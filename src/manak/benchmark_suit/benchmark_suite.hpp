@@ -6,6 +6,7 @@
 #include <map>
 
 #include <manak/util/macro_utils.hpp>
+#include <manak/util/log.hpp>
 
 #include "base_library.hpp"
 #include "node.hpp"
@@ -110,9 +111,11 @@ class BenchmarkSuite
   {
     for(auto cases : children)
     {
+      utils::CaseLogEntry& cle = utils::Log::GetLog().Add(cases.first);
+
       for(auto c : cases.second)
       {
-        c->Run();
+        c->Run(cle);
       }
     }
     for(std::map<std::string, BenchmarkSuite*>::iterator it = child_suits.begin();it != child_suits.end();it++)
@@ -171,14 +174,12 @@ namespace manak
 
 bool init_benchmarking_module()
 {
-  std::cout << "m2" << std::endl;
   #ifdef MANAK_SIMPLE_BENCHMARK_MODULE
   manak::BenchmarkSuite::GetMasterSuite()->Name() = MANAK_STRINGIZE(MANAK_SIMPLE_BENCHMARK_MODULE);
   manak::benchmark_suit::BaseLibrary::GetLibraryCollection().AddLibrary(MANAK_STRINGIZE(Base_Library));
 
   #else // MANAK_SIMPLE_BENCHMARK_MODULE
   manak::BenchmarkSuite::GetMasterSuite()->Name() = MANAK_STRINGIZE(MANAK_SIMPLE_BENCHMARK_MODULE);
-  manak::benchmark_suit::BaseLibrary::GetLibraryCollection().AddLibrary(MANAK_STRINGIZE(Base_Library));
 
   #endif // MANAK_SIMPLE_BENCHMARK_MODULE
 

@@ -21,7 +21,7 @@ MANAK_BENCHMARK_CASE_ITD(Name, Function, Iter, MANAK_DEFAULT_TOLERANCE, "")
 #define MANAK_AUTO_BENCHMARK_CASE_ITD(Name, Library, Iter, Tolerance, Desc)   \
 struct Name ## _ ## Library ##_## Benchmark                                   \
 {                                                                             \
-  static manak::PMeasure Run();                                               \
+  static void Run();                                                          \
   static manak::BenchmarkCase* static_temp;                                   \
 };                                                                            \
 manak::BenchmarkCase* Name ## _ ## Library ##_## Benchmark::static_temp =     \
@@ -50,4 +50,4 @@ MANAK_AUTO_BENCHMARK_CASE_ITD(Name, Library, Iter, MANAK_DEFAULT_TOLERANCE, "")
 ( manak::CTBenchmarkObject(#Name, #Library, Iter, tol, Desc, f_name) )
 
 #define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(Name, Library, f_name)                   \
-( manak::CTBenchmarkObject(#Name, #Library, MANAK_DEFAULT_ITERATIONS, MANAK_DEFAULT_TOLEARNCE, "", f_name) )
+( manak::CTBenchmarkObject(#Name, #Library, MANAK_DEFAULT_ITERATIONS, MANAK_DEFAULT_TOLERANCE, "", f_name) )

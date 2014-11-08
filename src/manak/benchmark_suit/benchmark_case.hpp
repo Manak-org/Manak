@@ -17,11 +17,14 @@
 #include <manak/util/timer.hpp>
 #include <manak/util/macro_utils.hpp>
 #include <manak/util/template_utils.hpp>
+#include <manak/util/log.hpp>
 
+//! Set default tolerance if not defined
 #ifndef MANAK_DEFAULT_TOLERANCE
   #define MANAK_DEFAULT_TOLERANCE 10
 #endif
 
+//! Set default iterations if not defined
 #ifndef MANAK_DEFAULT_ITERATIONS
   #define MANAK_DEFAULT_ITERATIONS 10
 #endif
@@ -103,8 +106,11 @@ class BenchmarkCase
     return library_name;
   }
 
-  bool Run()
+  bool Run(utils::CaseLogEntry& cle)
   {
+    size_t l_id = utils::Log::GetLog().AddLibrary(library_name);
+
+    size_t index = 0;
     for(auto run_function : run_functions)
     {
       MANAK_OPEN_LOG;
@@ -114,21 +120,14 @@ class BenchmarkCase
       std::cout.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
       std::cerr.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
 
-      std::cout << "m3" <<std::endl;
-
       Timer::Initialize(iterations);
 
       do
       {
-        std::cout << "m4" << std::endl;
         Timer::StartIter();
         Timer::StartTimer();
 
-        std::cout << "m4.5" << std::endl;
-
         run_function();
-
-        std::cout << "m5" << std::endl;
 
         Timer::StopTimer();
       }while(Timer::EndIter());
@@ -136,12 +135,13 @@ class BenchmarkCase
       std::cout.rdbuf(coutbuf);
       std::cerr.rdbuf(cerrbuf);
 
-      std::cout << "m6" << std::endl;
-
       f.close();
 
       PMeasure pm = Timer::GetStats();
-      std::cout << pm << std::endl;
+
+      utils::LogEntry& le = cle.Add(index);
+      le.Add(pm, l_id);
+      index++;
     }
     return true;
   }
@@ -153,17 +153,6 @@ class BenchmarkCase
   std::list<std::function<void()>> run_functions;
   double tolerance;
   size_t iterations;
-};
-
-template<int ...>
-struct seq { };
-
-template<int N, int ...S>
-struct gens : gens<N-1, N-1, S...> { };
-
-template<int ...S>
-struct gens<0, S...> {
-  typedef seq<S...> type;
 };
 
 template<typename T>

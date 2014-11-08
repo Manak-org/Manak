@@ -8,6 +8,7 @@
 #define MANAK_PMEASURE_HPP_INCLUDED
 
 #include <iostream>
+#include <sstream>
 
 namespace manak
 {
@@ -42,10 +43,12 @@ struct PMeasure
   double avg;
 };
 
-inline std::ostream& operator<<(std::ostream& s, const PMeasure& pm)
+inline std::ostream& operator<<(std::ostream& stream, const PMeasure& pm)
 {
+  std::stringstream s;
   s << pm.avg << " " << pm.min << " " << pm.max;
-  return s;
+  stream << s.str();
+  return stream;
 }
 
 }

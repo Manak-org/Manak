@@ -10,6 +10,7 @@
 #include <functional>
 
 #include <manak/benchmark_suit/benchmark_suite.hpp>
+#include <manak/util/log.hpp>
 
 //! If MANAK_ALTERNATE_INIT_FUNCTION is defined then that function will be
 //! called from generated main function for initializing unit benchmarking
@@ -20,6 +21,11 @@
 #define MANAK_INIT_FUNCTION manak::init_benchmarking_module
 #endif // MANAK_ALTERNATE_INIT_FUNCTION
 
+#ifndef MANAK_DEFAULT_OUT_FILENAME
+#define MANAK_DEFAULT_OUT_FILENAME benchmark_stat.txt
+#endif
+
+#include <manak/util/cli.hpp>
 
 namespace manak /** C++ Unit Benchmarking Library. **/
 {
@@ -34,7 +40,40 @@ namespace manak /** C++ Unit Benchmarking Library. **/
 int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* argv[] )
 {
   init_func();
-  BenchmarkSuite::GetMasterSuite()->Run();
+  std::string pattern = "";
+  if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-r"))
+  {
+    char* c_pattern = manak::utils::cli::CLI::getCmdOption(argv,
+                                                           argv + argc,
+                                                           "-r");
+    if(c_pattern)
+    {
+      pattern = std::string(c_pattern);
+    }
+    else
+    {
+      std::cout << "No pattern given!" << std::endl;
+      exit(1);
+    }
+  }
+
+  std::ofstream* stream = NULL;
+
+  if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-o"))
+  {
+    std::string filename(manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-o"));
+    stream = new std::ofstream(filename);
+  }
+  else
+  {
+    stream = new std::ofstream(MANAK_STRINGIZE(MANAK_DEFAULT_OUT_FILENAME));
+  }
+
+  BenchmarkSuite::GetMasterSuite()->Run(pattern);
+
+  utils::Log::GetLog().Print(*stream);
+
+  stream->close();
   return 0;
 }
 
