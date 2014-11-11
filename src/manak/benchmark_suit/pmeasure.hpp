@@ -35,6 +35,15 @@ struct PMeasure
   PMeasure(double min, double max, double avg)
     : min(min), max(max), avg(avg) {}
 
+  int Compare(const double value, const double tolerance)
+  {
+    if(avg - value > tolerance)
+      return 1;
+    if(value - avg > tolerance)
+      return -1;
+    return 0;
+  }
+
   //! Minimum time
   double min;
   //! Maximum time
@@ -45,9 +54,19 @@ struct PMeasure
 
 inline std::ostream& operator<<(std::ostream& stream, const PMeasure& pm)
 {
-  std::stringstream s;
-  s << pm.avg << " " << pm.min << " " << pm.max;
-  stream << s.str();
+  if(pm.avg != 0)
+  {
+    std::stringstream s;
+
+    #ifdef MANAK_SHOW_MIN_MAX
+    s << pm.avg << "[" << pm.min << ":" << pm.max << "]";
+    #else
+    s << pm.avg;
+    #endif // MANAK_SHOW_MIN_MAX
+
+    stream << s.str();
+  }
+  else stream << " ";
   return stream;
 }
 

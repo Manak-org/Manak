@@ -39,6 +39,8 @@ namespace manak /** C++ Unit Benchmarking Library. **/
 //!
 int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* argv[] )
 {
+  bool compare = false;
+
   init_func();
   std::string pattern = "";
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-r"))
@@ -69,11 +71,28 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
     stream = new std::ofstream(MANAK_STRINGIZE(MANAK_DEFAULT_OUT_FILENAME));
   }
 
-  BenchmarkSuite::GetMasterSuite()->Run(pattern);
+  if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-c"))
+  {
+    compare = true;
+    std::string filename(manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-c"));
+    BenchmarkSuite::GetMasterSuite()->LoadData(filename);
+  }
+
+  BenchmarkSuite::GetMasterSuite()->Run("", pattern, compare);
 
   utils::Log::GetLog().Print(*stream);
 
+  if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-s"))
+  {
+    std::string filename(manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-s"));
+
+    std::ofstream ss(filename);
+    utils::Log::GetLog().Save(ss);
+    ss.close();
+  }
+
   stream->close();
+  delete stream;
   return 0;
 }
 

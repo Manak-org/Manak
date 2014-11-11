@@ -127,18 +127,36 @@ class Timer
     return tv.tv_sec * 1000000 + tv.tv_usec;
   }
 
+  static void replaceAll(std::string& str,
+                         const std::string& from,
+                         const std::string& to)
+  {
+    size_t start_pos = 0;
+    while((start_pos = str.find(from, start_pos)) != std::string::npos)
+    {
+      while((start_pos = str.find(from, start_pos)) != std::string::npos)
+      {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length();
+      }
+      start_pos += to.length();
+    }
+  }
+
   //! Returns current time-stamp as string
   //!
   //! \return std::string
   //!
   //!
-  static std::string getTimeStamp()
+  static std::string getTimeStamp(bool removeSpaces = false)
   {
-    //time_t tm;
-    //time(&tm);
-    //std::string timestamp = ctime(&tm);
-    //timestamp[timestamp.length() - 1] = ' ';
-    //return timestamp;
+    time_t tm;
+    time(&tm);
+    std::string timestamp = ctime(&tm);
+    timestamp.pop_back();
+    timestamp = timestamp.substr(4);
+    if(removeSpaces) replaceAll(timestamp, " ", "_");
+    return timestamp;
   }
 
   static void Initialize(size_t iter)

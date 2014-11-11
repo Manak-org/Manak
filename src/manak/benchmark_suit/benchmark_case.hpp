@@ -3,7 +3,8 @@
 
 #include <string>
 #include <functional>
-#include <inttypes.h>
+#include <stdint.h>
+//#include <inttypes.h>
 #include <limits>
 #include <fstream>
 #include <iostream>
@@ -29,13 +30,19 @@
   #define MANAK_DEFAULT_ITERATIONS 10
 #endif
 
+#ifndef MANAK_REDIRECTION_FILENAME
+
+#define MANAK_REDIRECTION_FILENAME benchmark_log.txt
+
+#endif // MANAK_REDIRECTION_FILENAME
+
 //! While the benchmark is running all the output on std::cout and std::cerr
 //! is redirected to another stream
 //! If that stream is not defined then define it ourselves
 #ifndef MANAK_BENCHMARK_REDIRECTION_STREAM
 
 //! Open the logging file stream
-#define MANAK_OPEN_LOG std::ofstream f("benchmark_log.txt", std::fstream::app);
+#define MANAK_OPEN_LOG std::ofstream f(MANAK_STRINGIZE(MANAK_REDIRECTION_FILENAME), std::fstream::app);
 #define MANAK_BENCHMARK_REDIRECTION_STREAM f.rdbuf()
 
 #endif
@@ -93,7 +100,7 @@ class BenchmarkCase
     iterations(iterations)
   {
     std::function<T()> fun(run_function);
-    run_functions.emplace_back([=](){fun();});
+    run_functions.emplace_back("", [=](){fun();});
   }
 
   const std::string& Name() const
@@ -106,7 +113,8 @@ class BenchmarkCase
     return library_name;
   }
 
-  bool Run(utils::CaseLogEntry& cle)
+  bool Run(utils::CaseLogEntry& cle,
+           const bool compare = false)
   {
     size_t l_id = utils::Log::GetLog().AddLibrary(library_name);
 
@@ -127,7 +135,7 @@ class BenchmarkCase
         Timer::StartIter();
         Timer::StartTimer();
 
-        run_function();
+        run_function.second();
 
         Timer::StopTimer();
       }while(Timer::EndIter());
@@ -139,20 +147,35 @@ class BenchmarkCase
 
       PMeasure pm = Timer::GetStats();
 
-      utils::LogEntry& le = cle.Add(index);
-      le.Add(pm, l_id);
+      utils::LogEntry& le = cle.Add(index, run_function.first);
+      if(!compare)
+        le.Add(pm, l_id);
+      else
+      {
+        if(to_c.size() > index)
+          le.Add(pm, l_id, pm.Compare(to_c[index], tolerance), to_c[index]);
+        else
+          le.Add(pm, l_id);
+      }
       index++;
     }
     return true;
+  }
+
+  void AddComparisonEntry(double d)
+  {
+    to_c.push_back(d);
   }
 
  protected:
   std::string name;
   std::string library_name;
   std::string desc;
-  std::list<std::function<void()>> run_functions;
+  std::list<std::pair<std::string, std::function<void()>>> run_functions;
   double tolerance;
   size_t iterations;
+
+  std::vector<double> to_c;
 };
 
 template<typename T>
@@ -178,7 +201,15 @@ class T_Benchmark_Case : public BenchmarkCase
   T_Benchmark_Case* AddArgs(Args... args)
   {
     std::tuple<Args...> temp(args...);
-    run_functions.emplace_back([=](){return utils::Caller(t_function, temp); });
+    run_functions.emplace_back("", [=](){utils::Caller(t_function, temp); });
+    return this;
+  }
+
+  template<typename... Args>
+  T_Benchmark_Case* AddArgs_N(const std::string& name, Args... args)
+  {
+    std::tuple<Args...> temp(args...);
+    run_functions.emplace_back(name, [=](){utils::Caller(t_function, temp); });
     return this;
   }
 

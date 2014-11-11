@@ -5,6 +5,8 @@
 #include <list>
 #include <string>
 #include <iomanip>
+#include <sstream>
+#include <tuple>
 
 #include <manak/benchmark_suit/pmeasure.hpp>
 
@@ -20,15 +22,17 @@ struct LogEntry
     measures.emplace_back();
   }
 
-  void Add(PMeasure pm, size_t index)
+  void Add(PMeasure pm, size_t index, int inc = 0, const double c_value = 0)
   {
     if(index > measures.size() - 1)
     {
       while(index != measures.size() - 1)
       {
-        measures.emplace_back();
+        measures.emplace_back(PMeasure(), false, 0);
       }
-      *(--measures.end()) = pm;
+      std::get<0>(*(--measures.end())) = pm;
+      std::get<1>(*(--measures.end())) = inc;
+      std::get<2>(*(--measures.end())) = c_value;
     }
     else
     {
@@ -37,7 +41,9 @@ struct LogEntry
       {
         it++;
       }
-      *it = pm;
+      std::get<0>(*it) = pm;
+      std::get<1>(*it) = inc;
+      std::get<2>(*it) = c_value;
     }
   }
 
@@ -45,30 +51,51 @@ struct LogEntry
   {
     for(auto pm : measures)
     {
-      stream << std::setw(20) << pm;
+      std::stringstream s;
+      if(std::get<2>(pm) != 0)
+      {
+        if(std::get<1>(pm) > 0)
+          s << "+";
+        else if(std::get<2>(pm) < 0)
+          s << "-";
+        s << std::get<0>(pm);
+        s << "(" << std::get<2>(pm) << ")";
+      }
+      else s << std::get<0>(pm);
+
+      stream << std::setw(20) << s.str();
     }
   }
 
-  std::list<PMeasure> measures;
+  void Save(std::ostream& stream)
+  {
+    for(auto pm : measures)
+    {
+      stream << std::get<0>(pm).avg << " ";
+    }
+  }
+
+  std::list<std::tuple<PMeasure, int, double>> measures;
 };
 
 struct CaseLogEntry
 {
-  CaseLogEntry(const std::string& name)
-    : name(name)
+  CaseLogEntry(const std::string& name, const std::string& uname)
+    : name(name), uname(uname)
   {
-    entries.emplace_back();
+    entries.emplace_back("", LogEntry());
   }
 
-  LogEntry& Add(size_t index)
+  LogEntry& Add(size_t index, const std::string& name = "")
   {
     if(index > (entries.size() - 1))
     {
       while(index != entries.size() - 1)
       {
-        entries.emplace_back();
+        entries.emplace_back("", LogEntry());
       }
-      return *(--entries.end());
+      (*(--entries.end())).first = name;
+      return (*(--entries.end())).second;
     }
     else
     {
@@ -77,26 +104,54 @@ struct CaseLogEntry
       {
         it++;
       }
-      return *it;
+      (*it).first = name;
+      return (*it).second;
     }
   }
 
   void Print(std::ostream& stream)
   {
-    stream << name << std::endl;
+    if(entries.size() > 1)
+    {
+      stream << name << std::endl;
 
-    size_t index = 0;
+      size_t index = 0;
+      for(auto le : entries)
+      {
+        std::stringstream ss;
+        ss << "  ";
+        if(le.first == "")
+          ss << "Parameter Set " << index;
+        else
+          ss << le.first;
+
+        stream << std::setw(30) << ss.str();
+        le.second.Print(stream);
+        stream << std::endl;
+        index++;
+      }
+    }
+    else
+    {
+      stream << std::setw(30) << name;
+      (*entries.begin()).second.Print(stream);
+    }
+  }
+
+  void Save(std::ostream& stream)
+  {
+    stream << uname << " " << entries.size() << std::endl;
+
     for(auto le : entries)
     {
-      stream << "  Parameter Set " << std::setw(14) << index;
-      le.Print(stream);
+      le.second.Save(stream);
       stream << std::endl;
-      index++;
     }
   }
 
   std::string name;
-  std::list<LogEntry> entries;
+  std::string uname;
+  std::list<std::pair<std::string, LogEntry>> entries;
 };
 
 class Log
@@ -111,9 +166,9 @@ class Log
     return singleton;
   }
 
-  CaseLogEntry& Add(const std::string& name)
+  CaseLogEntry& Add(const std::string& name, const std::string& uname)
   {
-    cases.emplace_back(name);
+    cases.emplace_back(name, uname);
     return *(--cases.end());
   }
 
@@ -144,6 +199,24 @@ class Log
     {
       c.Print(stream);
       stream << std::endl;
+    }
+  }
+
+  void Save(std::ostream& stream)
+  {
+    stream << l_ids.size() << " ";
+
+    for(size_t i = 0;i < l_ids.size();i++)
+    {
+      stream << r_l_ids[i] << " ";
+    }
+    stream << std::endl;
+
+    stream << cases.size() << std::endl;
+
+    for(auto c : cases)
+    {
+      c.Save(stream);
     }
   }
 

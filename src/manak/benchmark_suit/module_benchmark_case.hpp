@@ -38,7 +38,7 @@ void Name ## _ ## Library ##_## Benchmark::Run()
 MANAK_AUTO_BENCHMARK_CASE_ITD(Name, Library, MANAK_DEFAULT_ITERATIONS, MANAK_DEFAULT_TOLERANCE, "")
 
 #define MANAK_AUTO_BENCHMARK_CASE_T(Name, Library, tol)                       \
-MANAK_AUTO_BENCHMARK_CASE_T(Name, Library, MANAK_DEFAULT_ITERATIONS, tol, "")
+MANAK_AUTO_BENCHMARK_CASE_ITD(Name, Library, MANAK_DEFAULT_ITERATIONS, tol, "")
 
 #define MANAK_AUTO_BENCHMARK_CASE_I(Name, Library, Iter)                      \
 MANAK_AUTO_BENCHMARK_CASE_ITD(Name, Library, Iter, MANAK_DEFAULT_TOLERANCE, "")

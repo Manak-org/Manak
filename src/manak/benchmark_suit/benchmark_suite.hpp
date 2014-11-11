@@ -4,6 +4,8 @@
 #include <string>
 #include <list>
 #include <map>
+#include <regex>
+#include <vector>
 
 #include <manak/util/macro_utils.hpp>
 #include <manak/util/log.hpp>
@@ -107,23 +109,142 @@ class BenchmarkSuite
     return suite;
   }
 
-  bool Run(const std::string& pattern = "")
+  bool Run(const std::string& uname = "",
+           const std::string& pattern = "",
+           const bool compare = false)
   {
-    for(auto cases : children)
+    std::string n_pattern = "";
+    std::string c_pattern = "";
+    if(pattern != "")
     {
-      utils::CaseLogEntry& cle = utils::Log::GetLog().Add(cases.first);
-
-      for(auto c : cases.second)
+      size_t index = pattern.find("/");
+      if(index == std::string::npos)
       {
-        c->Run(cle);
+        c_pattern = pattern;
+      }
+      else
+      {
+        c_pattern = pattern.substr(0, index);
+        n_pattern = pattern.substr(index + 1);
       }
     }
-    for(std::map<std::string, BenchmarkSuite*>::iterator it = child_suits.begin();it != child_suits.end();it++)
+
+    std::regex r1(c_pattern);
+
+    std::cout << c_pattern << std::endl;
+
+    for(auto cases : children)
     {
-      std::cout << it->second << " " << it->second->Name() << std::endl;
-      it->second->Run();
+      if((n_pattern == "" && c_pattern == "") || (n_pattern == "" && std::regex_match(cases.first, r1)))
+      {
+        utils::CaseLogEntry& cle = utils::Log::GetLog().Add(cases.first, uname + "/" + cases.first);
+
+        for(auto c : cases.second)
+        {
+          c->Run(cle, compare);
+        }
+      }
+    }
+    for(auto it : child_suits)
+    {
+      if(c_pattern == "" || std::regex_match(it.first, r1))
+        it.second->Run(uname + "/" + name, n_pattern, compare);
     }
     return true;
+  }
+
+  bool Find(const std::string& name, std::list<BenchmarkCase*>& lbc)
+  {
+    size_t t = name.find("/", 1);
+    if(t == std::string::npos)
+    {
+      auto it = children.find(name.substr(1));
+      if(it != children.end())
+      {
+        lbc = it->second;
+        return true;
+      }
+      else return false;
+    }
+    else
+    {
+      auto it = child_suits.find(name.substr(1, t - 1));
+      if(it != child_suits.end())
+      {
+        return it->second->Find(name.substr(t), lbc);
+      }
+      else return false;
+    }
+  }
+
+  bool LoadData(const std::string& name)
+  {
+    std::ifstream stream(name);
+
+    if(!stream.is_open())
+    {
+      std::cerr << "Unable to open file " << name << std::endl;
+    }
+
+    std::vector<std::string> libs;
+
+    size_t s_libs;
+
+    stream >> s_libs;
+    for(size_t i = 0;i < s_libs;i++)
+    {
+      std::string temp;
+      stream >> temp;
+      libs.push_back(temp);
+    }
+
+    size_t s_cases;
+    stream >> s_cases;
+    for(size_t i = 0;i < s_cases;i++)
+    {
+      std::string name;
+      stream >> name;
+      size_t s_entries;
+      stream >> s_entries;
+
+      std::list<BenchmarkCase*> lbc;
+      if(Find(name, lbc))
+      {
+        for(size_t i = 0;i < s_entries;i++)
+        {
+          for(auto l_name : libs)
+          {
+            double c_value;
+            stream >> c_value;
+
+            for(auto bc : lbc)
+            {
+              if(bc->LibraryName() == l_name)
+              {
+                bc->AddComparisonEntry(c_value);
+                break;
+              }
+            }
+          }
+        }
+      }
+    }
+    return true;
+  }
+
+  ~BenchmarkSuite()
+  {
+    for(auto lbc : children)
+    {
+      for(auto bc : lbc.second)
+      {
+        delete bc;
+      }
+    }
+    for(auto bs : child_suits)
+    {
+      delete bs.second;
+    }
   }
 
  private:

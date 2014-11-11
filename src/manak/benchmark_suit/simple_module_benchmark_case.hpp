@@ -1,6 +1,10 @@
-#define MANAK_BENCHMARK_CASE_ITD(Name, Function, Iter, Tolerance, Desc)        \
+#ifndef MANAK_BASE_LIBRARY_NAME
+#define MANAK_BASE_LIBRARY_NAME base_library
+#endif // MANAK_BASE_LIBRARY_NAME
+
+#define MANAK_BENCHMARK_CASE_ITD(Name, Function, Iter, Tolerance, Desc)       \
 ( new manak::BenchmarkCase(#Name,                                             \
-                           "Base_Library",                                    \
+                           MANAK_STRINGIZE(MANAK_BASE_LIBRARY_NAME),          \
                            Function,                                          \
                            Iter,                                              \
                            Tolerance,                                         \
@@ -14,6 +18,7 @@ MANAK_BENCHMARK_CASE_ITD(NAme, Function, MANAK_DEFAULT_ITERATIONS, Tolerance, ""
 
 #define MANAK_BENCHMARK_CASE_I(Name, Function, Iter)                          \
 MANAK_BENCHMARK_CASE_ITD(Name, Function, Iter, MANAK_DEFAULT_TOLERANCE, "")
+
 
 #define MANAK_AUTO_BENCHMARK_CASE_ITD(Name, Iter, Tolerance, Desc)            \
 struct Name ## _ ## Benchmark                                                 \
