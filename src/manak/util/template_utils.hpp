@@ -1,3 +1,9 @@
+/**
+ * @file template_utils.hpp
+ * @author Sumedh Ghaisas
+ *
+ * Declaration of some helper template function.
+ */
 #ifndef MANAK_UTIL_TEMPLATE_UTILS_HPP_INCLUDED
 #define MANAK_UTIL_TEMPLATE_UTILS_HPP_INCLUDED
 
@@ -5,18 +11,19 @@ namespace manak
 {
 namespace utils
 {
-namespace helper
+namespace helper /** Template Helper Functions. **/
 {
 
 template<int>
 struct template_placeholder;
 
-}
-}
-}
+}; // namespace helper
+}; // namespace utils
+}; // namespace manak
 
 namespace std
 {
+  //! Make template_placeholder class a valid standard placeholder
   template<int N>
   struct is_placeholder<manak::utils::helper::template_placeholder<N>>
     : integral_constant<int, N> // the one is important
@@ -27,7 +34,6 @@ namespace manak
 {
 namespace utils
 {
-
 namespace helper
 {
 

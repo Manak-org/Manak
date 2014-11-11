@@ -1,8 +1,8 @@
 /**
- * @file manak.hpp
+ * @file base_library.hpp
  * @author Sumedh Ghaisas
  *
- * Standalone header for end user.
+ * Declaration of base library.
  */
 #ifndef MANAK_BASE_LIBRARY_HPP_INCLUDED
 #define MANAK_BASE_LIBRARY_HPP_INCLUDED

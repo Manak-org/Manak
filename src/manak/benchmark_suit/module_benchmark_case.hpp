@@ -1,3 +1,10 @@
+/**
+ * @file module_benchmark_case.hpp
+ * @author Sumedh Ghaisas
+ *
+ * Declaration of macros used in MANAK_BENCHMARK_MODULE.
+ */
+
 #define MANAK_BENCHMARK_CASE_ITD(Name, Library, Function, Iter, Tolerance, Desc)     \
 ( new manak::BenchmarkCase(#Name,                                             \
                            #Library,                                          \

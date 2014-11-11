@@ -1,3 +1,9 @@
+/**
+ * @file timer.hpp
+ * @author Sumedh Ghaisas
+ *
+ * Declaration of Timer.
+ */
 #ifndef MANAK_UTIL_TIMER_HPP_INCLUDED
 #define MANAK_UTIL_TIMER_HPP_INCLUDED
 
@@ -127,6 +133,7 @@ class Timer
     return tv.tv_sec * 1000000 + tv.tv_usec;
   }
 
+  //! Replace all occurrences
   static void replaceAll(std::string& str,
                          const std::string& from,
                          const std::string& to)
@@ -159,6 +166,7 @@ class Timer
     return timestamp;
   }
 
+  //! Initialize a new Timer instance
   static void Initialize(size_t iter)
   {
     TotalTime() = 0;
@@ -168,6 +176,7 @@ class Timer
     CIter() = Iterations();
   }
 
+  //! Re initialize the current timer instance
   static void Reinitialize()
   {
     TotalTime() = 0;
@@ -176,18 +185,21 @@ class Timer
     CIter() = Iterations();
   }
 
+  //! Mark start of the iteration
   static void StartIter()
   {
     CTime() = 0;
     StateIter() = true;
   }
 
+  //! Start timer
   static void StartTimer()
   {
     Start() = microtimer();
     StateTimer() = true;
   }
 
+  //! Stop timer
   static void StopTimer()
   {
     if(StateTimer())
@@ -197,6 +209,7 @@ class Timer
     }
   }
 
+  //! Mark end of the iteration
   static bool EndIter()
   {
     if(StateIter() == false)
@@ -215,58 +228,68 @@ class Timer
     return true;
   }
 
+  //! Get statistics of current timer instance
   static PMeasure GetStats()
   {
     return PMeasure(Min(), Max(), (double)TotalTime()/ Iterations());
   }
 
+  //! Get-set total time
   static uint64_t& TotalTime()
   {
     static uint64_t singleton;
     return singleton;
   }
 
+  //! Get-set current timing
   static uint64_t& CTime()
   {
     static uint64_t singleton;
     return singleton;
   }
 
+  //! Get-set start time
   static uint64_t& Start()
   {
     static uint64_t singleton;
     return singleton;
   }
 
+  //! Get-set min time
   static uint64_t& Min()
   {
     static uint64_t singleton;
     return singleton;
   }
+  //! Get-set max time
   static uint64_t& Max()
   {
     static uint64_t singleton;
     return singleton;
   }
 
+  //! Get-set number
   static size_t& Iterations()
   {
     static size_t singleton;
     return singleton;
   }
 
+  //! Get-set number of iterations
   static int& CIter()
   {
     static int singleton;
     return singleton;
   }
 
+  //! Get-set iteration state
   static bool& StateIter()
   {
     static bool singleton;
     return singleton;
   }
 
+  //! Get-set timer state
   static bool& StateTimer()
   {
     static bool singleton;

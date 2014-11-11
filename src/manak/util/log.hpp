@@ -1,3 +1,9 @@
+/**
+ * @file log.hpp
+ * @author Sumedh Ghaisas
+ *
+ * Declaration of Log.
+ */
 #ifndef MANAK_UTIL_LOG_HPP_INCLUDED
 #define MANAK_UTIL_LOG_HPP_INCLUDED
 
@@ -15,13 +21,18 @@ namespace manak
 namespace utils
 {
 
+/**
+ * This struct stores the measures corresponding to one parameter set of a case.
+ */
 struct LogEntry
 {
+  //! Create an empty log entry
   LogEntry()
   {
     measures.emplace_back();
   }
 
+  //! Add a measure to this entry.
   void Add(PMeasure pm, size_t index, int inc = 0, const double c_value = 0)
   {
     if(index > measures.size() - 1)
@@ -47,6 +58,7 @@ struct LogEntry
     }
   }
 
+  //! Print all the measures to the stream in a user friendly way
   void Print(std::ostream& stream)
   {
     for(auto pm : measures)
@@ -62,11 +74,12 @@ struct LogEntry
         s << "(" << std::get<2>(pm) << ")";
       }
       else s << std::get<0>(pm);
-
+c++ tuple
       stream << std::setw(20) << s.str();
     }
   }
 
+  //! Print all the measures to the stream
   void Save(std::ostream& stream)
   {
     for(auto pm : measures)
@@ -75,17 +88,23 @@ struct LogEntry
     }
   }
 
+  //! List of entries along with comparison information
   std::list<std::tuple<PMeasure, int, double>> measures;
 };
 
+/**
+ * This struct stores all the logging information about one benchmark case.
+ */
 struct CaseLogEntry
 {
+  //! Create an empty benchmark case log
   CaseLogEntry(const std::string& name, const std::string& uname)
     : name(name), uname(uname)
   {
     entries.emplace_back("", LogEntry());
   }
 
+  //! Add a parameter set to thsi benchmark case
   LogEntry& Add(size_t index, const std::string& name = "")
   {
     if(index > (entries.size() - 1))
@@ -109,6 +128,7 @@ struct CaseLogEntry
     }
   }
 
+  //! Print the log in a user friendly way
   void Print(std::ostream& stream)
   {
     if(entries.size() > 1)
@@ -138,6 +158,7 @@ struct CaseLogEntry
     }
   }
 
+  //! Print the log
   void Save(std::ostream& stream)
   {
     stream << uname << " " << entries.size() << std::endl;
@@ -149,29 +170,39 @@ struct CaseLogEntry
     }
   }
 
+  //! Name of the case
   std::string name;
+  //! Unique name assigned to this case
   std::string uname;
+  //! List of entries(parameter set)
   std::list<std::pair<std::string, LogEntry>> entries;
 };
 
+/**
+ * This class stores and prints all the necessary information about the run.
+ */
 class Log
 {
  public:
+  //! Create an empty Log
   Log()
     : c_l_id(0) {}
 
+  //! Get singleton Log instance
   static Log& GetLog()
   {
     static Log singleton;
     return singleton;
   }
 
+  //! Add a benchmark case to his log
   CaseLogEntry& Add(const std::string& name, const std::string& uname)
   {
     cases.emplace_back(name, uname);
     return *(--cases.end());
   }
 
+  //! Add library to this log
   size_t AddLibrary(const std::string& name)
   {
     auto it = l_ids.find(name);
@@ -185,6 +216,7 @@ class Log
     return it->second;
   }
 
+  //! Print all the information in a user friendly way
   void Print(std::ostream& stream)
   {
     stream << std::setprecision(3);
@@ -202,6 +234,7 @@ class Log
     }
   }
 
+  //! Save all the information to the file for comparison
   void Save(std::ostream& stream)
   {
     stream << l_ids.size() << " ";
@@ -221,15 +254,19 @@ class Log
   }
 
  private:
+  //! map of library name to id
   std::map<std::string, size_t> l_ids;
+  //! map of library id to name
   std::map<size_t, std::string> r_l_ids;
+  //! List of benchamrk cases
   std::list<CaseLogEntry> cases;
 
+  //! currently assigned library id.
   size_t c_l_id;
-};
+}; // class Log
 
-}
-}
+}; // namespace utils
+}; // namespace manak
 
 
 #endif // MANAK_UTIL_LOG_HPP_INCLUDED

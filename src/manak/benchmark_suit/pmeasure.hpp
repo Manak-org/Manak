@@ -35,6 +35,7 @@ struct PMeasure
   PMeasure(double min, double max, double avg)
     : min(min), max(max), avg(avg) {}
 
+  //! Compare the average with given value taking into consideration the tolerance
   int Compare(const double value, const double tolerance)
   {
     if(avg - value > tolerance)
@@ -68,9 +69,9 @@ inline std::ostream& operator<<(std::ostream& stream, const PMeasure& pm)
   }
   else stream << " ";
   return stream;
-}
+}; // struct PMeasure
 
-}
+}; // namespace manak
 
 
 #endif // MANAK_PMEASURE_HPP_INCLUDED

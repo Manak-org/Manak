@@ -1,3 +1,9 @@
+/**
+ * @file benchmark_case.hpp
+ * @author Sumedh Ghaisas
+ *
+ * Declaration of BenchmarkCase.
+ */
 #ifndef MANAK_BENCHMARK_CASE_HPP_INCLUDED
 #define MANAK_BENCHMARK_CASE_HPP_INCLUDED
 
@@ -30,6 +36,7 @@
   #define MANAK_DEFAULT_ITERATIONS 10
 #endif
 
+//! Filename where the output of benchmark cases will be stored
 #ifndef MANAK_REDIRECTION_FILENAME
 
 #define MANAK_REDIRECTION_FILENAME benchmark_log.txt

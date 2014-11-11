@@ -1,3 +1,10 @@
+/**
+ * @file simple_module_benchmark_case.hpp
+ * @author Sumedh Ghaisas
+ *
+ * Declaration of macros used in MANAK_SIMPLE_BENCHMARK_MODULE.
+ */
+
 #ifndef MANAK_BASE_LIBRARY_NAME
 #define MANAK_BASE_LIBRARY_NAME base_library
 #endif // MANAK_BASE_LIBRARY_NAME

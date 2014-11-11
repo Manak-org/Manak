@@ -1,3 +1,9 @@
+/**
+ * @file benchmark_suite.hpp
+ * @author Sumedh Ghaisas
+ *
+ * Declaration BenchmarkSuite.
+ */
 #ifndef MANAK_BENCHMARK_SUITE_HPP_INCLUDED
 #define MANAK_BENCHMARK_SUITE_HPP_INCLUDED
 
