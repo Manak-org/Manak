@@ -231,6 +231,17 @@ class T_Benchmark_Case : public BenchmarkCase
     return this;
   }
 
+  template<typename... Args>
+  T_Benchmark_Case* AddCustomArgs(std::list<std::tuple<Args...>> (&fun)())
+  {
+    std::list<std::tuple<Args...>> args = fun();
+    for(auto s_arg : args)
+    {
+      utils::Caller(utils::BindToObject(&T_Benchmark_Case::AddArgs<Args...>, this), s_arg);
+    }
+    return this;
+  }
+
  private:
   std::function<T> t_function;
   size_t iter;
@@ -283,12 +294,6 @@ do                                                                            \
                                                                               \
   manak::Timer::StopTimer();                                                  \
 }while(manak::Timer::EndIter());
-
-
-#define MANAK_CREATE_BENCHMARK_CASE_FUNCTION(Function, ...)                   \
-[=]() {                                                                       \
-        Function(__VA_ARGS__);                                                \
-      }
 
 
 #endif // MANAK_BENCHMARK_CASE_HPP_INCLUDED

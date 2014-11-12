@@ -137,8 +137,6 @@ class BenchmarkSuite
 
     std::regex r1(c_pattern);
 
-    std::cout << c_pattern << std::endl;
-
     for(auto cases : children)
     {
       if((n_pattern == "" && c_pattern == "") || (n_pattern == "" && std::regex_match(cases.first, r1)))

@@ -74,7 +74,7 @@ struct LogEntry
         s << "(" << std::get<2>(pm) << ")";
       }
       else s << std::get<0>(pm);
-c++ tuple
+
       stream << std::setw(20) << s.str();
     }
   }
