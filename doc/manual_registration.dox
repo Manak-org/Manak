@@ -1,0 +1,252 @@
+/*! @page man_reg Manual Registration
+
+Manual case registration can only be done inside init function. Check out 
+@ref set_env_sbif for setting manual init function.
+
+@section man_reg_msbm Manual Registartion with Simple Module
+
+Simplest manual case registration can be done with the following code
+
+@code
+#include <iostream>
+
+bool bench_init();
+
+#define MANAK_SIMPLE_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_ALTERNATE_INIT_FUNCTION bench_init
+
+#include <manak/manak.hpp>
+
+void fun()
+{
+  for(size_t i = 0;i < 1000;i++);
+}
+
+bool bench_init()
+{
+  if(!manak::init_benchmarking_module())
+    exit(1);
+  
+  manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE(B1, fun));
+  return true;
+}
+@endcode
+
+@subsection man_reg_msbm1 MANAK_BENCHMARK_CASE
+Creates a benchmark case with name and benchmark function. Returns pointer to
+created manak::BenchmarkCase object. This can be passed to 
+manak::BenchmarkSuite::AddCase.
+
+@subsection man_reg_msbm2 MANAK_BENCHMARK_CASE_I
+Creates a benchmark case with name, benchmark function and number of iterations.
+Returns pointer to created manak::BenchmarkCase object. 
+
+@code
+manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE_I(B1, fun, 10));
+@endcode
+
+@subsection man_reg_msbm3 MANAK_BENCHMARK_CASE_T
+Creates a benchmark case with name, benchmark function and tolerance.
+Returns pointer to created manak::BenchmarkCase object. 
+
+@code
+manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE_T(B1, fun, 50));
+@endcode
+
+@subsection man_reg_msbm4 MANAK_BENCHMARK_CASE_IT
+Creates a benchmark case with name, benchmark function, number of iterations
+and tolerance. Returns pointer to created manak::BenchmarkCase object. 
+
+@code
+manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE_T(B1, fun, 10, 50));
+@endcode
+
+@subsection man_reg_msbm5 MANAK_BENCHMARK_SUITE
+Creates an empty unregistered benchmark suite with name. This benchmark suite can 
+be registred by passing it to any registered benchmark suite by
+manak::BenchmarkSuite::AddSuite function.
+
+@code
+#include <iostream>
+
+bool bench_init();
+
+#define MANAK_SIMPLE_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_ALTERNATE_INIT_FUNCTION bench_init
+
+#include <manak/manak.hpp>
+
+void fun()
+{
+  for(size_t i = 0;i < 1000;i++);
+}
+
+bool bench_init()
+{
+  if(!manak::init_benchmarking_module())
+    exit(1);
+  
+  manak::BenchmarkSuite* suite1 = manak::BenchmarkSuite::GetMasterSuite()->AddSuite(MANAK_BENCHMARK_SUITE(Suite1));
+  
+  suite1->AddCase(MANAK_BENCHMARK_CASE(B1, fun));
+  return true;
+}
+@endcode
+
+@subsection man_reg_msbm6 Parametrized Benchmark cases
+
+You can also use parametrized benchmarks with manual registartion.
+
+@code
+#include <iostream>
+
+bool bench_init();
+
+#define MANAK_SIMPLE_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_ALTERNATE_INIT_FUNCTION bench_init
+
+#include <manak/manak.hpp>
+
+void fun(int a, int b)
+{
+  for(size_t i = 0;i < 1000;i++);
+}
+
+bool bench_init()
+{
+  if(!manak::init_benchmarking_module())
+    exit(1);
+  
+  manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddArgs(0,0));
+  return true;
+}
+@endcode
+
+For more advance parametrized benchmark options check ... .
+
+@section man_reg_mbm Manual Registartion with Normal Module
+Simplest manual case registration can be done with the following code
+
+@code
+#include <iostream>
+
+bool bench_init();
+
+#define MANAK_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_ALTERNATE_INIT_FUNCTION bench_init
+
+#include <manak/manak.hpp>
+
+void fun()
+{
+  for(size_t i = 0;i < 1000;i++);
+}
+
+bool bench_init()
+{
+  if(!manak::init_benchmarking_module())
+    exit(1);
+  
+  manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE(B1, lib1, fun));
+  return true;
+}
+@endcode
+
+@subsection man_reg_mbm1 MANAK_BENCHMARK_CASE
+Creates a benchmark case with name, library and benchmark function. Returns 
+pointer to created manak::BenchmarkCase object. This can be passed to 
+manak::BenchmarkSuite::AddCase.
+
+@subsection man_reg_mbm2 MANAK_BENCHMARK_CASE_I
+Creates a benchmark case with name, library, benchmark function and number of 
+iterations. Returns pointer to created manak::BenchmarkCase object. 
+
+@code
+manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE_I(B1, lib1, fun, 10));
+@endcode
+
+@subsection man_reg_mbm3 MANAK_BENCHMARK_CASE_T
+Creates a benchmark case with name, library, benchmark function and tolerance.
+Returns pointer to created manak::BenchmarkCase object. 
+
+@code
+manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE_T(B1, lib1, fun, 50));
+@endcode
+
+@subsection man_reg_mbm4 MANAK_BENCHMARK_CASE_IT
+Creates a benchmark case with name, library, benchmark function, number of iterations
+and tolerance. Returns pointer to created manak::BenchmarkCase object. 
+
+@code
+manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE_T(B1, lib1, fun, 10, 50));
+@endcode
+
+@subsection man_reg_mbm5 MANAK_BENCHMARK_SUITE
+Creates an empty unregistered benchmark suite with name. This benchmark suite can 
+be registred by passing it to any registered benchmark suite by
+manak::BenchmarkSuite::AddSuite function.
+
+@code
+#include <iostream>
+
+bool bench_init();
+
+#define MANAK_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_ALTERNATE_INIT_FUNCTION bench_init
+
+#include <manak/manak.hpp>
+
+void fun()
+{
+  for(size_t i = 0;i < 1000;i++);
+}
+
+bool bench_init()
+{
+  if(!manak::init_benchmarking_module())
+    exit(1);
+  
+  manak::BenchmarkSuite* suite1 = manak::BenchmarkSuite::GetMasterSuite()->AddSuite(MANAK_BENCHMARK_SUITE(Suite1));
+  
+  suite1->AddCase(MANAK_BENCHMARK_CASE(B1, lib1, fun));
+  return true;
+}
+@endcode
+
+@subsection man_reg_mbm6 Parametrized Benchmark cases
+You can also use parametrized benchmarks with manual registartion.
+
+@code
+#include <iostream>
+
+bool bench_init();
+
+#define MANAK_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_ALTERNATE_INIT_FUNCTION bench_init
+
+#include <manak/manak.hpp>
+
+void fun(int a, int b)
+{
+  for(size_t i = 0;i < 1000;i++);
+}
+
+bool bench_init()
+{
+  if(!manak::init_benchmarking_module())
+    exit(1);
+  
+  manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, lib1, fun)->AddArgs(0,0));
+  return true;
+}
+@endcode
+
+For more advance parametrized benchmark options check ... .
+
+*/

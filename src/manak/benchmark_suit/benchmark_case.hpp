@@ -17,7 +17,6 @@
 #include <tuple>
 #include <type_traits>
 
-#include "node.hpp"
 #include "pmeasure.hpp"
 #include "base_library.hpp"
 
@@ -50,6 +49,7 @@
 
 //! Open the logging file stream
 #define MANAK_OPEN_LOG std::ofstream f(MANAK_STRINGIZE(MANAK_REDIRECTION_FILENAME), std::fstream::app);
+#define MANAK_CLOSE_LOG f.close();
 #define MANAK_BENCHMARK_REDIRECTION_STREAM f.rdbuf()
 
 #endif
@@ -58,6 +58,9 @@
 #define MANAK_OPEN_LOG
 #endif
 
+#ifndef MANAK_CLOSE_LOG
+#define MANAK_CLOSE_LOG
+#endif
 
 namespace manak
 {
@@ -150,7 +153,7 @@ class BenchmarkCase
       std::cout.rdbuf(coutbuf);
       std::cerr.rdbuf(cerrbuf);
 
-      f.close();
+      MANAK_CLOSE_LOG;
 
       PMeasure pm = Timer::GetStats();
 

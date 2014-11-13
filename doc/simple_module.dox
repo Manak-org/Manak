@@ -1,0 +1,84 @@
+/*! @page s_mod Simple Benchmark Module
+
+@section s_mod_intro Introduction
+This module is useful when only one library is benchmarked agaist itself with time.
+This module can be used by setting 'MANAK_SIMPLE_BENCHMARK_MODULE' to a desired 
+name. For more information on setting module type see @ref set_env_smt.
+
+@section s_mod_mr Manual Registration 
+For detailed information on manual registration of benchmark cases and benchmark
+suites in simple benchmark module see @ref man_reg_msbm.
+
+The macros provided for manual registartion of benchmark case:
+ - @ref man_reg_msbm1
+ - @ref man_reg_msbm2
+ - @ref man_reg_msbm3
+ - @ref man_reg_msbm4
+ - @ref man_reg_msbm6
+ 
+The macros provided for manual registration of benchmark suite:
+ - @ref man_reg_msbm5
+ 
+Example -
+@code
+#include <iostream>
+
+bool bench_init();
+
+#define MANAK_SIMPLE_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_ALTERNATE_INIT_FUNCTION bench_init
+
+#include <manak/manak.hpp>
+
+void fun()
+{
+  for(size_t i = 0;i < 1000;i++);
+}
+
+void fun2()
+{
+  for(size_t i = 0;i < 10000;i++);
+}
+
+void fun3(size_t a)
+{
+  for(size_t i = 0;i < a;i++);
+}
+
+bool bench_init()
+{
+  if(!manak::init_benchmarking_module())
+    exit(1);
+
+  manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE_I(B1, fun, 10));
+
+  manak::BenchmarkSuite* suite1 = manak::BenchmarkSuite::GetMasterSuite()->AddSuite(MANAK_BENCHMARK_SUITE(Suite1));
+
+  suite1->AddCase(MANAK_BENCHMARK_CASE_T(B2, fun2, 50));
+
+  manak::BenchmarkSuite* suite2 = suite1->AddSuite(MANAK_BENCHMARK_SUITE(Suite2));
+
+  suite2->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B3, fun3)->AddArgs((size_t)2000)->AddArgs((size_t)3000));
+  return true;
+}
+@endcode
+
+Ouput - 
+
+@code
+######################################################################
+#  Manak C++ Benchmarking Library                                    #
+#  Version 1.0.0                                                     #
+#  Created at Nov 14 01:13:16 2014                                   #
+######################################################################
+
+       Case Name              base_library        
+
+B1                            3.4                 
+B2                            31.4                
+B3
+  Parameter Set 0             7.3                 
+  Parameter Set 1             11.1  
+@endcode
+*/

@@ -42,6 +42,18 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
 {
   bool compare = false;
 
+  if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-h"))
+  {
+    std::cout << "-h          : For help" << std::endl;
+    std::cout << "-r regex    : Only the cases satisfying the given regex will run." << std::endl;
+    std::cout << "              Check out guide for supported regex expressions." << std::endl;
+    std::cout << "-o filename : Save output to given file." << std::endl;
+    std::cout << "-s filename : Save the result for comparison." << std::endl;
+    std::cout << "-c filename : Load the given file for comparison." << std::endl;
+    exit(0);
+  }
+
+
   init_func();
   std::string pattern = "";
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-r"))
@@ -74,9 +86,8 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
 
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-c"))
   {
-    compare = true;
     std::string filename(manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-c"));
-    BenchmarkSuite::GetMasterSuite()->LoadData(filename);
+    compare = BenchmarkSuite::GetMasterSuite()->LoadData(filename);
   }
 
   BenchmarkSuite::GetMasterSuite()->Run("", pattern, compare);

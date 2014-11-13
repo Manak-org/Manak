@@ -1,0 +1,21 @@
+/*! @page n_mod Benchmark Module
+
+@section n_mod_intro Introduction
+This module is useful when 2 or more libraries ar compared against each other
+with time. This module can be used by setting 'MANAK_BENCHMARK_MODULE' to a 
+desired name. For more information on setting module type see @ref set_env_smt.
+
+@section n_mod_mr Manual Registration 
+For detailed information on manual registration of benchmark cases and benchmark
+suites in benchmark module see @ref man_reg_mbm.
+
+The macros provided for manual registartion of benchmark case:
+ - @ref man_reg_mbm1
+ - @ref man_reg_mbm2
+ - @ref man_reg_mbm3
+ - @ref man_reg_mbm4
+ - @ref man_reg_mbm6
+ 
+The macros provided for manual registration of benchmark suite:
+ - @ref man_reg_mbm5
+*/

@@ -90,8 +90,47 @@ int fun()
 
 MANAK_ADD_BENCHMARK(MANAK_BENCHMARK_CASE(B1, fun));
 ```
-
 Remember Measure blocks can also be used in functions such as 'fun' here.
+
+To create benchmark suite -
+
+```cpp
+#include <iostream>
+
+#define MANAK_SIMPLE_BENCHMARK_MODULE lib
+#define MANAK_AUTO_BENCHMARK_MAIN
+
+#include <manak/manak.hpp>
+
+MANAK_AUTO_BENCHMARK_SUITE(Suite1);
+
+MANAK_AUTO_BENCHMARK_CASE(B1)
+{
+  for(size_t i = 0;i < 1000;i++);
+}
+```
+
+To compare 2 or more libraries against each other -
+
+```cpp
+#include <iostream>
+
+#define MANAK_BENCHMARK_MODULE lib
+#define MANAK_AUTO_BENCHMARK_MAIN
+
+#include <manak/manak.hpp>
+
+MANAK_AUTO_BENCHMARK_CASE(B1, lib1)
+{
+  for(size_t i = 0;i < 1000;i++);
+}
+
+MANAK_AUTO_BENCHMARK_CASE(B2, lib2)
+{
+  for(size_t i = 0;i < 10000;i++);
+}
+```
+
 Functions with arguments can be used as templates. Templates are useful when 
 the same function is used for benchmarking with different parameters.
 Consider the next example -

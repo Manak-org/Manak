@@ -16,6 +16,9 @@
 
 #include <manak/benchmark_suit/pmeasure.hpp>
 
+#include "version.hpp"
+#include "timer.hpp"
+
 namespace manak
 {
 namespace utils
@@ -49,7 +52,13 @@ struct LogEntry
     {
       auto it = measures.begin();
       for(size_t i = 0;i < index;i++)
-      {
+      {/**
+ * @file benchmark_case.hpp
+ * @author Sumedh Ghaisas
+ *
+ * Declaration of BenchmarkCase.
+ */
+
         it++;
       }
       std::get<0>(*it) = pm;
@@ -64,17 +73,19 @@ struct LogEntry
     for(auto pm : measures)
     {
       std::stringstream s;
-      if(std::get<2>(pm) != 0)
-      {
-        if(std::get<1>(pm) > 0)
-          s << "+";
-        else if(std::get<2>(pm) < 0)
-          s << "-";
-        s << std::get<0>(pm);
-        s << "(" << std::get<2>(pm) << ")";
-      }
-      else s << std::get<0>(pm);
-
+      //if(std::get<0>(pm).avg != 0)
+      //{
+        if(std::get<2>(pm) != 0)
+        {
+          if(std::get<1>(pm) > 0)
+            s << "+";
+          else if(std::get<1>(pm) < 0)
+            s << "-";
+          s << std::get<0>(pm);
+          s << "(" << std::get<2>(pm) << ")";
+        }
+        else s << std::get<0>(pm);
+      //}
       stream << std::setw(20) << s.str();
     }
   }
@@ -82,11 +93,18 @@ struct LogEntry
   //! Print all the measures to the stream
   void Save(std::ostream& stream)
   {
+    stream << measures.size() << " ";
     for(auto pm : measures)
     {
       stream << std::get<0>(pm).avg << " ";
     }
   }
+/**
+ * @file benchmark_case.hpp
+ * @author Sumedh Ghaisas
+ *
+ * Declaration of BenchmarkCase.
+ */
 
   //! List of entries along with comparison information
   std::list<std::tuple<PMeasure, int, double>> measures;
@@ -219,8 +237,26 @@ class Log
   //! Print all the information in a user friendly way
   void Print(std::ostream& stream)
   {
+    stream << std::setiosflags(std::ios::left);
+    stream << "######################################################################"
+           << std::endl;
+    stream << "#  " << std::setw(66) << "Manak C++ Benchmarking Library" << "#"
+           << std::endl;
+
+    std::stringstream ss;
+    ss << "Version " << __MANAK_VERSION_MAJOR << "." << __MANAK_VERSION_MINOR
+       << "." << __MANAK_VERSION_PATCH;
+    stream << "#  " << std::setw(66) << ss.str() << "#" << std::endl;
+
+    std::stringstream ss2;
+    ss2 << "Created at " << Timer::getTimeStamp();
+
+    stream << "#  " << std::setw(66) << ss2.str() << "#" << std::endl;
+
+    stream << "######################################################################"
+           << std::endl << std::endl;
     stream << std::setprecision(3);
-    stream << std::setiosflags(std::ios::left) << std::setw(30) << "       Case Name";
+    stream << std::setw(30) << "       Case Name";
     for(size_t i = 0;i < l_ids.size();i++)
     {
       stream << std::setw(20) << r_l_ids[i];

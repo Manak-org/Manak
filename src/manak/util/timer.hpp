@@ -195,8 +195,11 @@ class Timer
   //! Start timer
   static void StartTimer()
   {
-    Start() = microtimer();
-    StateTimer() = true;
+    if(StateIter())
+    {
+      Start() = microtimer();
+      StateTimer() = true;
+    }
   }
 
   //! Stop timer

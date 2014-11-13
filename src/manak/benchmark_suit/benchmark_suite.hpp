@@ -17,7 +17,6 @@
 #include <manak/util/log.hpp>
 
 #include "base_library.hpp"
-#include "node.hpp"
 #include "pmeasure.hpp"
 #include "benchmark_case.hpp"
 
@@ -58,14 +57,12 @@ class BenchmarkSuite
     if(suite != current_benchmark_suite->child_suits.end())
     {
       current_benchmark_suite = suite->second;
-      std::cout << "Benchmark set to " << current_benchmark_suite << std::endl;
     }
     else
     {
       BenchmarkSuite* n_s = new BenchmarkSuite(name);
       current_benchmark_suite->AddSuite(n_s);
       current_benchmark_suite = n_s;
-      std::cout << "Benchmark set to " << current_benchmark_suite << std::endl;
     }
     return current_benchmark_suite;
   }
@@ -187,7 +184,8 @@ class BenchmarkSuite
 
     if(!stream.is_open())
     {
-      std::cerr << "Unable to open file " << name << std::endl;
+      std::cerr << "Unable to open file " << name << " for comparison" << std::endl;
+      return false;
     }
 
     std::vector<std::string> libs;
@@ -216,14 +214,17 @@ class BenchmarkSuite
       {
         for(size_t i = 0;i < s_entries;i++)
         {
-          for(auto l_name : libs)
+          size_t s_measures;
+          stream >> s_measures;
+
+          for(size_t i = 0;i < s_measures;i++)
           {
             double c_value;
             stream >> c_value;
 
             for(auto bc : lbc)
             {
-              if(bc->LibraryName() == l_name)
+              if(bc->LibraryName() == libs[i])
               {
                 bc->AddComparisonEntry(c_value);
                 break;
@@ -282,18 +283,14 @@ class DeRegisterBenchmarkSuite
 }
 
 #define MANAK_BENCHMARK_SUITE(X)  \
-( new BenchmarkSuite(#X) )
+( new manak::BenchmarkSuite(#X) )
 
 #define MANAK_AUTO_BENCHMARK_SUITE(X)  \
-namespace X \
-{ \
 static manak::RegisterBenchmarkSuite STRING_JOIN(X, STRING_JOIN(invoker, __LINE__))(#X);\
 
 #define MANAK_AUTO_BENCHMARK_SUITE_END()  \
 static manak::DeRegisterBenchmarkSuite STRING_JOIN(destroy, __LINE__); \
-};
 
-#ifndef MANAK_ALTERNATE_INIT_FUNCTION
 namespace manak
 {
 
@@ -301,7 +298,6 @@ bool init_benchmarking_module()
 {
   #ifdef MANAK_SIMPLE_BENCHMARK_MODULE
   manak::BenchmarkSuite::GetMasterSuite()->Name() = MANAK_STRINGIZE(MANAK_SIMPLE_BENCHMARK_MODULE);
-  manak::benchmark_suit::BaseLibrary::GetLibraryCollection().AddLibrary(MANAK_STRINGIZE(Base_Library));
 
   #else // MANAK_SIMPLE_BENCHMARK_MODULE
   manak::BenchmarkSuite::GetMasterSuite()->Name() = MANAK_STRINGIZE(MANAK_SIMPLE_BENCHMARK_MODULE);
@@ -317,6 +313,5 @@ bool init_benchmarking_module()
   return true;
 }
 }
-#endif // MANAK_AUTO_BENCHMARK_MAIN
 
 #endif // MANAK_BENCHMARK_SUITE_HPP_INCLUDED

@@ -1,0 +1,10 @@
+/*! @mainpage Manak Documentation
+
+@section intro_sec Introduction
+
+Manak is C++ Unit Benchmarking library designed for easy to use and flexible 
+solution to C++ benchmarking. Manak is header only library and uses C++11 
+features. The available guide and tutorials are given below.
+
+Check out the @ref quick_guide to start.
+*/
