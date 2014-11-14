@@ -10,6 +10,8 @@ benchmark your library against any other library. Manak offers a hierarchical
 structure similar to BOOST Unit Testing and generates a easy to read output file.
 Manak is header only library and highly uses c++11 features. 
 
+##Check out [Documentation](http://sumedhghaisas.github.io/Manak/) for tutorials on Manak C++ Benchmarking.
+
 ##How To Install
 
 ###For Linux
