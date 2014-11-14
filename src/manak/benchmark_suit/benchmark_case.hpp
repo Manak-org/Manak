@@ -188,7 +188,7 @@ class BenchmarkCase
   std::vector<double> to_c;
 };
 
-template<typename T>
+template<typename RType, typename... Args>
 class T_Benchmark_Case : public BenchmarkCase
 {
  public:
@@ -197,7 +197,7 @@ class T_Benchmark_Case : public BenchmarkCase
 
   T_Benchmark_Case(const std::string& name,
                    const std::string& library_name,
-                   std::function<T> t_function,
+                   std::function<RType(Args...)> t_function,
                    const size_t iterations = MANAK_DEFAULT_ITERATIONS,
                    double tolerance = MANAK_DEFAULT_TOLERANCE,
                    const std::string& desc = "")
@@ -207,15 +207,13 @@ class T_Benchmark_Case : public BenchmarkCase
 
   }
 
-  template<typename... Args>
-  T_Benchmark_Case* AddArgs(Args... args)
+  T_Benchmark_Case<RType, Args...>* AddArgs(Args... args)
   {
     std::tuple<Args...> temp(args...);
     run_functions.emplace_back("", [=](){utils::Caller(t_function, temp); });
     return this;
   }
 
-  template<typename... Args>
   T_Benchmark_Case* AddArgs_N(const std::string& name, Args... args)
   {
     std::tuple<Args...> temp(args...);
@@ -223,42 +221,53 @@ class T_Benchmark_Case : public BenchmarkCase
     return this;
   }
 
-  template<typename... Args>
-  T_Benchmark_Case* AddCustomArgs(std::function<std::list<std::tuple<Args...>>()> fun)
+  template<typename... Args2>
+  T_Benchmark_Case* AddCustomArgs(std::function<std::list<std::tuple<Args...>>(Args2...)> fun, Args2... params)
   {
-    std::list<std::tuple<Args...>> args = fun();
+    std::list<std::tuple<Args...>> args = fun(params...);
     for(auto s_arg : args)
     {
-      utils::Caller(utils::BindToObject(&T_Benchmark_Case::AddArgs<Args...>, this), s_arg);
+      utils::Caller(utils::BindToObject(&T_Benchmark_Case<RType, Args...>::AddArgs, this), s_arg);
     }
     return this;
   }
 
-  template<typename... Args>
-  T_Benchmark_Case* AddCustomArgs(std::list<std::tuple<Args...>> (&fun)())
+  template<typename... Args2>
+  T_Benchmark_Case* AddCustomArgs(std::list<std::tuple<Args...>> (&fun)(Args2...), Args2... params)
   {
-    std::list<std::tuple<Args...>> args = fun();
+    std::list<std::tuple<Args...>> args = fun(params...);
     for(auto s_arg : args)
     {
-      utils::Caller(utils::BindToObject(&T_Benchmark_Case::AddArgs<Args...>, this), s_arg);
+      utils::Caller(utils::BindToObject(&T_Benchmark_Case<RType, Args...>::AddArgs, this), s_arg);
     }
     return this;
   }
 
  private:
-  std::function<T> t_function;
+  std::function<RType(Args...)> t_function;
   size_t iter;
 };
 
 template<typename RType, typename... Args>
-T_Benchmark_Case<RType(Args...)>* CTBenchmarkObject(const std::string& name,
+T_Benchmark_Case<RType, Args...>* CTBenchmarkObject(const std::string& name,
                                                     const std::string& library_name,
                                                     const size_t iterations,
                                                     double tolerance,
                                                     const std::string& desc,
-                                                    RType (&fun)(Args...))
+                                                    RType (*fun)(Args...))
 {
-  return new T_Benchmark_Case<RType(Args...)>(name, library_name, std::function<RType(Args...)>(fun), iterations, tolerance, desc);
+  return new T_Benchmark_Case<RType, Args...>(name, library_name, std::function<RType(Args...)>(fun), iterations, tolerance, desc);
+}
+
+template<typename RType, typename... Args>
+T_Benchmark_Case<RType, Args...>* CTBenchmarkObject(const std::string& name,
+                                                    const std::string& library_name,
+                                                    const size_t iterations,
+                                                    double tolerance,
+                                                    const std::string& desc,
+                                                    std::function<RType(Args...)> fun)
+{
+  return new T_Benchmark_Case<RType, Args...>(name, library_name, fun, iterations, tolerance, desc);
 }
 
 }

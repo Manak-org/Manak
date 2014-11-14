@@ -35,10 +35,16 @@ bool bench_init()
 }
 @endcode
 
+The function to be registered must have no parameters. The function with 
+parameters can used to generate parametrized benchmark cases. See 
+@ref p_bench for more information. Also see @ref use_afr for registration of
+complex functions such as overloaded functions, template functions and 
+class member functions.
+
 When iteration or tolerance is not specified for any benchmark case the default 
 will be used. See @ref set_env_mdi and @ref set_env_mdt for more details.
 
-See ... to understand the comparison framework in simple module.
+See @ref comp_sm to understand the comparison framework in simple module.
 
 @subsection man_reg_msbm1 MANAK_BENCHMARK_CASE
 Creates a benchmark case with name and benchmark function. Number of iterations
@@ -132,7 +138,7 @@ bool bench_init()
 }
 @endcode
 
-For more advance parametrized benchmark options check ... .
+For more advance parametrized benchmark options check @ref p_bench.
 
 For example on simple module manual registration check @ref s_mod_mr_ex.
 
@@ -165,10 +171,16 @@ bool bench_init()
 }
 @endcode
 
+The function to be registered must have no parameters. The function with 
+parameters can used to generate parametrized benchmark cases. See 
+@ref p_bench for more information. Also see @ref use_afr for registration of
+complex functions such as overloaded functions, template functions and 
+class member functions.
+
 When iteration or tolerance is not specified for any benchmark case the default 
 will be used. See @ref set_env_mdi and @ref set_env_mdt for more details.
 
-See ... to understand the comparison framework in normal module.
+See @ref comp_nm to understand the comparison framework in normal module.
 
 @subsection man_reg_mbm1 MANAK_BENCHMARK_CASE
 Creates a benchmark case with name, library and benchmark function. Returns 
@@ -261,7 +273,7 @@ bool bench_init()
 }
 @endcode
 
-For more advance parametrized benchmark options check ... .
+For more advance parametrized benchmark options check @ref p_bench.
 
 For example on normal module manual registration check @ref n_mod_mr_ex.
 

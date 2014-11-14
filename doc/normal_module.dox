@@ -177,4 +177,7 @@ B3
 @endcode
 
 The equivalent auto registration code can be found at @ref n_mod_ar_ex.
+
+@section nm_cf Comparison Framework
+Check out @ref comp_sm for information on comparion framework of normal module.
 */

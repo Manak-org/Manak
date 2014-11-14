@@ -30,7 +30,10 @@ calling function manak::manak_benchmarking_main. The function accepts
 benchmark initialization function as the first argument. Check out 
 @ref set_env_sbif for more information on benchmark initialization function. 
 Init function can be manually generated for registering benchmark cases manually.
-In any case MANAK_INIT_FUNCTION will be set to the current init function. 
+In any case MANAK_INIT_FUNCTION will be set to the current init function. See
+@ref build_cli for command line arguments available for auto generated main or 
+manak_benchmarking_main. Or you can pass argument '-h' to any generated executable
+to get help.
 
 @code
 #include <iostream>
@@ -125,6 +128,10 @@ desired value.
 #include <manak/manak.hpp>
 @endcode
 
+The output filname can also be given at runtime with command line argument
+'-o <filename>'. This run time filename will override the default filename.
+For more command line arguments @see build_cli.
+
 The default generated output shows average time of all iterations. To also see 
 min and max values define MANAK_SHOW_MIN_MAX.
 
@@ -184,7 +191,8 @@ number of iterations are used. The default can be chnaged by setting
 
 If tolerance is not specified for any benchmark case the default is used. The 
 default can be chnaged by setting 'MANAK_DEFAULT_TOLERANCE' to desired value. 
-The measure of tolerance is microseconds. To understand use of tolerance see ...
+The measure of tolerance is microseconds. To understand the use of tolerance see
+@ref comp.
 
 @code
 #define MANAK_DEFAULT_TOLERANCE <value in microseconds>

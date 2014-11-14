@@ -1,0 +1,141 @@
+/*! @page p_bench Complete guide on Parametrized Benchmark Cases
+
+With the use advance C++11 features, Manak implements simple to use template 
+benchmarking. Template benchmarking is useful when a same function is benchmarked
+with many different parameters. 
+
+@code 
+MANAK_AUTO_BENCHMARK_CASE(ForLoops_1000)
+{
+  for(size_t i = 0;i < 1000;i++);
+}
+MANAK_AUTO_BENCHMARK_CASE(ForLoops_2000)
+{
+  for(size_t i = 0;i < 200;i++);
+}
+@endcode
+
+Parametrized benchmark cases in Manak helps reduce code duplication and the above 
+code can be written like - 
+
+@code
+void ForLoops(size_t a)
+{
+  for(size_t i = 0;i < a;i++);
+}
+
+MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, ForLoops)->AddArgs(1000)->AddArgs(2000));
+@endcode 
+
+Reducing code redundancy helps minimize erros. In the above code 'B1' is a 
+parametrized benchmark holding 2 sets of parameter set. With 'AddArgs' you
+can add more parameter sets to the parametrized benchmark. There can be any number
+of 'AddArgs' calls linked to a parametrized benchmark case. Parametrized benchmark 
+case will run the function given on all the parameter sets. There is no restriction 
+on type of function accepted by parametrized benchmark but number and type of 
+parameters given to 'AddArgs' must match the given benchmark function. The only 
+thing is that the auto template substitution wont work with benchmark functions. 
+For templatized function the entire template signature must be provided.
+
+@code
+template<typename T>
+int fun(const T& t)
+{
+  Code;
+}
+
+MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun<std::string>)->AddArgs("Test"));
+@endcode
+
+@section p_bench_aca AddCustomArgs
+
+If number of parameter sets gets large its inconvenient to write each one 
+down in AddArgs. On top of that they may be part of the sequence which
+can be generated at runtime. For that 'AddCustomArgs' is useful. 
+
+@code
+int fun(int a, int b)
+{
+  Code;
+}
+
+list<tuple<int, int>> GetArgs()
+{
+  list<tuple<int, int>> out;
+  for(size_t i = 0;i < 50;i++)
+    out.emplace_back(i, i+1);
+  return out;
+}
+
+MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs(GetArgs));
+@endcode
+
+'AddCustomArgs' accepts a function which should return list of appropriate
+tuples. This custom function may have parameters which can be passed to 
+'AddCustomArgs' after the function name.
+
+@code
+int fun(int a, int b)
+{
+  Code;
+}
+
+list<tuple<int, int>> GetArgs(int a)
+{
+  list<tuple<int, int>> out;
+  for(size_t i = 0;i < a;i++)
+    out.emplace_back(i, i+1);
+  return out;
+}
+
+MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs(GetArgs, 50));
+@endcode
+
+For more advance function passing see @ref use_afr.
+
+@section p_bench_sm_m Parametrized Benchmark Macros for Simple Module
+Manak offers following macros for creating parametrized benchmarks
+  - @ref p_bench_m1
+  - @ref p_bench_m2
+  - @ref p_bench_m3
+  - @ref p_bench_m4
+  
+@subsection p_bench_m1 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE
+Creates a parametrized benchmark case with given name and function and return 
+pointer to the created case. The returned pointer can be registered manually or
+auto with 'MANAK_ADD_BENCHMARK'.
+
+@subsection p_bench_m2 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I
+Creates a parametrized benchmark case with given name, function and number of
+iterations. 
+
+@subsection p_bench_m3 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T
+Creates a parmetrized benchmark case with given name, function and tolerance.
+
+@subsection p_bench_m4 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT
+Creates a parametrized benchmark case with given name, function, number of 
+iterations and tolerance.
+
+@section p_bench_m_m Parametrized Benchmark Macros for Normal Module
+Manak offers following macros for creating parametrized benchmarks
+  - @ref p_bench_m5
+  - @ref p_bench_m6
+  - @ref p_bench_m7
+  - @ref p_bench_m8
+  
+@subsection p_bench_m5 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE
+Creates a parametrized benchmark case with name, library and function and return 
+pointer to the created case. The returned pointer can be registered manually or
+auto with 'MANAK_ADD_BENCHMARK'.
+
+@subsection p_bench_m6 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I
+Creates a parametrized benchmark case with name, library, function and number of
+iterations. 
+
+@subsection p_bench_m7 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T
+Creates a parmetrized benchmark case with name, library, function and tolerance.
+
+@subsection p_bench_m8 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT
+Creates a parametrized benchmark case with name, library, function, number of 
+iterations and tolerance.
+*/

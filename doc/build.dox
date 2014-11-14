@@ -1,0 +1,61 @@
+/*! @page build Installing and Using Manak
+
+@section build_sc Supported Compilers
+Manak is tested on following compilers -
+ - GNU G++(>= 4.7)
+ - LLVM Clang++ (>= 3.2)
+ - Visual Studio(>= 2012)
+ 
+@section build_lb Installing On Linux(or like environments)
+As Manak is header only library and has no external dependency, no build is 
+required for installation. 
+
+@subsection Installing with CMake
+ - Download and extract the source into folder.
+ - cd into that directory
+ - mkdir build
+ - cd build
+ - cmake ../
+ - sudo make install
+ 
+This will install Manak header files into /usr/local/includes.
+To generate this documentation run command 'make doc' in build.
+
+@subsection Manual Installation
+You can just copy the 'manak' folder(./src/manak) into the directory of your 
+choice. While compiling don't forget to add that directory to the compilers
+search path.
+
+@section build_wb Installing on Windows
+
+@subsection Installing with CMake
+You can download CMake GUI for Windows and install Manak with it. 
+
+@subsection Manual Installation
+Sometimes working with CMake on Windows is really confusing. So if you are using 
+Visual Studio environment of MinGW environment you can just copy the 'manak'
+folder (./src/manak) into the default search path of your environment.
+
+@section build_um Using Manak
+To use manak you only have to add manak.hpp to your project, which will let you 
+use all the macros and functions available. But before including manak.hpp you 
+should set the environment for Manak. See @ref set_env.
+
+@code
+#include <iostream>
+
+Set Manak environment; 
+
+#include <manak/manak.hpp>
+@endcode
+
+@subsection build_cli Command Line Arguments
+The following are the command line arguments available for any Manak generated 
+executable.
+ - '-h': Print help
+ - '-s <filename>': Save the generated for later comparisons. See @ref comp for more information.
+ - '-c <filename>': Load previously saved benchmarks for comparison. See @ref comp for more information.
+ - '-r <regex>': Run benchmark cases matching given regex. See @ref qg_rsc for more information.
+ - '-o <filename>: Redirect the output to given file. See @ref set_env_soof for more information.
+ - '-v': Get version information
+*/

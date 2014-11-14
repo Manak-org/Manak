@@ -1,0 +1,93 @@
+/*! @page use_afr Advance Function Registration
+
+@section use_afr_rtf Registration of Templatized Functions
+With overloadedtemplatized functions the template substitution becomes
+ambiguous. To remove this ambiguity in case of templatized functions specific 
+template signature must be given as auto template substitution won't work.
+
+@code
+template<typename T>
+int fun(T a)
+{
+  Code;
+}
+
+MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun<size_t>)->AddArgs(1000));
+@endcode
+
+@section use_afr_ofr Overloaded Function Registration 
+In case of overloaded functions, a static cast has to be used to determine the
+correct signature.
+
+@code
+int fun(int a)
+{
+  Code;
+}
+int fun(int b)
+{
+  Code;
+}
+
+MANAK_ADD_BENCHMARK(MANAK_BENCHMARK_CASE(B1, static_cast<int(&)(int)>(fun)));
+@endcode
+
+
+@section use_afr_rcmf Registration of Class Member Functions
+Static class functions can be directly passed.
+
+@code
+class A
+{
+ public:
+  static void fun()
+  {
+    Code;
+  }
+};
+
+MANAK_ADD_BENCHMARK(MANAK_BENCHMARK_CASE(B1, A::fun));
+@endcode
+
+The use of non static members is little complex. Manak provides a useful
+function manak::utils::BindToObject for that. This function accepts class member
+function pointer as first argument and pointer to class object as second and 
+returns a non class member function which can be directly passed to any macro.
+
+With manual registration - 
+@code
+class A
+{
+ public:
+  void fun(int a)
+  {
+    Code;
+  }
+}; 
+
+bool manual_init()
+{
+  A* a = new A();
+  manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, manak::utils::BindToObject(&A::fun, a))->AddArgs(1000));
+}
+@endcode
+
+With auto registration -
+@code
+class A
+{
+ public:
+  void fun(int a)
+  {
+    ;
+  }
+}
+
+A* Test()
+{
+  return new A();
+} 
+
+MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, manak::utils::BindToObject(&A::fun, Test()))->AddArgs(1000));
+@endcode
+*/

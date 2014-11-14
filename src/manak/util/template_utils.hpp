@@ -85,12 +85,6 @@ RType BindToObject2(F fun, O* o, Hold<S...>)
   return std::bind(fun, o, template_placeholder<S>()...);
 }
 
-template<typename RType, typename C, typename... Args>
-std::function<RType(Args...)> BindToObject(RType (C::*fun)(Args...) const, const C* c)
-{
-  return BindToObject2<std::function<RType(Args...)>>(fun, c, typename SGenerate<sizeof...(Args)>::type());
-}
-
 }; // namespace helpers
 
 template<typename RType, typename... Args>
@@ -107,6 +101,18 @@ RType Caller(RType (fun)(Args...), std::tuple<Args...> params)
 
 template<typename RType, typename C, typename... Args>
 std::function<RType(Args...)> BindToObject(RType (C::*fun)(Args...), C* c)
+{
+  return helper::BindToObject2<std::function<RType(Args...)>>(fun, c, typename helper::SGenerate<sizeof...(Args)>::type());
+}
+
+template<typename RType, typename C, typename... Args>
+std::function<RType(Args...)> BindToObject(RType (C::*fun)(Args...) const, const C* c)
+{
+  return helper::BindToObject2<std::function<RType(Args...)>>(fun, c, typename helper::SGenerate<sizeof...(Args)>::type());
+}
+
+template<typename RType, typename C, typename... Args>
+std::function<RType(Args...)> BindToObject(RType (C::*fun)(Args...) const, C* c)
 {
   return helper::BindToObject2<std::function<RType(Args...)>>(fun, c, typename helper::SGenerate<sizeof...(Args)>::type());
 }
