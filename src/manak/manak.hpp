@@ -52,6 +52,12 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
     std::cout << "-c filename : Load the given file for comparison." << std::endl;
     exit(0);
   }
+  
+  if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-v"))
+  {
+    std::cout << manak::GetVersionInfo() << std::endl;
+    exit(0);
+  }
 
 
   init_func();

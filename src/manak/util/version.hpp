@@ -12,7 +12,7 @@
 #include <sstream>
 
 //! Declare version
-#define __MANAK_VERSION_MAJOR "master"
+#define __MANAK_VERSION_MAJOR 1
 #define __MANAK_VERSION_MINOR 0
 #define __MANAK_VERSION_PATCH 0
 

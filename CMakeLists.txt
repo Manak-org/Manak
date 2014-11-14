@@ -3,10 +3,10 @@ cmake_minimum_required(VERSION 2.8.5)
 project(manak C CXX)
 
 # set version information
-set(MANAK_MAJOR_VERSION "0")
+set(MANAK_MAJOR_VERSION "1")
 set(MANAK_MINOR_VERSION "0")
 set(MANAK_PATCH_VERSION "0")
-set(MANAK_VERSION_NAME "master")
+set(MANAK_VERSION_NAME "Begin")
 
 # Make a target to generate the documentation.  If Doxygen isn't installed, then
 # I guess this option will just be unavailable.
