@@ -136,6 +136,8 @@ Simple Benchmarking Module</h1>
 <div class="line"></div>
 <div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, fun));</div>
 </div><!-- fragment --><p>Remember 'Measure' block can also be used inside manually generated functions.</p>
+<h2><a class="anchor" id="qg_pbc"></a>
+Parametrized Benchmark Cases</h2>
 <p>Functions with parameters can be used as template benchmark function. For example -</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b)</div>
 <div class="line">{</div>
@@ -169,7 +171,7 @@ Simple Benchmarking Module</h1>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun)-&gt;AddCustomArgs(get_args));</div>
-</div><!-- fragment --><p>The function passed to 'AddCustomArgs' must return list of tuples. These returned tuples will be unfolded and passed to the parametrized benchmark case one by one. For more advance parametrized benchmark options check ... .</p>
+</div><!-- fragment --><p>The function passed to 'AddCustomArgs' must return list of tuples. These returned tuples will be unfolded and passed to the parametrized benchmark case one by one. For more advance parametrized benchmark options check <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmark Cases</a> .</p>
 <p>The auto test registration registers the case to the current suit(which happens to be the master suit in global space). 'MANAK_AUTO_BENCHMARK_SUITE' registers a new suite under the current suit and sets the newly created suite as the current suite.</p>
 <div class="fragment"><div class="line"><a class="code" href="benchmark__suite_8hpp.html#ae2cb39c3eedb85936f963b6e9a48b546">MANAK_AUTO_BENCHMARK_SUITE</a>(Suite1);</div>
 <div class="line"></div>
@@ -314,7 +316,7 @@ Running Specific Cases</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 14 2014 19:03:27 for Manak by
+    <li class="footer">Generated on Sat Nov 15 2014 04:44:49 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

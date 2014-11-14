@@ -5,6 +5,11 @@ var NAVTREE =
       [ "Introduction", "index.html#intro_sec", null ]
     ] ],
     [ "All About Timing", "all_time.html", null ],
+    [ "Advance Function Registration", "use_afr.html", [
+      [ "Registration of Templatized Functions", "use_afr.html#use_afr_rtf", null ],
+      [ "Overloaded Function Registration", "use_afr.html#use_afr_ofr", null ],
+      [ "Registration of Class Member Functions", "use_afr.html#use_afr_rcmf", null ]
+    ] ],
     [ "Automatic Registration", "auto_reg.html", [
       [ "Auto Registration With Simple Module", "auto_reg.html#auto_reg_sbm", [
         [ "MANAK_AUTO_BENCHMARK_CASE", "auto_reg.html#auto_reg_sbm1", null ],
@@ -26,6 +31,23 @@ var NAVTREE =
         [ "MANAK_AUTO_BENCHMARK_END", "auto_reg.html#auto_reg_bm6", null ],
         [ "Parametrized Benchmark cases", "auto_reg.html#auto_reg_bm7", null ]
       ] ]
+    ] ],
+    [ "Installing and Using Manak", "build.html", [
+      [ "Supported Compilers", "build.html#build_sc", null ],
+      [ "Installing On Linux(or like environments)", "build.html#build_lb", [
+        [ "with CMake", "build.html#Installing", null ],
+        [ "Installation", "build.html#Manual", null ]
+      ] ],
+      [ "Installing on Windows", "build.html#build_wb", null ],
+      [ "Using Manak", "build.html#build_um", [
+        [ "Command Line Arguments", "build.html#build_cli", null ]
+      ] ]
+    ] ],
+    [ "Comparison Framework", "comp.html", [
+      [ "Comparison Framework for Simple Module", "comp.html#comp_sm", [
+        [ "Comparison framework examples", "comp.html#comp_sm_ex", null ]
+      ] ],
+      [ "Comparison Framework of Normal Module", "comp.html#comp_nm", null ]
     ] ],
     [ "Manual Registration", "man_reg.html", [
       [ "Manual Registartion with Simple Module", "man_reg.html#man_reg_msbm", [
@@ -50,11 +72,29 @@ var NAVTREE =
       [ "Auto Registration", "n_mod.html#n_mod_ar", null ],
       [ "Example", "n_mod.html#n_mod_ar_ex", null ],
       [ "Manual Registration", "n_mod.html#n_mod_mr", null ],
-      [ "Example", "n_mod.html#n_mod_mr_ex", null ]
+      [ "Example", "n_mod.html#n_mod_mr_ex", null ],
+      [ "Comparison Framework", "n_mod.html#nm_cf", null ]
+    ] ],
+    [ "Complete guide on Parametrized Benchmark Cases", "p_bench.html", [
+      [ "AddCustomArgs", "p_bench.html#p_bench_aca", null ],
+      [ "Parametrized Benchmark Macros for Simple Module", "p_bench.html#p_bench_sm_m", [
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE", "p_bench.html#p_bench_m1", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I", "p_bench.html#p_bench_m2", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T", "p_bench.html#p_bench_m3", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT", "p_bench.html#p_bench_m4", null ]
+      ] ],
+      [ "Parametrized Benchmark Macros for Normal Module", "p_bench.html#p_bench_m_m", [
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE", "p_bench.html#p_bench_m5", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I", "p_bench.html#p_bench_m6", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T", "p_bench.html#p_bench_m7", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT", "p_bench.html#p_bench_m8", null ]
+      ] ]
     ] ],
     [ "Quick Guide", "quick_guide.html", [
       [ "Introduction", "quick_guide.html#qg_intro_sec", null ],
-      [ "Simple Benchmarking Module", "quick_guide.html#qg_sbm", null ],
+      [ "Simple Benchmarking Module", "quick_guide.html#qg_sbm", [
+        [ "Parametrized Benchmark Cases", "quick_guide.html#qg_pbc", null ]
+      ] ],
       [ "Benchmaking Module", "quick_guide.html#qg_bm", null ],
       [ "Manak Comparison Framework", "quick_guide.html#qg_comp", null ],
       [ "Running Specific Cases", "quick_guide.html#qg_rsc", null ]
@@ -84,7 +124,8 @@ var NAVTREE =
       [ "Auto Registration", "s_mod.html#s_mod_ar", null ],
       [ "Example", "s_mod.html#s_mod_ar_ex", null ],
       [ "Manual Registration", "s_mod.html#s_mod_mr", null ],
-      [ "Example", "s_mod.html#s_mod_mr_ex", null ]
+      [ "Example", "s_mod.html#s_mod_mr_ex", null ],
+      [ "Comparison Framework", "s_mod.html#sm_cf", null ]
     ] ],
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
@@ -118,7 +159,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "all_time.html",
-"simple__module__benchmark__case_8hpp.html#a5c040e85b954a54d979013b2df2d8e3d"
+"s_mod.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

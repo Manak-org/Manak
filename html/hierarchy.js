@@ -6,7 +6,7 @@ var hierarchy =
     ] ],
     [ "manak::benchmark_suit::BaseLibrary", "classmanak_1_1benchmark__suit_1_1BaseLibrary.html", null ],
     [ "manak::BenchmarkCase", "classmanak_1_1BenchmarkCase.html", [
-      [ "manak::T_Benchmark_Case< T >", "classmanak_1_1T__Benchmark__Case.html", null ]
+      [ "manak::T_Benchmark_Case< RType, Args >", "classmanak_1_1T__Benchmark__Case.html", null ]
     ] ],
     [ "manak::BenchmarkSuite", "classmanak_1_1BenchmarkSuite.html", null ],
     [ "manak::DeRegisterBenchmarkSuite", "classmanak_1_1DeRegisterBenchmarkSuite.html", null ],

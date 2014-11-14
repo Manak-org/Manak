@@ -90,9 +90,6 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0dff49378c977fc8058ba13d8f2d3f41"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename C , typename... Args&gt; </td></tr>
-<tr class="memitem:a0dff49378c977fc8058ba13d8f2d3f41"><td class="memTemplItemLeft" align="right" valign="top">std::function&lt; RType(Args...)&gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils_1_1helper.html#a0dff49378c977fc8058ba13d8f2d3f41">BindToObject</a> (RType(C::*fun)(Args...) const, const C *c)</td></tr>
-<tr class="separator:a0dff49378c977fc8058ba13d8f2d3f41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af56d296ce7446f934b6b3196b0eceb09"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename F , typename O , int... S&gt; </td></tr>
 <tr class="memitem:af56d296ce7446f934b6b3196b0eceb09"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">BindToObject2</a> (F fun, const O *o, <a class="el" href="structmanak_1_1utils_1_1helper_1_1Hold.html">Hold</a>&lt; S...&gt;)</td></tr>
 <tr class="separator:af56d296ce7446f934b6b3196b0eceb09"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,38 +109,6 @@ Variables</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Template Helper Functions. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a0dff49378c977fc8058ba13d8f2d3f41"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename RType , typename C , typename... Args&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">std::function&lt;RType(Args...)&gt; manak::utils::helper::BindToObject </td>
-          <td>(</td>
-          <td class="paramtype">RType(C::*)(Args...) const&#160;</td>
-          <td class="paramname"><em>fun</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const C *&#160;</td>
-          <td class="paramname"><em>c</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00089">89</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
-
-<p>References <a class="el" href="template__utils_8hpp_source.html#l00077">BindToObject2()</a>, and <a class="el" href="template__utils_8hpp_source.html#l00054">manak::utils::helper::SGenerate&lt; N &gt;::type</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="af56d296ce7446f934b6b3196b0eceb09"></a>
 <div class="memitem">
 <div class="memproto">
@@ -178,7 +143,7 @@ template&lt;typename RType , typename F , typename O , int... S&gt; </div>
 
 <p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00077">77</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="template__utils_8hpp_source.html#l00089">BindToObject()</a>, and <a class="el" href="template__utils_8hpp_source.html#l00109">manak::utils::BindToObject()</a>.</p>
+<p>Referenced by <a class="el" href="template__utils_8hpp_source.html#l00103">manak::utils::BindToObject()</a>.</p>
 
 </div>
 </div>
@@ -277,7 +242,7 @@ template&lt;int N, int... Args&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacemanak.html">manak</a></li><li class="navelem"><a class="el" href="namespacemanak_1_1utils.html">utils</a></li><li class="navelem"><a class="el" href="namespacemanak_1_1utils_1_1helper.html">helper</a></li>
-    <li class="footer">Generated on Fri Nov 14 2014 19:03:27 for Manak by
+    <li class="footer">Generated on Sat Nov 15 2014 04:44:49 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

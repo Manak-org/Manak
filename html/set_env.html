@@ -79,7 +79,7 @@ MANAK_AUTO_BENCHMARK_MAIN</h2>
 <p>By defining 'MANAK_AUTO_BENCHMARK_MAIN', manak will create a main function for you. This main function will initialize all the cases and run them.</p>
 <h2><a class="anchor" id="set_env_mcmf"></a>
 Manually creating main function</h2>
-<p>You can create your own main function and still run all the benchmarks by calling function <a class="el" href="namespacemanak.html#adcb407502ab54acd1f73edb30564d5ce" title="This function runs benchmarking module with given function. ">manak::manak_benchmarking_main</a>. The function accepts benchmark initialization function as the first argument. Check out <a class="el" href="set_env.html#set_env_sbif">Set benchmark initialization function</a> for more information on benchmark initialization function. Init function can be manually generated for registering benchmark cases manually. In any case MANAK_INIT_FUNCTION will be set to the current init function.</p>
+<p>You can create your own main function and still run all the benchmarks by calling function <a class="el" href="namespacemanak.html#adcb407502ab54acd1f73edb30564d5ce" title="This function runs benchmarking module with given function. ">manak::manak_benchmarking_main</a>. The function accepts benchmark initialization function as the first argument. Check out <a class="el" href="set_env.html#set_env_sbif">Set benchmark initialization function</a> for more information on benchmark initialization function. Init function can be manually generated for registering benchmark cases manually. In any case MANAK_INIT_FUNCTION will be set to the current init function. See <a class="el" href="build.html#build_cli">Command Line Arguments</a> for command line arguments available for auto generated main or manak_benchmarking_main. Or you can pass argument '-h' to any generated executable to get help.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
@@ -142,7 +142,9 @@ Setting Options For Output File</h2>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_DEFAULT_OUT_FILENAME out.txt</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
-</div><!-- fragment --><p>The default generated output shows average time of all iterations. To also see min and max values define MANAK_SHOW_MIN_MAX.</p>
+</div><!-- fragment --><p>The output filname can also be given at runtime with command line argument '-o &lt;filename&gt;'. This run time filename will override the default filename. For more command line arguments </p>
+<dl class="section see"><dt>See Also</dt><dd>build_cli.</dd></dl>
+<p>The default generated output shows average time of all iterations. To also see min and max values define MANAK_SHOW_MIN_MAX.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
@@ -178,14 +180,14 @@ MANAK_DEFAULT_ITERATIONS</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#define MANAK_DEFAULT_ITERATIONS &lt;value in integer&gt;</span></div>
 </div><!-- fragment --><h2><a class="anchor" id="set_env_mdt"></a>
 MANAK_DEFAULT_TOLERANCE</h2>
-<p>If tolerance is not specified for any benchmark case the default is used. The default can be chnaged by setting 'MANAK_DEFAULT_TOLERANCE' to desired value. The measure of tolerance is microseconds. To understand use of tolerance see ...</p>
+<p>If tolerance is not specified for any benchmark case the default is used. The default can be chnaged by setting 'MANAK_DEFAULT_TOLERANCE' to desired value. The measure of tolerance is microseconds. To understand the use of tolerance see <a class="el" href="comp.html">Comparison Framework</a>.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#define MANAK_DEFAULT_TOLERANCE &lt;value in microseconds&gt;</span></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 14 2014 19:03:27 for Manak by
+    <li class="footer">Generated on Sat Nov 15 2014 04:44:49 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

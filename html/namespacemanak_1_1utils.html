@@ -100,9 +100,12 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a86aa7a3cea90f4b3bdc8655bc82a809f"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename C , typename... Args&gt; </td></tr>
-<tr class="memitem:a86aa7a3cea90f4b3bdc8655bc82a809f"><td class="memTemplItemLeft" align="right" valign="top">std::function&lt; RType(Args...)&gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html#a86aa7a3cea90f4b3bdc8655bc82a809f">BindToObject</a> (RType(C::*fun)(Args...), C *c)</td></tr>
-<tr class="separator:a86aa7a3cea90f4b3bdc8655bc82a809f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcb1904a214bd5346f199db39663ae3c"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename C , typename... Args&gt; </td></tr>
+<tr class="memitem:afcb1904a214bd5346f199db39663ae3c"><td class="memTemplItemLeft" align="right" valign="top">std::function&lt; RType(Args...)&gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">BindToObject</a> (RType(C::*fun)(Args...), C *c)</td></tr>
+<tr class="separator:afcb1904a214bd5346f199db39663ae3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ba41c847942b13036eeb56853d685c6"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename C , typename... Args&gt; </td></tr>
+<tr class="memitem:a5ba41c847942b13036eeb56853d685c6"><td class="memTemplItemLeft" align="right" valign="top">std::function&lt; RType(Args...)&gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html#a5ba41c847942b13036eeb56853d685c6">BindToObject</a> (RType(C::*fun)(Args...) const, const C *c)</td></tr>
+<tr class="separator:a5ba41c847942b13036eeb56853d685c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63269567bfc47d7ec87fbbfe80b73c2e"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename... Args&gt; </td></tr>
 <tr class="memitem:a63269567bfc47d7ec87fbbfe80b73c2e"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html#a63269567bfc47d7ec87fbbfe80b73c2e">Caller</a> (std::function&lt; RType(Args...)&gt; fun, std::tuple&lt; Args...&gt; params)</td></tr>
 <tr class="separator:a63269567bfc47d7ec87fbbfe80b73c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,14 +116,14 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Useful Utilities. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a86aa7a3cea90f4b3bdc8655bc82a809f"></a>
+<a class="anchor" id="afcb1904a214bd5346f199db39663ae3c"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename RType , typename C , typename... Args&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::function&lt;RType(Args...)&gt; manak::utils::BindToObject </td>
+          <td class="memname">std::function&lt; RType(Args...)&gt; manak::utils::BindToObject </td>
           <td>(</td>
           <td class="paramtype">RType(C::*)(Args...)&#160;</td>
           <td class="paramname"><em>fun</em>, </td>
@@ -139,11 +142,43 @@ template&lt;typename RType , typename C , typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00109">109</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
+<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00103">103</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
 
 <p>References <a class="el" href="template__utils_8hpp_source.html#l00077">manak::utils::helper::BindToObject2()</a>.</p>
 
-<p>Referenced by <a class="el" href="benchmark__case_8hpp_source.html#l00227">manak::T_Benchmark_Case&lt; T &gt;::AddCustomArgs()</a>.</p>
+<p>Referenced by <a class="el" href="benchmark__case_8hpp_source.html#l00225">manak::T_Benchmark_Case&lt; RType, Args &gt;::AddCustomArgs()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5ba41c847942b13036eeb56853d685c6"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RType , typename C , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;RType(Args...)&gt; manak::utils::BindToObject </td>
+          <td>(</td>
+          <td class="paramtype">RType(C::*)(Args...) const&#160;</td>
+          <td class="paramname"><em>fun</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const C *&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00109">109</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
+
+<p>References <a class="el" href="template__utils_8hpp_source.html#l00077">manak::utils::helper::BindToObject2()</a>.</p>
 
 </div>
 </div>
@@ -173,9 +208,9 @@ template&lt;typename RType , typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00097">97</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
+<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00091">91</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="benchmark__case_8hpp_source.html#l00211">manak::T_Benchmark_Case&lt; T &gt;::AddArgs()</a>, <a class="el" href="benchmark__case_8hpp_source.html#l00219">manak::T_Benchmark_Case&lt; T &gt;::AddArgs_N()</a>, and <a class="el" href="benchmark__case_8hpp_source.html#l00227">manak::T_Benchmark_Case&lt; T &gt;::AddCustomArgs()</a>.</p>
+<p>Referenced by <a class="el" href="benchmark__case_8hpp_source.html#l00210">manak::T_Benchmark_Case&lt; RType, Args &gt;::AddArgs()</a>, <a class="el" href="benchmark__case_8hpp_source.html#l00217">manak::T_Benchmark_Case&lt; RType, Args &gt;::AddArgs_N()</a>, and <a class="el" href="benchmark__case_8hpp_source.html#l00225">manak::T_Benchmark_Case&lt; RType, Args &gt;::AddCustomArgs()</a>.</p>
 
 </div>
 </div>
@@ -205,7 +240,7 @@ template&lt;typename RType , typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00103">103</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
+<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00097">97</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
 
 </div>
 </div>
@@ -215,7 +250,7 @@ template&lt;typename RType , typename... Args&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacemanak.html">manak</a></li><li class="navelem"><a class="el" href="namespacemanak_1_1utils.html">utils</a></li>
-    <li class="footer">Generated on Fri Nov 14 2014 19:03:27 for Manak by
+    <li class="footer">Generated on Sat Nov 15 2014 04:44:49 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

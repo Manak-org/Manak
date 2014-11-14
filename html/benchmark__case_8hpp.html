@@ -98,7 +98,7 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmanak_1_1T__Benchmark__Case.html">manak::T_Benchmark_Case&lt; T &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmanak_1_1T__Benchmark__Case.html">manak::T_Benchmark_Case&lt; RType, Args &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -134,9 +134,12 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abb095330fcc8ca6e51b894ddae323686"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename... Args&gt; </td></tr>
-<tr class="memitem:abb095330fcc8ca6e51b894ddae323686"><td class="memTemplItemLeft" align="right" valign="top">T_Benchmark_Case&lt; RType(Args...)&gt; *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak.html#abb095330fcc8ca6e51b894ddae323686">manak::CTBenchmarkObject</a> (const std::string &amp;name, const std::string &amp;library_name, const size_t iterations, double tolerance, const std::string &amp;desc, RType(&amp;fun)(Args...))</td></tr>
-<tr class="separator:abb095330fcc8ca6e51b894ddae323686"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada1890933429fd0563aca289c7f6c3c3"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename... Args&gt; </td></tr>
+<tr class="memitem:ada1890933429fd0563aca289c7f6c3c3"><td class="memTemplItemLeft" align="right" valign="top">T_Benchmark_Case&lt; RType, Args...&gt; *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak.html#ada1890933429fd0563aca289c7f6c3c3">manak::CTBenchmarkObject</a> (const std::string &amp;name, const std::string &amp;library_name, const size_t iterations, double tolerance, const std::string &amp;desc, RType(*fun)(Args...))</td></tr>
+<tr class="separator:ada1890933429fd0563aca289c7f6c3c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb35cf2201c07a2cba7a10e7f306c43"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename... Args&gt; </td></tr>
+<tr class="memitem:a2fb35cf2201c07a2cba7a10e7f306c43"><td class="memTemplItemLeft" align="right" valign="top">T_Benchmark_Case&lt; RType, Args...&gt; *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak.html#a2fb35cf2201c07a2cba7a10e7f306c43">manak::CTBenchmarkObject</a> (const std::string &amp;name, const std::string &amp;library_name, const size_t iterations, double tolerance, const std::string &amp;desc, std::function&lt; RType(Args...)&gt; fun)</td></tr>
+<tr class="separator:a2fb35cf2201c07a2cba7a10e7f306c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Add a measure to this entry. </p>
@@ -168,7 +171,7 @@ Functions</h2></td></tr>
 <div class="ttc" id="classmanak_1_1BenchmarkCase_html"><div class="ttname"><a href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a></div><div class="ttdef"><b>Definition:</b> <a href="benchmark__case_8hpp_source.html#l00068">benchmark_case.hpp:68</a></div></div>
 <div class="ttc" id="macro__utils_8hpp_html_a6ec7bd2e052f08c1b0163acf7ccdc9fe"><div class="ttname"><a href="macro__utils_8hpp.html#a6ec7bd2e052f08c1b0163acf7ccdc9fe">STRING_JOIN</a></div><div class="ttdeci">#define STRING_JOIN(X, Y)</div><div class="ttdoc">Joins given parameters. </div><div class="ttdef"><b>Definition:</b> <a href="macro__utils_8hpp_source.html#l00018">macro_utils.hpp:18</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="benchmark__case_8hpp_source.html#l00274">274</a> of file <a class="el" href="benchmark__case_8hpp_source.html">benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="benchmark__case_8hpp_source.html#l00283">283</a> of file <a class="el" href="benchmark__case_8hpp_source.html">benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
@@ -289,7 +292,7 @@ Functions</h2></td></tr>
 <div class="line">manak::Timer::StopTimer();</div>
 <div class="ttc" id="classmanak_1_1Timer_html_a2550f9a6df56054a9cba7c763ccd8f53"><div class="ttname"><a href="classmanak_1_1Timer.html#a2550f9a6df56054a9cba7c763ccd8f53">manak::Timer::StartTimer</a></div><div class="ttdeci">static void StartTimer()</div><div class="ttdoc">Start timer. </div><div class="ttdef"><b>Definition:</b> <a href="timer_8hpp_source.html#l00196">timer.hpp:196</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="benchmark__case_8hpp_source.html#l00284">284</a> of file <a class="el" href="benchmark__case_8hpp_source.html">benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="benchmark__case_8hpp_source.html#l00293">293</a> of file <a class="el" href="benchmark__case_8hpp_source.html">benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
@@ -321,7 +324,7 @@ Functions</h2></td></tr>
 <div class="ttc" id="classmanak_1_1Timer_html_abdd3de8ba1437dac207e4166324ddb22"><div class="ttname"><a href="classmanak_1_1Timer.html#abdd3de8ba1437dac207e4166324ddb22">manak::Timer::Reinitialize</a></div><div class="ttdeci">static void Reinitialize()</div><div class="ttdoc">Re initialize the current timer instance. </div><div class="ttdef"><b>Definition:</b> <a href="timer_8hpp_source.html#l00180">timer.hpp:180</a></div></div>
 <div class="ttc" id="classmanak_1_1Timer_html_a6b4858f82dc524a783fffdca1426f133"><div class="ttname"><a href="classmanak_1_1Timer.html#a6b4858f82dc524a783fffdca1426f133">manak::Timer::StartIter</a></div><div class="ttdeci">static void StartIter()</div><div class="ttdoc">Mark start of the iteration. </div><div class="ttdef"><b>Definition:</b> <a href="timer_8hpp_source.html#l00189">timer.hpp:189</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="benchmark__case_8hpp_source.html#l00289">289</a> of file <a class="el" href="benchmark__case_8hpp_source.html">benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="benchmark__case_8hpp_source.html#l00298">298</a> of file <a class="el" href="benchmark__case_8hpp_source.html">benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
@@ -331,7 +334,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4c6f0f56bb7b054cbb2a0de860d7d462.html">manak</a></li><li class="navelem"><a class="el" href="dir_586b1078daf0a92751fc3409d59529af.html">benchmark_suit</a></li><li class="navelem"><a class="el" href="benchmark__case_8hpp.html">benchmark_case.hpp</a></li>
-    <li class="footer">Generated on Fri Nov 14 2014 19:03:27 for Manak by
+    <li class="footer">Generated on Sat Nov 15 2014 04:44:49 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -11,5 +11,6 @@ var benchmark__case_8hpp =
     [ "MANAK_REDIRECTION_FILENAME", "benchmark__case_8hpp.html#af46b05b8d7d27ef3bb17b920049e4916", null ],
     [ "Measure", "benchmark__case_8hpp.html#ae14657e1f2d907faa918ff681c81d895", null ],
     [ "Repeat", "benchmark__case_8hpp.html#aa0fdc74d5cc0b16ad5c9c2a6f78bf18d", null ],
-    [ "CTBenchmarkObject", "benchmark__case_8hpp.html#abb095330fcc8ca6e51b894ddae323686", null ]
+    [ "CTBenchmarkObject", "benchmark__case_8hpp.html#ada1890933429fd0563aca289c7f6c3c3", null ],
+    [ "CTBenchmarkObject", "benchmark__case_8hpp.html#a2fb35cf2201c07a2cba7a10e7f306c43", null ]
 ];

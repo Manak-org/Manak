@@ -80,7 +80,7 @@ Auto Registration With Simple Module</h1>
 <div class="line">}</div>
 </div><!-- fragment --><p>Any auto registration registers the case or suite to the current benchmark suite. When no benchmark suite is set the current benchmark suite is set to master suite. So in the example above 'MANAK_AUTO_BENCHMARK_CASE' will register 'B1' to master suite.</p>
 <p>When iteration or tolerance is not specified for any benchmark case the default will be used. See <a class="el" href="set_env.html#set_env_mdi">MANAK_DEFAULT_ITERATIONS</a> and <a class="el" href="set_env.html#set_env_mdt">MANAK_DEFAULT_TOLERANCE</a> for more details.</p>
-<p>See ... to understand the comparison framework in simple module.</p>
+<p>See <a class="el" href="comp.html#comp_sm">Comparison Framework for Simple Module</a> to understand the comparison framework in simple module.</p>
 <h2><a class="anchor" id="auto_reg_sbm1"></a>
 MANAK_AUTO_BENCHMARK_CASE</h2>
 <p>Creates benchmark case with name, and registers it to the current benchmark suite. Iterations and tolerance for the benchmark case are taken to be defaults.</p>
@@ -121,7 +121,8 @@ MANAK_ADD_BENCHMARK</h2>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, fun));</div>
-</div><!-- fragment --><p>'MANAK_BENCHMARK_CASE' is a directive for manual registration. For more such directives see <a class="el" href="man_reg.html">Manual Registration</a></p>
+</div><!-- fragment --><p>'MANAK_BENCHMARK_CASE' is a directive for manual registration. For more such directives see <a class="el" href="man_reg.html">Manual Registration</a>.</p>
+<p>The function to be registered must have no parameters. The function with parameters can used to generate parametrized benchmark cases. See <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmark Cases</a> for more information. Also see <a class="el" href="use_afr.html">Advance Function Registration</a> for registration of complex functions such as overloaded functions, template functions and class member functions.</p>
 <h2><a class="anchor" id="auto_reg_sbm5"></a>
 MANAK_AUTO_BENCHMARK_SUITE</h2>
 <p>Creates a new benchmarking suite with given name and registers it to the current benchmarking suite. It also sets the newly generated benchmarking suite as the current suite.</p>
@@ -179,7 +180,7 @@ Parametrized Benchmark cases</h2>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(ForLoops, fun)-&gt;AddArgs((<span class="keywordtype">size_t</span>)1000)-&gt;AddArgs((<span class="keywordtype">size_t</span>)2000));</div>
-</div><!-- fragment --><p>For more advance parametrized benchmark options check ... .</p>
+</div><!-- fragment --><p>For more advance parametrized benchmark options check <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmark Cases</a>.</p>
 <p>For example on simple module auto registration check <a class="el" href="s_mod.html#s_mod_ar_ex">Example</a>.</p>
 <h1><a class="anchor" id="auto_reg_bm"></a>
 Auto Registration With Normal Module</h1>
@@ -197,7 +198,7 @@ Auto Registration With Normal Module</h1>
 <div class="line">}</div>
 </div><!-- fragment --><p>Any auto registration registers the case or suite to the current benchmark suite. When no benchmark suite is set the current benchmark suite is set to master suite. So in the example above 'MANAK_AUTO_BENCHMARK_CASE' will register 'B1' to master suite.</p>
 <p>When iteration or tolerance is not specified for any benchmark case the default will be used. See <a class="el" href="set_env.html#set_env_mdi">MANAK_DEFAULT_ITERATIONS</a> and <a class="el" href="set_env.html#set_env_mdt">MANAK_DEFAULT_TOLERANCE</a> for more details.</p>
-<p>See ... to understand the comparison framework in simple module.</p>
+<p>See <a class="el" href="comp.html#comp_nm">Comparison Framework of Normal Module</a> to understand the comparison framework in normal module.</p>
 <h2><a class="anchor" id="auto_reg_bm1"></a>
 MANAK_AUTO_BENCHMARK_CASE</h2>
 <p>Creates benchmark case with name and library, and registers it to the current benchmark suite.Iterations and tolerance for the benchmark case are taken to be defaults.</p>
@@ -238,7 +239,8 @@ MANAK_ADD_BENCHMARK</h2>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, lib1, fun));</div>
-</div><!-- fragment --><p>'MANAK_BENCHMARK_CASE' is a directive for manual registration. For more such directives see <a class="el" href="man_reg.html">Manual Registration</a></p>
+</div><!-- fragment --><p>'MANAK_BENCHMARK_CASE' is a directive for manual registration. For more such directives see <a class="el" href="man_reg.html">Manual Registration</a>.</p>
+<p>The function to be registered must have no parameters. The function with parameters can used to generate parametrized benchmark cases. See <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmark Cases</a> for more information. Also see <a class="el" href="use_afr.html">Advance Function Registration</a> for registration of complex functions such as overloaded functions, template functions and class member functions.</p>
 <h2><a class="anchor" id="auto_reg_bm5"></a>
 MANAK_AUTO_BENCHMARK_SUITE</h2>
 <p>Creates a new benchmarking suite with given name and registers it to the current benchmarking suite. It also sets the newly generated benchmarking suite as the current suite.</p>
@@ -296,14 +298,14 @@ Parametrized Benchmark cases</h2>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(ForLoops, lib1, fun)-&gt;AddArgs((<span class="keywordtype">size_t</span>)1000)-&gt;AddArgs((<span class="keywordtype">size_t</span>)2000));</div>
-</div><!-- fragment --><p>For more advance parametrized benchmark options check ... .</p>
+</div><!-- fragment --><p>For more advance parametrized benchmark options check <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmark Cases</a>.</p>
 <p>For example on normal module auto registration check <a class="el" href="n_mod.html#n_mod_ar_ex">Example</a>. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 14 2014 19:03:27 for Manak by
+    <li class="footer">Generated on Sat Nov 15 2014 04:44:49 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

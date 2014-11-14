@@ -1,11 +1,11 @@
 var classmanak_1_1T__Benchmark__Case =
 [
-    [ "T_Benchmark_Case", "classmanak_1_1T__Benchmark__Case.html#ab6f7101d86e54901430f09bf686fd675", null ],
-    [ "T_Benchmark_Case", "classmanak_1_1T__Benchmark__Case.html#a03dda7cc83741cf3ad4b80f0123338f1", null ],
-    [ "AddArgs", "classmanak_1_1T__Benchmark__Case.html#aa346f0da6a375c55e64b6d8c34ceb810", null ],
-    [ "AddArgs_N", "classmanak_1_1T__Benchmark__Case.html#a19c5bc1eb2d567a8c4cfa2a128c5ba58", null ],
-    [ "AddCustomArgs", "classmanak_1_1T__Benchmark__Case.html#a7b23a0ae1ff2ac06283fe56b7318772c", null ],
-    [ "AddCustomArgs", "classmanak_1_1T__Benchmark__Case.html#ad33ff661c3885d29d48d156d48ccb23f", null ],
-    [ "iter", "classmanak_1_1T__Benchmark__Case.html#a5910eb76616a91f669aa37327420415e", null ],
-    [ "t_function", "classmanak_1_1T__Benchmark__Case.html#a5e7b8839772e6d2fc649cc0a22b33888", null ]
+    [ "T_Benchmark_Case", "classmanak_1_1T__Benchmark__Case.html#a875d5dc530f3432fc2212e9fddf844af", null ],
+    [ "T_Benchmark_Case", "classmanak_1_1T__Benchmark__Case.html#a74be6cba74373f2b5c0099366d57ff94", null ],
+    [ "AddArgs", "classmanak_1_1T__Benchmark__Case.html#a24b84486c5db32a8f53bf9b46974bfd9", null ],
+    [ "AddArgs_N", "classmanak_1_1T__Benchmark__Case.html#a696c9c2832d01af8e692d294d2f07d8d", null ],
+    [ "AddCustomArgs", "classmanak_1_1T__Benchmark__Case.html#aa4832e8a6c93670938161c7de40d75b2", null ],
+    [ "AddCustomArgs", "classmanak_1_1T__Benchmark__Case.html#aba2fc9ba716d76989ce01969f57c3429", null ],
+    [ "iter", "classmanak_1_1T__Benchmark__Case.html#ae1a3b22e2ea2401d6cde7abeb4fbe4dc", null ],
+    [ "t_function", "classmanak_1_1T__Benchmark__Case.html#ac20447522692e55a5a0e47a421d18a33", null ]
 ];

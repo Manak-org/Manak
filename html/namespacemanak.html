@@ -106,9 +106,12 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abb095330fcc8ca6e51b894ddae323686"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename... Args&gt; </td></tr>
-<tr class="memitem:abb095330fcc8ca6e51b894ddae323686"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classmanak_1_1T__Benchmark__Case.html">T_Benchmark_Case</a>&lt; RType(Args...)&gt; *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak.html#abb095330fcc8ca6e51b894ddae323686">CTBenchmarkObject</a> (const std::string &amp;name, const std::string &amp;library_name, const size_t iterations, double tolerance, const std::string &amp;desc, RType(&amp;fun)(Args...))</td></tr>
-<tr class="separator:abb095330fcc8ca6e51b894ddae323686"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada1890933429fd0563aca289c7f6c3c3"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename... Args&gt; </td></tr>
+<tr class="memitem:ada1890933429fd0563aca289c7f6c3c3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classmanak_1_1T__Benchmark__Case.html">T_Benchmark_Case</a>&lt; RType, Args...&gt; *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak.html#ada1890933429fd0563aca289c7f6c3c3">CTBenchmarkObject</a> (const std::string &amp;name, const std::string &amp;library_name, const size_t iterations, double tolerance, const std::string &amp;desc, RType(*fun)(Args...))</td></tr>
+<tr class="separator:ada1890933429fd0563aca289c7f6c3c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb35cf2201c07a2cba7a10e7f306c43"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename... Args&gt; </td></tr>
+<tr class="memitem:a2fb35cf2201c07a2cba7a10e7f306c43"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classmanak_1_1T__Benchmark__Case.html">T_Benchmark_Case</a>&lt; RType, Args...&gt; *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak.html#a2fb35cf2201c07a2cba7a10e7f306c43">CTBenchmarkObject</a> (const std::string &amp;name, const std::string &amp;library_name, const size_t iterations, double tolerance, const std::string &amp;desc, std::function&lt; RType(Args...)&gt; fun)</td></tr>
+<tr class="separator:a2fb35cf2201c07a2cba7a10e7f306c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a951d1134a5aa1a031e8f6922d77bf8d8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemanak.html#a951d1134a5aa1a031e8f6922d77bf8d8">GetVersionInfo</a> ()</td></tr>
 <tr class="memdesc:a951d1134a5aa1a031e8f6922d77bf8d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the version information in string.  <a href="#a951d1134a5aa1a031e8f6922d77bf8d8">More...</a><br/></td></tr>
 <tr class="separator:a951d1134a5aa1a031e8f6922d77bf8d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,14 +126,14 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>C++ Unit Benchmarking Library. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="abb095330fcc8ca6e51b894ddae323686"></a>
+<a class="anchor" id="ada1890933429fd0563aca289c7f6c3c3"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename RType , typename... Args&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classmanak_1_1T__Benchmark__Case.html">T_Benchmark_Case</a>&lt;RType(Args...)&gt;* manak::CTBenchmarkObject </td>
+          <td class="memname"><a class="el" href="classmanak_1_1T__Benchmark__Case.html">T_Benchmark_Case</a>&lt;RType, Args...&gt;* manak::CTBenchmarkObject </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
@@ -162,7 +165,7 @@ template&lt;typename RType , typename... Args&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">RType(&amp;)(Args...)&#160;</td>
+          <td class="paramtype">RType(*)(Args...)&#160;</td>
           <td class="paramname"><em>fun</em>&#160;</td>
         </tr>
         <tr>
@@ -173,7 +176,61 @@ template&lt;typename RType , typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="benchmark__case_8hpp_source.html#l00254">254</a> of file <a class="el" href="benchmark__case_8hpp_source.html">benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="benchmark__case_8hpp_source.html#l00252">252</a> of file <a class="el" href="benchmark__case_8hpp_source.html">benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2fb35cf2201c07a2cba7a10e7f306c43"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RType , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmanak_1_1T__Benchmark__Case.html">T_Benchmark_Case</a>&lt;RType, Args...&gt;* manak::CTBenchmarkObject </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>library_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>iterations</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>tolerance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>desc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; RType(Args...)&gt;&#160;</td>
+          <td class="paramname"><em>fun</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="benchmark__case_8hpp_source.html#l00263">263</a> of file <a class="el" href="benchmark__case_8hpp_source.html">benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
@@ -301,7 +358,7 @@ template&lt;typename RType , typename... Args&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacemanak.html">manak</a></li>
-    <li class="footer">Generated on Fri Nov 14 2014 19:03:27 for Manak by
+    <li class="footer">Generated on Sat Nov 15 2014 04:44:49 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
