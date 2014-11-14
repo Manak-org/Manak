@@ -16,7 +16,7 @@ available in this module check out @ref s_mod
 Normak benchmark module can be set by defining 'MANAK_BENCHMARK_MODULE' to 
 desired name. This module supports multiple libraries. When this module is used 
 each benchmark case has to assigned to a library. For macros available in this
-module check out ...
+module check out @ref n_mod
 
 @section set_env_smft Set main function type
 
@@ -166,13 +166,27 @@ The values given in brackets stand for [min:max].
 Set MANAK_BASE_LIBRARY_NAME to desired name to change the name of singleton
 library in 'MANAK_SIMPLE_BENCHMARK_MODULE'.
 
+@code
+#define MANAK_BASE_LIBRARY_NAME <name>
+@endcode
+
 @subsection set_env_mdi MANAK_DEFAULT_ITERATIONS
 
 If number of iterations is not specified for any benchmark case the default 
 number of iterations are used. The default can be chnaged by setting 
-'MANAK_DEFAULT_ITERATIONS' to the desired value.
+'MANAK_DEFAULT_ITERATIONS' to the desired value. 
 
 @code
-#define MANAK_BASE_LIBRARY_NAME <name>
+#define MANAK_DEFAULT_ITERATIONS <value in integer>
+@endcode
+
+@subsection set_env_mdt MANAK_DEFAULT_TOLERANCE
+
+If tolerance is not specified for any benchmark case the default is used. The 
+default can be chnaged by setting 'MANAK_DEFAULT_TOLERANCE' to desired value. 
+The measure of tolerance is microseconds. To understand use of tolerance see ...
+
+@code
+#define MANAK_DEFAULT_TOLERANCE <value in microseconds>
 @endcode
 */

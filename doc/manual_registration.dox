@@ -1,7 +1,9 @@
 /*! @page man_reg Manual Registration
 
 Manual case registration can only be done inside init function. Check out 
-@ref set_env_sbif for setting manual init function.
+@ref set_env_sbif for setting manual init function. For manual registration
+code to benchmark must be written in a separate function, but still timing
+macros provided by Manak can be used. For more information see @ref all_time.
 
 @section man_reg_msbm Manual Registartion with Simple Module
 
@@ -33,10 +35,15 @@ bool bench_init()
 }
 @endcode
 
+When iteration or tolerance is not specified for any benchmark case the default 
+will be used. See @ref set_env_mdi and @ref set_env_mdt for more details.
+
+See ... to understand the comparison framework in simple module.
+
 @subsection man_reg_msbm1 MANAK_BENCHMARK_CASE
-Creates a benchmark case with name and benchmark function. Returns pointer to
-created manak::BenchmarkCase object. This can be passed to 
-manak::BenchmarkSuite::AddCase.
+Creates a benchmark case with name and benchmark function. Number of iterations
+and tolerance is taken to be default. Returns pointer to created 
+manak::BenchmarkCase object. This can be passed to manak::BenchmarkSuite::AddCase.
 
 @subsection man_reg_msbm2 MANAK_BENCHMARK_CASE_I
 Creates a benchmark case with name, benchmark function and number of iterations.
@@ -127,6 +134,8 @@ bool bench_init()
 
 For more advance parametrized benchmark options check ... .
 
+For example on simple module manual registration check @ref s_mod_mr_ex.
+
 @section man_reg_mbm Manual Registartion with Normal Module
 Simplest manual case registration can be done with the following code
 
@@ -155,6 +164,11 @@ bool bench_init()
   return true;
 }
 @endcode
+
+When iteration or tolerance is not specified for any benchmark case the default 
+will be used. See @ref set_env_mdi and @ref set_env_mdt for more details.
+
+See ... to understand the comparison framework in normal module.
 
 @subsection man_reg_mbm1 MANAK_BENCHMARK_CASE
 Creates a benchmark case with name, library and benchmark function. Returns 
@@ -248,5 +262,7 @@ bool bench_init()
 @endcode
 
 For more advance parametrized benchmark options check ... .
+
+For example on normal module manual registration check @ref n_mod_mr_ex.
 
 */

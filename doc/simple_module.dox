@@ -5,6 +5,74 @@ This module is useful when only one library is benchmarked agaist itself with ti
 This module can be used by setting 'MANAK_SIMPLE_BENCHMARK_MODULE' to a desired 
 name. For more information on setting module type see @ref set_env_smt.
 
+@section s_mod_ar Auto Registration
+For detalied information on auto registration of benchmark cases and benchmark 
+suites in simple module see @ref auto_reg_sbm.
+
+The macros provided for auto registartion of benchmark case:
+ - @ref auto_reg_sbm1
+ - @ref auto_reg_sbm2
+ - @ref auto_reg_sbm3
+ - @ref auto_reg_sbm4
+ - @ref auto_reg_sbm8
+ - @ref auto_reg_sbm7
+ 
+The macros provided for auto registration of benchmark suite:
+ - @ref auto_reg_sbm5
+ - @ref auto_reg_sbm6
+ 
+@section s_mod_ar_ex Example
+
+@code
+#include <iostream>
+
+#define MANAK_SIMPLE_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+
+#include <manak/manak.hpp>
+
+MANAK_AUTO_BENCHMARK_CASE_I(B1, 10)
+{
+  for(size_t i = 0;i < 1000;i++);
+}
+
+MANAK_AUTO_BENCHMARK_SUITE(Suite1);
+
+MANAK_AUTO_BENCHMARK_CASE_T(B2, 50)
+{
+  for(size_t i = 0;i < 10000;i++);
+}
+
+MANAK_AUTO_BENCHMARK_SUITE(Suite2);
+
+void fun3(size_t a)
+{
+  for(size_t i = 0;i < a;i++);
+}
+
+MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B3, fun3)->AddArgs((size_t)2000)->AddArgs((size_t)3000));
+@endcode
+
+Output -
+
+@code
+######################################################################
+#  Manak C++ Benchmarking Library                                    #
+#  Version 1.0.0                                                     #
+#  Created at Nov 14 16:16:41 2014                                   #
+######################################################################
+
+       Case Name              base_library        
+
+B1                            3.2                 
+B2                            32                  
+B3
+  Parameter Set 0             7.8                 
+  Parameter Set 1             11.5   
+@endcode
+
+The equivalent manual registration code can be found at @ref s_mod_mr_ex.
+
 @section s_mod_mr Manual Registration 
 For detailed information on manual registration of benchmark cases and benchmark
 suites in simple benchmark module see @ref man_reg_msbm.
@@ -19,7 +87,7 @@ The macros provided for manual registartion of benchmark case:
 The macros provided for manual registration of benchmark suite:
  - @ref man_reg_msbm5
  
-Example -
+@section s_mod_mr_ex Example
 @code
 #include <iostream>
 
@@ -81,4 +149,6 @@ B3
   Parameter Set 0             7.3                 
   Parameter Set 1             11.1  
 @endcode
+
+The equivalent auto registration code can be found at @ref s_mod_ar_ex.
 */

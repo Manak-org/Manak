@@ -1,0 +1,338 @@
+/*! @page auto_reg Automatic Registration
+
+Manak offers auto case and suite registation with a user friendly API. Auto 
+registration can be done anywhere where manak.hpp is included. It cannot be 
+inside any class or a function but it can be inside a namespace. For support
+of timing macros inside auto registration see @ref all_time.
+
+@section auto_reg_sbm Auto Registration With Simple Module
+
+Simplest auto benchmark case registration -
+
+@code
+#include <iostream>
+
+#define MANAK_SIMPLE_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+
+#include <manak/manak.hpp>
+
+MANAK_AUTO_BENCHMARK_CASE(B1)
+{
+  Code;
+}
+@endcode
+
+Any auto registration registers the case or suite to the current benchmark suite.
+When no benchmark suite is set the current benchmark suite is set to master suite.
+So in the example above 'MANAK_AUTO_BENCHMARK_CASE' will register 'B1' to master
+suite. 
+
+When iteration or tolerance is not specified for any benchmark case the default 
+will be used. See @ref set_env_mdi and @ref set_env_mdt for more details.
+
+See ... to understand the comparison framework in simple module.
+
+@subsection auto_reg_sbm1 MANAK_AUTO_BENCHMARK_CASE
+Creates benchmark case with name, and registers it to the current benchmark suite.
+Iterations and tolerance for the benchmark case are taken to be defaults.
+
+@subsection auto_reg_sbm2 MANAK_AUTO_BENCHMARK_CASE_I
+Creates benchmark case with name and iterations, and registers it to the 
+current benchmark suite. 
+
+@code
+MANAK_AUTO_BENCHMARK_CASE_I(B1, 10)
+{
+  Code;
+}
+@endcode
+
+@subsection auto_reg_sbm3 MANAK_AUTO_BENCHMARK_CASE_T
+Creates benchmark case with name and tolerance, and registers it to the 
+current benchmark suite. 
+
+@code
+MANAK_AUTO_BENCHMARK_CASE_T(B1, 50)
+{
+  Code;
+}
+@endcode
+
+@subsection auto_reg_sbm4 MANAK_AUTO_BENCHMARK_CASE_IT
+Creates benchmark case with name, iterations and tolerance, and registers it to 
+the current benchmark suite. 
+
+@code
+MANAK_AUTO_BENCHMARK_CASE_IT(B1, 10, 50)
+{
+  Code;
+}
+@endcode
+
+@subsection auto_reg_sbm8 MANAK_ADD_BENCHMARK
+'MANAK_ADD_BENCHMARK' can be used to register manually generated benchmark case.
+This is especially useful when written function needs to be added as benchmark 
+case.
+
+@code
+#include <iostream>
+
+#define MANAK_SIMPLE_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN 
+
+#include <manak/manak.hpp>
+
+int fun()
+{
+  Code to benchmark;
+}
+
+MANAK_ADD_BENCHMARK(MANAK_BENCHMARK_CASE(B1, fun));
+@endcode
+
+'MANAK_BENCHMARK_CASE' is a directive for manual registration. For more such 
+directives see @ref man_reg
+
+@subsection auto_reg_sbm5 MANAK_AUTO_BENCHMARK_SUITE
+Creates a new benchmarking suite with given name and registers it to the 
+current benchmarking suite. It also sets the newly generated benchmarking suite
+as the current suite.
+
+@code
+#include <iostream>
+
+#define MANAK_SIMPLE_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+
+#include <manak/manak.hpp>
+
+MANAK_AUTO_BENCHMARK_SUITE(Suite1);
+
+MANAK_AUTO_BENCHMARK_CASE(B1)
+{
+  Code;
+}
+@endcode
+
+In the above example 'Suite1' will be registered under master suite and 'B1' will
+be registered under 'Suite1'.
+
+@subsection auto_reg_sbm6 MANAK_AUTO_BENCHMARK_END
+Sets the current benchmark suite to the parent of current of benchmark suite.
+
+@code
+#include <iostream>
+
+#define MANAK_SIMPLE_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+
+#include <manak/manak.hpp>
+
+MANAK_AUTO_BENCHMARK_SUITE(Suite1);
+
+MANAK_AUTO_BENCHMARK_CASE(B1)
+{
+  Code;
+}
+
+MANAK_AUTO_BENCHMARK_SUITE_END();
+
+MANAK_AUTO_BENCHMARK_CASE(B2)
+{
+  Code;
+} 
+@endcode
+
+In the above example 'B1' will be registered under 'Suite1' but 'B2' will
+be registered under master suite.
+
+@subsection auto_reg_sbm7 Parametrized Benchmark cases
+Parametrized benchmark cases can be registered with macro 'MANAK_ADD_BENCHMARK'.
+
+@code
+#include <iostream>
+
+#define MANAK_SIMPLE_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+
+#include <manak/manak.hpp>
+
+int fun(size_t a)
+{
+  for(size_t i = 0;i < a;i++);
+}
+
+MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(ForLoops, fun)->AddArgs((size_t)1000)->AddArgs((size_t)2000));
+@endcode
+
+For more advance parametrized benchmark options check ... .
+
+For example on simple module auto registration check @ref s_mod_ar_ex.
+
+@section auto_reg_bm Auto Registration With Normal Module
+
+Simplest auto benchmark case registration -
+
+@code
+#include <iostream>
+
+#define MANAK_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+
+#include <manak/manak.hpp>
+
+MANAK_AUTO_BENCHMARK_CASE(B1, lib1)
+{
+  Code;
+}
+@endcode
+
+Any auto registration registers the case or suite to the current benchmark suite.
+When no benchmark suite is set the current benchmark suite is set to master suite.
+So in the example above 'MANAK_AUTO_BENCHMARK_CASE' will register 'B1' to master
+suite. 
+
+When iteration or tolerance is not specified for any benchmark case the default 
+will be used. See @ref set_env_mdi and @ref set_env_mdt for more details.
+
+See ... to understand the comparison framework in simple module.
+
+@subsection auto_reg_bm1 MANAK_AUTO_BENCHMARK_CASE
+Creates benchmark case with name and library, and registers it to the current 
+benchmark suite.Iterations and tolerance for the benchmark case are taken to be 
+defaults.
+
+@subsection auto_reg_bm2 MANAK_AUTO_BENCHMARK_CASE_I
+Creates benchmark case with name, library and iterations, and registers it to the 
+current benchmark suite. 
+
+@code
+MANAK_AUTO_BENCHMARK_CASE_I(B1, lib1, 10)
+{
+  Code;
+}
+@endcode
+
+@subsection auto_reg_bm3 MANAK_AUTO_BENCHMARK_CASE_T
+Creates benchmark case with name, library and tolerance, and registers it to the 
+current benchmark suite. 
+
+@code
+MANAK_AUTO_BENCHMARK_CASE_T(B1, lib1, 50)
+{
+  Code;
+}
+@endcode
+
+@subsection auto_reg_bm4 MANAK_AUTO_BENCHMARK_CASE_IT
+Creates benchmark case with name, library, iterations and tolerance, and 
+registers it to the current benchmark suite. 
+
+@code
+MANAK_AUTO_BENCHMARK_CASE_IT(B1, lib1, 10, 50)
+{
+  Code;
+}
+@endcode
+
+@subsection auto_reg_bm8 MANAK_ADD_BENCHMARK
+'MANAK_ADD_BENCHMARK' can be used to register manually generated benchmark case.
+This is especially useful when written function needs to be added as benchmark 
+case.
+
+@code
+#include <iostream>
+
+#define MANAK_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN 
+
+#include <manak/manak.hpp>
+
+int fun()
+{
+  Code to benchmark;
+}
+
+MANAK_ADD_BENCHMARK(MANAK_BENCHMARK_CASE(B1, lib1, fun));
+@endcode
+
+'MANAK_BENCHMARK_CASE' is a directive for manual registration. For more such 
+directives see @ref man_reg
+
+@subsection auto_reg_bm5 MANAK_AUTO_BENCHMARK_SUITE
+Creates a new benchmarking suite with given name and registers it to the 
+current benchmarking suite. It also sets the newly generated benchmarking suite
+as the current suite.
+
+@code
+#include <iostream>
+
+#define MANAK_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+
+#include <manak/manak.hpp>
+
+MANAK_AUTO_BENCHMARK_SUITE(Suite1);
+
+MANAK_AUTO_BENCHMARK_CASE(B1, lib1)
+{
+  Code;
+}
+@endcode
+
+In the above example 'Suite1' will be registered under master suite and 'B1' will
+be registered under 'Suite1'.
+
+@subsection auto_reg_bm6 MANAK_AUTO_BENCHMARK_END
+Sets the current benchmark suite to the parent of current of benchmark suite.
+
+@code
+#include <iostream>
+
+#define MANAK_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+
+#include <manak/manak.hpp>
+
+MANAK_AUTO_BENCHMARK_SUITE(Suite1);
+
+MANAK_AUTO_BENCHMARK_CASE(B1, lib1)
+{
+  Code;
+}
+
+MANAK_AUTO_BENCHMARK_SUITE_END();
+
+MANAK_AUTO_BENCHMARK_CASE(B2, lib2)
+{
+  Code;
+} 
+@endcode
+
+In the above example 'B1' will be registered under 'Suite1' but 'B2' will
+be registered under master suite.
+
+@subsection auto_reg_bm7 Parametrized Benchmark cases
+Parametrized benchmark cases can be registered with macro 'MANAK_ADD_BENCHMARK'.
+
+@code
+#include <iostream>
+
+#define MANAK_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+
+#include <manak/manak.hpp>
+
+int fun(size_t a)
+{
+  for(size_t i = 0;i < a;i++);
+}
+
+MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(ForLoops, lib1, fun)->AddArgs((size_t)1000)->AddArgs((size_t)2000));
+@endcode
+
+For more advance parametrized benchmark options check ... .
+
+For example on normal module auto registration check @ref n_mod_ar_ex.
+*/

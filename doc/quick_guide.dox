@@ -36,19 +36,12 @@ check out @ref set_env_smt.
 @section qg_sbm Simple Benchmarking Module
 
 Simple benchmarking module can be used when only one library is compared against
-itself with time. 
+itself with time. For detailed information on Simple Benchmark Module see 
+@ref s_mod
 
 To set the module to simple benchmark module, set
 'MANAK_SIMPLE_BENCHMARK_MODULE' to the name of the module.
-######################################################################
-#  Manak C++ Benchmarking Library                                    #
-#  Version master.0.0                                                #
-#  Created at Nov 13 22:41:53 2014                                   #
-######################################################################
-
-       Case Name              base_library        
-
-ForLoop                       3.2[3:4]            
+           
 @code
 #define MANAK_SIMPLE_BENCHMARK_MODULE name
 @endcode
@@ -144,7 +137,7 @@ MANAK_AUTO_BENCHMARK_CASE_I(B1, 100)
 }
 @endcode
 
-For more auto benchmark options check...
+For more auto benchmark options check @ref auto_reg
 
 To register a function as benchmark case -
 
@@ -249,12 +242,14 @@ MANAK_AUTO_BENCHMARK_CASE(B1)
 In this example B1 will be registered under Suite2 where as B2 will be registered 
 under Suite1. And in the same way Suite2 will be registered under Suite1 and 
 Suite1 under master. This hierarchical structure helps in running specific 
-benchmarks at a time.
+benchmarks at a time. For more information on auto registration see @ref auto_reg.
 
 @section qg_bm Benchmaking Module
 
 This module is useful when the code also needs to be compared against other 
-libraries. A simple cases registration in this module will look like - 
+libraries. For detailed information on this module see @ref n_mod
+
+A simple cases registration in this module will look like - 
 
 @code
 #include <iostream>
@@ -312,6 +307,7 @@ list<tuple<int, int>> get_args()
 MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B2, lib2, fun2)->AddCustomArgs(get_args));
 @endcode
 
+See @ref auto_reg for more information on auto registration.
 
 @section qg_comp Manak Comparison Framework
 
@@ -352,7 +348,8 @@ The output will look like -
 ForLoops                      3.4                 31.8
 @endcode
 
-Manak also offers saving these results for comparison. Pass argument '-s <filename>'
+Manak also offers saving these results for comparison. This comparison type is 
+available for both simple and normal Pass argument '-s <filename>'
 to executable for saving the results for comparison. This specially saved file 
 can be loaded for comparison with command line arguments '-c <filename>'. Let us 
 assume 'bench' is the executable name then -

@@ -21,13 +21,13 @@
 MANAK_BENCHMARK_CASE_ITD(Name, Library, Function, MANAK_DEFAULT_ITERATIONS, MANAK_DEFAULT_TOLERANCE, "")
 
 #define MANAK_BENCHMARK_CASE_T(Name, Library, Function, Tolerance)            \
-MANAK_BENCHMARK_CASE_ITD(NAme, Library, Function, MANAK_DEFAULT_ITERATIONS, Tolerance, "")
+MANAK_BENCHMARK_CASE_ITD(Name, Library, Function, MANAK_DEFAULT_ITERATIONS, Tolerance, "")
 
-#define MANAK_BENCHMARK_CASE_I(Name, Function, Iter)                          \
-MANAK_BENCHMARK_CASE_ITD(Name, Function, Iter, MANAK_DEFAULT_TOLERANCE, "")
+#define MANAK_BENCHMARK_CASE_I(Name, Library, Function, Iter)                          \
+MANAK_BENCHMARK_CASE_ITD(Name, Library, Function, Iter, MANAK_DEFAULT_TOLERANCE, "")
 
-#define MANAK_BENCHMARK_CASE_IT(Name, Function, Iter, Tol)                    \
-MANAK_BENCHMARK_CASE_ITD(Name, Function, Iter, tol, "")
+#define MANAK_BENCHMARK_CASE_IT(Name, Library, Function, Iter, Tol)                    \
+MANAK_BENCHMARK_CASE_ITD(Name, Library, Function, Iter, Tol, "")
 
 ///
 /// MANAK_AUTO_BENCHMARK_CASE macros
@@ -75,8 +75,8 @@ MANAK_AUTO_BENCHMARK_CASE_ITD(Name, Library, Iter, Tol, "")
 ( manak::CTBenchmarkObject(#Name, #Library, Iter, MANAK_DEFAULT_TOLERANCE, "", f_name) )
 
 #define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T(Name, Library, f_name, Tol)    \
-( manak::CTBenchmarkObject(#Name, #Library, MANAK_DEFAULT_ITERATIONS, tol, "", f_name) )
+( manak::CTBenchmarkObject(#Name, #Library, MANAK_DEFAULT_ITERATIONS, Tol, "", f_name) )
 
 #define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT(Name, Library, f_name, Iter, Tol)    \
-( manak::CTBenchmarkObject(#Name, #Library, Iter, tol, "", f_name) )
+( manak::CTBenchmarkObject(#Name, #Library, Iter, Tol, "", f_name) )
 
