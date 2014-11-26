@@ -1,6 +1,7 @@
 /**
  * @file benchmark_case.hpp
  * @author Sumedh Ghaisas
+ * @author Harman Singh
  *
  * Declaration of BenchmarkCase.
  */

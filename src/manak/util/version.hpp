@@ -12,9 +12,10 @@
 #include <sstream>
 
 //! Declare version
-#define __MANAK_VERSION_MAJOR 1
+#define __MANAK_VERSION_MAJOR 0
 #define __MANAK_VERSION_MINOR 0
 #define __MANAK_VERSION_PATCH 0
+#define __MANAK_VERSION_NAME "master"
 
 namespace manak
 {
@@ -25,7 +26,8 @@ std::string GetVersionInfo()
   std::stringstream stream;
   stream << "Manak C++ Benchmarking Library" << std::endl;
   stream << "version " << __MANAK_VERSION_MAJOR << "." << __MANAK_VERSION_MINOR;
-  stream << "." << __MANAK_VERSION_PATCH;
+  stream << "." << __MANAK_VERSION_PATCH << std::endl;
+  stream << __MANAK_VERSION_NAME;
   return stream.str();
 }
 
