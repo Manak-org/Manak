@@ -127,6 +127,11 @@ class BenchmarkCase
            const bool compare = false)
   {
     size_t l_id = utils::Log::GetLog().AddLibrary(library_name);
+    Timer::CurrentLibraryID() = l_id;
+    Timer::CurrentCompareStat() = compare;
+    Timer::CurrentTolerance() = tolerance;
+
+    Timer::CurrentCaseLogEntry() = &cle;
 
     size_t index = 0;
     for(auto run_function : run_functions)
@@ -137,6 +142,14 @@ class BenchmarkCase
 
       std::cout.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
       std::cerr.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
+
+      Timer::CurrentIndex() = index;
+      Timer::CurrentSubName() = run_function.first;
+
+      if(to_c.size() > index)
+        Timer::CurrentToCompare() = to_c[index];
+      else
+        Timer::CurrentToCompare() = -1;
 
       Timer::Initialize(iterations);
 
@@ -155,19 +168,9 @@ class BenchmarkCase
 
       MANAK_CLOSE_LOG;
 
-      PMeasure pm = Timer::GetStats();
+      Timer::Deinitialize();
 
-      utils::LogEntry& le = cle.Add(index, run_function.first);
-      if(!compare)
-        le.Add(pm, l_id);
-      else
-      {
-        if(to_c.size() > index)
-          le.Add(pm, l_id, pm.Compare(to_c[index], tolerance), to_c[index]);
-        else
-          le.Add(pm, l_id);
-      }
-      index++;
+      index = Timer::CurrentIndex();
     }
     return true;
   }
@@ -243,7 +246,7 @@ class T_Benchmark_Case : public BenchmarkCase
     return this;
   }
 
- private:
+private:
   std::function<RType(Args...)> t_function;
   size_t iter;
 };
@@ -305,7 +308,8 @@ do                                                                            \
   Code                                                                        \
                                                                               \
   manak::Timer::StopTimer();                                                  \
-}while(manak::Timer::EndIter());
+}while(manak::Timer::EndIter());                                              \
+manak::Timer::Deinitialize();
 
 
 #endif // MANAK_BENCHMARK_CASE_HPP_INCLUDED

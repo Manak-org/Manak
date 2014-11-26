@@ -9,8 +9,10 @@
 
 #include <limits>
 #include <iostream>
+#include <vector>
 
 #include <manak/benchmark_suit/pmeasure.hpp>
+#include <manak/util/log.hpp>
 
 #if defined(__unix__) || defined(__unix)
   #include <time.h>       // clock_gettime()
@@ -133,39 +135,6 @@ class Timer
     return tv.tv_sec * 1000000 + tv.tv_usec;
   }
 
-  //! Replace all occurrences
-  static void replaceAll(std::string& str,
-                         const std::string& from,
-                         const std::string& to)
-  {
-    size_t start_pos = 0;
-    while((start_pos = str.find(from, start_pos)) != std::string::npos)
-    {
-      while((start_pos = str.find(from, start_pos)) != std::string::npos)
-      {
-        str.replace(start_pos, from.length(), to);
-        start_pos += to.length();
-      }
-      start_pos += to.length();
-    }
-  }
-
-  //! Returns current time-stamp as string
-  //!
-  //! \return std::string
-  //!
-  //!
-  static std::string getTimeStamp(bool removeSpaces = false)
-  {
-    time_t tm;
-    time(&tm);
-    std::string timestamp = ctime(&tm);
-    timestamp.pop_back();
-    timestamp = timestamp.substr(4);
-    if(removeSpaces) replaceAll(timestamp, " ", "_");
-    return timestamp;
-  }
-
   //! Initialize a new Timer instance
   static void Initialize(size_t iter)
   {
@@ -174,6 +143,7 @@ class Timer
     Max() = std::numeric_limits<uint64_t>::min();
     Iterations() = iter;
     CIter() = Iterations();
+    StateInit() = true;
   }
 
   //! Re initialize the current timer instance
@@ -183,13 +153,42 @@ class Timer
     Min() = std::numeric_limits<uint64_t>::max();
     Max() = std::numeric_limits<uint64_t>::min();
     CIter() = Iterations();
+    StateInit() = true;
+  }
+
+  //! Deinitialize and register
+  static void Deinitialize()
+  {
+    if(StateInit())
+    {
+      StateInit() = false;
+
+      utils::LogEntry& le = CurrentCaseLogEntry()->Add(CurrentIndex(), CurrentSubName());
+      CurrentIndex()++;
+      CurrentSubName() = "";
+
+      PMeasure pm = GetStats();
+
+      if(!CurrentCompareStat())
+        le.Add(pm, CurrentLibraryID());
+      else
+      {
+        if(CurrentToCompare() != -1)
+          le.Add(pm, CurrentLibraryID(), pm.Compare(CurrentToCompare(), CurrentTolerance()), CurrentToCompare());
+        else
+          le.Add(pm, CurrentLibraryID());
+      }
+    }
   }
 
   //! Mark start of the iteration
   static void StartIter()
   {
-    CTime() = 0;
-    StateIter() = true;
+    if(StateInit())
+    {
+      CTime() = 0;
+      StateIter() = true;
+    }
   }
 
   //! Start timer
@@ -296,6 +295,55 @@ class Timer
   static bool& StateTimer()
   {
     static bool singleton;
+    return singleton;
+  }
+
+  //! Get-set initialization state
+  static bool& StateInit()
+  {
+    static bool singleton;
+    return singleton;
+  }
+
+  static utils::CaseLogEntry*& CurrentCaseLogEntry()
+  {
+    static utils::CaseLogEntry* singleton;
+    return singleton;
+  }
+
+  static bool& CurrentCompareStat()
+  {
+    static bool singleton;
+    return singleton;
+  }
+
+  static double& CurrentToCompare()
+  {
+    static double singleton;
+    return singleton;
+  }
+
+  static size_t& CurrentLibraryID()
+  {
+    static size_t singleton;
+    return singleton;
+  }
+
+  static double& CurrentTolerance()
+  {
+    static double singleton;
+    return singleton;
+  }
+
+  static size_t& CurrentIndex()
+  {
+    static size_t singleton;
+    return singleton;
+  }
+
+  static std::string& CurrentSubName()
+  {
+    static std::string singleton;
     return singleton;
   }
 }; // class Timer

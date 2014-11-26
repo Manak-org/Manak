@@ -71,8 +71,11 @@ MANAK_AUTO_BENCHMARK_CASE(B1)
 
 With 'Repeat' block, only the code inside the 'Repeat' block is executed for number
 of iterations. Any code outside of 'Repeat' block will not be timed, even
-'Measure' blocks. If there are multiple 'Repeat' blocks the only the last
-'Repeat' block will be timed.
+'Measure' blocks. 
+
+There can be multiple 'Repeat' blocks inside a case, in such a case each 'Repeat'
+block will be timed separately and added as a sub-benchmark case. For more 
+information on multiple 'Repeat' blocks see @ref p_bench_mr
 
 'Measure' and 'Repeat' blocks can also be used in manually added benchmark cases.
 For example - 

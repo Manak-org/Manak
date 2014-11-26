@@ -17,7 +17,6 @@
 #include <manak/benchmark_suit/pmeasure.hpp>
 
 #include "version.hpp"
-#include "timer.hpp"
 
 namespace manak
 {
@@ -234,6 +233,39 @@ class Log
     return it->second;
   }
 
+  //! Replace all occurrences
+  static void replaceAll(std::string& str,
+                         const std::string& from,
+                         const std::string& to)
+  {
+    size_t start_pos = 0;
+    while((start_pos = str.find(from, start_pos)) != std::string::npos)
+    {
+      while((start_pos = str.find(from, start_pos)) != std::string::npos)
+      {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length();
+      }
+      start_pos += to.length();
+    }
+  }
+
+  //! Returns current time-stamp as string
+  //!
+  //! \return std::string
+  //!
+  //!
+  static std::string getTimeStamp(bool removeSpaces = false)
+  {
+    time_t tm;
+    time(&tm);
+    std::string timestamp = ctime(&tm);
+    timestamp.pop_back();
+    timestamp = timestamp.substr(4);
+    if(removeSpaces) replaceAll(timestamp, " ", "_");
+    return timestamp;
+  }
+
   //! Print all the information in a user friendly way
   void Print(std::ostream& stream)
   {
@@ -249,7 +281,7 @@ class Log
     stream << "#  " << std::setw(66) << ss.str() << "#" << std::endl;
 
     std::stringstream ss2;
-    ss2 << "Created at " << Timer::getTimeStamp();
+    ss2 << "Created at " << getTimeStamp();
 
     stream << "#  " << std::setw(66) << ss2.str() << "#" << std::endl;
 
