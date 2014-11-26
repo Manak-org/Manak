@@ -202,7 +202,7 @@ MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs
 
 The function passed to 'AddCustomArgs' must return list of tuples. These returned
 tuples will be unfolded and passed to the parametrized benchmark case one by one.
-For more advance parametrized benchmark options check @ref p_bench .
+For more advance parametrized benchmark options check @ref p_bench_para .
 
 The auto test registration registers the case to the current suit(which happens 
 to be the master suit in global space). 'MANAK_AUTO_BENCHMARK_SUITE' registers

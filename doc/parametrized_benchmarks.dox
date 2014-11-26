@@ -1,14 +1,16 @@
-/*! @page p_bench Complete guide on Parametrized Benchmark Cases
+/*! @page p_bench Complete guide on Templatized Benchmarking
 
 With the use advance C++11 features, Manak implements simple to use template 
 benchmarking. Template benchmarking is useful when a same function is benchmarked
 with many different parameters. 
 
+@section p_bench_para Templatized Benchmarking with Parametrized Benchmarks
 @code 
 MANAK_AUTO_BENCHMARK_CASE(ForLoops_1000)
 {
   for(size_t i = 0;i < 1000;i++);
 }
+
 MANAK_AUTO_BENCHMARK_CASE(ForLoops_2000)
 {
   for(size_t i = 0;i < 200;i++);
@@ -47,7 +49,7 @@ int fun(const T& t)
 MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun<std::string>)->AddArgs("Test"));
 @endcode
 
-@section p_bench_aca AddCustomArgs
+@subsection p_bench_aca AddCustomArgs
 
 If number of parameter sets gets large its inconvenient to write each one 
 down in AddArgs. On top of that they may be part of the sequence which
@@ -138,4 +140,57 @@ Creates a parmetrized benchmark case with name, library, function and tolerance.
 @subsection p_bench_m8 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT
 Creates a parametrized benchmark case with name, library, function, number of 
 iterations and tolerance.
+
+@section p_bench_mr Templatized Benchmarking with Multiple 'Repeat' blocks.
+Check out @ref all_time to understand what 'Repeat' blocks are. Each 'Repeat'
+blocks registers a sub-benchmark case under the benchmark case. This property can 
+be used to simulate the effect of templatized benchmarking. 
+For example - 
+@code
+#include <iostream>
+
+#define MANAK_SIMPLE_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+
+#include <manak/manak.hpp>
+
+using namespace std;
+
+MANAK_AUTO_TEST_CASE(B1)
+{
+  for(size_t i = 1000;i < 2000;i = i + 100)
+  {
+    Repeat
+    (
+      for(size_t j = 0;j < i;i++);
+    )
+  }
+} 
+@endcode
+
+The output of this code is -
+
+@code
+######################################################################
+#  Manak C++ Benchmarking Library                                    #
+#  Version master                                                    #
+#  Created at Nov 26 15:38:38 2014                                   #
+######################################################################
+
+       Case Name              base_library        
+
+B1
+  Parameter Set 0             3                   
+  Parameter Set 1             3.4                 
+  Parameter Set 2             3.7                 
+  Parameter Set 3             4                   
+  Parameter Set 4             4.4                 
+  Parameter Set 5             4.6                 
+  Parameter Set 6             5                   
+  Parameter Set 7             5                   
+  Parameter Set 8             5.4                 
+  Parameter Set 9             5.8
+@endcode
+
+
 */
