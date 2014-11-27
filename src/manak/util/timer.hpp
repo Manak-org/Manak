@@ -168,28 +168,38 @@ class Timer
       StateInit() = false;
 
       std::string sub_name = "";
-      std::string* temp = (std::string*)os.Get("Timer_CurrentSubName");
+      std::string* temp = (std::string*)os.RGet("Timer_CurrentSubName");
       if(temp)
         sub_name = *temp;
 
       size_t& current_index = *(size_t*)os.Get("Timer_CurrentIndex");
 
-      utils::LogEntry& le = CurrentCaseLogEntry()->Add(current_index, sub_name);
+      utils::CaseLogEntry& cle = *(utils::CaseLogEntry*)os.Get("Timer_CurrentCaseLogEntry");
 
-      current_index++;
-      os.Erase("Timer_CurrentSubName");
+      utils::LogEntry& le = cle.Add(current_index, sub_name);
 
       PMeasure pm = GetStats();
 
-      if(!CurrentCompareStat())
-        le.Add(pm, CurrentLibraryID());
+      double tolerance = *(double*)os.Get("Timer_CurrentTolerance");
+      size_t l_id = *(size_t*)os.Get("Timer_CurrentLibraryID");
+      std::vector<double> to_c = *(std::vector<double>*)os.Get("Timer_CurrentToCompare");
+
+      double comp_val = -1;
+      if(current_index < to_c.size())
+        comp_val = to_c[current_index];
+
+      bool current_compare_stat = *(bool*)os.Get("Timer_CurrentCompareStat");
+
+      if(current_compare_stat)
+        le.Add(pm, l_id);
       else
       {
-        if(CurrentToCompare() != -1)
-          le.Add(pm, CurrentLibraryID(), pm.Compare(CurrentToCompare(), CurrentTolerance()), CurrentToCompare());
+        if(comp_val != -1)
+          le.Add(pm, l_id, pm.Compare(comp_val, tolerance), comp_val);
         else
-          le.Add(pm, CurrentLibraryID());
+          le.Add(pm, l_id);
       }
+      current_index++;
     }
   }
 
@@ -316,48 +326,6 @@ class Timer
     static bool singleton;
     return singleton;
   }
-
-  static utils::CaseLogEntry*& CurrentCaseLogEntry()
-  {
-    static utils::CaseLogEntry* singleton;
-    return singleton;
-  }
-
-  static bool& CurrentCompareStat()
-  {
-    static bool singleton;
-    return singleton;
-  }
-
-  static double& CurrentToCompare()
-  {
-    static double singleton;
-    return singleton;
-  }
-
-  static size_t& CurrentLibraryID()
-  {
-    static size_t singleton;
-    return singleton;
-  }
-
-  static double& CurrentTolerance()
-  {
-    static double singleton;
-    return singleton;
-  }
-
-//  static size_t& CurrentIndex()
-//  {
-//    static size_t singleton;
-//    return singleton;
-//  }
-
-//  static std::string& CurrentSubName()
-//  {
-//    static std::string singleton;
-//    return singleton;
-//  }
 }; // class Timer
 
 }; // namespace manak

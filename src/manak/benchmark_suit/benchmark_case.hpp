@@ -127,14 +127,16 @@ class BenchmarkCase
   }
 
   bool Run(utils::CaseLogEntry& cle,
-           const bool compare = false)
+           bool compare = false)
   {
-    size_t l_id = utils::Log::GetLog().AddLibrary(library_name);
-    Timer::CurrentLibraryID() = l_id;
-    Timer::CurrentCompareStat() = compare;
-    Timer::CurrentTolerance() = tolerance;
+    utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
 
-    Timer::CurrentCaseLogEntry() = &cle;
+    size_t l_id = utils::Log::GetLog().AddLibrary(library_name);
+
+    os.Insert("Timer_CurrentLibraryID", &l_id, "Current_Run");
+    os.Insert("Timer_CurrentCompareStat", &compare, "Current_Run");
+    os.Insert("Timer_CurrentTolerance", &tolerance, "Current_Run");
+    os.Insert("Timer_CurrentCaseLogEntry", &cle, "Current_Run");
 
     size_t index = 0;
     for(auto run_function : run_functions)
@@ -146,15 +148,10 @@ class BenchmarkCase
       std::cout.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
       std::cerr.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
 
-      utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
-
-      os["Timer_CurrentIndex"] = &index;
+      os.Insert("Timer_CurrentIndex", &index, "Current_Run");
       os["Timer_CurrentSubName"] = &run_function.first;
 
-      if(to_c.size() > index)
-        Timer::CurrentToCompare() = to_c[index];
-      else
-        Timer::CurrentToCompare() = -1;
+      os.Insert("Timer_CurrentToCompare", &to_c, "Current_Run");
 
       Timer::Initialize(iterations);
 
@@ -175,6 +172,9 @@ class BenchmarkCase
 
       Timer::Deinitialize();
     }
+
+    os.EraseGroup("Current_Run");
+
     return true;
   }
 
