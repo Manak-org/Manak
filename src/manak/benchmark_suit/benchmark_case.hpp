@@ -26,6 +26,7 @@
 #include <manak/util/macro_utils.hpp>
 #include <manak/util/template_utils.hpp>
 #include <manak/util/log.hpp>
+#include <manak/util/object_store.hpp>
 
 //! Set default tolerance if not defined
 #ifndef MANAK_DEFAULT_TOLERANCE
@@ -145,8 +146,10 @@ class BenchmarkCase
       std::cout.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
       std::cerr.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
 
-      Timer::CurrentIndex() = index;
-      Timer::CurrentSubName() = run_function.first;
+      utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
+
+      os["Timer_CurrentIndex"] = &index;
+      os["Timer_CurrentSubName"] = &run_function.first;
 
       if(to_c.size() > index)
         Timer::CurrentToCompare() = to_c[index];
@@ -171,8 +174,6 @@ class BenchmarkCase
       MANAK_CLOSE_LOG;
 
       Timer::Deinitialize();
-
-      index = Timer::CurrentIndex();
     }
     return true;
   }

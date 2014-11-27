@@ -14,6 +14,7 @@
 
 #include <manak/benchmark_suit/pmeasure.hpp>
 #include <manak/util/log.hpp>
+#include <manak/util/object_store.hpp>
 
 #if defined(__unix__) || defined(__unix)
   #include <time.h>       // clock_gettime()
@@ -160,13 +161,23 @@ class Timer
   //! Deinitialize and register
   static void Deinitialize()
   {
+    utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
+
     if(StateInit())
     {
       StateInit() = false;
 
-      utils::LogEntry& le = CurrentCaseLogEntry()->Add(CurrentIndex(), CurrentSubName());
-      CurrentIndex()++;
-      CurrentSubName() = "";
+      std::string sub_name = "";
+      std::string* temp = (std::string*)os.Get("Timer_CurrentSubName");
+      if(temp)
+        sub_name = *temp;
+
+      size_t& current_index = *(size_t*)os.Get("Timer_CurrentIndex");
+
+      utils::LogEntry& le = CurrentCaseLogEntry()->Add(current_index, sub_name);
+
+      current_index++;
+      os.Erase("Timer_CurrentSubName");
 
       PMeasure pm = GetStats();
 
@@ -336,17 +347,17 @@ class Timer
     return singleton;
   }
 
-  static size_t& CurrentIndex()
-  {
-    static size_t singleton;
-    return singleton;
-  }
+//  static size_t& CurrentIndex()
+//  {
+//    static size_t singleton;
+//    return singleton;
+//  }
 
-  static std::string& CurrentSubName()
-  {
-    static std::string singleton;
-    return singleton;
-  }
+//  static std::string& CurrentSubName()
+//  {
+//    static std::string singleton;
+//    return singleton;
+//  }
 }; // class Timer
 
 }; // namespace manak
