@@ -17,6 +17,7 @@
 #include <iostream>
 #include <tuple>
 #include <type_traits>
+#include <typeinfo>
 
 #include "pmeasure.hpp"
 #include "base_library.hpp"
@@ -243,6 +244,17 @@ class T_Benchmark_Case : public BenchmarkCase
     for(auto s_arg : args)
     {
       utils::Caller(utils::BindToObject(&T_Benchmark_Case<RType, Args...>::AddArgs, this), s_arg);
+    }
+    return this;
+  }
+
+  template<typename ST, typename... Args2>
+  T_Benchmark_Case* AddCustomArgs_N(std::list<std::tuple<ST, Args...>> (&fun)(Args2...), Args2... params)
+  {
+    std::list<std::tuple<ST, Args...>> args = fun(params...);
+    for(auto s_arg : args)
+    {
+      utils::Caller(utils::BindToObject(&T_Benchmark_Case<RType, Args...>::AddArgs_N, this), s_arg);
     }
     return this;
   }
