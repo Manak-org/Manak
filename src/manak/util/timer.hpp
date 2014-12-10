@@ -172,34 +172,15 @@ class Timer
       if(temp)
         sub_name = *temp;
 
-      size_t& current_index = *(size_t*)os.Get("Timer_CurrentIndex");
+      typedef std::list<std::tuple<std::string, double, PMeasure>> ResultList;
 
-      utils::CaseLogEntry& cle = *(utils::CaseLogEntry*)os.Get("Timer_CurrentCaseLogEntry");
-
-      utils::LogEntry& le = cle.Add(current_index, sub_name);
+      ResultList& re = *(ResultList*)os.Get("Timer_CurrentResultList");
 
       PMeasure pm = GetStats();
 
       double tolerance = *(double*)os.Get("Timer_CurrentTolerance");
-      size_t l_id = *(size_t*)os.Get("Timer_CurrentLibraryID");
-      std::vector<double> to_c = *(std::vector<double>*)os.Get("Timer_CurrentToCompare");
 
-      double comp_val = -1;
-      if(current_index < to_c.size())
-        comp_val = to_c[current_index];
-
-      bool current_compare_stat = *(bool*)os.Get("Timer_CurrentCompareStat");
-
-      if(current_compare_stat)
-        le.Add(pm, l_id);
-      else
-      {
-        if(comp_val != -1)
-          le.Add(pm, l_id, pm.Compare(comp_val, tolerance), comp_val);
-        else
-          le.Add(pm, l_id);
-      }
-      current_index++;
+      re.emplace_back(sub_name, tolerance, pm);
     }
   }
 
@@ -325,6 +306,39 @@ class Timer
   {
     static bool singleton;
     return singleton;
+  }
+
+  //! Replace all occurrences
+  static void replaceAll(std::string& str,
+                         const std::string& from,
+                         const std::string& to)
+  {
+    size_t start_pos = 0;
+    while((start_pos = str.find(from, start_pos)) != std::string::npos)
+    {
+      while((start_pos = str.find(from, start_pos)) != std::string::npos)
+      {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length();
+      }
+      start_pos += to.length();
+    }
+  }
+
+  //! Returns current time-stamp as string
+  //!
+  //! \return std::string
+  //!
+  //!
+  static std::string getTimeStamp(bool removeSpaces = false)
+  {
+    time_t tm;
+    time(&tm);
+    std::string timestamp = ctime(&tm);
+    timestamp.pop_back();
+    timestamp = timestamp.substr(4);
+    if(removeSpaces) replaceAll(timestamp, " ", "_");
+    return timestamp;
   }
 }; // class Timer
 

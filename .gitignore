@@ -1,1 +1,6 @@
 html/
+bin/
+build/
+obj/
+releases/
+*~

@@ -19,6 +19,7 @@
 #include "base_library.hpp"
 #include "pmeasure.hpp"
 #include "benchmark_case.hpp"
+#include "run_tree.hpp"
 
 namespace manak
 {
@@ -116,41 +117,35 @@ class BenchmarkSuite
            const std::string& pattern = "",
            const bool compare = false)
   {
-    std::string n_pattern = "";
-    std::string c_pattern = "";
-    if(pattern != "")
-    {
-      size_t index = pattern.find("/");
-      if(index == std::string::npos)
-      {
-        c_pattern = pattern;
-      }
-      else
-      {
-        c_pattern = pattern.substr(0, index);
-        n_pattern = pattern.substr(index + 1);
-      }
-    }
+    RunTree::GlobalRunTree().AddSuite(name);
 
-    std::regex r1(c_pattern);
+    std::regex r1(pattern);
 
     for(auto cases : children)
     {
-      if((n_pattern == "" && c_pattern == "") || (n_pattern == "" && std::regex_match(cases.first, r1)))
+      std::string match_string = "";
+      if(uname == "")
+        match_string += cases.first;
+      else match_string = uname + "/" + cases.first;
+
+      if((pattern == "") || std::regex_match(match_string, r1))
       {
         utils::CaseLogEntry& cle = utils::Log::GetLog().Add(cases.first, uname + "/" + cases.first);
 
         for(auto c : cases.second)
         {
-          c->Run(cle, compare);
+          RunTree::GlobalRunTree().AddCase(c);
+          //c->Run(cle, compare);
         }
       }
     }
     for(auto it : child_suits)
     {
-      if(c_pattern == "" || std::regex_match(it.first, r1))
-        it.second->Run(uname + "/" + name, n_pattern, compare);
+      it.second->Run(uname + "/" + name, pattern, compare);
     }
+
+    RunTree::GlobalRunTree().CloseSuite();
+
     return true;
   }
 

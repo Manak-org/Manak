@@ -18,6 +18,7 @@
 #include <tuple>
 #include <type_traits>
 #include <typeinfo>
+#include <list>
 
 #include "pmeasure.hpp"
 #include "base_library.hpp"
@@ -126,19 +127,15 @@ class BenchmarkCase
     return library_name;
   }
 
-  bool Run(utils::CaseLogEntry& cle,
-           bool compare = false)
+  std::list<std::tuple<std::string, double, PMeasure>> Run()
   {
     utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
 
-    size_t l_id = utils::Log::GetLog().AddLibrary(library_name);
+    std::list<std::tuple<std::string, double, PMeasure>> out;
 
-    os.Insert("Timer_CurrentLibraryID", &l_id, "Current_Run");
-    os.Insert("Timer_CurrentCompareStat", &compare, "Current_Run");
     os.Insert("Timer_CurrentTolerance", &tolerance, "Current_Run");
-    os.Insert("Timer_CurrentCaseLogEntry", &cle, "Current_Run");
+    os.Insert("Timer_CurrentResultList", &out, "Current_Run");
 
-    size_t index = 0;
     for(auto run_function : run_functions)
     {
       MANAK_OPEN_LOG;
@@ -148,10 +145,7 @@ class BenchmarkCase
       std::cout.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
       std::cerr.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
 
-      os.Insert("Timer_CurrentIndex", &index, "Current_Run");
       os["Timer_CurrentSubName"] = &run_function.first;
-
-      os.Insert("Timer_CurrentToCompare", &to_c, "Current_Run");
 
       Timer::Initialize(iterations);
 
@@ -175,7 +169,7 @@ class BenchmarkCase
 
     os.EraseGroup("Current_Run");
 
-    return true;
+    return out;
   }
 
   void AddComparisonEntry(double d)

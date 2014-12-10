@@ -10,7 +10,7 @@
 #include <functional>
 
 #include <manak/benchmark_suit/benchmark_suite.hpp>
-#include <manak/util/log.hpp>
+#include <manak/benchmark_suit/run_tree.hpp>
 
 //! If MANAK_ALTERNATE_INIT_FUNCTION is defined then that function will be
 //! called from generated main function for initializing unit benchmarking
@@ -52,7 +52,7 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
     std::cout << "-c filename : Load the given file for comparison." << std::endl;
     exit(0);
   }
-  
+
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-v"))
   {
     std::cout << manak::GetVersionInfo() << std::endl;
@@ -98,7 +98,8 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
 
   BenchmarkSuite::GetMasterSuite()->Run("", pattern, compare);
 
-  utils::Log::GetLog().Print(*stream);
+  RunTree::GlobalRunTree().Run();
+  RunTree::GlobalRunTree().PrintTXT(*stream);
 
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-s"))
   {

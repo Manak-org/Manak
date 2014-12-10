@@ -233,62 +233,13 @@ class Log
     return it->second;
   }
 
-  //! Replace all occurrences
-  static void replaceAll(std::string& str,
-                         const std::string& from,
-                         const std::string& to)
-  {
-    size_t start_pos = 0;
-    while((start_pos = str.find(from, start_pos)) != std::string::npos)
-    {
-      while((start_pos = str.find(from, start_pos)) != std::string::npos)
-      {
-        str.replace(start_pos, from.length(), to);
-        start_pos += to.length();
-      }
-      start_pos += to.length();
-    }
-  }
-
-  //! Returns current time-stamp as string
-  //!
-  //! \return std::string
-  //!
-  //!
-  static std::string getTimeStamp(bool removeSpaces = false)
-  {
-    time_t tm;
-    time(&tm);
-    std::string timestamp = ctime(&tm);
-    timestamp.pop_back();
-    timestamp = timestamp.substr(4);
-    if(removeSpaces) replaceAll(timestamp, " ", "_");
-    return timestamp;
-  }
-
   //! Print all the information in a user friendly way
   void Print(std::ostream& stream)
   {
-    stream << std::setiosflags(std::ios::left);
-    stream << "######################################################################"
-           << std::endl;
-    stream << "#  " << std::setw(66) << "Manak C++ Benchmarking Library" << "#"
-           << std::endl;
 
-    std::stringstream ss;
-    ss << "Version " << __MANAK_VERSION_MAJOR << "." << __MANAK_VERSION_MINOR
-       << "." << __MANAK_VERSION_PATCH;
-    stream << "#  " << std::setw(66) << ss.str() << "#" << std::endl;
-
-    std::stringstream ss2;
-    ss2 << "Created at " << getTimeStamp();
-
-    stream << "#  " << std::setw(66) << ss2.str() << "#" << std::endl;
-
-    stream << "######################################################################"
-           << std::endl << std::endl;
     stream << std::setprecision(3);
     stream << std::setw(30) << "       Case Name";
+
     for(size_t i = 0;i < l_ids.size();i++)
     {
       stream << std::setw(20) << r_l_ids[i];
