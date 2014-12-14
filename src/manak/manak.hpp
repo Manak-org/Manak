@@ -90,15 +90,17 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
     stream = new std::ofstream(MANAK_STRINGIZE(MANAK_DEFAULT_OUT_FILENAME));
   }
 
-  if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-c"))
-  {
-    std::string filename(manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-c"));
-    compare = BenchmarkSuite::GetMasterSuite()->LoadData(filename);
-  }
-
   BenchmarkSuite::GetMasterSuite()->Run("", pattern, compare);
 
   RunTree::GlobalRunTree().Run();
+
+  if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-c"))
+  {
+    std::string filename(manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-c"));
+    std::ifstream com_file(filename);
+    RunTree::GlobalRunTree().LoadForComparison(com_file);
+  }
+
   RunTree::GlobalRunTree().PrintTXT(*stream);
 
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-s"))
@@ -106,7 +108,7 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
     std::string filename(manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-s"));
 
     std::ofstream ss(filename);
-    utils::Log::GetLog().Save(ss);
+    RunTree::GlobalRunTree().SaveForComparison(ss);
     ss.close();
   }
 

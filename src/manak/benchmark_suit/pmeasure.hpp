@@ -55,19 +55,16 @@ struct PMeasure
 
 inline std::ostream& operator<<(std::ostream& stream, const PMeasure& pm)
 {
-  if(pm.avg != 0)
-  {
-    std::stringstream s;
+  std::stringstream s;
 
-    #ifdef MANAK_SHOW_MIN_MAX
-    s << pm.avg << "[" << pm.min << ":" << pm.max << "]";
-    #else
-    s << pm.avg;
-    #endif // MANAK_SHOW_MIN_MAX
+  #ifdef MANAK_SHOW_MIN_MAX
+  s << pm.avg << "[" << pm.min << ":" << pm.max << "]";
+  #else
+  s << pm.avg;
+  #endif // MANAK_SHOW_MIN_MAX
 
-    stream << s.str();
-  }
-  else stream << " ";
+  stream << s.str();
+
   return stream;
 }; // struct PMeasure
 

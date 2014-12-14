@@ -41,6 +41,30 @@ struct RNode
     children[l_id] = bc;
   }
 
+  std::string GetPMRep(const std::tuple<std::string, double, PMeasure, double>& entry)
+  {
+    std::stringstream ss;
+
+    double comp_val = std::get<3>(entry);
+    PMeasure pm = std::get<2>(entry);
+
+    if(comp_val >= 0)
+    {
+      double tol = std::get<3>(entry);
+
+      int res = pm.Compare(comp_val, tol);
+
+      if(res > 0)
+        ss << "+";
+      else if(res < 0)
+        ss << "-";
+      ss << std::get<2>(entry) << "(" << comp_val << ")";
+    }
+    else
+      ss << std::get<2>(entry);
+    return ss.str();
+  }
+
   void Run()
   {
     for(auto n : nexts)
@@ -66,8 +90,8 @@ struct RNode
 
     if(children.size() != 0)
     {
-      std::list<std::tuple<std::string, double, PMeasure>> dummy;
-      std::list<std::tuple<std::string, double, PMeasure>>::iterator it_s[l_ids];
+      std::list<std::tuple<std::string, double, PMeasure, double>> dummy;
+      std::list<std::tuple<std::string, double, PMeasure, double>>::iterator it_s[l_ids];
 
       for(size_t i = 0;i < l_ids;i++)
       {
@@ -111,7 +135,9 @@ struct RNode
                   else
                     sub_name = std::get<0>(*it_s[i]);
                 }
-                ss << std::get<2>(*it_s[i]);
+
+                ss << GetPMRep(*it_s[i]);
+
                 it_s[i]++;
               }
               else ss << "---";
@@ -150,7 +176,7 @@ struct RNode
           {
             if(it_s[i] != results.find(i)->second.end())
             {
-              ss << std::get<2>(*it_s[i]);
+              ss << GetPMRep(*it_s[i]);
             }
             else ss << "---";
           }
@@ -165,19 +191,88 @@ struct RNode
     }
   }
 
+  void SaveForComparison(std::ostream& stream, const std::string& uname)
+  {
+    for(auto it : nexts)
+    {
+      it.second->SaveForComparison(stream, uname + "/" + it.first);
+    }
+
+    if(children.size() != 0)
+    {
+      for(auto it : children)
+      {
+        stream << uname << " " << it.second->LibraryName();
+        auto result = results.find(it.first);
+        stream << " " << result->second.size();
+        for(auto res : result->second)
+        {
+          stream << " " << std::get<2>(res).avg;
+        }
+        stream << std::endl;
+      }
+    }
+  }
+
+  void LoadForComparison(const std::string& uname,
+                         size_t l_id,
+                         const std::list<double>& readings)
+  {
+    if(uname != "")
+    {
+      size_t index = uname.find("/");
+
+      std::string temp = "";
+      std::string c_name = "";
+
+      if(index != std::string::npos)
+      {
+        temp = uname.substr(index + 1, uname.size());
+        c_name = uname.substr(0, index);
+      }
+      else
+        c_name = uname;
+
+      auto it = nexts.find(c_name);
+      if(it != nexts.end())
+      {
+        it->second->LoadForComparison(temp, l_id, readings);
+      }
+    }
+    else if(children.size() != 0)
+    {
+      auto it = results.find(l_id);
+      if(it != results.end())
+      {
+        auto r_it = readings.begin();
+        for(auto& l_it : it->second)
+        {
+          if(r_it != readings.end())
+          {
+            std::get<3>(l_it) = *r_it;
+          }
+          else break;
+        }
+      }
+    }
+  }
+
   RNode* parent;
 
   std::map<std::string, RNode*> nexts;
 
   std::map<size_t, BenchmarkCase*> children;
-  std::map<size_t, std::list<std::tuple<std::string, double, PMeasure>>> results;
+  std::map<size_t, std::list<std::tuple<std::string, double, PMeasure, double>>> results;
 };
 
 class RunTree
 {
  public:
   RunTree()
-    : root(new RNode(NULL)), current_node(root), total_nodes(0), current_l_id(0)
+    : root(new RNode(NULL)),
+    current_node(root),
+    total_nodes(0),
+    current_l_id(0)
   {
   }
 
@@ -281,6 +376,59 @@ class RunTree
 
     stream << std::endl;
     root->PrintTXT(stream, l_map.size());
+  }
+
+  void SaveForComparison(std::ostream& stream)
+  {
+    stream << GetVersionInfo() << std::endl;
+
+    stream << Timer::getTimeStamp() << std::endl;
+
+    root->SaveForComparison(stream, "");
+  }
+
+  void LoadForComparison(std::istream& stream)
+  {
+    std::string temp;
+
+    getline(stream, temp);
+    getline(stream, temp);
+    getline(stream, temp);
+
+    //! extract time
+    getline(stream, temp);
+
+    //! get all the cases
+    while(getline(stream, temp))
+    {
+      std::stringstream ss;
+      ss << temp;
+      std::string uname;
+      ss >> uname;
+
+      std::string l_name;
+      ss >> l_name;
+
+      size_t num_readings = 0;
+      ss >> num_readings;
+
+      std::list<double> readings;
+
+      for(size_t i = 0;i < num_readings;i++)
+      {
+        double temp;
+        ss >> temp;
+        readings.push_back(temp);
+      }
+
+      uname = uname.substr(1, uname.length() - 1);
+
+      auto l_it = l_map.find(l_name);
+      if(l_it != l_map.end())
+      {
+        root->LoadForComparison(uname, l_it->second, readings);
+      }
+    }
   }
 
  private:

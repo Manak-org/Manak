@@ -295,7 +295,7 @@ bool init_benchmarking_module()
   manak::BenchmarkSuite::GetMasterSuite()->Name() = MANAK_STRINGIZE(MANAK_SIMPLE_BENCHMARK_MODULE);
 
   #else // MANAK_SIMPLE_BENCHMARK_MODULE
-  manak::BenchmarkSuite::GetMasterSuite()->Name() = MANAK_STRINGIZE(MANAK_SIMPLE_BENCHMARK_MODULE);
+  manak::BenchmarkSuite::GetMasterSuite()->Name() = MANAK_STRINGIZE(MANAK_BENCHMARK_MODULE);
 
   #endif // MANAK_SIMPLE_BENCHMARK_MODULE
 

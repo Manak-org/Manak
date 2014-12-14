@@ -127,11 +127,11 @@ class BenchmarkCase
     return library_name;
   }
 
-  std::list<std::tuple<std::string, double, PMeasure>> Run()
+  std::list<std::tuple<std::string, double, PMeasure, double>> Run()
   {
     utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
 
-    std::list<std::tuple<std::string, double, PMeasure>> out;
+    std::list<std::tuple<std::string, double, PMeasure, double>> out;
 
     os.Insert("Timer_CurrentTolerance", &tolerance, "Current_Run");
     os.Insert("Timer_CurrentResultList", &out, "Current_Run");
@@ -148,13 +148,13 @@ class BenchmarkCase
       os["Timer_CurrentSubName"] = &run_function.first;
 
       Timer::Initialize(iterations);
-
+      auto& fun = run_function.second;
       do
       {
         Timer::StartIter();
         Timer::StartTimer();
 
-        run_function.second();
+        fun();
 
         Timer::StopTimer();
       }while(Timer::EndIter());
