@@ -50,7 +50,7 @@ struct RNode
 
     if(comp_val >= 0)
     {
-      double tol = std::get<3>(entry);
+      double tol = std::get<1>(entry);
 
       int res = pm.Compare(comp_val, tol);
 
