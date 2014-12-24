@@ -137,16 +137,6 @@ bool init_benchmarking_module()
   #endif // MANAK_BENCHMARK_MODULE
   #endif // MANAK_SIMPLE_BENCHMARK_MODULE
 
-  #ifdef MANAK_SIMPLE_BENCHMARK_MODULE
-
-  #define MANAK_MODULE_NAME MANAK_STRINGIZE(MANAK_SIMPLE_BENCHMARK_MODULE)
-
-  #else // MANAK_SIMPLE_BENCHMARK_MODULE
-
-  #define MANAK_MODULE_NAME MANAK_STRINGIZE(MANAK_BENCHMARK_MODULE)
-
-  #endif // MANAK_SIMPLE_BENCHMARK_MODULE
-
   manak::BenchmarkSuite::GetMasterSuite()->Name() = MANAK_MODULE_NAME;
 
   return true;
@@ -154,7 +144,6 @@ bool init_benchmarking_module()
 
 }
 
-#include "base_library.hpp"
 #include "pmeasure.hpp"
 #include "run_tree.hpp"
 

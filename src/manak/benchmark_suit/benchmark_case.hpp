@@ -21,50 +21,12 @@
 #include <list>
 
 #include "pmeasure.hpp"
-#include "base_library.hpp"
 
 #include <manak/util/timer.hpp>
 #include <manak/util/macro_utils.hpp>
 #include <manak/util/template_utils.hpp>
 #include <manak/util/log.hpp>
 #include <manak/util/object_store.hpp>
-
-//! Set default tolerance if not defined
-#ifndef MANAK_DEFAULT_TOLERANCE
-  #define MANAK_DEFAULT_TOLERANCE 10
-#endif
-
-//! Set default iterations if not defined
-#ifndef MANAK_DEFAULT_ITERATIONS
-  #define MANAK_DEFAULT_ITERATIONS 10
-#endif
-
-//! Filename where the output of benchmark cases will be stored
-#ifndef MANAK_REDIRECTION_FILENAME
-
-#define MANAK_REDIRECTION_FILENAME benchmark_log.txt
-
-#endif // MANAK_REDIRECTION_FILENAME
-
-//! While the benchmark is running all the output on std::cout and std::cerr
-//! is redirected to another stream
-//! If that stream is not defined then define it ourselves
-#ifndef MANAK_BENCHMARK_REDIRECTION_STREAM
-
-//! Open the logging file stream
-#define MANAK_OPEN_LOG std::ofstream f(MANAK_STRINGIZE(MANAK_REDIRECTION_FILENAME), std::fstream::app);
-#define MANAK_CLOSE_LOG f.close();
-#define MANAK_BENCHMARK_REDIRECTION_STREAM f.rdbuf()
-
-#endif
-
-#ifndef MANAK_OPEN_LOG
-#define MANAK_OPEN_LOG
-#endif
-
-#ifndef MANAK_CLOSE_LOG
-#define MANAK_CLOSE_LOG
-#endif
 
 namespace manak
 {
@@ -74,7 +36,7 @@ class BenchmarkCase
  public:
   BenchmarkCase(const std::string& name,
                 const std::string& library_name,
-                const size_t iterations =MANAK_DEFAULT_ITERATIONS,
+                const size_t iterations = MANAK_DEFAULT_ITERATIONS,
                 double tolerance = MANAK_DEFAULT_TOLERANCE,
                 const std::string& desc = "")
     : name(name),
@@ -117,6 +79,13 @@ class BenchmarkCase
     run_functions.emplace_back("", [=](){fun();});
   }
 
+  std::list<std::tuple<std::string, double, PMeasure, double>> Run();
+
+  void AddComparisonEntry(double d)
+  {
+    to_c.push_back(d);
+  }
+
   const std::string& Name() const
   {
     return name;
@@ -127,55 +96,6 @@ class BenchmarkCase
     return library_name;
   }
 
-  std::list<std::tuple<std::string, double, PMeasure, double>> Run()
-  {
-    utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
-
-    std::list<std::tuple<std::string, double, PMeasure, double>> out;
-
-    os.Insert("Timer_CurrentTolerance", &tolerance, "Current_Run");
-    os.Insert("Timer_CurrentResultList", &out, "Current_Run");
-
-    for(auto run_function : run_functions)
-    {
-      MANAK_OPEN_LOG;
-      std::streambuf *coutbuf = std::cout.rdbuf();
-      std::streambuf *cerrbuf = std::cout.rdbuf();
-
-      std::cout.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
-      std::cerr.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
-
-      os["Timer_CurrentSubName"] = &run_function.first;
-
-      Timer::Initialize(iterations);
-      auto& fun = run_function.second;
-      do
-      {
-        Timer::StartIter();
-        Timer::StartTimer();
-
-        fun();
-
-        Timer::StopTimer();
-      }while(Timer::EndIter());
-
-      std::cout.rdbuf(coutbuf);
-      std::cerr.rdbuf(cerrbuf);
-
-      MANAK_CLOSE_LOG;
-
-      Timer::Deinitialize();
-    }
-
-    os.EraseGroup("Current_Run");
-
-    return out;
-  }
-
-  void AddComparisonEntry(double d)
-  {
-    to_c.push_back(d);
-  }
 
  protected:
   std::string name;
@@ -282,6 +202,9 @@ T_Benchmark_Case<RType, Args...>* CTBenchmarkObject(const std::string& name,
 }
 
 }
+
+//! Add implementation
+#include "benchmark_case_impl.hpp"
 
 #ifdef MANAK_SIMPLE_BENCHMARK_MODULE
 #include "simple_module_benchmark_case.hpp"
