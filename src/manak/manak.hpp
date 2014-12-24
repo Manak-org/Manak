@@ -103,6 +103,9 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
 
   RunTree::GlobalRunTree().PrintTXT(*stream);
 
+  std::ofstream s_html("test.html");
+  RunTree::GlobalRunTree().PrintHTML(s_html);
+
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-s"))
   {
     std::string filename(manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-s"));

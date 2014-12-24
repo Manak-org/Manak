@@ -10,6 +10,7 @@
 #include "benchmark_case.hpp"
 
 #include <manak/util/version.hpp>
+#include <manak/util/macro_utils.hpp>
 
 namespace manak
 {
@@ -188,6 +189,118 @@ struct RNode
         stream << std::endl;
       }
       stream << std::endl;
+    }
+  }
+
+  void PrintHTML(std::ostream& stream, size_t l_ids)
+  {
+    for(auto it : nexts)
+    {
+      it.second->PrintHTML(stream, l_ids);
+    }
+
+    if(children.size() != 0)
+    {
+      std::list<std::tuple<std::string, double, PMeasure, double>> dummy;
+      std::list<std::tuple<std::string, double, PMeasure, double>>::iterator it_s[l_ids];
+
+      for(size_t i = 0;i < l_ids;i++)
+      {
+        auto it = results.find(i);
+        if(it != results.end())
+          it_s[i] = it->second.begin();
+        else it_s[i] = dummy.end();
+      }
+
+      size_t num_entries = 0;
+      for(auto l : results)
+      {
+        if(l.second.size() > num_entries)
+          num_entries = l.second.size();
+      }
+
+
+      if(num_entries > 1)
+      {
+        stream << "<tr>" << std::endl;
+        stream << "<td rowspan = \"" << num_entries
+               << "\">" << children.begin()->second->Name()
+               << "</td>" << std::endl;
+
+        for(size_t index = 0;index < num_entries;index++)
+        {
+          std::stringstream s_values;
+
+          std::string sub_name = "";
+          bool name_mismatch = false;
+
+          for(size_t i = 0;i < l_ids;i++)
+          {
+            std::stringstream ss;
+
+            if(it_s[i] != dummy.end())
+            {
+              if(it_s[i] != results.find(i)->second.end())
+              {
+                if(!name_mismatch)
+                {
+                  if(sub_name != "" && sub_name != std::get<0>(*it_s[i]))
+                    name_mismatch = true;
+                  else
+                    sub_name = std::get<0>(*it_s[i]);
+                }
+
+                ss << GetPMRep(*it_s[i]);
+
+                it_s[i]++;
+              }
+              else ss << "---";
+            }
+            else ss << "---";
+
+            s_values << "<td>" << ss.str() << "</td>" << std::endl;
+          }
+
+          std::stringstream s_sub_name;
+          if(!name_mismatch)
+          {
+            s_sub_name << sub_name;
+          }
+          else
+          {
+            s_sub_name << "Parameter Set " << index;
+          }
+
+          stream << "<td>" << s_sub_name.str() << "</td>" << std::endl;
+          stream << s_values.str() << std::endl;
+          stream << "</tr>" << std::endl;
+          if(index != num_entries - 1)
+            stream << "<tr>" << std::endl;
+        }
+      }
+      else
+      {
+        stream << "<tr>" << std::endl;
+        stream << "<td>" << children.begin()->second->Name() << "</td>" << std::endl;
+        stream << "<td></td>" << std::endl;
+        for(size_t i = 0;i < l_ids;i++)
+        {
+          std::stringstream ss;
+
+          if(it_s[i] != dummy.end())
+          {
+            if(it_s[i] != results.find(i)->second.end())
+            {
+              ss << GetPMRep(*it_s[i]);
+            }
+            else ss << "---";
+          }
+          else ss << "---";
+
+          stream << "<td>" << ss.str() << "</td>" << std::endl;
+        }
+        stream << "</tr>" << std::endl;
+      }
     }
   }
 
@@ -376,6 +489,97 @@ class RunTree
 
     stream << std::endl;
     root->PrintTXT(stream, l_map.size());
+  }
+
+  void PrintHTML(std::ostream& stream)
+  {
+    stream << "<!DOCTYPE html>" << std::endl;
+
+    //! Open html
+    stream << "<html>" << std::endl;
+
+    //! open head
+    stream << "<head>" << std::endl;
+
+    //! add title
+    stream << "<title> Benchmarking log for module '"
+           << MANAK_MODULE_NAME << "'"
+           << "</title>" << std::endl;
+
+    //! add styles
+    stream << "<style>" << std::endl;
+    stream << "li bold {font-weight: bold; font-size: 25px; }" << std::endl;
+    stream << "li info {font-size: 25px; }" << std::endl;
+    stream << "table, th, td { border: 1px solid black; \
+                               border-collapse: collapse; \
+                             } \
+               th, td { \
+                        padding: 5px; \
+                        text-align: left; \
+                      }" << std::endl;
+    stream << "</style>" << std::endl;
+
+    //! close head
+    stream << "</head>" << std::endl;
+
+    //! Add body
+    stream << "<body>" << std::endl;
+
+    //! Add heading
+    stream << "<h1 style=\"text-align:center\"> Benchmarking Log for Module '"
+           << MANAK_MODULE_NAME << "'" << "</h1>" << std::endl;
+
+    //! add blank line
+    stream << "<br>" << std::endl;
+
+    //! Add list of important information to show
+    stream << "<ul>" << std::endl;
+
+    //! add module name
+    stream << "<li><bold>Module: </bold><info>" << MANAK_MODULE_NAME << "</info>"
+           << "</li>" << std::endl;
+    //! add timestamp
+    stream << "<li><bold>Timestamp: </bold><info>"
+           << Timer::getTimeStamp() << "</info></li>" << std::endl;
+    //! add benchmark case count
+    stream << "<li><bold>Total Cases: </bold><info>"
+           << total_nodes << "</info></li>" << std::endl;
+
+    //! close list
+    stream << "</ul>" << std::endl;
+
+    stream << "<br>" << std::endl;
+
+    //! add table
+    stream << "<table style=\"width:100%\">" << std::endl;
+
+    //! table headings
+    stream << "<tr>" << std::endl;
+    stream << "<th>Benchmark Name</th>" << std::endl;
+    stream << "<th></th>" << std::endl;
+    for(size_t i = 0;i < l_map.size();i++)
+    {
+      stream << std::setw(20);
+      for(auto it : l_map)
+      {
+        if(it.second == i)
+        {
+          stream << "<th>" << it.first << "</th>" << std::endl;
+          break;
+        }
+      }
+    }
+    stream << "</tr>" << std::endl;
+
+    root->PrintHTML(stream, l_map.size());
+
+    stream << "</table>" << std::endl;
+
+    //! close body
+    stream << "</body>" << std::endl;
+
+    //! close html
+    stream << "</html>" << std::endl;
   }
 
   void SaveForComparison(std::ostream& stream)
