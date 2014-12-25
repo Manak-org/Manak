@@ -77,7 +77,7 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
     stream = new std::ofstream(MANAK_STRINGIZE(MANAK_DEFAULT_OUT_FILENAME));
   }
 
-  BenchmarkSuite::GetMasterSuite()->Run("", pattern, compare);
+  BenchmarkSuite::GetMasterSuite().Run("", pattern, compare);
 
   RunTree::GlobalRunTree().Run();
 

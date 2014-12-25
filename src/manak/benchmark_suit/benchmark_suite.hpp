@@ -42,10 +42,10 @@ class BenchmarkSuite
 
   ~BenchmarkSuite();
 
-  static BenchmarkSuite* GetMasterSuite()
+  static BenchmarkSuite& GetMasterSuite()
   {
     static BenchmarkSuite singleton;
-    return &singleton;
+    return singleton;
   }
 
   BenchmarkSuite* AddSuite(BenchmarkSuite* suite)
@@ -137,7 +137,7 @@ bool init_benchmarking_module()
   #endif // MANAK_BENCHMARK_MODULE
   #endif // MANAK_SIMPLE_BENCHMARK_MODULE
 
-  manak::BenchmarkSuite::GetMasterSuite()->Name() = MANAK_MODULE_NAME;
+  manak::BenchmarkSuite::GetMasterSuite().Name() = MANAK_MODULE_NAME;
 
   return true;
 }
@@ -157,7 +157,7 @@ class RegisterBenchmarkSuite
  public:
   RegisterBenchmarkSuite(const std::string& name)
   {
-    BenchmarkSuite::GetMasterSuite()->SetCurrentSuite(name);
+    BenchmarkSuite::GetMasterSuite().SetCurrentSuite(name);
   }
 };
 
@@ -166,7 +166,7 @@ class DeRegisterBenchmarkSuite
  public:
   DeRegisterBenchmarkSuite()
   {
-    BenchmarkSuite::GetMasterSuite()->SetCurrentSuiteToParent();
+    BenchmarkSuite::GetMasterSuite().SetCurrentSuiteToParent();
   }
 };
 

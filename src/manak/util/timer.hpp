@@ -172,7 +172,7 @@ class Timer
       if(temp)
         sub_name = *temp;
 
-      typedef std::list<std::tuple<std::string, double, PMeasure, double>> ResultList;
+      typedef std::list<utils::ObjectStore> ResultList;
 
       ResultList& re = *(ResultList*)os.Get("Timer_CurrentResultList");
 
@@ -180,7 +180,13 @@ class Timer
 
       double tolerance = *(double*)os.Get("Timer_CurrentTolerance");
 
-      re.emplace_back(sub_name, tolerance, pm, -1);
+      utils::ObjectStore os;
+      os["name"] = new std::string(sub_name);
+      os["tolerance"] = new double(tolerance);
+      os["pmeasure"] = new PMeasure(pm);
+      os["compare"] = new double(-1);
+
+      re.emplace_back(os);
     }
   }
 

@@ -23,6 +23,29 @@ struct RNode
 
   }
 
+  ~RNode()
+  {
+    for(auto it : nexts)
+    {
+      delete it.second;
+    }
+
+    for(auto it : results)
+    {
+      for(auto it2 : it.second)
+      {
+        std::string* name = (std::string*)it2.Get("name");
+        delete name;
+        double* tol = (double*)it2.Get("tolerance");
+        delete tol;
+        PMeasure* pm = (PMeasure*)it2.Get("pmeasure");
+        delete pm;
+        double* com = (double*)it2.Get("compare");
+        delete com;
+      }
+    }
+  }
+
   bool AddNext(const std::string& name, RNode*& n);
 
   void AddCase(BenchmarkCase* bc, size_t l_id)
@@ -30,15 +53,14 @@ struct RNode
     children[l_id] = bc;
   }
 
-  std::string GetPMRep(const std::tuple<std::string,
-                       double, PMeasure,
-                       double>& entry);
+  std::string GetPMRep(const utils::ObjectStore& entry);
 
   void Run();
 
   void PrintTXT(std::ostream& stream, size_t l_ids);
 
-  void PrintHTML(std::ostream& stream, size_t l_ids);
+  void PrintHTML(std::ostream& stream,
+                 size_t l_ids);
 
   void SaveForComparison(std::ostream& stream, const std::string& uname);
 
@@ -51,7 +73,8 @@ struct RNode
   std::map<std::string, RNode*> nexts;
 
   std::map<size_t, BenchmarkCase*> children;
-  std::map<size_t, std::list<std::tuple<std::string, double, PMeasure, double>>> results;
+  //std::map<size_t, std::list<std::tuple<std::string, double, PMeasure, double>>> results;
+  std::map<size_t, std::list<utils::ObjectStore>> results;
 };
 
 class RunTree
@@ -63,6 +86,11 @@ class RunTree
     total_nodes(0),
     current_l_id(0)
   {
+  }
+
+  ~RunTree()
+  {
+    delete root;
   }
 
   static RunTree& GlobalRunTree()

@@ -18,18 +18,16 @@ bool RNode::AddNext(const std::string& name, RNode*& n)
   return true;
 }
 
-std::string RNode::GetPMRep(const std::tuple<std::string,
-                            double, PMeasure,
-                            double>& entry)
+std::string RNode::GetPMRep(const utils::ObjectStore& entry)
 {
   std::stringstream ss;
 
-  double comp_val = std::get<3>(entry);
-  PMeasure pm = std::get<2>(entry);
+  double comp_val = *(double*)entry.Get("compare");
+  PMeasure pm = *(PMeasure*)entry.Get("pmeasure");
 
   if(comp_val >= 0)
   {
-    double tol = std::get<1>(entry);
+    double tol = *(double*)entry.Get("tolerance");
 
     int res = pm.Compare(comp_val, tol);
 
@@ -37,10 +35,10 @@ std::string RNode::GetPMRep(const std::tuple<std::string,
       ss << "+";
     else if(res < 0)
       ss << "-";
-    ss << std::get<2>(entry) << "(" << comp_val << ")";
+    ss << pm << "(" << comp_val << ")";
   }
   else
-    ss << std::get<2>(entry);
+    ss << pm;
   return ss.str();
 }
 
@@ -69,8 +67,8 @@ void RNode::PrintTXT(std::ostream& stream, size_t l_ids)
 
   if(children.size() != 0)
   {
-    std::list<std::tuple<std::string, double, PMeasure, double>> dummy;
-    std::list<std::tuple<std::string, double, PMeasure, double>>::iterator it_s[l_ids];
+    std::list<utils::ObjectStore> dummy;
+    std::list<utils::ObjectStore>::iterator it_s[l_ids];
 
     for(size_t i = 0;i < l_ids;i++)
     {
@@ -109,10 +107,10 @@ void RNode::PrintTXT(std::ostream& stream, size_t l_ids)
             {
               if(!name_mismatch)
               {
-                if(sub_name != "" && sub_name != std::get<0>(*it_s[i]))
+                if(sub_name != "" && sub_name != *(std::string*)it_s[i]->Get("name"))
                   name_mismatch = true;
                 else
-                  sub_name = std::get<0>(*it_s[i]);
+                  sub_name = *(std::string*)it_s[i]->Get("name");
               }
 
               ss << GetPMRep(*it_s[i]);
@@ -170,7 +168,8 @@ void RNode::PrintTXT(std::ostream& stream, size_t l_ids)
   }
 }
 
-void RNode::PrintHTML(std::ostream& stream, size_t l_ids)
+void RNode::PrintHTML(std::ostream& stream,
+                      size_t l_ids)
 {
   for(auto it : nexts)
   {
@@ -179,8 +178,8 @@ void RNode::PrintHTML(std::ostream& stream, size_t l_ids)
 
   if(children.size() != 0)
   {
-    std::list<std::tuple<std::string, double, PMeasure, double>> dummy;
-    std::list<std::tuple<std::string, double, PMeasure, double>>::iterator it_s[l_ids];
+    std::list<utils::ObjectStore> dummy;
+    std::list<utils::ObjectStore>::iterator it_s[l_ids];
 
     for(size_t i = 0;i < l_ids;i++)
     {
@@ -221,10 +220,10 @@ void RNode::PrintHTML(std::ostream& stream, size_t l_ids)
             {
               if(!name_mismatch)
               {
-                if(sub_name != "" && sub_name != std::get<0>(*it_s[i]))
+                if(sub_name != "" && sub_name != *(std::string*)it_s[i]->Get("name"))
                   name_mismatch = true;
                 else
-                  sub_name = std::get<0>(*it_s[i]);
+                  sub_name = *(std::string*)it_s[i]->Get("name");
               }
 
               ss << GetPMRep(*it_s[i]);
@@ -297,7 +296,7 @@ void RNode::SaveForComparison(std::ostream& stream, const std::string& uname)
       stream << " " << result->second.size();
       for(auto res : result->second)
       {
-        stream << " " << std::get<2>(res).avg;
+        stream << " " << ((PMeasure*)res.Get("pmeasure"))->avg;
       }
       stream << std::endl;
     }
@@ -339,7 +338,7 @@ void RNode::LoadForComparison(const std::string& uname,
       {
         if(r_it != readings.end())
         {
-          std::get<3>(l_it) = *r_it;
+          *(double*)l_it.Get("compare") = *r_it;
         }
         else break;
       }
@@ -452,8 +451,12 @@ void RunTree::PrintHTML(std::ostream& stream)
 
   //! add styles
   stream << "<style>" << std::endl;
+
+  //! List styles
   stream << "li bold {font-weight: bold; font-size: 25px; }" << std::endl;
   stream << "li info {font-size: 25px; }" << std::endl;
+
+  //! Table styles
   stream << "table, th, td { border: 1px solid black; \
                                border-collapse: collapse; \
                              } \
@@ -461,6 +464,11 @@ void RunTree::PrintHTML(std::ostream& stream)
                         padding: 5px; \
                         text-align: left; \
                       }" << std::endl;
+
+  //! Detail report styles
+  stream << "case_title {font-weight: bold; font-size: 25px; }" << std::endl;
+  stream <<
+
   stream << "</style>" << std::endl;
 
   //! close head

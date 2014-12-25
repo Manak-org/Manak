@@ -1,11 +1,11 @@
 namespace manak
 {
 
-std::list<std::tuple<std::string, double, PMeasure, double>> BenchmarkCase::Run()
+std::list<utils::ObjectStore> BenchmarkCase::Run()
 {
   utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
 
-  std::list<std::tuple<std::string, double, PMeasure, double>> out;
+  std::list<utils::ObjectStore> out;
 
   os.Insert("Timer_CurrentTolerance", &tolerance, "Current_Run");
   os.Insert("Timer_CurrentResultList", &out, "Current_Run");

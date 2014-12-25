@@ -79,7 +79,7 @@ class BenchmarkCase
     run_functions.emplace_back("", [=](){fun();});
   }
 
-  std::list<std::tuple<std::string, double, PMeasure, double>> Run();
+  std::list<utils::ObjectStore> Run();
 
   void AddComparisonEntry(double d)
   {
@@ -221,7 +221,7 @@ class STRING_JOIN(unamed, STRING_JOIN(_, __LINE__))                           \
 };                                                                            \
 manak::BenchmarkCase*                                                         \
 STRING_JOIN(unamed, STRING_JOIN(_, __LINE__))::static_temp =                  \
-manak::BenchmarkSuite::GetMasterSuite()->GetCurrentSuite()->AddCase(bench)
+manak::BenchmarkSuite::GetMasterSuite().GetCurrentSuite()->AddCase(bench)
 
 
 #define Measure(Code)                                                         \

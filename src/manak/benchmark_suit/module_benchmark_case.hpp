@@ -40,7 +40,7 @@ struct Name ## _ ## Library ##_## Benchmark                                   \
   static manak::BenchmarkCase* static_temp;                                   \
 };                                                                            \
 manak::BenchmarkCase* Name ## _ ## Library ##_## Benchmark::static_temp =     \
-manak::BenchmarkSuite::GetMasterSuite()->GetCurrentSuite()->                  \
+manak::BenchmarkSuite::GetMasterSuite().GetCurrentSuite()->                  \
 AddCase(MANAK_BENCHMARK_CASE_ITD(Name,                                        \
                                  Library,                                     \
                                  Name ## _ ## Library ##_## Benchmark::Run,   \
