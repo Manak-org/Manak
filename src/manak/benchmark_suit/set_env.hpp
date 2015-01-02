@@ -21,7 +21,7 @@
 
 //! If no output file is given benchmarking statistics will be saved to this file
 #ifndef MANAK_DEFAULT_OUT_FILENAME
-#define MANAK_DEFAULT_OUT_FILENAME benchmark_stat.txt
+#define MANAK_DEFAULT_OUT_FILENAME benchmark_stat
 #endif
 
 //! Set default tolerance if not defined

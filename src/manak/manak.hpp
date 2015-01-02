@@ -27,6 +27,7 @@ namespace manak /** C++ Unit Benchmarking Library. **/
 //!
 int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* argv[] )
 {
+  bool output_format_html = true;
   bool compare = false;
 
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-h"))
@@ -37,6 +38,8 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
     std::cout << "-o filename : Save output to given file." << std::endl;
     std::cout << "-s filename : Save the result for comparison." << std::endl;
     std::cout << "-c filename : Load the given file for comparison." << std::endl;
+    std::cout << "-f HTML     : Save the output as HTML(Default)" << std::endl;
+    std::cout << "   TXT      : Save the output as text document" << std::endl;
     exit(0);
   }
 
@@ -67,6 +70,20 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
 
   std::ofstream* stream = NULL;
 
+  if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-f"))
+  {
+    std::string format = manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-f");
+    if(format == "TXT" || format == "txt")
+      output_format_html = false;
+    else if(format == "HTML" || format == "html");
+    else
+    {
+      std::cerr << "Unrecognized format \"" << format << "\"" << std::endl;
+      std::cerr << "For supported formats pass \"-h\"" << std::endl;
+      exit(1);
+    }
+  }
+
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-o"))
   {
     std::string filename(manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-o"));
@@ -74,7 +91,13 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
   }
   else
   {
-    stream = new std::ofstream(MANAK_STRINGIZE(MANAK_DEFAULT_OUT_FILENAME));
+    std::string fname = MANAK_STRINGIZE(MANAK_DEFAULT_OUT_FILENAME);
+
+    if(output_format_html)
+      fname += ".html";
+    else fname += ".txt";
+
+    stream = new std::ofstream(fname);
   }
 
   BenchmarkSuite::GetMasterSuite().Run("", pattern, compare);
@@ -88,10 +111,13 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
     RunTree::GlobalRunTree().LoadForComparison(com_file);
   }
 
-  RunTree::GlobalRunTree().PrintTXT(*stream);
+  if(output_format_html)
+    RunTree::GlobalRunTree().PrintHTML(*stream);
+  else
+    RunTree::GlobalRunTree().PrintTXT(*stream);
 
-  std::ofstream s_html("test.html");
-  RunTree::GlobalRunTree().PrintHTML(s_html);
+//  std::ofstream s_html("test.html");
+//  RunTree::GlobalRunTree().PrintHTML(s_html);
 
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-s"))
   {
