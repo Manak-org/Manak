@@ -24,7 +24,6 @@ namespace manak /** C++ Unit Benchmarking Library. **/
 //!
 //! \return int
 //!
-//!
 int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* argv[] )
 {
   bool output_format_html = true;
