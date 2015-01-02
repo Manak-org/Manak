@@ -118,9 +118,18 @@ class BenchmarkSuite
   {
     return name;
   }
+  const std::string& UName() const
+  {
+    return uname;
+  }
+  std::string& UName()
+  {
+    return uname;
+  }
 
  private:
   std::string name;
+  std::string uname;
 
   std::map<std::string, std::list<BenchmarkCase*>> children;
   std::map<std::string, BenchmarkSuite*> child_suits;

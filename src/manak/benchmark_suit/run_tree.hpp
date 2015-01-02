@@ -5,6 +5,8 @@
 #include <string>
 #include <list>
 #include <tuple>
+#include <iostream>
+#include <iomanip>
 
 #include "pmeasure.hpp"
 #include "benchmark_case.hpp"
@@ -23,28 +25,7 @@ struct RNode
 
   }
 
-  ~RNode()
-  {
-    for(auto it : nexts)
-    {
-      delete it.second;
-    }
-
-    for(auto it : results)
-    {
-      for(auto it2 : it.second)
-      {
-        std::string* name = (std::string*)it2.Get("name");
-        delete name;
-        double* tol = (double*)it2.Get("tolerance");
-        delete tol;
-        PMeasure* pm = (PMeasure*)it2.Get("pmeasure");
-        delete pm;
-        double* com = (double*)it2.Get("compare");
-        delete com;
-      }
-    }
-  }
+  ~RNode();
 
   bool AddNext(const std::string& name, RNode*& n);
 
@@ -60,7 +41,9 @@ struct RNode
   void PrintTXT(std::ostream& stream, size_t l_ids);
 
   void PrintHTML(std::ostream& stream,
-                 size_t l_ids);
+                 std::ostream& stream2,
+                 size_t l_ids,
+                 const std::map<std::string, size_t>& l_map);
 
   void SaveForComparison(std::ostream& stream, const std::string& uname);
 
@@ -84,7 +67,8 @@ class RunTree
     : root(new RNode(NULL)),
     current_node(root),
     total_nodes(0),
-    current_l_id(0)
+    current_l_id(0),
+    isComp(false)
   {
   }
 
@@ -131,6 +115,9 @@ class RunTree
 
   size_t total_nodes;
   size_t current_l_id;
+
+  bool isComp;
+  std::string compare_time;
 };
 
 }

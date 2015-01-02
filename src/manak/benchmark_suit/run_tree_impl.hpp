@@ -5,6 +5,29 @@ namespace manak
 /// RNode Implementations
 ///////////////////////////////////////////////////////////////////////////////
 
+RNode::~RNode()
+{
+  for(auto it : nexts)
+  {
+    delete it.second;
+  }
+
+  for(auto it : results)
+  {
+    for(auto it2 : it.second)
+    {
+      std::string* name = (std::string*)it2.Get("name");
+      delete name;
+      double* tol = (double*)it2.Get("tolerance");
+      delete tol;
+      PMeasure* pm = (PMeasure*)it2.Get("pmeasure");
+      delete pm;
+      double* com = (double*)it2.Get("compare");
+      delete com;
+    }
+  }
+}
+
 bool RNode::AddNext(const std::string& name, RNode*& n)
 {
   auto it = nexts.find(name);
@@ -169,11 +192,13 @@ void RNode::PrintTXT(std::ostream& stream, size_t l_ids)
 }
 
 void RNode::PrintHTML(std::ostream& stream,
-                      size_t l_ids)
+                      std::ostream& stream2,
+                      size_t l_ids,
+                      const std::map<std::string, size_t>& l_map)
 {
   for(auto it : nexts)
   {
-    it.second->PrintHTML(stream, l_ids);
+    it.second->PrintHTML(stream, stream2, l_ids, l_map);
   }
 
   if(children.size() != 0)
@@ -194,6 +219,82 @@ void RNode::PrintHTML(std::ostream& stream,
     {
       if(l.second.size() > num_entries)
         num_entries = l.second.size();
+    }
+
+    stream2 << "<h2>" << children.begin()->second->UName() << "</h2>" << std::endl;
+    stream2 << "<bold>Number of Libraries: </bold>" << l_ids - 1
+            << "<br>" << std::endl;
+    stream2 << "<bold>Libraries: </bold>";
+
+    bool temp = true;
+    for(auto it : results)
+    {
+      if(!temp)
+      {
+        stream2 << ", ";
+      }
+      else temp = false;
+
+      for(auto it2 : l_map)
+      {
+        if(it2.second == it.first)
+        {
+          stream2 << it2.first;
+        }
+      }
+    }
+    stream2 << "<br>" << std::endl;
+
+    for(auto lid : results)
+    {
+      std::string l_name = "";
+
+      for(auto it : l_map)
+        if(it.second == lid.first)
+          l_name = it.first;
+
+      stream2 << "<h3>" << l_name << "</h3>" << std::endl;
+
+      //! add table
+      stream2 << "<table style=\"width:100%\">" << std::endl;
+
+      stream2 << "<tr>" << std::endl;
+      stream2 << "<th>Subcase</th>" << std::endl;
+      stream2 << "<th>Result</th>" << std::endl;
+      stream2 << "<th>Min</th>" << std::endl;
+      stream2 << "<th>Max</th>" << std::endl;
+      stream2 << "<th>Tolerance</th>" << std::endl;
+      stream2 << "<th>Iterations</th>" << std::endl;
+      stream2 << "</tr>" << std::endl;
+
+      size_t p_index = 0;
+
+      for(auto res : lid.second)
+      {
+        utils::ObjectStore& os = res;
+
+        std::string name = *(std::string*)res["name"];
+        PMeasure pm = *(PMeasure*)res["pmeasure"];
+        double tol = *(double*)res["tolerance"];
+        size_t iter = *(size_t*)res["iterations"];
+
+        stream2 << "<tr>" << std::endl;
+        if(name != "")
+          stream2 << "<td>" << name << "</td>" << std::endl;
+        else
+          stream2 << "<td>Parameter Set " << p_index << "</td>" << std::endl;
+
+        stream2 << "<td>" << GetPMRep(os) << "</td>" << std::endl;
+        stream2 << "<td>" << pm.min << "</td>" << std::endl;
+        stream2 << "<td>" << pm.max << "</td>" << std::endl;
+        stream2 << "<td>" << tol << "</td>" << std::endl;
+        stream2 << "<td>" << iter << "</td>" << std::endl;
+        stream2 << "</tr>" << std::endl;
+
+        p_index++;
+      }
+
+      stream2 << "</table>" << std::endl;
     }
 
     if(num_entries > 1)
@@ -277,6 +378,8 @@ void RNode::PrintHTML(std::ostream& stream,
       }
       stream << "</tr>" << std::endl;
     }
+
+    stream2 << "<hr width=100% align=left>" << std::endl;
   }
 }
 
@@ -436,6 +539,10 @@ void RunTree::PrintTXT(std::ostream& stream)
 
 void RunTree::PrintHTML(std::ostream& stream)
 {
+  std::stringstream stream1;
+  std::stringstream stream2;
+  root->PrintHTML(stream1, stream2, l_map.size(), l_map);
+
   stream << "<!DOCTYPE html>" << std::endl;
 
   //! Open html
@@ -465,9 +572,7 @@ void RunTree::PrintHTML(std::ostream& stream)
                         text-align: left; \
                       }" << std::endl;
 
-  //! Detail report styles
-  stream << "case_title {font-weight: bold; font-size: 25px; }" << std::endl;
-  stream <<
+  stream << "bold {font-weight: bold; }" << std::endl;
 
   stream << "</style>" << std::endl;
 
@@ -497,6 +602,12 @@ void RunTree::PrintHTML(std::ostream& stream)
   stream << "<li><bold>Total Cases: </bold><info>"
          << total_nodes << "</info></li>" << std::endl;
 
+  if(isComp)
+  {
+    stream << "<li><bold>Timestamp of module added for comparison: "
+           << compare_time << "</bold></li>" << std::endl;
+  }
+
   //! close list
   stream << "</ul>" << std::endl;
 
@@ -523,9 +634,19 @@ void RunTree::PrintHTML(std::ostream& stream)
   }
   stream << "</tr>" << std::endl;
 
-  root->PrintHTML(stream, l_map.size());
+  stream << stream1.str() << std::endl;
 
   stream << "</table>" << std::endl;
+
+  stream << "<h2>Detailed Report</h2>" << std::endl;
+  stream << "<hr width=100% align=left>" << std::endl;
+
+  stream << stream2.str() << std::endl;
+
+  stream << "<footer>" << std::endl;
+  stream << "<p>Created by Manak:C++ Unit Benchmarking Library</p>" << std::endl;
+  stream << "</footer>" << std::endl;
+
 
   //! close body
   stream << "</body>" << std::endl;
@@ -545,6 +666,8 @@ void RunTree::SaveForComparison(std::ostream& stream)
 
 void RunTree::LoadForComparison(std::istream& stream)
 {
+  isComp = true;
+
   std::string temp;
 
   getline(stream, temp);
@@ -553,6 +676,7 @@ void RunTree::LoadForComparison(std::istream& stream)
 
   //! extract time
   getline(stream, temp);
+  compare_time = temp;
 
   //! get all the cases
   while(getline(stream, temp))

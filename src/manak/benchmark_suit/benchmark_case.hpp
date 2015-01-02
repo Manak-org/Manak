@@ -11,7 +11,6 @@
 #include <string>
 #include <functional>
 #include <stdint.h>
-//#include <inttypes.h>
 #include <limits>
 #include <fstream>
 #include <iostream>
@@ -25,7 +24,6 @@
 #include <manak/util/timer.hpp>
 #include <manak/util/macro_utils.hpp>
 #include <manak/util/template_utils.hpp>
-#include <manak/util/log.hpp>
 #include <manak/util/object_store.hpp>
 
 namespace manak
@@ -95,10 +93,19 @@ class BenchmarkCase
   {
     return library_name;
   }
+  const std::string& UName() const
+  {
+    return uname;
+  }
+  std::string& UName()
+  {
+    return uname;
+  }
 
 
  protected:
   std::string name;
+  std::string uname;
   std::string library_name;
   std::string desc;
   std::list<std::pair<std::string, std::function<void()>>> run_functions;
@@ -230,7 +237,7 @@ Code                                                                          \
 manak::Timer::StopTimer();
 
 #define Repeat(Code)                                                          \
-manak::Timer::Reinitialize();                                                 \
+manak::Timer::Initialize();                                                 \
 do                                                                            \
 {                                                                             \
   manak::Timer::StartIter();                                                  \

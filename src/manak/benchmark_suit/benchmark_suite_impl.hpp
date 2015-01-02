@@ -103,6 +103,8 @@ bool BenchmarkSuite::Find(const std::string& name, std::list<BenchmarkCase*>& lb
                           const std::string& pattern,
                           const bool compare)
 {
+  this->uname = uname + "/" + name;
+
   RunTree::GlobalRunTree().AddSuite(name);
 
   std::regex r1(pattern);
@@ -116,12 +118,10 @@ bool BenchmarkSuite::Find(const std::string& name, std::list<BenchmarkCase*>& lb
 
     if((pattern == "") || std::regex_match(match_string, r1))
     {
-      utils::CaseLogEntry& cle = utils::Log::GetLog().Add(cases.first, uname + "/" + cases.first);
-
       for(auto c : cases.second)
       {
+        c->UName() = uname + "/" + cases.first;
         RunTree::GlobalRunTree().AddCase(c);
-        //c->Run(cle, compare);
       }
     }
   }

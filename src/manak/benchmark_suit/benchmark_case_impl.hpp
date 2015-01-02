@@ -9,6 +9,7 @@ std::list<utils::ObjectStore> BenchmarkCase::Run()
 
   os.Insert("Timer_CurrentTolerance", &tolerance, "Current_Run");
   os.Insert("Timer_CurrentResultList", &out, "Current_Run");
+  os.Insert("Timer_CurrentIterations", &iterations, "Current_Run");
 
   for(auto run_function : run_functions)
   {
@@ -21,7 +22,7 @@ std::list<utils::ObjectStore> BenchmarkCase::Run()
 
     os["Timer_CurrentSubName"] = &run_function.first;
 
-    Timer::Initialize(iterations);
+    Timer::Initialize();
     auto& fun = run_function.second;
     do
     {

@@ -13,7 +13,6 @@
 #include <vector>
 
 #include <manak/benchmark_suit/pmeasure.hpp>
-#include <manak/util/log.hpp>
 #include <manak/util/object_store.hpp>
 
 #if defined(__unix__) || defined(__unix)
@@ -138,22 +137,24 @@ class Timer
   }
 
   //! Initialize a new Timer instance
-  static void Initialize(size_t iter)
+  static void Initialize()
   {
+    size_t iter = 0;
+
+    utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
+
+    if(os.Get("Timer_CurrentSubIterations") != NULL)
+    {
+      size_t* temp = (size_t*)os.RGet("Timer_CurrentSubIterations");
+      iter = *temp;
+      delete temp;
+    }
+    else iter = *(size_t*)os.Get("Timer_CurrentIterations");
+
     TotalTime() = 0;
     Min() = std::numeric_limits<uint64_t>::max();
     Max() = std::numeric_limits<uint64_t>::min();
     Iterations() = iter;
-    CIter() = Iterations();
-    StateInit() = true;
-  }
-
-  //! Re initialize the current timer instance
-  static void Reinitialize()
-  {
-    TotalTime() = 0;
-    Min() = std::numeric_limits<uint64_t>::max();
-    Max() = std::numeric_limits<uint64_t>::min();
     CIter() = Iterations();
     StateInit() = true;
   }
@@ -185,6 +186,7 @@ class Timer
       os["tolerance"] = new double(tolerance);
       os["pmeasure"] = new PMeasure(pm);
       os["compare"] = new double(-1);
+      os["iterations"] = new size_t(Iterations());
 
       re.emplace_back(os);
     }
