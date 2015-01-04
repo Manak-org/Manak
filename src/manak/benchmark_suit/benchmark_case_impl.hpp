@@ -44,6 +44,14 @@ std::list<utils::ObjectStore> BenchmarkCase::Run()
 
   os.EraseGroup("Current_Run");
 
+  double* t_tol = (double*)os.Get("Timer_CurrentSubTolerance");
+  if(t_tol != NULL)
+    delete t_tol;
+
+  size_t* t_iter = (size_t*)os.Get("Timer_CurrentSubIterations");
+  if(t_iter != NULL)
+    delete t_iter;
+
   return out;
 }
 
