@@ -260,7 +260,6 @@ if(X != 0)                                                                    \
 #define SetTol(X)                                                             \
 if((size_t*)manak::utils::ObjectStore::GetGlobalObjectStore().Get("Timer_CurrentSubTolerance") != NULL) \
   delete (double*)manak::utils::ObjectStore::GetGlobalObjectStore().Get("Timer_CurrentSubTolerance");                                                              \
-manak::utils::ObjectStore::GetGlobalObjectStore().Insert("Timer_CurrentSubTolerance", new double(X)); \
-
+manak::utils::ObjectStore::GetGlobalObjectStore().Insert("Timer_CurrentSubTolerance", new double(X));
 
 #endif // MANAK_BENCHMARK_CASE_HPP_INCLUDED
