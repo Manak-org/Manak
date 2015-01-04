@@ -237,7 +237,7 @@ Code                                                                          \
 manak::Timer::StopTimer();
 
 #define Repeat(Code)                                                          \
-manak::Timer::Initialize();                                                 \
+manak::Timer::Initialize();                                                   \
 do                                                                            \
 {                                                                             \
   manak::Timer::StartIter();                                                  \
@@ -249,5 +249,15 @@ do                                                                            \
 }while(manak::Timer::EndIter());                                              \
 manak::Timer::Deinitialize();
 
+#define SetIter(X)                                                            \
+if(X != 0)                                                                    \
+{                                                                             \
+  size_t* t_iter = new size_t(X);                                             \
+  manak::utils::ObjectStore::GetGlobalObjectStore().Insert("Timer_CurrentSubIterations", t_iter); \
+}
+
+#define SetTol(X)                                                             \
+double* t_tol = new double(X);                                                \
+manak::utils::ObjectStore::GetGlobalObjectStore().Insert("Timer_CurrentSubTolerance", t_tol);
 
 #endif // MANAK_BENCHMARK_CASE_HPP_INCLUDED
