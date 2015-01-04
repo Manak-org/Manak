@@ -24,6 +24,8 @@ RNode::~RNode()
       delete pm;
       double* com = (double*)it2.Get("compare");
       delete com;
+      size_t* iter = (size_t*)it2.Get("iterations");
+      delete iter;
     }
   }
 }

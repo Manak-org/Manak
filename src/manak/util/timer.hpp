@@ -179,7 +179,20 @@ class Timer
 
       PMeasure pm = GetStats();
 
-      double tolerance = *(double*)os.Get("Timer_CurrentTolerance");
+      double tolerance = 0;
+
+      double* t_tol;
+      if((t_tol = (double*)os.Get("Timer_CurrentSubTolerance")) == NULL)
+      {
+        t_tol = (double*)os.Get("Timer_CurrentTolerance");
+        tolerance = *t_tol;
+      }
+      else
+      {
+        tolerance = *t_tol;
+        os.RGet("Timer_CurrentSubTolerance");
+        delete t_tol;
+      }
 
       utils::ObjectStore os;
       os["name"] = new std::string(sub_name);
