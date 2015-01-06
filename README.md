@@ -4,11 +4,12 @@
 
 Manak unit benchmarking library provides both easy to use and flexible solution
 to the problem of benchmarking. Unit benchmarking comes handy for projects 
-with continuous integration. With manak you can save the benchmarks of your
+with continuous integration. With Manak you can save the benchmarks of your
 current implementation and compare them against the later ones. You can also 
 benchmark your library against any other library. Manak offers a hierarchical 
 structure similar to BOOST Unit Testing and generates a easy to read output file.
-Manak is header only library and highly uses c++11 features. 
+Manak supports HTML log generation along with txt logs. Manak is header only 
+library and highly uses c++11 features. 
 
 ###Check out [Documentation](http://sumedhghaisas.github.io/Manak/) for tutorials on Manak C++ Benchmarking.
 
@@ -44,11 +45,11 @@ MANAK_AUTO_BENCHMARK_CASE(ForLoops)
 }
 ```
 This will create a benchmark case with name 'ForLoops' which will time the 
-fo loop given inside. The default iterations are 10. Run the genrated executable 
+for loop given inside. The default iterations are 10. Run the genrated executable 
 by passing '-h' for more options.   
 
-The ouput will be written to file 'benchmark_stat.txt'.Here the function code 
-inside the auo case will be timed. For More time sensetive code you can use 
+The ouput will be written to file 'benchmark_stat.html'.Here the function code 
+inside the auto case will be timed. For More time sensetive code you can use 
 'Measure' macro. For example -  
 
 ```cpp
@@ -73,7 +74,8 @@ MANAK_AUTO_BENCHMARK_CASE(ForLoops)
 ```
 
 This usage will only measure the code inside the measure block. There can be 
-more that one measure blocks.
+more that one measure blocks. For more time related options check out the 
+complete guide.
 
 To add already existing function to benchmarking -
 
@@ -186,5 +188,7 @@ list<tuple<int, int>> get_args()
 MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs(get_args));
 ```
 
-The genrated timing can be saved and added for comparison for later runs. For
+Check out the complete guide for more template related options.
+
+The genrated timings can be saved and added for comparison for later runs. For
 more options check out the Complete Guide.
