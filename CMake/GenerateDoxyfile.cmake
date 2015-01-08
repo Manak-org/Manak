@@ -3,8 +3,8 @@
 # it will generate the documentation into the build directory.
 
 # set version information
-set(MANAK_MAJOR_VERSION "0")
-set(MANAK_MINOR_VERSION "0")
+set(MANAK_MAJOR_VERSION "1")
+set(MANAK_MINOR_VERSION "1")
 set(MANAK_PATCH_VERSION "0")
 set(MANAK_VERSION_NAME "Master")
 

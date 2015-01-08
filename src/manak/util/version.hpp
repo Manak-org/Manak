@@ -12,10 +12,10 @@
 #include <sstream>
 
 //! Declare version
-#define __MANAK_VERSION_MAJOR 0
-#define __MANAK_VERSION_MINOR 0
+#define __MANAK_VERSION_MAJOR 1
+#define __MANAK_VERSION_MINOR 1
 #define __MANAK_VERSION_PATCH 0
-#define __MANAK_VERSION_NAME "master"
+#define __MANAK_VERSION_NAME "Master"
 
 namespace manak
 {

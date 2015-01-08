@@ -11,7 +11,7 @@ structure similar to BOOST Unit Testing and generates a easy to read output file
 Manak supports HTML log generation along with txt logs. Manak is header only 
 library and highly uses c++11 features. 
 
-###Check out [Documentation](http://sumedhghaisas.github.io/Manak/) for tutorials on Manak C++ Benchmarking.
+###Check out [Documentation](http://Manak-org.github.io/Manak/) for tutorials on Manak C++ Benchmarking.
 
 ##How To Install
 
