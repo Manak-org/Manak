@@ -7,16 +7,15 @@ uses. When manak.hpp is included in the project it also included the master
 benchmarking suit which registers all the benchmarking cases. This master suit 
 is a special case of a benchmarking suit which may have more test suits or 
 cases as its children. On the other hand benchmarking case is a leaf node in 
-this tree(or so we assume util template benchmarks come into picture).
-Each benchmark case is charectorized by a function which is ultimately timed. 
-This hierarchical structure helps us to run specific benchmarks. Now that we know
-the hierarchical structure we can introduce the concept of library into this
-picture. Libaries in MANAK are considered groups of benchmarking cases that are 
-compared against each other. So now we can say that a benchmark case is 
-characterized by function and a library. The benchmark cases having same name 
-and different library are compared against each other in the output. Remember 
-benchmarking suits maintain their own namespace so benchmarking cases having 
-same name and different suit won't be compared. 
+this tree(or so we assume until template benchmarks come into picture).
+Each benchmark case is charectorized by a unique name. This name contains the 
+path to this case from the root. This hierarchical structure helps us to run 
+specific benchmarks. Now that we know the hierarchical structure we can introduce 
+the concept of library into this picture. Libaries in MANAK are considered groups 
+of benchmarking cases that are compared against each other. So now we can say 
+that a benchmark case is characterized by name and a library. The benchmark cases 
+having same name and different library are compared against each other in the 
+output. Check out @ref mhierarchy for more details on the MANAK hierarchy.
 
 So now we can start benchmarking. The benchmark cases and suits in Manak
 can be registred either manually or automatically. But in this quick guide we 
@@ -29,6 +28,31 @@ number of iterations and the average of all iterations is taken as the final
 result. When number of iterations is not given the default is used(Which is 10
 if not set otherwise). The default can be changed by setting 
 'MANAK_DEFAULT_ITERATIONS' to the desired value.
+
+MANAK can generate ouput in 2 different formats, HTML and TXT. A simple HTML 
+output looks like this - <a href="samples/qg_intro_sec_1.html">Sample HTML ouput</a>.
+The equivalent TXT log -
+
+@code
+######################################################################
+#  Manak C++ Benchmarking Library                                    #
+#  Version 0.0.0                                                     #
+#  Created at Jan  7 15:47:09 2015                                   #
+######################################################################
+
+       Case Name              lib1                lib2                
+Test                          5(3.1)              0.9(0.4)            
+
+Test2
+                              0.7(0.4)            ---                 
+                              4.9(0.4)            ---
+@endcode
+
+The values in bracket for both HTML and TXT output are values added for comprison.
+For more information on comparison framework check @comp. Manak by default 
+generates HTML output but user can force Manak to generate TXT output with -f 
+option(also stands for format :P). Passing argument '-f TXT' will force MANAK 
+to generate TXT output.
 
 MANAK offers 2 benchmarking modules. For more information on benchmarking modules
 check out @ref set_env_smt.
@@ -66,9 +90,12 @@ MANAK_AUTO_BENCHMARK_CASE(ForLoops)
 @endcode
 
 Thats it! This will automatically registers the case in master suit and the 
-MANAK_AUTO_BENCHMARK_MAIN define will generate the main for you. Manak uses C++11
-features so don't forget to add option '-std=c++11' to g++ or clang. By default 
-the output will be saved to file 'benchmark_stat.txt' and will look like -
+MANAK_AUTO_BENCHMARK_MAIN will generate the main for you. Manak uses C++11
+features so don't forget compile the code with C++11 support. By default 
+the output will be saved to file 'benchmark_stat.html' and will look like -
+<a href="samples/qg_intro_sec_2.html">Sample HTML ouput</a>
+
+TXT output for above code -
 
 @code
 ######################################################################
@@ -82,13 +109,13 @@ the output will be saved to file 'benchmark_stat.txt' and will look like -
 ForLoops                      3.3  
 @endcode
 
-To change the default output file set 'MANAK_DEFAULT_OUT_FILENAME' to desired 
+To change the default output file, set 'MANAK_DEFAULT_OUT_FILENAME' to desired 
 value. Check out @ref set_env_soof for more options. While running the benchmark 
-case all the ouput to standard output will be redirected by default to the file 
-'benchmark_log.txt'. To chnage the default set 'MANAK_REDIRECTION_FILENAME' to 
+case all the ouput to the standard output will be redirected by default to the 
+file 'benchmark_log.txt'. To chnage the default, set 'MANAK_REDIRECTION_FILENAME' to 
 desired value. For more options about redirection check @ref set_env_sro.
 
-If you want to generate the main for yourselves check @ref set_env_mcmf
+If you want to generate the main for yourselves check @ref set_env_mcmf.
 
 Sometimes the code to be measured requires another code to be executed before or 
 after, sort of like set up and tear down. To measure such a code 'Measure' macro
@@ -122,6 +149,13 @@ MANAK_AUTO_BENCHMARK_CASE(B1)
     Code to be measured;
   )
   
+  Code;
+  
+  Measure
+  (
+    Another code to be measured;
+  )
+  
   Tear down;
 }
 @endcode
@@ -151,7 +185,7 @@ MANAK_ADD_BENCHMARK(MANAK_BENCHMARK_CASE(B1, fun));
 Remember 'Measure' block can also be used inside manually generated functions.
 
 @subsection qg_pbc Parametrized Benchmark Cases
-Functions with parameters can be used as template benchmark function.
+Functions with parameters can be used as templated benchmarks.
 For example - 
 
 @code
@@ -277,15 +311,7 @@ extra parameter.
 MANAK_AUTO_BENCHMARK_CASE_I(B1, lib1, 10)
 {
   Code;
-}######################################################################
-#  Manak C++ Benchmarking Library                                    #
-#  Version master.0.0                                                #
-#  Created at Nov 13 22:41:53 2014                                   #
-######################################################################
-
-       Case Name              base_library        
-
-ForLoop                       3.2[3:4]            
+}
 
 int fun()
 {}
@@ -335,7 +361,10 @@ MANAK_AUTO_BENCHMARK_CASE(ForLoops, lib2)
 }
 @endcode
 
-The output will look like -
+The HTML output will look like - <a href="samples/qg_intro_sec_3.html">Sample HTML ouput</a>
+
+And TXT output - 
+
 
 @code
 ######################################################################
@@ -350,18 +379,18 @@ ForLoops                      3.4                 31.8
 @endcode
 
 Manak also offers saving these results for comparison. This comparison type is 
-available for both simple and normal Pass argument '-s <filename>'
-to executable for saving the results for comparison. This specially saved file 
+available for both simple and normal modules. Pass argument '-s <filename>'
+to the executable for saving the results. This specially saved file 
 can be loaded for comparison with command line arguments '-c <filename>'. Let us 
-assume 'bench' is the executable name then -
+assume 'bench' is the executable name, then -
 
 @code
 bench -s saved.txt
 bench -c saved.txt
 @endcode
 
-The output of the second run will be saved to 'benchmark_stat.txt'.
-The output will sort of look like - 
+The output of the second run will be saved to 'benchmark_stat.html'.
+The output will look like - <a href="samples/qg_intro_sec_4.html">Sample HTML ouput</a>
 
 @code
 ######################################################################
@@ -376,11 +405,12 @@ ForLoops                      +42.4(3.2)          -0.1(31.6)
 @endcode
 
 The values in bracket are the values loaded for comparison. Loaded values are 
-also compared with the current values with tolerance. The result of the comparison
+compared with the current values with tolerance. The result of the comparison
 is shown with a sign in front of the current value. No sign will imply equivalent 
 runs. The default tolerance is 10 which can be changed by setting 
 'MANAK_DEFAULT_TOLERANCE' to desired value. Also tolerance for each test can be 
-set by using 'MANAK_AUTO_BENCHMARK_CASE_T'
+set by using 'MANAK_AUTO_BENCHMARK_CASE_T' macro. For more available macros 
+check @auto_reg.
 
 @code
 MANAK_AUTO_BENCHMARK_CASE_T(ForLoops, lib1, 50)
@@ -401,7 +431,7 @@ matching the regex will run.
 How to write a regex:
  - To access the child of any suite "/" token can be used. 
  - If an entire suite matches the regex, all the children of that suite will run.
- - All type of regex expressions are supported between "/" tokens.
+ - Manak uses c++11 regex expressions.
  
 Example -
 To run a suite named 'B1' under master suite 
@@ -420,5 +450,7 @@ To run all children of suite B1(child of master) starting with "Bench"
 @code
 bench -r B1/Bench.*
 @endcode
+
+For more information on regex expressions check ...
 
 */

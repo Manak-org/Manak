@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Benchmarking log for module 'bench'</title>
+<style>
+li bold {font-weight: bold; font-size: 25px; }
+li info {font-size: 25px; }
+table, th, td { border: 1px solid black;                                border-collapse: collapse;                              }                th, td {                         padding: 5px;                         text-align: left;                       }
+bold {font-weight: bold; }
+</style>
+</head>
+<body>
+<h1 style="text-align:center"> Benchmarking Log for Module 'bench'</h1>
+<br>
+<ul>
+<li><bold>Module: </bold><info>bench</info></li>
+<li><bold>Timestamp: </bold><info>Jan  7 16:50:35 2015</info></li>
+<li><bold>Total Cases: </bold><info>1</info></li>
+<li><bold>Timestamp of module added for comparison: Jan  7 16:50:32 2015</bold></li>
+</ul>
+<br>
+<table style="width:100%">
+<tr>
+<th>Benchmark Name</th>
+<th></th>
+                <th>lib1</th>
+                <th>lib2</th>
+</tr>
+<tr>
+<td>ForLoops</td>
+<td></td>
+<td>3.5(2)</td>
+<td>+34.9(18.2)</td>
+</tr>
+
+</table>
+<h2>Detailed Report</h2>
+<hr width=100% align=left>
+<h2>/ForLoops</h2>
+<bold>Number of Libraries: </bold>1<br>
+<bold>Libraries: </bold>lib1, lib2<br>
+<h3>lib1</h3>
+<table style="width:100%">
+<tr>
+<th>Subcase</th>
+<th>Result</th>
+<th>Min</th>
+<th>Max</th>
+<th>Tolerance</th>
+<th>Iterations</th>
+</tr>
+<tr>
+<td>Parameter Set 0</td>
+<td>3.5(2)</td>
+<td>3</td>
+<td>4</td>
+<td>10</td>
+<td>10</td>
+</tr>
+</table>
+<h3>lib2</h3>
+<table style="width:100%">
+<tr>
+<th>Subcase</th>
+<th>Result</th>
+<th>Min</th>
+<th>Max</th>
+<th>Tolerance</th>
+<th>Iterations</th>
+</tr>
+<tr>
+<td>Parameter Set 0</td>
+<td>+34.9(18.2)</td>
+<td>34</td>
+<td>36</td>
+<td>10</td>
+<td>10</td>
+</tr>
+</table>
+<hr width=100% align=left>
+
+<footer>
+<p>Created by Manak:C++ Unit Benchmarking Library</p>
+</footer>
+</body>
+</html>

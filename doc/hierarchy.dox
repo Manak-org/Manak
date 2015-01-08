@@ -1,0 +1,62 @@
+/*! @page mhierarchy MANAK Hierarchical Structure
+
+MANAK hierarchical structure - 
+
+      Master Suite
+            |
+            |
+     Benchmark Suite
+            |
+            |
+      Benchmark Case
+            |
+            |
+    Sub-Benchmark Case
+    
+@section hierarchy_master Master Suite
+
+When you include manak.hpp, it also adds a master suite to the program. Master 
+suite is ancestor of all benchmark suites and cases. Main function of MANAK
+always runs this master suite which eventually runs the cases. Check out 
+@ref set_env_smft for more information on main functions.
+
+@section hierarchy_suite Benchmark Suite
+
+Benchmark Suite is a collection of benchmark suites and cases which can be 
+accessed by a unique name. For example,
+
+      Master Suite
+            |
+            |
+         Suite1
+         |    |
+         |    |
+       Suite2 |
+              |
+            Case1
+            
+Here, Suite1 is a direct child of master suite having name /Suite1. Suite2 will
+have name /Suite1/Suite2. Specific benchmarking suites can be run with regular
+expression support provided by MANAK. Check out @ref qg_rsc for regular expression 
+support.
+
+@section hierarchy_case Benchmark Case
+
+Like benchmark suites, benchmarking cases in MANAK are also accessed by unique 
+hierarchical names. MANAK also supports running specific case with regular 
+expressions(see @ref qg_rsc). Benchmark is not associated to any function to run,
+it simply contains sub-benchmark cases which holds the actual code to be 
+benchmarked.
+
+@section hierarchy_sub Sub-Benchmark Case
+
+Sub-Benchmark case may be the smallest unit in this hierarchy but it is the most
+important and complex. There can be any number of sub-benchmark cases in a 
+benchmark case and they are identified with index rather than a name(although a 
+name can be assigned). Index is provided based on the chronological order. So 
+when benchmark cases are compared against each other(see @ref comp if you don't
+know when they are compared), sub-benchmark cases are compared against each other.
+The benchmark cases in comparison can have different number of sub-benchmark cases.
+For example - look at this <a href="samples/comp_1.html">Sample HTML ouput</a>.
+
+*/

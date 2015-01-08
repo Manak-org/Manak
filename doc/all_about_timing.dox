@@ -10,7 +10,7 @@ MANAK_AUTO_BENCHMARK_CASE(B1)
 @endcode
 
 In this case the entire function call will be timed. Sometimes the Code to 
-measure is more time sensetive. The measue code may require some other code for
+measure is more time sensetive. The code to measue may require some other code for
 setup or tear down. For this Manak provides 'Measure' macro.
 
 @code
@@ -42,8 +42,8 @@ All the benchmarks cases run for certain number of iterations and the final time
 is taken as the average of all the iterations. If number of iterations are not 
 specified for any benchmark case default is used(which is 10). Check out 
 @ref set_env_mdi for setting default number of iterations. Sometimes the setup
-code or the tear down is very expensive in terms of time and is only required 
-to be executed once. Even with 'Measure' blocks, setup and teardown code is 
+code or the tear down is very expensive in terms of time and is required 
+to be executed only once. Even with 'Measure' blocks, setup and teardown code is 
 executed every iteration. This problem can be solved with 'Repeat' macro.
 
 @code

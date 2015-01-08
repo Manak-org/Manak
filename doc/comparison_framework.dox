@@ -24,7 +24,7 @@ MANAK_AUTO_BENCHMARK_CASE(B1)
 }
 @endcode
 
-Save the results of this benchmark in 'bench1.txt'.
+Save the results of this benchmark in 'bench1.txt' for comparison.
 
 @code 
 g++ -std=c++11 <name>.cpp
@@ -54,7 +54,9 @@ g++ -std=c++11 <name>.cpp
 ./a.out -c bench1.txt
 @endcode
 
-The output of this procedure will look like - 
+The output of this procedure will look like <a href="samples/comp_1.html">Sample HTML ouput</a>
+
+The sample TXT output is - 
 
 @code
 ######################################################################
@@ -67,6 +69,9 @@ The output of this procedure will look like -
 
 B1                            +34(3.7) 
 @endcode
+
+MANAK by default generates HTML output. Check out @ref out_format for more 
+information on output formats.
 
 The value in the bracket is the old benchmarked value which was saved in 
 'bench1.txt'. The '+' sign in front of the entry suggests that 
@@ -105,7 +110,7 @@ MANAK_AUTO_BENCHMARK_CASE(B2)
 }
 @endcode
 
-In this case the output will look like - 
+In this case the output(TXT... HTML output will be similar) will look like - 
 
 @code
 ######################################################################
@@ -147,7 +152,7 @@ MANAK_AUTO_BENCHMARK_CASE(B2)
 }
 @endcode
 
-The output will be - 
+The output(TXT) will be - 
 
 @code
 ######################################################################
@@ -195,7 +200,7 @@ MANAK_AUTO_BENCHMARK_CASE(B2, lib2)
 }
 @endcode
 
-The output of this code will be - 
+The output(TXT) of this code will be - 
 
 @code
 ######################################################################
@@ -242,7 +247,7 @@ MANAK_AUTO_BENCHMARK_CASE(B2, lib2)
 }
 @endcode
 
-And the output - 
+And the output(TXT) - 
 
 @code
 ######################################################################
