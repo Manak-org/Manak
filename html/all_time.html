@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">0.0.0</span>
    </div>
   </td>
  </tr>
@@ -68,7 +68,7 @@ $(document).ready(function(){initNavTree('all_time.html','');});
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>In this case the entire function call will be timed. Sometimes the Code to measure is more time sensetive. The measue code may require some other code for setup or tear down. For this Manak provides 'Measure' macro.</p>
+</div><!-- fragment --><p>In this case the entire function call will be timed. Sometimes the Code to measure is more time sensetive. The code to measue may require some other code for setup or tear down. For this Manak provides 'Measure' macro.</p>
 <div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1)</div>
 <div class="line">{</div>
 <div class="line">  SetUp Code;</div>
@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('all_time.html','');});
 <div class="line">  TearDown Code;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>In this case only the code inside Measure blocks will be timed. There can be any number of 'Measure' blocks inside a benchmark case. The time of all the 'Measure' blocks will be sumed.</p>
-<p>All the benchmarks cases run for certain number of iterations and the final time is taken as the average of all the iterations. If number of iterations are not specified for any benchmark case default is used(which is 10). Check out <a class="el" href="set_env.html#set_env_mdi">MANAK_DEFAULT_ITERATIONS</a> for setting default number of iterations. Sometimes the setup code or the tear down is very expensive in terms of time and is only required to be executed once. Even with 'Measure' blocks, setup and teardown code is executed every iteration. This problem can be solved with 'Repeat' macro.</p>
+<p>All the benchmarks cases run for certain number of iterations and the final time is taken as the average of all the iterations. If number of iterations are not specified for any benchmark case default is used(which is 10). Check out <a class="el" href="set_env.html#set_env_mdi">MANAK_DEFAULT_ITERATIONS</a> for setting default number of iterations. Sometimes the setup code or the tear down is very expensive in terms of time and is required to be executed only once. Even with 'Measure' blocks, setup and teardown code is executed every iteration. This problem can be solved with 'Repeat' macro.</p>
 <div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1)</div>
 <div class="line">{</div>
 <div class="line">  SetUp Code;</div>
@@ -109,7 +109,8 @@ $(document).ready(function(){initNavTree('all_time.html','');});
 <div class="line">  )</div>
 <div class="line">  TearDown Code;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>With 'Repeat' block, only the code inside the 'Repeat' block is executed for number of iterations. Any code outside of 'Repeat' block will not be timed, even 'Measure' blocks. If there are multiple 'Repeat' blocks the only the last 'Repeat' block will be timed.</p>
+</div><!-- fragment --><p>With 'Repeat' block, only the code inside the 'Repeat' block is executed for number of iterations. Any code outside of 'Repeat' block will not be timed, even 'Measure' blocks.</p>
+<p>There can be multiple 'Repeat' blocks inside a case, in such a case each 'Repeat' block will be timed separately and added as a sub-benchmark case. For more information on multiple 'Repeat' blocks see <a class="el" href="p_bench.html#p_bench_mr">Templatized Benchmarking with Multiple 'Repeat' blocks.</a></p>
 <p>'Measure' and 'Repeat' blocks can also be used in manually added benchmark cases. For example -</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b)</div>
 <div class="line">{</div>
@@ -130,7 +131,7 @@ $(document).ready(function(){initNavTree('all_time.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Nov 15 2014 05:14:29 for Manak by
+    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

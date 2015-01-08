@@ -10,8 +10,9 @@ var template__utils_8hpp =
     [ "BindToObject", "template__utils_8hpp.html#a5ba41c847942b13036eeb56853d685c6", null ],
     [ "BindToObject2", "template__utils_8hpp.html#af56d296ce7446f934b6b3196b0eceb09", null ],
     [ "BindToObject2", "template__utils_8hpp.html#a2abf8d0742f5154b175c21361f3230af", null ],
-    [ "Caller", "template__utils_8hpp.html#a63269567bfc47d7ec87fbbfe80b73c2e", null ],
-    [ "Caller", "template__utils_8hpp.html#a951074493ed6dafd96e1d6ee238d056d", null ],
+    [ "Caller", "template__utils_8hpp.html#a1349ad2e9f57a117e3e8ad41ea72ce49", null ],
+    [ "Caller", "template__utils_8hpp.html#ab00dc0b7740e8e7d6d4be2b957f3ccfe", null ],
     [ "Caller_2", "template__utils_8hpp.html#a922a803ec5fd37b5fc709d4795f6f388", null ],
+    [ "Caller_3", "template__utils_8hpp.html#a61c6fe083ae2e7b032762b476d93bca7", null ],
     [ "Combine", "template__utils_8hpp.html#a76d59562921b729fe7c2cc72349b09d1", null ]
 ];

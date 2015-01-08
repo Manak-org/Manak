@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">0.0.0</span>
    </div>
   </td>
  </tr>
@@ -76,6 +76,7 @@
       <li><a href="#index_r"><span>r</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
       <li><a href="#index_t"><span>t</span></a></li>
+      <li><a href="#index_u"><span>u</span></a></li>
       <li class="current"><a href="#index_~"><span>~</span></a></li>
     </ul>
   </div>
@@ -98,10 +99,6 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 &#160;
 
 <h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
-<li>Add()
-: <a class="el" href="structmanak_1_1utils_1_1CaseLogEntry.html#a20bbf5a2c863ec0c65159d3ea4587252">manak::utils::CaseLogEntry</a>
-, <a class="el" href="classmanak_1_1utils_1_1Log.html#ae908e125aebf534b07c757147d77c977">manak::utils::Log</a>
-</li>
 <li>AddArgs()
 : <a class="el" href="classmanak_1_1T__Benchmark__Case.html#a24b84486c5db32a8f53bf9b46974bfd9">manak::T_Benchmark_Case&lt; RType, Args &gt;</a>
 </li>
@@ -110,26 +107,31 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </li>
 <li>AddCase()
 : <a class="el" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">manak::BenchmarkSuite</a>
+, <a class="el" href="structmanak_1_1RNode.html#a9cd22af32e4430297c5b4b915c81f118">manak::RNode</a>
+, <a class="el" href="classmanak_1_1RunTree.html#a6b4f728b181fccfc16a6a8a8174b16be">manak::RunTree</a>
 </li>
 <li>AddComparisonEntry()
 : <a class="el" href="classmanak_1_1BenchmarkCase.html#a40f3ba406d9cb58f43cee6d98181fe54">manak::BenchmarkCase</a>
 </li>
 <li>AddCustomArgs()
-: <a class="el" href="classmanak_1_1T__Benchmark__Case.html#aa4832e8a6c93670938161c7de40d75b2">manak::T_Benchmark_Case&lt; RType, Args &gt;</a>
+: <a class="el" href="classmanak_1_1T__Benchmark__Case.html#aba2fc9ba716d76989ce01969f57c3429">manak::T_Benchmark_Case&lt; RType, Args &gt;</a>
 </li>
-<li>AddLibrary()
-: <a class="el" href="classmanak_1_1benchmark__suit_1_1BaseLibrary.html#a9d1686656d60b28ee1f6fbbc98e90587">manak::benchmark_suit::BaseLibrary</a>
-, <a class="el" href="classmanak_1_1utils_1_1Log.html#a592a3637987770e3be558361aaa1d983">manak::utils::Log</a>
+<li>AddCustomArgs_N()
+: <a class="el" href="classmanak_1_1T__Benchmark__Case.html#a123bee013b8521fec5f70b94fb469502">manak::T_Benchmark_Case&lt; RType, Args &gt;</a>
+</li>
+<li>AddNext()
+: <a class="el" href="structmanak_1_1RNode.html#a2fcc502e34d3f403c2bb78748a4997f8">manak::RNode</a>
 </li>
 <li>AddSuite()
 : <a class="el" href="classmanak_1_1BenchmarkSuite.html#a62ca596fa52af0e6684371d74c85668d">manak::BenchmarkSuite</a>
+, <a class="el" href="classmanak_1_1RunTree.html#a3ff2671e610a27156e8f2fab5145a1c1">manak::RunTree</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_b"></a>- b -</h3><ul>
 <li>BenchmarkCase()
-: <a class="el" href="classmanak_1_1BenchmarkCase.html#a76897392793f8e19986fea378c179975">manak::BenchmarkCase</a>
+: <a class="el" href="classmanak_1_1BenchmarkCase.html#af2328ef8249a31eb10af0fd884103b54">manak::BenchmarkCase</a>
 </li>
 <li>BenchmarkSuite()
 : <a class="el" href="classmanak_1_1BenchmarkSuite.html#a2b0450f3f5b4fa1a9ef8dc549aca5227">manak::BenchmarkSuite</a>
@@ -138,11 +140,11 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 
 
 <h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
-<li>CaseLogEntry()
-: <a class="el" href="structmanak_1_1utils_1_1CaseLogEntry.html#ab88660a5cba2c28abc6167778970c36b">manak::utils::CaseLogEntry</a>
-</li>
 <li>CIter()
 : <a class="el" href="classmanak_1_1Timer.html#a2d46ce5c7fa9f2ab4e9a7d9e3159f40e">manak::Timer</a>
+</li>
+<li>CloseSuite()
+: <a class="el" href="classmanak_1_1RunTree.html#a8c97503444efda6686a4048399b4c313">manak::RunTree</a>
 </li>
 <li>cmdOptionExists()
 : <a class="el" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI</a>
@@ -157,6 +159,9 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 
 
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>Deinitialize()
+: <a class="el" href="classmanak_1_1Timer.html#acaac91b0c96b110ff64a9074782e8c51">manak::Timer</a>
+</li>
 <li>DeRegisterBenchmarkSuite()
 : <a class="el" href="classmanak_1_1DeRegisterBenchmarkSuite.html#aa91d748637a324ae6e6774caa4046348">manak::DeRegisterBenchmarkSuite</a>
 </li>
@@ -166,6 +171,12 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
 <li>EndIter()
 : <a class="el" href="classmanak_1_1Timer.html#a564ebe1a1344b6de1ec40ca55b03c78c">manak::Timer</a>
+</li>
+<li>Erase()
+: <a class="el" href="classmanak_1_1utils_1_1ObjectStore.html#abfbd3eb6b7080a7915d7489de7efa7f7">manak::utils::ObjectStore</a>
+</li>
+<li>EraseGroup()
+: <a class="el" href="classmanak_1_1utils_1_1ObjectStore.html#aa9202f8f4757f6a0e87fd885cb114199">manak::utils::ObjectStore</a>
 </li>
 </ul>
 
@@ -178,20 +189,23 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 
 
 <h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
+<li>Get()
+: <a class="el" href="classmanak_1_1utils_1_1ObjectStore.html#a184b583e191ba7bddc158fde7246c23f">manak::utils::ObjectStore</a>
+</li>
 <li>getCmdOption()
 : <a class="el" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a578f1007dd0bbe17a2e84993189519f7">manak::utils::cli::CLI</a>
 </li>
 <li>GetCurrentSuite()
 : <a class="el" href="classmanak_1_1BenchmarkSuite.html#a320e653fae69d8f720a6cacbe82aa27f">manak::BenchmarkSuite</a>
 </li>
-<li>GetLibraryCollection()
-: <a class="el" href="classmanak_1_1benchmark__suit_1_1BaseLibrary.html#a26b987fd159afbc6ae0b6c6326f8490d">manak::benchmark_suit::BaseLibrary</a>
-</li>
-<li>GetLog()
-: <a class="el" href="classmanak_1_1utils_1_1Log.html#a27185a8abd17e64ebeb2cad4b1e4268f">manak::utils::Log</a>
+<li>GetGlobalObjectStore()
+: <a class="el" href="classmanak_1_1utils_1_1ObjectStore.html#aa750f5895583de87d1f44a2f8ad14240">manak::utils::ObjectStore</a>
 </li>
 <li>GetMasterSuite()
-: <a class="el" href="classmanak_1_1BenchmarkSuite.html#a4bfb65abccacfc7c527ad10f302b5e4b">manak::BenchmarkSuite</a>
+: <a class="el" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite</a>
+</li>
+<li>GetPMRep()
+: <a class="el" href="structmanak_1_1RNode.html#a1e0cfa9c58736f39a005b4b0f7e0928f">manak::RNode</a>
 </li>
 <li>GetStats()
 : <a class="el" href="classmanak_1_1Timer.html#a5d3e1803a75a010be5266047344b16eb">manak::Timer</a>
@@ -199,12 +213,18 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>getTimeStamp()
 : <a class="el" href="classmanak_1_1Timer.html#a8150217549c367e6d7307b08f98f413f">manak::Timer</a>
 </li>
+<li>GlobalRunTree()
+: <a class="el" href="classmanak_1_1RunTree.html#a1ac041f90b576275833a7f45848b5e1c">manak::RunTree</a>
+</li>
 </ul>
 
 
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
 <li>Initialize()
-: <a class="el" href="classmanak_1_1Timer.html#a577e201a519a6af51d912e6d03765068">manak::Timer</a>
+: <a class="el" href="classmanak_1_1Timer.html#a81e034f9db078ed969213a85715056a8">manak::Timer</a>
+</li>
+<li>Insert()
+: <a class="el" href="classmanak_1_1utils_1_1ObjectStore.html#a693930c8438dbf734fac1929f3772cc7">manak::utils::ObjectStore</a>
 </li>
 <li>Iterations()
 : <a class="el" href="classmanak_1_1Timer.html#a7c9fcfa384b0b9b3cbcf7a39d1cab9c6">manak::Timer</a>
@@ -219,11 +239,9 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>LoadData()
 : <a class="el" href="classmanak_1_1BenchmarkSuite.html#a425babbc6006b56e858abd9629016e40">manak::BenchmarkSuite</a>
 </li>
-<li>Log()
-: <a class="el" href="classmanak_1_1utils_1_1Log.html#ac82fc2051e2e3c08317536a252bfd6af">manak::utils::Log</a>
-</li>
-<li>LogEntry()
-: <a class="el" href="structmanak_1_1utils_1_1LogEntry.html#a41c4f142f5d300ffaeb7c4c447a2e63a">manak::utils::LogEntry</a>
+<li>LoadForComparison()
+: <a class="el" href="structmanak_1_1RNode.html#ae350ffb130da8b32a2658082e2844c09">manak::RNode</a>
+, <a class="el" href="classmanak_1_1RunTree.html#aae96bf764810f2d9df0d5d50a87fe060">manak::RunTree</a>
 </li>
 </ul>
 
@@ -244,7 +262,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <h3><a class="anchor" id="index_n"></a>- n -</h3><ul>
 <li>Name()
 : <a class="el" href="classmanak_1_1BenchmarkCase.html#ada60ac171d3907e81997b9c09b186e6c">manak::BenchmarkCase</a>
-, <a class="el" href="classmanak_1_1BenchmarkSuite.html#ae22ac4ea4d3a66be76a11be7dc82cf53">manak::BenchmarkSuite</a>
+, <a class="el" href="classmanak_1_1BenchmarkSuite.html#a639e9ae0285d0e3d44e0dd63e2311384">manak::BenchmarkSuite</a>
 </li>
 </ul>
 
@@ -253,10 +271,13 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>PMeasure()
 : <a class="el" href="structmanak_1_1PMeasure.html#a544127c32b18c1213aeaddbafb439f8d">manak::PMeasure</a>
 </li>
-<li>Print()
-: <a class="el" href="structmanak_1_1utils_1_1CaseLogEntry.html#a7adec1366bf45a1f5458ea1794f3ceba">manak::utils::CaseLogEntry</a>
-, <a class="el" href="classmanak_1_1utils_1_1Log.html#a6a9032d0b2acc7f38c8385ee3e5ef3a7">manak::utils::Log</a>
-, <a class="el" href="structmanak_1_1utils_1_1LogEntry.html#ac6b1fc856e020739c7b7460468dbc114">manak::utils::LogEntry</a>
+<li>PrintHTML()
+: <a class="el" href="structmanak_1_1RNode.html#ae9e1002104a53e2f6dafdcf8c6a1f83e">manak::RNode</a>
+, <a class="el" href="classmanak_1_1RunTree.html#a1c6e05f9a565f3d952e55cdd78de1083">manak::RunTree</a>
+</li>
+<li>PrintTXT()
+: <a class="el" href="structmanak_1_1RNode.html#a463a9bb7c7938cf9fa1f17ddd1cdc628">manak::RNode</a>
+, <a class="el" href="classmanak_1_1RunTree.html#ae2aea8645a116220d0b14b15b08b048d">manak::RunTree</a>
 </li>
 </ul>
 
@@ -265,27 +286,34 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>RegisterBenchmarkSuite()
 : <a class="el" href="classmanak_1_1RegisterBenchmarkSuite.html#a29b02fa270df5b414b593a089316a083">manak::RegisterBenchmarkSuite</a>
 </li>
-<li>Reinitialize()
-: <a class="el" href="classmanak_1_1Timer.html#abdd3de8ba1437dac207e4166324ddb22">manak::Timer</a>
-</li>
 <li>replaceAll()
 : <a class="el" href="classmanak_1_1Timer.html#a4c7e6abf3319577afc310cc0e119f2f8">manak::Timer</a>
 </li>
+<li>RGet()
+: <a class="el" href="classmanak_1_1utils_1_1ObjectStore.html#af3d8face81200bd7ca40fda243710de0">manak::utils::ObjectStore</a>
+</li>
+<li>RNode()
+: <a class="el" href="structmanak_1_1RNode.html#a5d6a06c5939c5c0ed0493bc8c4156dc6">manak::RNode</a>
+</li>
 <li>Run()
-: <a class="el" href="classmanak_1_1BenchmarkCase.html#a6c8d298e4501e91d61a7d16a85ce23a9">manak::BenchmarkCase</a>
+: <a class="el" href="classmanak_1_1BenchmarkCase.html#a11fc6196e2cb5b89ab38598a7088d2d0">manak::BenchmarkCase</a>
 , <a class="el" href="classmanak_1_1BenchmarkSuite.html#aa94f6d653cc68b2cf2ce437b78a3f4ff">manak::BenchmarkSuite</a>
+, <a class="el" href="structmanak_1_1RNode.html#adfee0e5bb97ce99d666caa47e7d39a8e">manak::RNode</a>
+, <a class="el" href="classmanak_1_1RunTree.html#a54dff5bfe24f37725602138f46d6046a">manak::RunTree</a>
+</li>
+<li>RunTree()
+: <a class="el" href="classmanak_1_1RunTree.html#a2846eaa0bc1fe2251b475c21cde94fa0">manak::RunTree</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
-<li>Save()
-: <a class="el" href="structmanak_1_1utils_1_1CaseLogEntry.html#af4913ab2141763b9272316baa4388a61">manak::utils::CaseLogEntry</a>
-, <a class="el" href="classmanak_1_1utils_1_1Log.html#ac7735513feb9e23d4f104618734e2cfe">manak::utils::Log</a>
-, <a class="el" href="structmanak_1_1utils_1_1LogEntry.html#a9178a08a3623bcea00c117152d69993b">manak::utils::LogEntry</a>
+<li>SaveForComparison()
+: <a class="el" href="structmanak_1_1RNode.html#a175d5b1b64e8b84f5488a30e9f568290">manak::RNode</a>
+, <a class="el" href="classmanak_1_1RunTree.html#a2641440cb675ed31dda8808ae56d6882">manak::RunTree</a>
 </li>
 <li>SetCurrentSuite()
-: <a class="el" href="classmanak_1_1BenchmarkSuite.html#add3cb9e1a0babcaf07bbb33703502714">manak::BenchmarkSuite</a>
+: <a class="el" href="classmanak_1_1BenchmarkSuite.html#a3a9db5f700f8bb7b6e7ea52dd5867f8e">manak::BenchmarkSuite</a>
 </li>
 <li>SetCurrentSuiteToParent()
 : <a class="el" href="classmanak_1_1BenchmarkSuite.html#a200ca583fd6baba6ee34bf37a3f73285">manak::BenchmarkSuite</a>
@@ -298,6 +326,9 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </li>
 <li>StartTimer()
 : <a class="el" href="classmanak_1_1Timer.html#a2550f9a6df56054a9cba7c763ccd8f53">manak::Timer</a>
+</li>
+<li>StateInit()
+: <a class="el" href="classmanak_1_1Timer.html#a316e288388aa25153927351d81510d99">manak::Timer</a>
 </li>
 <li>StateIter()
 : <a class="el" href="classmanak_1_1Timer.html#a1b3fac3ef5d001c617d455e60212bc51">manak::Timer</a>
@@ -321,9 +352,23 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </ul>
 
 
+<h3><a class="anchor" id="index_u"></a>- u -</h3><ul>
+<li>UName()
+: <a class="el" href="classmanak_1_1BenchmarkCase.html#a1f2e427d3dca13f4f3dddbe1b7da5a8f">manak::BenchmarkCase</a>
+, <a class="el" href="classmanak_1_1BenchmarkSuite.html#a1f8e13b1ef3e224c79f376c81c858ae6">manak::BenchmarkSuite</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_~"></a>- ~ -</h3><ul>
 <li>~BenchmarkSuite()
 : <a class="el" href="classmanak_1_1BenchmarkSuite.html#a9162ab334d3fedecd0769163373e7c0e">manak::BenchmarkSuite</a>
+</li>
+<li>~RNode()
+: <a class="el" href="structmanak_1_1RNode.html#a3416fc3819201972d4111723b74c6d3e">manak::RNode</a>
+</li>
+<li>~RunTree()
+: <a class="el" href="classmanak_1_1RunTree.html#a20f1ebc1ef7de5aee1756c3ea100a02f">manak::RunTree</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -331,7 +376,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Nov 15 2014 05:14:29 for Manak by
+    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">0.0.0</span>
    </div>
   </td>
  </tr>
@@ -79,7 +79,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="template__utils_8hpp__dep__incl.png" border="0" usemap="#src_2manak_2util_2template__utils_8hppdep" alt=""/></div>
 <map name="src_2manak_2util_2template__utils_8hppdep" id="src_2manak_2util_2template__utils_8hppdep">
-<area shape="rect" id="node2" href="benchmark__case_8hpp.html" title="Add a measure to this entry. " alt="" coords="5,97,184,138"/><area shape="rect" id="node3" href="benchmark__suite_8hpp.html" title="src/manak/benchmark\l_suit/benchmark_suite.hpp" alt="" coords="5,187,184,229"/><area shape="rect" id="node4" href="manak_8hpp.html" title="src/manak/manak.hpp" alt="" coords="19,277,169,304"/></map>
+<area shape="rect" id="node2" href="benchmark__case_8hpp.html" title="src/manak/benchmark\l_suit/benchmark_case.hpp" alt="" coords="61,97,240,138"/><area shape="rect" id="node3" href="benchmark__suite_8hpp.html" title="src/manak/benchmark\l_suit/benchmark_suite.hpp" alt="" coords="5,278,184,319"/><area shape="rect" id="node5" href="run__tree_8hpp.html" title="src/manak/benchmark\l_suit/run_tree.hpp" alt="" coords="133,187,283,229"/><area shape="rect" id="node4" href="manak_8hpp.html" title="src/manak/manak.hpp" alt="" coords="82,368,232,395"/></map>
 </div>
 </div>
 <p><a href="template__utils_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -128,15 +128,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a2abf8d0742f5154b175c21361f3230af"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename F , typename O , int... S&gt; </td></tr>
 <tr class="memitem:a2abf8d0742f5154b175c21361f3230af"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils_1_1helper.html#a2abf8d0742f5154b175c21361f3230af">manak::utils::helper::BindToObject2</a> (F fun, O *o, Hold&lt; S...&gt;)</td></tr>
 <tr class="separator:a2abf8d0742f5154b175c21361f3230af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63269567bfc47d7ec87fbbfe80b73c2e"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename... Args&gt; </td></tr>
-<tr class="memitem:a63269567bfc47d7ec87fbbfe80b73c2e"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html#a63269567bfc47d7ec87fbbfe80b73c2e">manak::utils::Caller</a> (std::function&lt; RType(Args...)&gt; fun, std::tuple&lt; Args...&gt; params)</td></tr>
-<tr class="separator:a63269567bfc47d7ec87fbbfe80b73c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a951074493ed6dafd96e1d6ee238d056d"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename... Args&gt; </td></tr>
-<tr class="memitem:a951074493ed6dafd96e1d6ee238d056d"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html#a951074493ed6dafd96e1d6ee238d056d">manak::utils::Caller</a> (RType(fun)(Args...), std::tuple&lt; Args...&gt; params)</td></tr>
-<tr class="separator:a951074493ed6dafd96e1d6ee238d056d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1349ad2e9f57a117e3e8ad41ea72ce49"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename P , typename... Args&gt; </td></tr>
+<tr class="memitem:a1349ad2e9f57a117e3e8ad41ea72ce49"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html#a1349ad2e9f57a117e3e8ad41ea72ce49">manak::utils::Caller</a> (std::function&lt; RType(Args...)&gt; fun, P params)</td></tr>
+<tr class="separator:a1349ad2e9f57a117e3e8ad41ea72ce49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab00dc0b7740e8e7d6d4be2b957f3ccfe"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename P , typename... Args&gt; </td></tr>
+<tr class="memitem:ab00dc0b7740e8e7d6d4be2b957f3ccfe"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html#ab00dc0b7740e8e7d6d4be2b957f3ccfe">manak::utils::Caller</a> (RType(*fun)(Args...), P params)</td></tr>
+<tr class="separator:ab00dc0b7740e8e7d6d4be2b957f3ccfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a922a803ec5fd37b5fc709d4795f6f388"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename Fun , typename P , int... S&gt; </td></tr>
 <tr class="memitem:a922a803ec5fd37b5fc709d4795f6f388"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils_1_1helper.html#a922a803ec5fd37b5fc709d4795f6f388">manak::utils::helper::Caller_2</a> (Fun fun, P params, Hold&lt; S...&gt;)</td></tr>
 <tr class="separator:a922a803ec5fd37b5fc709d4795f6f388"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61c6fe083ae2e7b032762b476d93bca7"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename... Args&gt; </td></tr>
+<tr class="memitem:a61c6fe083ae2e7b032762b476d93bca7"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils_1_1helper.html#a61c6fe083ae2e7b032762b476d93bca7">manak::utils::helper::Caller_3</a> (std::function&lt; RType(Args...)&gt; fun, Args...args)</td></tr>
+<tr class="separator:a61c6fe083ae2e7b032762b476d93bca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -155,7 +158,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4c6f0f56bb7b054cbb2a0de860d7d462.html">manak</a></li><li class="navelem"><a class="el" href="dir_1fe2efaad9cdc7226aed6d70f6eeea1f.html">util</a></li><li class="navelem"><a class="el" href="template__utils_8hpp.html">template_utils.hpp</a></li>
-    <li class="footer">Generated on Sat Nov 15 2014 05:14:29 for Manak by
+    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

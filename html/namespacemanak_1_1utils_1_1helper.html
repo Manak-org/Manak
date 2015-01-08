@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">0.0.0</span>
    </div>
   </td>
  </tr>
@@ -99,6 +99,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a922a803ec5fd37b5fc709d4795f6f388"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename Fun , typename P , int... S&gt; </td></tr>
 <tr class="memitem:a922a803ec5fd37b5fc709d4795f6f388"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils_1_1helper.html#a922a803ec5fd37b5fc709d4795f6f388">Caller_2</a> (Fun fun, P params, <a class="el" href="structmanak_1_1utils_1_1helper_1_1Hold.html">Hold</a>&lt; S...&gt;)</td></tr>
 <tr class="separator:a922a803ec5fd37b5fc709d4795f6f388"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61c6fe083ae2e7b032762b476d93bca7"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename... Args&gt; </td></tr>
+<tr class="memitem:a61c6fe083ae2e7b032762b476d93bca7"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils_1_1helper.html#a61c6fe083ae2e7b032762b476d93bca7">Caller_3</a> (std::function&lt; RType(Args...)&gt; fun, Args...args)</td></tr>
+<tr class="separator:a61c6fe083ae2e7b032762b476d93bca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -141,9 +144,9 @@ template&lt;typename RType , typename F , typename O , int... S&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00077">77</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
+<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00082">82</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="template__utils_8hpp_source.html#l00103">manak::utils::BindToObject()</a>.</p>
+<p>Referenced by <a class="el" href="template__utils_8hpp_source.html#l00115">manak::utils::BindToObject()</a>.</p>
 
 </div>
 </div>
@@ -179,7 +182,7 @@ template&lt;typename RType , typename F , typename O , int... S&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00083">83</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
+<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00088">88</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
 
 </div>
 </div>
@@ -206,6 +209,36 @@ template&lt;typename RType , typename Fun , typename P , int... S&gt; </div>
           <td></td>
           <td class="paramtype">Hold&lt; S...&gt;&#160;</td>
           <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00070">70</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a61c6fe083ae2e7b032762b476d93bca7"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RType , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">RType manak::utils::helper::Caller_3 </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; RType(Args...)&gt;&#160;</td>
+          <td class="paramname"><em>fun</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -242,7 +275,7 @@ template&lt;int N, int... Args&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacemanak.html">manak</a></li><li class="navelem"><a class="el" href="namespacemanak_1_1utils.html">utils</a></li><li class="navelem"><a class="el" href="namespacemanak_1_1utils_1_1helper.html">helper</a></li>
-    <li class="footer">Generated on Sat Nov 15 2014 05:14:29 for Manak by
+    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

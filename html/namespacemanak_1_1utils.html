@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">0.0.0</span>
    </div>
   </td>
  </tr>
@@ -88,14 +88,7 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmanak_1_1utils_1_1CaseLogEntry.html">CaseLogEntry</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This struct stores all the logging information about one benchmark case.  <a href="structmanak_1_1utils_1_1CaseLogEntry.html#details">More...</a><br/></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmanak_1_1utils_1_1Log.html">Log</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class stores and prints all the necessary information about the run.  <a href="classmanak_1_1utils_1_1Log.html#details">More...</a><br/></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmanak_1_1utils_1_1LogEntry.html">LogEntry</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This struct stores the measures corresponding to one parameter set of a case.  <a href="structmanak_1_1utils_1_1LogEntry.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmanak_1_1utils_1_1ObjectStore.html">ObjectStore</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -106,12 +99,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a5ba41c847942b13036eeb56853d685c6"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename C , typename... Args&gt; </td></tr>
 <tr class="memitem:a5ba41c847942b13036eeb56853d685c6"><td class="memTemplItemLeft" align="right" valign="top">std::function&lt; RType(Args...)&gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html#a5ba41c847942b13036eeb56853d685c6">BindToObject</a> (RType(C::*fun)(Args...) const, const C *c)</td></tr>
 <tr class="separator:a5ba41c847942b13036eeb56853d685c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63269567bfc47d7ec87fbbfe80b73c2e"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename... Args&gt; </td></tr>
-<tr class="memitem:a63269567bfc47d7ec87fbbfe80b73c2e"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html#a63269567bfc47d7ec87fbbfe80b73c2e">Caller</a> (std::function&lt; RType(Args...)&gt; fun, std::tuple&lt; Args...&gt; params)</td></tr>
-<tr class="separator:a63269567bfc47d7ec87fbbfe80b73c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a951074493ed6dafd96e1d6ee238d056d"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename... Args&gt; </td></tr>
-<tr class="memitem:a951074493ed6dafd96e1d6ee238d056d"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html#a951074493ed6dafd96e1d6ee238d056d">Caller</a> (RType(fun)(Args...), std::tuple&lt; Args...&gt; params)</td></tr>
-<tr class="separator:a951074493ed6dafd96e1d6ee238d056d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1349ad2e9f57a117e3e8ad41ea72ce49"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename P , typename... Args&gt; </td></tr>
+<tr class="memitem:a1349ad2e9f57a117e3e8ad41ea72ce49"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html#a1349ad2e9f57a117e3e8ad41ea72ce49">Caller</a> (std::function&lt; RType(Args...)&gt; fun, P params)</td></tr>
+<tr class="separator:a1349ad2e9f57a117e3e8ad41ea72ce49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab00dc0b7740e8e7d6d4be2b957f3ccfe"><td class="memTemplParams" colspan="2">template&lt;typename RType , typename P , typename... Args&gt; </td></tr>
+<tr class="memitem:ab00dc0b7740e8e7d6d4be2b957f3ccfe"><td class="memTemplItemLeft" align="right" valign="top">RType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html#ab00dc0b7740e8e7d6d4be2b957f3ccfe">Caller</a> (RType(*fun)(Args...), P params)</td></tr>
+<tr class="separator:ab00dc0b7740e8e7d6d4be2b957f3ccfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a530ceeff3af218908a57205502360c71"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html#a530ceeff3af218908a57205502360c71">operator&lt;&lt;</a> (std::ostream &amp;s, const <a class="el" href="classmanak_1_1utils_1_1ObjectStore.html">ObjectStore</a> &amp;os)</td></tr>
+<tr class="separator:a530ceeff3af218908a57205502360c71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Useful Utilities. </p>
@@ -142,11 +137,11 @@ template&lt;typename RType , typename C , typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00103">103</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
+<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00115">115</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
 
-<p>References <a class="el" href="template__utils_8hpp_source.html#l00077">manak::utils::helper::BindToObject2()</a>.</p>
+<p>References <a class="el" href="template__utils_8hpp_source.html#l00082">manak::utils::helper::BindToObject2()</a>.</p>
 
-<p>Referenced by <a class="el" href="benchmark__case_8hpp_source.html#l00225">manak::T_Benchmark_Case&lt; RType, Args &gt;::AddCustomArgs()</a>.</p>
+<p>Referenced by <a class="el" href="benchmark__case_8hpp_source.html#l00152">manak::T_Benchmark_Case&lt; RType, Args &gt;::AddCustomArgs()</a>, and <a class="el" href="benchmark__case_8hpp_source.html#l00174">manak::T_Benchmark_Case&lt; RType, Args &gt;::AddCustomArgs_N()</a>.</p>
 
 </div>
 </div>
@@ -176,17 +171,17 @@ template&lt;typename RType , typename C , typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00109">109</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
+<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00121">121</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
 
-<p>References <a class="el" href="template__utils_8hpp_source.html#l00077">manak::utils::helper::BindToObject2()</a>.</p>
+<p>References <a class="el" href="template__utils_8hpp_source.html#l00082">manak::utils::helper::BindToObject2()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a63269567bfc47d7ec87fbbfe80b73c2e"></a>
+<a class="anchor" id="a1349ad2e9f57a117e3e8ad41ea72ce49"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RType , typename... Args&gt; </div>
+template&lt;typename RType , typename P , typename... Args&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">RType manak::utils::Caller </td>
@@ -197,7 +192,7 @@ template&lt;typename RType , typename... Args&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::tuple&lt; Args...&gt;&#160;</td>
+          <td class="paramtype">P&#160;</td>
           <td class="paramname"><em>params</em>&#160;</td>
         </tr>
         <tr>
@@ -208,28 +203,28 @@ template&lt;typename RType , typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00091">91</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
+<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00096">96</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="benchmark__case_8hpp_source.html#l00210">manak::T_Benchmark_Case&lt; RType, Args &gt;::AddArgs()</a>, <a class="el" href="benchmark__case_8hpp_source.html#l00217">manak::T_Benchmark_Case&lt; RType, Args &gt;::AddArgs_N()</a>, and <a class="el" href="benchmark__case_8hpp_source.html#l00225">manak::T_Benchmark_Case&lt; RType, Args &gt;::AddCustomArgs()</a>.</p>
+<p>Referenced by <a class="el" href="benchmark__case_8hpp_source.html#l00137">manak::T_Benchmark_Case&lt; RType, Args &gt;::AddArgs()</a>, <a class="el" href="benchmark__case_8hpp_source.html#l00144">manak::T_Benchmark_Case&lt; RType, Args &gt;::AddArgs_N()</a>, <a class="el" href="benchmark__case_8hpp_source.html#l00152">manak::T_Benchmark_Case&lt; RType, Args &gt;::AddCustomArgs()</a>, and <a class="el" href="benchmark__case_8hpp_source.html#l00174">manak::T_Benchmark_Case&lt; RType, Args &gt;::AddCustomArgs_N()</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a951074493ed6dafd96e1d6ee238d056d"></a>
+<a class="anchor" id="ab00dc0b7740e8e7d6d4be2b957f3ccfe"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RType , typename... Args&gt; </div>
+template&lt;typename RType , typename P , typename... Args&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">RType manak::utils::Caller </td>
           <td>(</td>
-          <td class="paramtype">RType(fun)(Args...)&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">RType(*)(Args...)&#160;</td>
+          <td class="paramname"><em>fun</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::tuple&lt; Args...&gt;&#160;</td>
+          <td class="paramtype">P&#160;</td>
           <td class="paramname"><em>params</em>&#160;</td>
         </tr>
         <tr>
@@ -240,7 +235,35 @@ template&lt;typename RType , typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00097">97</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
+<p>Definition at line <a class="el" href="template__utils_8hpp_source.html#l00108">108</a> of file <a class="el" href="template__utils_8hpp_source.html">template_utils.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a530ceeff3af218908a57205502360c71"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; manak::utils::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ObjectStore &amp;&#160;</td>
+          <td class="paramname"><em>os</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="object__store_8hpp_source.html#l00084">84</a> of file <a class="el" href="object__store_8hpp_source.html">object_store.hpp</a>.</p>
 
 </div>
 </div>
@@ -250,7 +273,7 @@ template&lt;typename RType , typename... Args&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacemanak.html">manak</a></li><li class="navelem"><a class="el" href="namespacemanak_1_1utils.html">utils</a></li>
-    <li class="footer">Generated on Sat Nov 15 2014 05:14:29 for Manak by
+    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -1,13 +1,14 @@
 <map id="src/manak/manak.hpp" name="src/manak/manak.hpp">
-<area shape="rect" id="node3" href="$benchmark__suite_8hpp.html" title="manak/benchmark_suit\l/benchmark_suite.hpp" alt="" coords="1361,81,1519,122"/>
-<area shape="rect" id="node10" href="$log_8hpp.html" title="manak/util/log.hpp" alt="" coords="1423,253,1551,280"/>
-<area shape="rect" id="node27" href="$cli_8hpp.html" title="manak/util/cli.hpp" alt="" coords="1753,88,1876,115"/>
-<area shape="rect" id="node9" href="$macro__utils_8hpp.html" title="manak/util/macro_utils.hpp" alt="" coords="108,253,287,280"/>
-<area shape="rect" id="node14" href="$pmeasure_8hpp.html" title="manak/benchmark_suit\l/pmeasure.hpp" alt="" coords="759,411,916,453"/>
-<area shape="rect" id="node19" href="$base__library_8hpp.html" title="base_library.hpp" alt="" coords="1281,253,1397,280"/>
-<area shape="rect" id="node21" href="$benchmark__case_8hpp.html" title="Add a measure to this entry. " alt="" coords="729,171,876,197"/>
-<area shape="rect" id="node16" href="$version_8hpp.html" title="version.hpp" alt="" coords="1258,336,1347,363"/>
-<area shape="rect" id="node17" href="$timer_8hpp.html" title="timer.hpp" alt="" coords="426,336,501,363"/>
-<area shape="rect" id="node25" href="$template__utils_8hpp.html" title="manak/util/template\l_utils.hpp" alt="" coords="801,246,936,287"/>
-<area shape="rect" id="node26" href="$module__benchmark__case_8hpp.html" title="module_benchmark_case.hpp" alt="" coords="961,253,1156,280"/>
+<area shape="rect" id="node3" href="$set__env_8hpp.html" title="manak/benchmark_suit\l/set_env.hpp" alt="" coords="1147,81,1304,122"/>
+<area shape="rect" id="node4" href="$benchmark__suite_8hpp.html" title="manak/benchmark_suit\l/benchmark_suite.hpp" alt="" coords="1328,81,1485,122"/>
+<area shape="rect" id="node26" href="$run__tree_8hpp.html" title="run_tree.hpp" alt="" coords="1885,171,1979,197"/>
+<area shape="rect" id="node31" href="$cli_8hpp.html" title="manak/util/cli.hpp" alt="" coords="2465,88,2588,115"/>
+<area shape="rect" id="node10" href="$benchmark__case_8hpp.html" title="benchmark_case.hpp" alt="" coords="1333,245,1480,272"/>
+<area shape="rect" id="node18" href="$pmeasure_8hpp.html" title="pmeasure.hpp" alt="" coords="1917,411,2021,437"/>
+<area shape="rect" id="node22" href="$macro__utils_8hpp.html" title="manak/util/macro_utils.hpp" alt="" coords="1881,328,2060,355"/>
+<area shape="rect" id="node20" href="$timer_8hpp.html" title="manak/util/timer.hpp" alt="" coords="1514,328,1653,355"/>
+<area shape="rect" id="node21" href="$object__store_8hpp.html" title="manak/util/object_store.hpp" alt="" coords="1522,411,1704,437"/>
+<area shape="rect" id="node23" href="$template__utils_8hpp.html" title="manak/util/template\l_utils.hpp" alt="" coords="552,321,687,362"/>
+<area shape="rect" id="node25" href="$module__benchmark__case_8hpp.html" title="module_benchmark_case.hpp" alt="" coords="915,328,1109,355"/>
+<area shape="rect" id="node28" href="$version_8hpp.html" title="manak/util/version.hpp" alt="" coords="2046,411,2199,437"/>
 </map>

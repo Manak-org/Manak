@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">0.0.0</span>
    </div>
   </td>
  </tr>
@@ -125,77 +125,90 @@ $(document).ready(function(){initNavTree('template__utils_8hpp_source.html','');
 <div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="structmanak_1_1utils_1_1helper_1_1SGenerate_3_011_01_4.html#a084d2b1ec8f147787f7cb4837e3aada0">   60</a></span>&#160;  <span class="keyword">typedef</span> <a class="code" href="structmanak_1_1utils_1_1helper_1_1Hold.html">Hold&lt;1&gt;</a> <a class="code" href="structmanak_1_1utils_1_1helper_1_1SGenerate_3_011_01_4.html#a084d2b1ec8f147787f7cb4837e3aada0">type</a>;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span> Fun, <span class="keyword">typename</span> P, <span class="keywordtype">int</span>... S&gt;</div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils_1_1helper.html#a922a803ec5fd37b5fc709d4795f6f388">   64</a></span>&#160;RType <a class="code" href="namespacemanak_1_1utils_1_1helper.html#a922a803ec5fd37b5fc709d4795f6f388">Caller_2</a>(Fun fun, P params, <a class="code" href="structmanak_1_1utils_1_1helper_1_1Hold.html">Hold&lt;S...&gt;</a>)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils_1_1helper.html#a61c6fe083ae2e7b032762b476d93bca7">   64</a></span>&#160;RType <a class="code" href="namespacemanak_1_1utils_1_1helper.html#a61c6fe083ae2e7b032762b476d93bca7">Caller_3</a>(std::function&lt;RType(Args...)&gt; fun, Args... args)</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordflow">return</span> fun(std::get&lt;S - 1&gt;(params)...);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordflow">return</span> fun(args...);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">int</span>&gt;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">struct </span>template_placeholder</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span> F, <span class="keyword">typename</span> O, <span class="keywordtype">int</span>... S&gt;</div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">   77</a></span>&#160;RType <a class="code" href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">BindToObject2</a>(F fun, <span class="keyword">const</span> O* o, <a class="code" href="structmanak_1_1utils_1_1helper_1_1Hold.html">Hold&lt;S...&gt;</a>)</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keywordflow">return</span> std::bind(fun, o, <a class="code" href="structmanak_1_1utils_1_1helper_1_1template__placeholder.html">template_placeholder&lt;S&gt;</a>()...);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span> F, <span class="keyword">typename</span> O, <span class="keywordtype">int</span>... S&gt;</div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils_1_1helper.html#a2abf8d0742f5154b175c21361f3230af">   83</a></span>&#160;RType <a class="code" href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">BindToObject2</a>(F fun, O* o, <a class="code" href="structmanak_1_1utils_1_1helper_1_1Hold.html">Hold&lt;S...&gt;</a>)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;{</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordflow">return</span> std::bind(fun, o, <a class="code" href="structmanak_1_1utils_1_1helper_1_1template__placeholder.html">template_placeholder&lt;S&gt;</a>()...);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}; <span class="comment">// namespace helpers</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils.html#a63269567bfc47d7ec87fbbfe80b73c2e">   91</a></span>&#160;RType <a class="code" href="namespacemanak_1_1utils.html#a63269567bfc47d7ec87fbbfe80b73c2e">Caller</a>(std::function&lt;RType(Args...)&gt; fun, std::tuple&lt;Args...&gt; params)</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;{</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordflow">return</span> helper::Caller_2&lt;RType&gt;(fun, params, <span class="keyword">typename</span> <a class="code" href="structmanak_1_1utils_1_1helper_1_1SGenerate.html">helper::SGenerate</a>&lt;<span class="keyword">sizeof</span>...(Args)&gt;::type());</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils.html#a951074493ed6dafd96e1d6ee238d056d">   97</a></span>&#160;RType <a class="code" href="namespacemanak_1_1utils.html#a63269567bfc47d7ec87fbbfe80b73c2e">Caller</a>(RType (fun)(Args...), std::tuple&lt;Args...&gt; params)</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;{</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keywordflow">return</span> helper::Caller_2&lt;RType&gt;(fun, params, <span class="keyword">typename</span> <a class="code" href="structmanak_1_1utils_1_1helper_1_1SGenerate.html">helper::SGenerate</a>&lt;<span class="keyword">sizeof</span>...(Args)&gt;::type());</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span> C, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">  103</a></span>&#160;std::function&lt;RType(Args...)&gt; <a class="code" href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">BindToObject</a>(RType (C::*fun)(Args...), C* c)</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;{</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">helper::BindToObject2</a>&lt;std::function&lt;RType(Args...)&gt;&gt;(fun, c, <span class="keyword">typename</span> <a class="code" href="structmanak_1_1utils_1_1helper_1_1SGenerate.html">helper::SGenerate</a>&lt;<span class="keyword">sizeof</span>...(Args)&gt;::type());</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span> C, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils.html#a5ba41c847942b13036eeb56853d685c6">  109</a></span>&#160;std::function&lt;RType(Args...)&gt; <a class="code" href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">BindToObject</a>(RType (C::*fun)(Args...) <span class="keyword">const</span>, <span class="keyword">const</span> C* c)</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;{</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">helper::BindToObject2</a>&lt;std::function&lt;RType(Args...)&gt;&gt;(fun, c, <span class="keyword">typename</span> <a class="code" href="structmanak_1_1utils_1_1helper_1_1SGenerate.html">helper::SGenerate</a>&lt;<span class="keyword">sizeof</span>...(Args)&gt;::type());</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;}</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span> Fun, <span class="keyword">typename</span> P, <span class="keywordtype">int</span>... S&gt;</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils_1_1helper.html#a922a803ec5fd37b5fc709d4795f6f388">   70</a></span>&#160;RType <a class="code" href="namespacemanak_1_1utils_1_1helper.html#a922a803ec5fd37b5fc709d4795f6f388">Caller_2</a>(Fun fun, P params, <a class="code" href="structmanak_1_1utils_1_1helper_1_1Hold.html">Hold&lt;S...&gt;</a>)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordflow">return</span> fun(std::get&lt;S - 1&gt;(params)...);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">int</span>&gt;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">struct </span>template_placeholder</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span> F, <span class="keyword">typename</span> O, <span class="keywordtype">int</span>... S&gt;</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">   82</a></span>&#160;RType <a class="code" href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">BindToObject2</a>(F fun, <span class="keyword">const</span> O* o, <a class="code" href="structmanak_1_1utils_1_1helper_1_1Hold.html">Hold&lt;S...&gt;</a>)</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;{</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordflow">return</span> std::bind(fun, o, <a class="code" href="structmanak_1_1utils_1_1helper_1_1template__placeholder.html">template_placeholder&lt;S&gt;</a>()...);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span> F, <span class="keyword">typename</span> O, <span class="keywordtype">int</span>... S&gt;</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils_1_1helper.html#a2abf8d0742f5154b175c21361f3230af">   88</a></span>&#160;RType <a class="code" href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">BindToObject2</a>(F fun, O* o, <a class="code" href="structmanak_1_1utils_1_1helper_1_1Hold.html">Hold&lt;S...&gt;</a>)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordflow">return</span> std::bind(fun, o, <a class="code" href="structmanak_1_1utils_1_1helper_1_1template__placeholder.html">template_placeholder&lt;S&gt;</a>()...);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}; <span class="comment">// namespace helpers</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span> P, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils.html#a1349ad2e9f57a117e3e8ad41ea72ce49">   96</a></span>&#160;RType <a class="code" href="namespacemanak_1_1utils.html#a1349ad2e9f57a117e3e8ad41ea72ce49">Caller</a>(std::function&lt;RType(Args...)&gt; fun, P params)</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;{</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordflow">return</span> helper::Caller_2&lt;RType&gt;(fun, params, <span class="keyword">typename</span> <a class="code" href="structmanak_1_1utils_1_1helper_1_1SGenerate.html">helper::SGenerate</a>&lt;<span class="keyword">sizeof</span>...(Args)&gt;::type());</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">//template&lt;typename RType, typename... Args&gt;</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">//RType Caller(RType (fun)(Args...), std::tuple&lt;Args...&gt; params)</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">//{</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">//  return helper::Caller_2&lt;RType&gt;(fun, params, typename helper::SGenerate&lt;sizeof...(Args)&gt;::type());</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">//}</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span> P, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils.html#ab00dc0b7740e8e7d6d4be2b957f3ccfe">  108</a></span>&#160;RType <a class="code" href="namespacemanak_1_1utils.html#a1349ad2e9f57a117e3e8ad41ea72ce49">Caller</a>(RType (*fun)(Args...), P params)</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;{</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="keywordflow">return</span> helper::Caller_2&lt;RType&gt;(fun, params, <span class="keyword">typename</span> <a class="code" href="structmanak_1_1utils_1_1helper_1_1SGenerate.html">helper::SGenerate</a>&lt;<span class="keyword">sizeof</span>...(Args)&gt;::type());</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span> C, <span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;std::function&lt;RType(Args...)&gt; <a class="code" href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">BindToObject</a>(RType (C::*fun)(Args...) <span class="keyword">const</span>, C* c)</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">  115</a></span>&#160;std::function&lt;RType(Args...)&gt; <a class="code" href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">BindToObject</a>(RType (C::*fun)(Args...), C* c)</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;{</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">helper::BindToObject2</a>&lt;std::function&lt;RType(Args...)&gt;&gt;(fun, c, <span class="keyword">typename</span> helper::SGenerate&lt;<span class="keyword">sizeof</span>...(Args)&gt;::type());</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">helper::BindToObject2</a>&lt;std::function&lt;RType(Args...)&gt;&gt;(fun, c, <span class="keyword">typename</span> <a class="code" href="structmanak_1_1utils_1_1helper_1_1SGenerate.html">helper::SGenerate</a>&lt;<span class="keyword">sizeof</span>...(Args)&gt;::type());</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}; <span class="comment">// namespace utils</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}; <span class="comment">// namespace manak</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">#endif // MANAK_UTIL_TEMPLATE_UTILS_HPP_INCLUDED</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span> C, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="namespacemanak_1_1utils.html#a5ba41c847942b13036eeb56853d685c6">  121</a></span>&#160;std::function&lt;RType(Args...)&gt; <a class="code" href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">BindToObject</a>(RType (C::*fun)(Args...) <span class="keyword">const</span>, <span class="keyword">const</span> C* c)</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;{</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">helper::BindToObject2</a>&lt;std::function&lt;RType(Args...)&gt;&gt;(fun, c, <span class="keyword">typename</span> <a class="code" href="structmanak_1_1utils_1_1helper_1_1SGenerate.html">helper::SGenerate</a>&lt;<span class="keyword">sizeof</span>...(Args)&gt;::type());</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RType, <span class="keyword">typename</span> C, <span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;std::function&lt;RType(Args...)&gt; <a class="code" href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">BindToObject</a>(RType (C::*fun)(Args...) <span class="keyword">const</span>, C* c)</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;{</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">helper::BindToObject2</a>&lt;std::function&lt;RType(Args...)&gt;&gt;(fun, c, <span class="keyword">typename</span> helper::SGenerate&lt;<span class="keyword">sizeof</span>...(Args)&gt;::type());</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;}; <span class="comment">// namespace utils</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}; <span class="comment">// namespace manak</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#endif // MANAK_UTIL_TEMPLATE_UTILS_HPP_INCLUDED</span></div>
 <div class="ttc" id="structmanak_1_1utils_1_1helper_1_1template__placeholder_html"><div class="ttname"><a href="structmanak_1_1utils_1_1helper_1_1template__placeholder.html">manak::utils::helper::template_placeholder</a></div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00018">template_utils.hpp:18</a></div></div>
 <div class="ttc" id="structmanak_1_1utils_1_1helper_1_1SGenerate_3_011_01_4_html_a084d2b1ec8f147787f7cb4837e3aada0"><div class="ttname"><a href="structmanak_1_1utils_1_1helper_1_1SGenerate_3_011_01_4.html#a084d2b1ec8f147787f7cb4837e3aada0">manak::utils::helper::SGenerate&lt; 1 &gt;::type</a></div><div class="ttdeci">Hold&lt; 1 &gt; type</div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00060">template_utils.hpp:60</a></div></div>
-<div class="ttc" id="namespacemanak_1_1utils_html_a63269567bfc47d7ec87fbbfe80b73c2e"><div class="ttname"><a href="namespacemanak_1_1utils.html#a63269567bfc47d7ec87fbbfe80b73c2e">manak::utils::Caller</a></div><div class="ttdeci">RType Caller(std::function&lt; RType(Args...)&gt; fun, std::tuple&lt; Args...&gt; params)</div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00091">template_utils.hpp:91</a></div></div>
+<div class="ttc" id="namespacemanak_1_1utils_html_a1349ad2e9f57a117e3e8ad41ea72ce49"><div class="ttname"><a href="namespacemanak_1_1utils.html#a1349ad2e9f57a117e3e8ad41ea72ce49">manak::utils::Caller</a></div><div class="ttdeci">RType Caller(std::function&lt; RType(Args...)&gt; fun, P params)</div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00096">template_utils.hpp:96</a></div></div>
 <div class="ttc" id="structmanak_1_1utils_1_1helper_1_1Hold_html"><div class="ttname"><a href="structmanak_1_1utils_1_1helper_1_1Hold.html">manak::utils::helper::Hold</a></div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00041">template_utils.hpp:41</a></div></div>
-<div class="ttc" id="namespacemanak_1_1utils_1_1helper_html_af56d296ce7446f934b6b3196b0eceb09"><div class="ttname"><a href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">manak::utils::helper::BindToObject2</a></div><div class="ttdeci">RType BindToObject2(F fun, const O *o, Hold&lt; S...&gt;)</div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00077">template_utils.hpp:77</a></div></div>
+<div class="ttc" id="namespacemanak_1_1utils_1_1helper_html_a61c6fe083ae2e7b032762b476d93bca7"><div class="ttname"><a href="namespacemanak_1_1utils_1_1helper.html#a61c6fe083ae2e7b032762b476d93bca7">manak::utils::helper::Caller_3</a></div><div class="ttdeci">RType Caller_3(std::function&lt; RType(Args...)&gt; fun, Args...args)</div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00064">template_utils.hpp:64</a></div></div>
+<div class="ttc" id="namespacemanak_1_1utils_1_1helper_html_af56d296ce7446f934b6b3196b0eceb09"><div class="ttname"><a href="namespacemanak_1_1utils_1_1helper.html#af56d296ce7446f934b6b3196b0eceb09">manak::utils::helper::BindToObject2</a></div><div class="ttdeci">RType BindToObject2(F fun, const O *o, Hold&lt; S...&gt;)</div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00082">template_utils.hpp:82</a></div></div>
 <div class="ttc" id="namespacemanak_1_1utils_1_1helper_html_a76d59562921b729fe7c2cc72349b09d1"><div class="ttname"><a href="namespacemanak_1_1utils_1_1helper.html#a76d59562921b729fe7c2cc72349b09d1">manak::utils::helper::Combine</a></div><div class="ttdeci">Hold&lt; Args..., N &gt; Combine(Hold&lt; Args...&gt;, Hold&lt; N &gt;)</div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00046">template_utils.hpp:46</a></div></div>
 <div class="ttc" id="structmanak_1_1utils_1_1helper_1_1SGenerate_html"><div class="ttname"><a href="structmanak_1_1utils_1_1helper_1_1SGenerate.html">manak::utils::helper::SGenerate</a></div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00052">template_utils.hpp:52</a></div></div>
-<div class="ttc" id="namespacemanak_1_1utils_html_afcb1904a214bd5346f199db39663ae3c"><div class="ttname"><a href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">manak::utils::BindToObject</a></div><div class="ttdeci">std::function&lt; RType(Args...)&gt; BindToObject(RType(C::*fun)(Args...), C *c)</div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00103">template_utils.hpp:103</a></div></div>
-<div class="ttc" id="namespacemanak_1_1utils_1_1helper_html_a922a803ec5fd37b5fc709d4795f6f388"><div class="ttname"><a href="namespacemanak_1_1utils_1_1helper.html#a922a803ec5fd37b5fc709d4795f6f388">manak::utils::helper::Caller_2</a></div><div class="ttdeci">RType Caller_2(Fun fun, P params, Hold&lt; S...&gt;)</div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00064">template_utils.hpp:64</a></div></div>
+<div class="ttc" id="namespacemanak_1_1utils_html_afcb1904a214bd5346f199db39663ae3c"><div class="ttname"><a href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">manak::utils::BindToObject</a></div><div class="ttdeci">std::function&lt; RType(Args...)&gt; BindToObject(RType(C::*fun)(Args...), C *c)</div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00115">template_utils.hpp:115</a></div></div>
+<div class="ttc" id="namespacemanak_1_1utils_1_1helper_html_a922a803ec5fd37b5fc709d4795f6f388"><div class="ttname"><a href="namespacemanak_1_1utils_1_1helper.html#a922a803ec5fd37b5fc709d4795f6f388">manak::utils::helper::Caller_2</a></div><div class="ttdeci">RType Caller_2(Fun fun, P params, Hold&lt; S...&gt;)</div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00070">template_utils.hpp:70</a></div></div>
 <div class="ttc" id="structmanak_1_1utils_1_1helper_1_1SGenerate_html_a7ef97ac89ad49818f7219f55c0849778"><div class="ttname"><a href="structmanak_1_1utils_1_1helper_1_1SGenerate.html#a7ef97ac89ad49818f7219f55c0849778">manak::utils::helper::SGenerate::type</a></div><div class="ttdeci">decltype(Combine(typename SGenerate&lt; N-1 &gt;::type(), Hold&lt; N &gt;())) typedef type</div><div class="ttdef"><b>Definition:</b> <a href="template__utils_8hpp_source.html#l00054">template_utils.hpp:54</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -203,7 +216,7 @@ $(document).ready(function(){initNavTree('template__utils_8hpp_source.html','');
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4c6f0f56bb7b054cbb2a0de860d7d462.html">manak</a></li><li class="navelem"><a class="el" href="dir_1fe2efaad9cdc7226aed6d70f6eeea1f.html">util</a></li><li class="navelem"><a class="el" href="template__utils_8hpp.html">template_utils.hpp</a></li>
-    <li class="footer">Generated on Sat Nov 15 2014 05:14:29 for Manak by
+    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

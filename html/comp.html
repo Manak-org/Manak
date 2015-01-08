@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">0.0.0</span>
    </div>
   </td>
  </tr>
@@ -79,7 +79,7 @@ Comparison framework examples</h2>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Save the results of this benchmark in 'bench1.txt'.</p>
+</div><!-- fragment --><p>Save the results of this benchmark in 'bench1.txt' for comparison.</p>
 <div class="fragment"><div class="line">g++ -std=c++11 &lt;name&gt;.cpp</div>
 <div class="line">./a.out -s bench1.txt</div>
 </div><!-- fragment --><p>Change &lt;name&gt;.cpp to -</p>
@@ -97,7 +97,8 @@ Comparison framework examples</h2>
 </div><!-- fragment --><p>Compare the new code with the older -</p>
 <div class="fragment"><div class="line">g++ -std=c++11 &lt;name&gt;.cpp</div>
 <div class="line">./a.out -c bench1.txt</div>
-</div><!-- fragment --><p>The output of this procedure will look like -</p>
+</div><!-- fragment --><p>The output of this procedure will look like <a href="samples/comp_1.html">Sample HTML ouput</a></p>
+<p>The sample TXT output is -</p>
 <div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version 1.0.0                                                     #</span></div>
@@ -107,7 +108,8 @@ Comparison framework examples</h2>
 <div class="line">       Case Name              base_library        </div>
 <div class="line"></div>
 <div class="line">B1                            +34(3.7) </div>
-</div><!-- fragment --><p>The value in the bracket is the old benchmarked value which was saved in 'bench1.txt'. The '+' sign in front of the entry suggests that the current benchmark is higher in magnitude. On the other hand if the current entry is lower in magnitude, output will show a negative sign. This comparison is done based on tolerance. Hence no sign implies the benchmarks are equivalent with respect to given tolerance. Here no tolerance is given for 'B1' so default tolerance is assumed(10 microseconds). See <a class="el" href="set_env.html#set_env_mdt">MANAK_DEFAULT_TOLERANCE</a> for setting default tolerance value. In comparison with tolerance 'value +- tolerance' is considered equivalent. Tolerance can be given for a perticular benchmark case with 'MANAK_AUTO_BENCHMARK_CASE_T' or 'MANAK_BENCHMARK_CASE_T'. See <a class="el" href="s_mod.html">Simple Benchmark Module</a> for more information on these macros.</p>
+</div><!-- fragment --><p>MANAK by default generates HTML output. Check out <a class="el" href="out_format.html">Output Formats</a> for more information on output formats.</p>
+<p>The value in the bracket is the old benchmarked value which was saved in 'bench1.txt'. The '+' sign in front of the entry suggests that the current benchmark is higher in magnitude. On the other hand if the current entry is lower in magnitude, output will show a negative sign. This comparison is done based on tolerance. Hence no sign implies the benchmarks are equivalent with respect to given tolerance. Here no tolerance is given for 'B1' so default tolerance is assumed(10 microseconds). See <a class="el" href="set_env.html#set_env_mdt">MANAK_DEFAULT_TOLERANCE</a> for setting default tolerance value. In comparison with tolerance 'value +- tolerance' is considered equivalent. Tolerance can be given for a perticular benchmark case with 'MANAK_AUTO_BENCHMARK_CASE_T' or 'MANAK_BENCHMARK_CASE_T'. See <a class="el" href="s_mod.html">Simple Benchmark Module</a> for more information on these macros.</p>
 <p>For loading the appropriate old value into the benchmark case each benchmark case is assigned a unique name. This unique name depends on its location in the hierarchy and its library. Hence its not necessary to maintain the exact state of the benchmarking module to load the old saved results.</p>
 <p>For example let us change the code of &lt;name&gt;.cpp to - </p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -126,7 +128,7 @@ Comparison framework examples</h2>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 100000;i++);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>In this case the output will look like -</p>
+</div><!-- fragment --><p>In this case the output(TXT... HTML output will be similar) will look like -</p>
 <div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version 1.0.0                                                     #</span></div>
@@ -158,7 +160,7 @@ Comparison framework examples</h2>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 100000;i++);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>The output will be -</p>
+</div><!-- fragment --><p>The output(TXT) will be -</p>
 <div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version master.0.0                                                #</span></div>
@@ -193,7 +195,7 @@ Comparison Framework of Normal Module</h1>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>The output of this code will be -</p>
+</div><!-- fragment --><p>The output(TXT) of this code will be -</p>
 <div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version master.0.0                                                #</span></div>
@@ -229,7 +231,7 @@ Comparison Framework of Normal Module</h1>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>And the output -</p>
+</div><!-- fragment --><p>And the output(TXT) -</p>
 <div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version master.0.0                                                #</span></div>
@@ -246,7 +248,7 @@ Comparison Framework of Normal Module</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Nov 15 2014 05:14:29 for Manak by
+    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

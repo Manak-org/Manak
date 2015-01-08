@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">0.0.0</span>
    </div>
   </td>
  </tr>
@@ -79,8 +79,6 @@ $(document).ready(function(){initNavTree('namespacemanak.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:namespacemanak_1_1benchmark__suit"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1benchmark__suit.html">benchmark_suit</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespacemanak_1_1utils"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemanak_1_1utils.html">utils</a></td></tr>
 <tr class="memdesc:namespacemanak_1_1utils"><td class="mdescLeft">&#160;</td><td class="mdescRight">Useful Utilities. <br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,6 +95,10 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the timing information of any run.  <a href="structmanak_1_1PMeasure.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmanak_1_1RegisterBenchmarkSuite.html">RegisterBenchmarkSuite</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmanak_1_1RNode.html">RNode</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmanak_1_1RunTree.html">RunTree</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmanak_1_1T__Benchmark__Case.html">T_Benchmark_Case</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,7 +178,7 @@ template&lt;typename RType , typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="benchmark__case_8hpp_source.html#l00252">252</a> of file <a class="el" href="benchmark__case_8hpp_source.html">benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="benchmark__case_8hpp_source.html#l00190">190</a> of file <a class="el" href="benchmark__case_8hpp_source.html">benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
@@ -230,7 +232,7 @@ template&lt;typename RType , typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="benchmark__case_8hpp_source.html#l00263">263</a> of file <a class="el" href="benchmark__case_8hpp_source.html">benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="benchmark__case_8hpp_source.html#l00201">201</a> of file <a class="el" href="benchmark__case_8hpp_source.html">benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
@@ -249,11 +251,11 @@ template&lt;typename RType , typename... Args&gt; </div>
 
 <p>Returns the version information in string. </p>
 
-<p>Definition at line <a class="el" href="version_8hpp_source.html#l00023">23</a> of file <a class="el" href="version_8hpp_source.html">version.hpp</a>.</p>
+<p>Definition at line <a class="el" href="version_8hpp_source.html#l00024">24</a> of file <a class="el" href="version_8hpp_source.html">version.hpp</a>.</p>
 
-<p>References <a class="el" href="version_8hpp_source.html#l00015">__MANAK_VERSION_MAJOR</a>, <a class="el" href="version_8hpp_source.html#l00016">__MANAK_VERSION_MINOR</a>, and <a class="el" href="version_8hpp_source.html#l00017">__MANAK_VERSION_PATCH</a>.</p>
+<p>References <a class="el" href="version_8hpp_source.html#l00015">__MANAK_VERSION_MAJOR</a>, <a class="el" href="version_8hpp_source.html#l00016">__MANAK_VERSION_MINOR</a>, <a class="el" href="version_8hpp_source.html#l00018">__MANAK_VERSION_NAME</a>, and <a class="el" href="version_8hpp_source.html#l00017">__MANAK_VERSION_PATCH</a>.</p>
 
-<p>Referenced by <a class="el" href="manak_8hpp_source.html#l00041">manak_benchmarking_main()</a>.</p>
+<p>Referenced by <a class="el" href="manak_8hpp_source.html#l00027">manak_benchmarking_main()</a>.</p>
 
 </div>
 </div>
@@ -270,9 +272,9 @@ template&lt;typename RType , typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="benchmark__suite_8hpp_source.html#l00297">297</a> of file <a class="el" href="benchmark__suite_8hpp_source.html">benchmark_suite.hpp</a>.</p>
+<p>Definition at line <a class="el" href="benchmark__suite_8hpp_source.html#l00141">141</a> of file <a class="el" href="benchmark__suite_8hpp_source.html">benchmark_suite.hpp</a>.</p>
 
-<p>References <a class="el" href="benchmark__suite_8hpp_source.html#l00038">manak::BenchmarkSuite::GetMasterSuite()</a>, <a class="el" href="macro__utils_8hpp_source.html#l00013">MANAK_STRINGIZE</a>, and <a class="el" href="benchmark__suite_8hpp_source.html#l00075">manak::BenchmarkSuite::Name()</a>.</p>
+<p>References <a class="el" href="benchmark__suite_8hpp_source.html#l00045">manak::BenchmarkSuite::GetMasterSuite()</a>, <a class="el" href="set__env_8hpp_source.html#l00009">MANAK_MODULE_NAME</a>, and <a class="el" href="benchmark__suite_8hpp_source.html#l00113">manak::BenchmarkSuite::Name()</a>.</p>
 
 </div>
 </div>
@@ -310,9 +312,9 @@ template&lt;typename RType , typename... Args&gt; </div>
 <p>If main is set to auto, this function will be called else it has to be called manually. Returns status as int</p>
 <dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
-<p>Definition at line <a class="el" href="manak_8hpp_source.html#l00041">41</a> of file <a class="el" href="manak_8hpp_source.html">manak.hpp</a>.</p>
+<p>Definition at line <a class="el" href="manak_8hpp_source.html#l00027">27</a> of file <a class="el" href="manak_8hpp_source.html">manak.hpp</a>.</p>
 
-<p>References <a class="el" href="cli_8hpp_source.html#l00040">manak::utils::cli::CLI::cmdOptionExists()</a>, <a class="el" href="cli_8hpp_source.html#l00027">manak::utils::cli::CLI::getCmdOption()</a>, <a class="el" href="log_8hpp_source.html#l00210">manak::utils::Log::GetLog()</a>, <a class="el" href="benchmark__suite_8hpp_source.html#l00038">manak::BenchmarkSuite::GetMasterSuite()</a>, <a class="el" href="version_8hpp_source.html#l00023">GetVersionInfo()</a>, <a class="el" href="benchmark__suite_8hpp_source.html#l00181">manak::BenchmarkSuite::LoadData()</a>, <a class="el" href="manak_8hpp_source.html#l00026">MANAK_DEFAULT_OUT_FILENAME</a>, <a class="el" href="macro__utils_8hpp_source.html#l00013">MANAK_STRINGIZE</a>, <a class="el" href="log_8hpp_source.html#l00238">manak::utils::Log::Print()</a>, <a class="el" href="benchmark__suite_8hpp_source.html#l00115">manak::BenchmarkSuite::Run()</a>, and <a class="el" href="log_8hpp_source.html#l00274">manak::utils::Log::Save()</a>.</p>
+<p>References <a class="el" href="cli_8hpp_source.html#l00040">manak::utils::cli::CLI::cmdOptionExists()</a>, <a class="el" href="cli_8hpp_source.html#l00027">manak::utils::cli::CLI::getCmdOption()</a>, <a class="el" href="benchmark__suite_8hpp_source.html#l00045">manak::BenchmarkSuite::GetMasterSuite()</a>, <a class="el" href="version_8hpp_source.html#l00024">GetVersionInfo()</a>, <a class="el" href="run__tree_8hpp_source.html#l00080">manak::RunTree::GlobalRunTree()</a>, <a class="el" href="classmanak_1_1RunTree.html#aae96bf764810f2d9df0d5d50a87fe060">manak::RunTree::LoadForComparison()</a>, <a class="el" href="set__env_8hpp_source.html#l00024">MANAK_DEFAULT_OUT_FILENAME</a>, <a class="el" href="macro__utils_8hpp_source.html#l00013">MANAK_STRINGIZE</a>, <a class="el" href="classmanak_1_1RunTree.html#a1c6e05f9a565f3d952e55cdd78de1083">manak::RunTree::PrintHTML()</a>, <a class="el" href="classmanak_1_1RunTree.html#ae2aea8645a116220d0b14b15b08b048d">manak::RunTree::PrintTXT()</a>, <a class="el" href="classmanak_1_1BenchmarkSuite.html#aa94f6d653cc68b2cf2ce437b78a3f4ff">manak::BenchmarkSuite::Run()</a>, <a class="el" href="classmanak_1_1RunTree.html#a54dff5bfe24f37725602138f46d6046a">manak::RunTree::Run()</a>, and <a class="el" href="classmanak_1_1RunTree.html#a2641440cb675ed31dda8808ae56d6882">manak::RunTree::SaveForComparison()</a>.</p>
 
 </div>
 </div>
@@ -350,7 +352,7 @@ template&lt;typename RType , typename... Args&gt; </div>
 
 <p>Definition at line <a class="el" href="pmeasure_8hpp_source.html#l00056">56</a> of file <a class="el" href="pmeasure_8hpp_source.html">pmeasure.hpp</a>.</p>
 
-<p>References <a class="el" href="pmeasure_8hpp_source.html#l00053">manak::PMeasure::avg</a>, <a class="el" href="pmeasure_8hpp_source.html#l00051">manak::PMeasure::max</a>, and <a class="el" href="pmeasure_8hpp_source.html#l00049">manak::PMeasure::min</a>.</p>
+<p>References <a class="el" href="pmeasure_8hpp_source.html#l00053">manak::PMeasure::avg</a>.</p>
 
 </div>
 </div>
@@ -360,7 +362,7 @@ template&lt;typename RType , typename... Args&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacemanak.html">manak</a></li>
-    <li class="footer">Generated on Sat Nov 15 2014 05:14:29 for Manak by
+    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

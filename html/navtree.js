@@ -49,6 +49,12 @@ var NAVTREE =
       ] ],
       [ "Comparison Framework of Normal Module", "comp.html#comp_nm", null ]
     ] ],
+    [ "MANAK Hierarchical Structure", "mhierarchy.html", [
+      [ "Master Suite", "mhierarchy.html#hierarchy_master", null ],
+      [ "Benchmark Suite", "mhierarchy.html#hierarchy_suite", null ],
+      [ "Benchmark Case", "mhierarchy.html#hierarchy_case", null ],
+      [ "Sub-Benchmark Case", "mhierarchy.html#hierarchy_sub", null ]
+    ] ],
     [ "Manual Registration", "man_reg.html", [
       [ "Manual Registartion with Simple Module", "man_reg.html#man_reg_msbm", [
         [ "MANAK_BENCHMARK_CASE", "man_reg.html#man_reg_msbm1", null ],
@@ -75,8 +81,16 @@ var NAVTREE =
       [ "Example", "n_mod.html#n_mod_mr_ex", null ],
       [ "Comparison Framework", "n_mod.html#nm_cf", null ]
     ] ],
-    [ "Complete guide on Parametrized Benchmark Cases", "p_bench.html", [
-      [ "AddCustomArgs", "p_bench.html#p_bench_aca", null ],
+    [ "Output Formats", "out_format.html", [
+      [ "Introduction", "out_format.html#out_format_intro", null ],
+      [ "HTML", "out_format.html#out_format_html", null ]
+    ] ],
+    [ "Complete guide on Templatized Benchmarking", "p_bench.html", [
+      [ "Templatized Benchmarking with Parametrized Benchmarks", "p_bench.html#p_bench_para", [
+        [ "AddArgs_N", "p_bench.html#p_bench_aan", null ],
+        [ "AddCustomArgs", "p_bench.html#p_bench_aca", null ]
+      ] ],
+      [ "AddCuctomArgs_N", "p_bench.html#p_bench_acan", null ],
       [ "Parametrized Benchmark Macros for Simple Module", "p_bench.html#p_bench_sm_m", [
         [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE", "p_bench.html#p_bench_m1", null ],
         [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I", "p_bench.html#p_bench_m2", null ],
@@ -88,7 +102,8 @@ var NAVTREE =
         [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I", "p_bench.html#p_bench_m6", null ],
         [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T", "p_bench.html#p_bench_m7", null ],
         [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT", "p_bench.html#p_bench_m8", null ]
-      ] ]
+      ] ],
+      [ "Templatized Benchmarking with Multiple 'Repeat' blocks.", "p_bench.html#p_bench_mr", null ]
     ] ],
     [ "Quick Guide", "quick_guide.html", [
       [ "Introduction", "quick_guide.html#qg_intro_sec", null ],
@@ -159,7 +174,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "all_time.html",
-"s_mod.html"
+"p_bench.html#p_bench_m1"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

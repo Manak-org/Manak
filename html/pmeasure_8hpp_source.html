@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">0.0.0</span>
    </div>
   </td>
  </tr>
@@ -103,26 +103,17 @@ $(document).ready(function(){initNavTree('pmeasure_8hpp_source.html','');});
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
 <div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="namespacemanak.html#a3e9dcfc4e072bd99aa3b22c6f05e12b9">   56</a></span>&#160;<span class="keyword">inline</span> std::ostream&amp; <a class="code" href="namespacemanak.html#a3e9dcfc4e072bd99aa3b22c6f05e12b9">operator&lt;&lt;</a>(std::ostream&amp; stream, <span class="keyword">const</span> <a class="code" href="structmanak_1_1PMeasure.html">PMeasure</a>&amp; pm)</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordflow">if</span>(pm.<a class="code" href="structmanak_1_1PMeasure.html#ac54151834cd85fca4ccaa69cc594fa08">avg</a> != 0)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    std::stringstream s;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  std::stringstream s;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  s &lt;&lt; pm.<a class="code" href="structmanak_1_1PMeasure.html#ac54151834cd85fca4ccaa69cc594fa08">avg</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  stream &lt;&lt; s.str();</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">    #ifdef MANAK_SHOW_MIN_MAX</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor"></span>    s &lt;&lt; pm.<a class="code" href="structmanak_1_1PMeasure.html#ac54151834cd85fca4ccaa69cc594fa08">avg</a> &lt;&lt; <span class="stringliteral">&quot;[&quot;</span> &lt;&lt; pm.<a class="code" href="structmanak_1_1PMeasure.html#a6ddaa14a452f7e399da6cc8aa71f98eb">min</a> &lt;&lt; <span class="stringliteral">&quot;:&quot;</span> &lt;&lt; pm.<a class="code" href="structmanak_1_1PMeasure.html#a8339a0456f3593c7d1d6f38777b23575">max</a> &lt;&lt; <span class="stringliteral">&quot;]&quot;</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">    #else</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor"></span>    s &lt;&lt; pm.<a class="code" href="structmanak_1_1PMeasure.html#ac54151834cd85fca4ccaa69cc594fa08">avg</a>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">    #endif // MANAK_SHOW_MIN_MAX</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    stream &lt;&lt; s.str();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordflow">else</span> stream &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordflow">return</span> stream;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}; <span class="comment">// struct PMeasure</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}; <span class="comment">// namespace manak</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif // MANAK_PMEASURE_HPP_INCLUDED</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordflow">return</span> stream;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}; <span class="comment">// struct PMeasure</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}; <span class="comment">// namespace manak</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif // MANAK_PMEASURE_HPP_INCLUDED</span></div>
 <div class="ttc" id="structmanak_1_1PMeasure_html_a4348b415a635171840a7afdbb57a6947"><div class="ttname"><a href="structmanak_1_1PMeasure.html#a4348b415a635171840a7afdbb57a6947">manak::PMeasure::Compare</a></div><div class="ttdeci">int Compare(const double value, const double tolerance)</div><div class="ttdoc">Compare the average with given value taking into consideration the tolerance. </div><div class="ttdef"><b>Definition:</b> <a href="pmeasure_8hpp_source.html#l00039">pmeasure.hpp:39</a></div></div>
 <div class="ttc" id="namespacemanak_html_a3e9dcfc4e072bd99aa3b22c6f05e12b9"><div class="ttname"><a href="namespacemanak.html#a3e9dcfc4e072bd99aa3b22c6f05e12b9">manak::operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;stream, const PMeasure &amp;pm)</div><div class="ttdef"><b>Definition:</b> <a href="pmeasure_8hpp_source.html#l00056">pmeasure.hpp:56</a></div></div>
 <div class="ttc" id="structmanak_1_1PMeasure_html_ac54151834cd85fca4ccaa69cc594fa08"><div class="ttname"><a href="structmanak_1_1PMeasure.html#ac54151834cd85fca4ccaa69cc594fa08">manak::PMeasure::avg</a></div><div class="ttdeci">double avg</div><div class="ttdoc">Average time. </div><div class="ttdef"><b>Definition:</b> <a href="pmeasure_8hpp_source.html#l00053">pmeasure.hpp:53</a></div></div>
@@ -137,7 +128,7 @@ $(document).ready(function(){initNavTree('pmeasure_8hpp_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4c6f0f56bb7b054cbb2a0de860d7d462.html">manak</a></li><li class="navelem"><a class="el" href="dir_586b1078daf0a92751fc3409d59529af.html">benchmark_suit</a></li><li class="navelem"><a class="el" href="pmeasure_8hpp.html">pmeasure.hpp</a></li>
-    <li class="footer">Generated on Sat Nov 15 2014 05:14:29 for Manak by
+    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

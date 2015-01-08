@@ -1,6 +1,5 @@
 <map id="src/manak/util/version.hpp" name="src/manak/util/version.hpp">
-<area shape="rect" id="node2" href="$log_8hpp.html" title="src/manak/util/log.hpp" alt="" coords="146,80,296,107"/>
-<area shape="rect" id="node3" href="$benchmark__case_8hpp.html" title="Add a measure to this entry. " alt="" coords="5,155,184,197"/>
-<area shape="rect" id="node4" href="$benchmark__suite_8hpp.html" title="src/manak/benchmark\l_suit/benchmark_suite.hpp" alt="" coords="56,246,235,287"/>
-<area shape="rect" id="node5" href="$manak_8hpp.html" title="src/manak/manak.hpp" alt="" coords="133,336,283,363"/>
+<area shape="rect" id="node2" href="$run__tree_8hpp.html" title="src/manak/benchmark\l_suit/run_tree.hpp" alt="" coords="82,81,232,122"/>
+<area shape="rect" id="node3" href="$benchmark__suite_8hpp.html" title="src/manak/benchmark\l_suit/benchmark_suite.hpp" alt="" coords="5,171,184,213"/>
+<area shape="rect" id="node4" href="$manak_8hpp.html" title="src/manak/manak.hpp" alt="" coords="82,261,232,288"/>
 </map>

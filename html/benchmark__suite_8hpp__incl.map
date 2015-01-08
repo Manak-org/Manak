@@ -1,11 +1,11 @@
 <map id="src/manak/benchmark_suit/benchmark_suite.hpp" name="src/manak/benchmark_suit/benchmark_suite.hpp">
-<area shape="rect" id="node7" href="$macro__utils_8hpp.html" title="manak/util/macro_utils.hpp" alt="" coords="1495,179,1674,205"/>
-<area shape="rect" id="node8" href="$log_8hpp.html" title="manak/util/log.hpp" alt="" coords="319,179,447,205"/>
-<area shape="rect" id="node12" href="$pmeasure_8hpp.html" title="manak/benchmark_suit\l/pmeasure.hpp" alt="" coords="1090,337,1247,378"/>
-<area shape="rect" id="node17" href="$base__library_8hpp.html" title="base_library.hpp" alt="" coords="26,179,142,205"/>
-<area shape="rect" id="node19" href="$benchmark__case_8hpp.html" title="Add a measure to this entry. " alt="" coords="849,96,995,123"/>
-<area shape="rect" id="node14" href="$version_8hpp.html" title="version.hpp" alt="" coords="595,261,683,288"/>
-<area shape="rect" id="node15" href="$timer_8hpp.html" title="timer.hpp" alt="" coords="1227,261,1302,288"/>
-<area shape="rect" id="node24" href="$template__utils_8hpp.html" title="manak/util/template\l_utils.hpp" alt="" coords="759,171,894,213"/>
-<area shape="rect" id="node25" href="$module__benchmark__case_8hpp.html" title="module_benchmark_case.hpp" alt="" coords="919,179,1114,205"/>
+<area shape="rect" id="node7" href="$benchmark__case_8hpp.html" title="benchmark_case.hpp" alt="" coords="1319,171,1465,197"/>
+<area shape="rect" id="node16" href="$pmeasure_8hpp.html" title="pmeasure.hpp" alt="" coords="884,336,988,363"/>
+<area shape="rect" id="node20" href="$macro__utils_8hpp.html" title="manak/util/macro_utils.hpp" alt="" coords="2171,253,2349,280"/>
+<area shape="rect" id="node24" href="$run__tree_8hpp.html" title="run_tree.hpp" alt="" coords="502,96,596,123"/>
+<area shape="rect" id="node18" href="$timer_8hpp.html" title="manak/util/timer.hpp" alt="" coords="1565,253,1704,280"/>
+<area shape="rect" id="node19" href="$object__store_8hpp.html" title="manak/util/object_store.hpp" alt="" coords="449,336,631,363"/>
+<area shape="rect" id="node21" href="$template__utils_8hpp.html" title="manak/util/template\l_utils.hpp" alt="" coords="932,246,1067,287"/>
+<area shape="rect" id="node23" href="$module__benchmark__case_8hpp.html" title="module_benchmark_case.hpp" alt="" coords="1295,253,1489,280"/>
+<area shape="rect" id="node26" href="$version_8hpp.html" title="manak/util/version.hpp" alt="" coords="655,336,808,363"/>
 </map>

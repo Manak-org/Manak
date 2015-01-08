@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">0.0.0</span>
    </div>
   </td>
  </tr>
@@ -65,9 +65,23 @@ $(document).ready(function(){initNavTree('quick_guide.html','');});
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="qg_intro_sec"></a>
 Introduction</h1>
-<p>So let us take a moment to understand the hierarchical structure that MANAK uses. When <a class="el" href="manak_8hpp.html">manak.hpp</a> is included in the project it also included the master benchmarking suit which registers all the benchmarking cases. This master suit is a special case of a benchmarking suit which may have more test suits or cases as its children. On the other hand benchmarking case is a leaf node in this tree(or so we assume util template benchmarks come into picture). Each benchmark case is charectorized by a function which is ultimately timed. This hierarchical structure helps us to run specific benchmarks. Now that we know the hierarchical structure we can introduce the concept of library into this picture. Libaries in MANAK are considered groups of benchmarking cases that are compared against each other. So now we can say that a benchmark case is characterized by function and a library. The benchmark cases having same name and different library are compared against each other in the output. Remember benchmarking suits maintain their own namespace so benchmarking cases having same name and different suit won't be compared.</p>
+<p>So let us take a moment to understand the hierarchical structure that MANAK uses. When <a class="el" href="manak_8hpp.html">manak.hpp</a> is included in the project it also included the master benchmarking suit which registers all the benchmarking cases. This master suit is a special case of a benchmarking suit which may have more test suits or cases as its children. On the other hand benchmarking case is a leaf node in this tree(or so we assume until template benchmarks come into picture). Each benchmark case is charectorized by a unique name. This name contains the path to this case from the root. This hierarchical structure helps us to run specific benchmarks. Now that we know the hierarchical structure we can introduce the concept of library into this picture. Libaries in MANAK are considered groups of benchmarking cases that are compared against each other. So now we can say that a benchmark case is characterized by name and a library. The benchmark cases having same name and different library are compared against each other in the output. Check out <a class="el" href="mhierarchy.html">MANAK Hierarchical Structure</a> for more details on the MANAK hierarchy.</p>
 <p>So now we can start benchmarking. The benchmark cases and suits in Manak can be registred either manually or automatically. But in this quick guide we are only going to consider auto registration. For more information on manual registration check out <a class="el" href="man_reg.html">Manual Registration</a></p>
 <p>Before we start registration of cases let us understand the timing features of MANAK. The time is measured in microseconds. The function runs for given number of iterations and the average of all iterations is taken as the final result. When number of iterations is not given the default is used(Which is 10 if not set otherwise). The default can be changed by setting 'MANAK_DEFAULT_ITERATIONS' to the desired value.</p>
+<p>MANAK can generate ouput in 2 different formats, HTML and TXT. A simple HTML output looks like this - <a href="samples/qg_intro_sec_1.html">Sample HTML ouput</a>. The equivalent TXT log -</p>
+<div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version 0.0.0                                                     #</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Created at Jan  7 15:47:09 2015                                   #</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">######################################################################</span></div>
+<div class="line"><span class="preprocessor"></span></div>
+<div class="line">       Case Name              lib1                lib2                </div>
+<div class="line">Test                          5(3.1)              0.9(0.4)            </div>
+<div class="line"></div>
+<div class="line">Test2</div>
+<div class="line">                              0.7(0.4)            ---                 </div>
+<div class="line">                              4.9(0.4)            ---</div>
+</div><!-- fragment --><p>The values in bracket for both HTML and TXT output are values added for comprison. For more information on comparison framework check <a class="el" href="comp.html">Comparison Framework</a>. Manak by default generates HTML output but user can force Manak to generate TXT output with -f option(also stands for format :P). Passing argument '-f TXT' will force MANAK to generate TXT output.</p>
 <p>MANAK offers 2 benchmarking modules. For more information on benchmarking modules check out <a class="el" href="set_env.html#set_env_smt">Setting module type</a>.</p>
 <h1><a class="anchor" id="qg_sbm"></a>
 Simple Benchmarking Module</h1>
@@ -87,7 +101,8 @@ Simple Benchmarking Module</h1>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Thats it! This will automatically registers the case in master suit and the MANAK_AUTO_BENCHMARK_MAIN define will generate the main for you. Manak uses C++11 features so don't forget to add option '-std=c++11' to g++ or clang. By default the output will be saved to file 'benchmark_stat.txt' and will look like -</p>
+</div><!-- fragment --><p>Thats it! This will automatically registers the case in master suit and the MANAK_AUTO_BENCHMARK_MAIN will generate the main for you. Manak uses C++11 features so don't forget compile the code with C++11 support. By default the output will be saved to file 'benchmark_stat.html' and will look like - <a href="samples/qg_intro_sec_2.html">Sample HTML ouput</a></p>
+<p>TXT output for above code -</p>
 <div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version 1.0.0                                                     #</span></div>
@@ -97,8 +112,8 @@ Simple Benchmarking Module</h1>
 <div class="line">       Case Name              base_library        </div>
 <div class="line"></div>
 <div class="line">ForLoops                      3.3  </div>
-</div><!-- fragment --><p>To change the default output file set 'MANAK_DEFAULT_OUT_FILENAME' to desired value. Check out <a class="el" href="set_env.html#set_env_soof">Setting Options For Output File</a> for more options. While running the benchmark case all the ouput to standard output will be redirected by default to the file 'benchmark_log.txt'. To chnage the default set 'MANAK_REDIRECTION_FILENAME' to desired value. For more options about redirection check <a class="el" href="set_env.html#set_env_sro">Setting Redirection Options</a>.</p>
-<p>If you want to generate the main for yourselves check <a class="el" href="set_env.html#set_env_mcmf">Manually creating main function</a></p>
+</div><!-- fragment --><p>To change the default output file, set 'MANAK_DEFAULT_OUT_FILENAME' to desired value. Check out <a class="el" href="set_env.html#set_env_soof">Setting Options For Output File</a> for more options. While running the benchmark case all the ouput to the standard output will be redirected by default to the file 'benchmark_log.txt'. To chnage the default, set 'MANAK_REDIRECTION_FILENAME' to desired value. For more options about redirection check <a class="el" href="set_env.html#set_env_sro">Setting Redirection Options</a>.</p>
+<p>If you want to generate the main for yourselves check <a class="el" href="set_env.html#set_env_mcmf">Manually creating main function</a>.</p>
 <p>Sometimes the code to be measured requires another code to be executed before or after, sort of like set up and tear down. To measure such a code 'Measure' macro can be used. For example -</p>
 <div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1)</div>
 <div class="line">{</div>
@@ -121,6 +136,13 @@ Simple Benchmarking Module</h1>
 <div class="line">    Code to be measured;</div>
 <div class="line">  )</div>
 <div class="line">  </div>
+<div class="line">  Code;</div>
+<div class="line">  </div>
+<div class="line">  <a class="code" href="benchmark__case_8hpp.html#ae14657e1f2d907faa918ff681c81d895">Measure</a></div>
+<div class="line">  (</div>
+<div class="line">    Another code to be measured;</div>
+<div class="line">  )</div>
+<div class="line">  </div>
 <div class="line">  Tear down;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>For more time related features check out <a class="el" href="all_time.html">All About Timing</a></p>
@@ -138,7 +160,7 @@ Simple Benchmarking Module</h1>
 </div><!-- fragment --><p>Remember 'Measure' block can also be used inside manually generated functions.</p>
 <h2><a class="anchor" id="qg_pbc"></a>
 Parametrized Benchmark Cases</h2>
-<p>Functions with parameters can be used as template benchmark function. For example -</p>
+<p>Functions with parameters can be used as templated benchmarks. For example -</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
@@ -171,7 +193,7 @@ Parametrized Benchmark Cases</h2>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun)-&gt;AddCustomArgs(get_args));</div>
-</div><!-- fragment --><p>The function passed to 'AddCustomArgs' must return list of tuples. These returned tuples will be unfolded and passed to the parametrized benchmark case one by one. For more advance parametrized benchmark options check <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmark Cases</a> .</p>
+</div><!-- fragment --><p>The function passed to 'AddCustomArgs' must return list of tuples. These returned tuples will be unfolded and passed to the parametrized benchmark case one by one. For more advance parametrized benchmark options check <a class="el" href="p_bench.html#p_bench_para">Templatized Benchmarking with Parametrized Benchmarks</a> .</p>
 <p>The auto test registration registers the case to the current suit(which happens to be the master suit in global space). 'MANAK_AUTO_BENCHMARK_SUITE' registers a new suite under the current suit and sets the newly created suite as the current suite.</p>
 <div class="fragment"><div class="line"><a class="code" href="benchmark__suite_8hpp.html#ae2cb39c3eedb85936f963b6e9a48b546">MANAK_AUTO_BENCHMARK_SUITE</a>(Suite1);</div>
 <div class="line"></div>
@@ -218,15 +240,7 @@ Benchmaking Module</h1>
 <div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ac57cc187439c0bff8b688ca09b689d9c">MANAK_AUTO_BENCHMARK_CASE_I</a>(B1, lib1, 10)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
-<div class="line">}######################################################################</div>
-<div class="line"><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version master.0.0                                                #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Created at Nov 13 22:41:53 2014                                   #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">######################################################################</span></div>
-<div class="line"><span class="preprocessor"></span></div>
-<div class="line">       Case Name              base_library        </div>
-<div class="line"></div>
-<div class="line">ForLoop                       3.2[3:4]            </div>
+<div class="line">}</div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">int</span> fun()</div>
 <div class="line">{}</div>
@@ -267,7 +281,8 @@ Manak Comparison Framework</h1>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>The output will look like -</p>
+</div><!-- fragment --><p>The HTML output will look like - <a href="samples/qg_intro_sec_3.html">Sample HTML ouput</a></p>
+<p>And TXT output -</p>
 <div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version 1.0.0                                                     #</span></div>
@@ -277,10 +292,10 @@ Manak Comparison Framework</h1>
 <div class="line">       Case Name              lib1                lib2                </div>
 <div class="line"></div>
 <div class="line">ForLoops                      3.4                 31.8</div>
-</div><!-- fragment --><p>Manak also offers saving these results for comparison. This comparison type is available for both simple and normal Pass argument '-s &lt;filename&gt;' to executable for saving the results for comparison. This specially saved file can be loaded for comparison with command line arguments '-c &lt;filename&gt;'. Let us assume 'bench' is the executable name then -</p>
+</div><!-- fragment --><p>Manak also offers saving these results for comparison. This comparison type is available for both simple and normal modules. Pass argument '-s &lt;filename&gt;' to the executable for saving the results. This specially saved file can be loaded for comparison with command line arguments '-c &lt;filename&gt;'. Let us assume 'bench' is the executable name, then -</p>
 <div class="fragment"><div class="line">bench -s saved.txt</div>
 <div class="line">bench -c saved.txt</div>
-</div><!-- fragment --><p>The output of the second run will be saved to 'benchmark_stat.txt'. The output will sort of look like -</p>
+</div><!-- fragment --><p>The output of the second run will be saved to 'benchmark_stat.html'. The output will look like - <a href="samples/qg_intro_sec_4.html">Sample HTML ouput</a></p>
 <div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version 1.0.0                                                     #</span></div>
@@ -290,7 +305,7 @@ Manak Comparison Framework</h1>
 <div class="line">       Case Name              lib1                lib2                </div>
 <div class="line"></div>
 <div class="line">ForLoops                      +42.4(3.2)          -0.1(31.6)</div>
-</div><!-- fragment --><p>The values in bracket are the values loaded for comparison. Loaded values are also compared with the current values with tolerance. The result of the comparison is shown with a sign in front of the current value. No sign will imply equivalent runs. The default tolerance is 10 which can be changed by setting 'MANAK_DEFAULT_TOLERANCE' to desired value. Also tolerance for each test can be set by using 'MANAK_AUTO_BENCHMARK_CASE_T'</p>
+</div><!-- fragment --><p>The values in bracket are the values loaded for comparison. Loaded values are compared with the current values with tolerance. The result of the comparison is shown with a sign in front of the current value. No sign will imply equivalent runs. The default tolerance is 10 which can be changed by setting 'MANAK_DEFAULT_TOLERANCE' to desired value. Also tolerance for each test can be set by using 'MANAK_AUTO_BENCHMARK_CASE_T' macro. For more available macros check <a class="el" href="auto_reg.html">Automatic Registration</a>.</p>
 <div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ab449c770b6d3bc90c0e1dcb8a38cd23e">MANAK_AUTO_BENCHMARK_CASE_T</a>(ForLoops, lib1, 50)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
@@ -303,7 +318,7 @@ Running Specific Cases</h1>
 <ul>
 <li>To access the child of any suite "/" token can be used.</li>
 <li>If an entire suite matches the regex, all the children of that suite will run.</li>
-<li>All type of regex expressions are supported between "/" tokens.</li>
+<li>Manak uses c++11 regex expressions.</li>
 </ul>
 <p>Example - To run a suite named 'B1' under master suite </p>
 <div class="fragment"><div class="line">bench -r B1</div>
@@ -311,12 +326,13 @@ Running Specific Cases</h1>
 <div class="fragment"><div class="line">bench -r B1/B2</div>
 </div><!-- fragment --><p>To run all children of suite B1(child of master) starting with "Bench"</p>
 <div class="fragment"><div class="line">bench -r B1/Bench.*</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p>For more information on regex expressions check ... </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Nov 15 2014 05:14:29 for Manak by
+    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
