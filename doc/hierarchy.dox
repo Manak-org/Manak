@@ -53,10 +53,18 @@ benchmarked.
 Sub-Benchmark case may be the smallest unit in this hierarchy but it is the most
 important and complex. There can be any number of sub-benchmark cases in a 
 benchmark case and they are identified with index rather than a name(although a 
-name can be assigned). Index is provided based on the chronological order. So 
-when benchmark cases are compared against each other(see @ref comp if you don't
+name can be assigned). Index is provided based on the chronological order(starting 
+with 0). So when benchmark cases are compared against each other(see @ref comp if you don't
 know when they are compared), sub-benchmark cases are compared against each other.
 The benchmark cases in comparison can have different number of sub-benchmark cases.
-For example - look at this <a href="samples/comp_1.html">Sample HTML ouput</a>.
-
+For example - look at this <a href="samples/hierarchy_1.html">Sample HTML ouput</a>.
+Check out @ref out_format_html for information on HTML output.
+You can see here that case B1 for lib1 contains 3 sub-cases while B1 for lib2 
+contains 2 sub-cases. Take a look at the detailed report, in B1-lib1 all the 
+sub-cases are named but the second one does not reflect into the main table. 
+This is because the name of second sub-case name of lib1 and second sub-case of lib2 
+does not match(there is an extra space). As sub-cases are indexed by numbers, 
+Names of sub-cases only reflect in the main table if they match for every library. 
+This also applied to TXT output. Check out @ref p_bench for guide on 
+templatized benchmarking.
 */

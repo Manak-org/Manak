@@ -29,6 +29,10 @@ void ForLoops(size_t a)
 MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, ForLoops)->AddArgs(1000)->AddArgs(2000));
 @endcode 
 
+The output(HTML) can be seen <a href="samples/p_bench_1.html">HERE</a>. As you
+can see there are 2 sub-cases in B1. Notice that all the sub-cases share the same 
+tolerance and iteration values.
+
 Reducing code redundancy helps minimize erros. In the above code 'B1' is a 
 parametrized benchmark holding 2 sets of parameter set. With 'AddArgs' you
 can add more parameter sets to the parametrized benchmark. There can be any number
@@ -48,6 +52,28 @@ int fun(const T& t)
 
 MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun<std::string>)->AddArgs("Test"));
 @endcode
+
+@subsection p_bench_aan AddArgs_N
+
+'AddArgs' adds an unamed sub-case to the benchmark case. Sub-benchmark cases are
+characterized by the chronological index rather than a name. Check out @ref hierarchy_sub
+for more information on the structure. But still it sometimes helps to associate 
+a name. For example <a href="samples/p_bench_2.html">THIS</a> output is better 
+than <a href="samples/p_bench_1.html">THIS</a> output. AddArgs_N can be used to
+add name to the sub-case.
+
+@code
+void ForLoops(size_t a)
+{
+  for(size_t i = 0;i < a;i++);
+}
+
+MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, ForLoops)->AddArgs_N("With 1000", 1000)->AddArgs_N("With 2000", 2000));
+@endcode
+
+AddArgs_N works as same as AddArgs but always accepts one parameter as name.
+Remember even though name is added to the sub-case they are accessed only by
+their chronological index. To understand this better see @ref hierarchy_sub.
 
 @subsection p_bench_aca AddCustomArgs
 
@@ -91,6 +117,27 @@ list<tuple<int, int>> GetArgs(int a)
 }
 
 MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs(GetArgs, 50));
+@endcode
+
+@section p_bench_acan AddCuctomArgs_N
+
+To name sub-cases use AddCustomArgs_N
+
+@code
+int fun(int a, int b)
+{
+  Code;
+}
+
+list<tuple<std::string, int, int>> GetArgs(int a)
+{
+  list<tuple<int, int>> out;
+  for(size_t i = 0;i < a;i++)
+    out.emplace_back(<name>, i, i+1);
+  return out;
+}
+
+MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs_N(GetArgs, 50));
 @endcode
 
 For more advance function passing see @ref use_afr.
@@ -156,19 +203,21 @@ For example -
 
 using namespace std;
 
-MANAK_AUTO_TEST_CASE(B1)
+MANAK_AUTO_BENCHMARK_CASE(B1)
 {
   for(size_t i = 1000;i < 2000;i = i + 100)
   {
     Repeat
     (
-      for(size_t j = 0;j < i;i++);
+      for(size_t j = 0;j < i;j++);
     )
   }
-} 
+}
 @endcode
 
-The output of this code is -
+The output of this code is <a href="samples/p_bench_3.html">HTML</a>
+
+TXT output is given below - 
 
 @code
 ######################################################################
@@ -192,5 +241,35 @@ B1
   Parameter Set 9             5.8
 @endcode
 
+If you want to assign different tolerance and iteration values to sub-cases,
+multiple repeat is the way to go. This is not possible with parametrized 
+benchmark cases. 
 
+@code
+#include <iostream>
+
+#define MANAK_SIMPLE_BENCHMARK_MODULE bench
+#define MANAK_AUTO_BENCHMARK_MAIN
+
+#include <manak/manak.hpp>
+
+using namespace std;
+
+MANAK_AUTO_BENCHMARK_CASE_T(B1, <value>)
+{
+  for(size_t i = 1000;i < 2000;i = i + 100)
+  {
+    SetTol(<value>);
+    SetIter(<value>);
+    Repeat
+    (
+      for(size_t j = 0;j < i;j++);
+    )
+  }
+}
+@endcode
+
+SetIter and SetTol only takes effect for the next sub-case. It is trivial to 
+mention that if no SetTol is given for a sub-case the default is taken which is 
+the tolerance set for the parent benchmark case.
 */

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Benchmarking log for module 'bench'</title>
+<style>
+li bold {font-weight: bold; font-size: 25px; }
+li info {font-size: 25px; }
+table, th, td { border: 1px solid black;                                border-collapse: collapse;                              }                th, td {                         padding: 5px;                         text-align: left;                       }
+bold {font-weight: bold; }
+</style>
+</head>
+<body>
+<h1 style="text-align:center"> Benchmarking Log for Module 'bench'</h1>
+<br>
+<ul>
+<li><bold>Module: </bold><info>bench</info></li>
+<li><bold>Timestamp: </bold><info>Jan  8 14:25:46 2015</info></li>
+<li><bold>Total Cases: </bold><info>1</info></li>
+<li><bold>Timestamp of module added for comparison: Jan  7 18:39:23 2015</bold></li>
+</ul>
+<br>
+<table style="width:100%">
+<tr>
+<th>Benchmark Name</th>
+<th></th>
+                <th>lib1</th>
+                <th>lib2</th>
+</tr>
+<tr>
+<td rowspan = "3">B1</td>
+<td>With100</td>
+<td>0.7</td>
+<td>0.8</td>
+
+</tr>
+<tr>
+<td>Parameter Set 1</td>
+<td>4.8</td>
+<td>4.3</td>
+
+</tr>
+<tr>
+<td>With10000</td>
+<td>45.7</td>
+<td>---</td>
+
+</tr>
+
+</table>
+<h2>Detailed Report</h2>
+<hr width=100% align=left>
+<h2>/B1</h2>
+<bold>Number of Libraries: </bold>1<br>
+<bold>Libraries: </bold>lib1, lib2<br>
+<h3>lib1</h3>
+<table style="width:100%">
+<tr>
+<th>Subcase</th>
+<th>Result</th>
+<th>Min</th>
+<th>Max</th>
+<th>Tolerance</th>
+<th>Iterations</th>
+</tr>
+<tr>
+<td>With100</td>
+<td>0.7</td>
+<td>0</td>
+<td>2</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>With1000</td>
+<td>4.8</td>
+<td>4</td>
+<td>5</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>With10000</td>
+<td>45.7</td>
+<td>39</td>
+<td>81</td>
+<td>10</td>
+<td>10</td>
+</tr>
+</table>
+<h3>lib2</h3>
+<table style="width:100%">
+<tr>
+<th>Subcase</th>
+<th>Result</th>
+<th>Min</th>
+<th>Max</th>
+<th>Tolerance</th>
+<th>Iterations</th>
+</tr>
+<tr>
+<td>With100</td>
+<td>0.8</td>
+<td>0</td>
+<td>1</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>With 1000</td>
+<td>4.3</td>
+<td>4</td>
+<td>5</td>
+<td>10</td>
+<td>10</td>
+</tr>
+</table>
+<hr width=100% align=left>
+
+<footer>
+<p>Created by Manak:C++ Unit Benchmarking Library</p>
+</footer>
+</body>
+</html>

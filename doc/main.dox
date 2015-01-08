@@ -5,7 +5,7 @@
 Manak is C++ Unit Benchmarking library designed for easy to use and flexible 
 solution to C++ benchmarking. Manak is header only library and uses C++11 
 features. Manak provides many useful features such as automated registration(see
-@auto_reg), HTML output generation(see @ref out_format), comparison 
+@ref auto_reg), HTML output generation(see @ref out_format), comparison 
 framework(see @ref comp), smart timing macros(see @ref all_time), parametrized 
 benchmarks(see @ref qg_pbc) and many more. Manak supports hierarchical structure 
 construction which helps in running specific benchmarks through regular 
@@ -14,6 +14,8 @@ expression(see @ref qg_rsc).
 Manak is tested on Windows, Linux and MacOS. Check out @ref build.
 
 Check out the @ref quick_guide to start.
+
+Check out @ref mhierarchy.
 
 See @ref set_env for guide on setting Manak environment variables.
 
