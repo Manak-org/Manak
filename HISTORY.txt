@@ -1,0 +1,11 @@
+   9 JAN 2015   MANAK 1.1.0
+   
+  * Multiple repeat block support added(#1)
+  * Template benchmarking can also be simulated with multiple repeat blocks
+  * Supports HTML output, HTML is default output(#3)
+  * Sub-benchmark cases can be named(#6)
+  * Tolerance and iterations of sub-benchmark cases can be changed(#9)
+  
+  15 NOV 2015   MANAK 1.0.0
+  
+  * Initial Release 
