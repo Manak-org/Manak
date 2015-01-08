@@ -20,7 +20,7 @@ std::list<utils::ObjectStore> BenchmarkCase::Run()
     std::cout.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
     std::cerr.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
 
-    os["Timer_CurrentSubName"] = &run_function.first;
+    os["Timer_CurrentSubName"] = new std::string(run_function.first);
 
     Timer::Initialize();
     auto& fun = run_function.second;
