@@ -171,7 +171,10 @@ class Timer
       std::string sub_name = "";
       std::string* temp = (std::string*)os.RGet("Timer_CurrentSubName");
       if(temp)
+      {
         sub_name = *temp;
+        delete temp;
+      }
 
       typedef std::list<utils::ObjectStore> ResultList;
 
