@@ -27,11 +27,8 @@ std::list<utils::ObjectStore> BenchmarkCase::Run()
     do
     {
       Timer::StartIter();
-      Timer::StartTimer();
 
       fun();
-
-      Timer::StopTimer();
     }while(Timer::EndIter());
 
     std::cout.rdbuf(coutbuf);

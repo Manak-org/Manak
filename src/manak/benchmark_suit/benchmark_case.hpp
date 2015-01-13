@@ -236,35 +236,4 @@ manak::Timer::StartTimer();                                                   \
 Code                                                                          \
 manak::Timer::StopTimer();
 
-#define Repeat(Code)                                                          \
-manak::Timer::Initialize();                                                   \
-do                                                                            \
-{                                                                             \
-  manak::Timer::StartIter();                                                  \
-  manak::Timer::StartTimer();                                                 \
-                                                                              \
-  Code                                                                        \
-                                                                              \
-  manak::Timer::StopTimer();                                                  \
-}while(manak::Timer::EndIter());                                              \
-manak::Timer::Deinitialize();
-
-#define SetIter(X)                                                            \
-if((size_t*)manak::utils::ObjectStore::GetGlobalObjectStore().Get("Timer_CurrentSubIterations") != NULL) \
-  delete (size_t*)manak::utils::ObjectStore::GetGlobalObjectStore().Get("Timer_CurrentSubIterations");                                                              \
-if(X != 0)                                                                    \
-{                                                                             \
-  manak::utils::ObjectStore::GetGlobalObjectStore().Insert("Timer_CurrentSubIterations", new size_t(X)); \
-}
-
-#define SetTol(X)                                                             \
-if((size_t*)manak::utils::ObjectStore::GetGlobalObjectStore().Get("Timer_CurrentSubTolerance") != NULL) \
-  delete (double*)manak::utils::ObjectStore::GetGlobalObjectStore().Get("Timer_CurrentSubTolerance");                                                              \
-manak::utils::ObjectStore::GetGlobalObjectStore().Insert("Timer_CurrentSubTolerance", new double(X));
-
-#define SetSubName(X)                                                         \
-if((std::string*)manak::utils::ObjectStore::GetGlobalObjectStore().Get("Timer_CurrentSubName") != NULL);  \
-  delete (std::string*)manak::utils::ObjectStore::GetGlobalObjectStore().Get("Timer_CurrentSubName"); \
-manak::utils::ObjectStore::GetGlobalObjectStore().Insert("Timer_CurrentSubName", new std::string(X));
-
 #endif // MANAK_BENCHMARK_CASE_HPP_INCLUDED
