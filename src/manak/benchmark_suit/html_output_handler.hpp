@@ -1,9 +1,10 @@
-#ifndef MANAK_TXT_OUPUT_HANDLER_HPP_INCLUDED
-#define MANAK_TXT_OUPUT_HANDLER_HPP_INCLUDED
+#ifndef MANAK_HTML_OUPUT_HANDLER_HPP_INCLUDED
+#define MANAK_HTML_OUPUT_HANDLER_HPP_INCLUDED
 
 #include <map>
 #include <string>
 #include <list>
+#include <sstream>
 
 #include "output_handler.hpp"
 
@@ -12,14 +13,14 @@
 namespace manak
 {
 
-class TXTOutputHandler : public OutputHandler
+class HTMLOutputHandler : public OutputHandler
 {
  public:
-  TXTOutputHandler(const std::string& name)
-    : OutputHandler(name)
+  HTMLOutputHandler(const std::string& name)
+    : OutputHandler(name), total_nodes(0)
   {}
 
-  ~TXTOutputHandler() {}
+  ~HTMLOutputHandler() {}
 
   void Initialize(const std::map<std::string, size_t>& l_map,
                   bool compare,
@@ -32,15 +33,20 @@ class TXTOutputHandler : public OutputHandler
 
   void CloseSuite() {}
 
-  void Finalize() {}
+  void Finalize();
 
  private:
   std::map<std::string, size_t> l_map;
+  std::stringstream stream1;
+  std::stringstream stream2;
+
+  size_t total_nodes;
+  bool isComp;
+  std::string compare_time;
 };
 
 }
 
-#include "txt_output_handler_impl.hpp"
+#include "html_output_handler_impl.hpp"
 
-
-#endif // MANAK_TXT_OUPUT_HANDLER_HPP_INCLUDED
+#endif // MANAK_HTML_OUPUT_HANDLER_HPP_INCLUDED

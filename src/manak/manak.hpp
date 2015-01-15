@@ -87,8 +87,6 @@ int manak_benchmarking_main(int argc, char* argv[] )
     }
   }
 
-  std::ofstream* stream = NULL;
-
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-f"))
   {
     std::string format = manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-f");
@@ -103,29 +101,38 @@ int manak_benchmarking_main(int argc, char* argv[] )
     }
   }
 
+  std::string filename;
+
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-o"))
   {
-    std::string filename(manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-o"));
-    stream = new std::ofstream(filename);
+    filename = std::string(manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-o"));
   }
   else
   {
-    std::string fname = MANAK_STRINGIZE(MANAK_DEFAULT_OUT_FILENAME);
+    filename = MANAK_STRINGIZE(MANAK_DEFAULT_OUT_FILENAME);
 
     if(output_format_html)
-      fname += ".html";
-    else fname += ".txt";
+    {
+      filename += ".html";
+    }
+    else
+    {
+      filename += ".txt";
+    }
+  }
 
-    stream = new std::ofstream(fname);
-
-    manak::OutputManager::GlobalOutputManager().AddHandler(new manak::TXTOutputHandler("test.txt"));
+  if(output_format_html)
+  {
+    manak::OutputManager::GlobalOutputManager().AddHandler(new manak::HTMLOutputHandler(filename));
+  }
+  else
+  {
+    manak::OutputManager::GlobalOutputManager().AddHandler(new manak::TXTOutputHandler(filename));
   }
 
   manak::init_benchmarking_module();
 
   BenchmarkSuite::GetMasterSuite().Run("", pattern, compare);
-
-  //RunTree::GlobalRunTree().Run();
 
   ResultCollector::GlobalResultCollector().Run();
 
@@ -135,14 +142,6 @@ int manak_benchmarking_main(int argc, char* argv[] )
     std::ifstream com_file(filename);
     ResultCollector::GlobalResultCollector().LoadForComparison(com_file);
   }
-
-//  if(output_format_html)
-//    RunTree::GlobalRunTree().PrintHTML(*stream);
-//  else
-//    RunTree::GlobalRunTree().PrintTXT(*stream);
-
-//  std::ofstream s_html("test.html");
-//  RunTree::GlobalRunTree().PrintHTML(s_html);
 
   ResultCollector::GlobalResultCollector().Print();
 
@@ -155,8 +154,6 @@ int manak_benchmarking_main(int argc, char* argv[] )
     ss.close();
   }
 
-  stream->close();
-  delete stream;
   return 0;
 }
 
