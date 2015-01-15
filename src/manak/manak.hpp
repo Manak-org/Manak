@@ -11,12 +11,34 @@
 
 #include <manak/benchmark_suit/set_env.hpp>
 #include <manak/benchmark_suit/benchmark_suite.hpp>
-#include <manak/benchmark_suit/run_tree.hpp>
+#include <manak/benchmark_suit/result_collector.hpp>
+
+#include <manak/benchmark_suit/output_manager.hpp>
 
 #include <manak/util/cli.hpp>
 
 namespace manak /** C++ Unit Benchmarking Library. **/
 {
+
+bool init_benchmarking_module()
+{
+  #ifndef MANAK_SIMPLE_BENCHMARK_MODULE
+  #ifndef MANAK_BENCHMARK_MODULE
+  static_assert(false, "Manak benchmarking module not defined. Use either MANAK_BENCHMARK_MODULE or MANAK_SIMPLE_BENCHMARK_MODULE");
+  #endif // MANAK_BENCHMARK_MODULE
+  #endif // MANAK_SIMPLE_BENCHMARK_MODULE
+
+  //! If MANAK_MANUAL_INIT_FUNCTION is defined then that function will be
+  //! called from default initialization function. This function can be used
+  //! manually registering cases.
+  #ifdef MANAK_MANUAL_INIT_FUNCTION
+  MANAK_MANUAL_INIT_FUNCTION();
+  #endif // MANAK_MANUAL_INIT_FUNCTION
+
+  manak::BenchmarkSuite::GetMasterSuite().Name() = MANAK_MODULE_NAME;
+
+  return true;
+}
 
 //! This function runs benchmarking module with given function. If main is set
 //! to auto, this function will be called else it has to be called manually.
@@ -24,7 +46,7 @@ namespace manak /** C++ Unit Benchmarking Library. **/
 //!
 //! \return int
 //!
-int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* argv[] )
+int manak_benchmarking_main(int argc, char* argv[] )
 {
   bool output_format_html = true;
   bool compare = false;
@@ -48,8 +70,6 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
     exit(0);
   }
 
-
-  init_func();
   std::string pattern = "";
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-r"))
   {
@@ -97,33 +117,41 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
     else fname += ".txt";
 
     stream = new std::ofstream(fname);
+
+    manak::OutputManager::GlobalOutputManager().AddHandler(new manak::TXTOutputHandler("test.txt"));
   }
+
+  manak::init_benchmarking_module();
 
   BenchmarkSuite::GetMasterSuite().Run("", pattern, compare);
 
-  RunTree::GlobalRunTree().Run();
+  //RunTree::GlobalRunTree().Run();
+
+  ResultCollector::GlobalResultCollector().Run();
 
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-c"))
   {
     std::string filename(manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-c"));
     std::ifstream com_file(filename);
-    RunTree::GlobalRunTree().LoadForComparison(com_file);
+    ResultCollector::GlobalResultCollector().LoadForComparison(com_file);
   }
 
-  if(output_format_html)
-    RunTree::GlobalRunTree().PrintHTML(*stream);
-  else
-    RunTree::GlobalRunTree().PrintTXT(*stream);
+//  if(output_format_html)
+//    RunTree::GlobalRunTree().PrintHTML(*stream);
+//  else
+//    RunTree::GlobalRunTree().PrintTXT(*stream);
 
 //  std::ofstream s_html("test.html");
 //  RunTree::GlobalRunTree().PrintHTML(s_html);
+
+  ResultCollector::GlobalResultCollector().Print();
 
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-s"))
   {
     std::string filename(manak::utils::cli::CLI::getCmdOption(argv, argv + argc, "-s"));
 
     std::ofstream ss(filename);
-    RunTree::GlobalRunTree().SaveForComparison(ss);
+    ResultCollector::GlobalResultCollector().SaveForComparison(ss);
     ss.close();
   }
 
@@ -139,7 +167,7 @@ int manak_benchmarking_main(std::function<bool()> init_func, int argc, char* arg
 
 int main(int argc, char* argv[])
 {
-  return manak::manak_benchmarking_main(&MANAK_INIT_FUNCTION, argc, argv);
+  return manak::manak_benchmarking_main(argc, argv);
 }
 
 #endif // MANAK_AUTO_BENCHMARK_MAIN

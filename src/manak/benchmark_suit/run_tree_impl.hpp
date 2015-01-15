@@ -205,6 +205,8 @@ void RNode::PrintHTML(std::ostream& stream,
 
   if(children.size() != 0)
   {
+    OutputManager::GlobalOutputManager().Initialize(l_map, isComp, compare_time);
+
     std::list<utils::ObjectStore> dummy;
     std::list<utils::ObjectStore>::iterator it_s[l_ids];
 
@@ -500,6 +502,8 @@ void RunTree::Run()
 
 void RunTree::PrintTXT(std::ostream& stream)
 {
+  OutputManager::GlobalOutputManager().Initialize(l_map,isComp, compare_time);
+
   stream << std::setiosflags(std::ios::left);
   stream << "######################################################################"
          << std::endl;
@@ -541,6 +545,8 @@ void RunTree::PrintTXT(std::ostream& stream)
 
 void RunTree::PrintHTML(std::ostream& stream)
 {
+  OutputManager::GlobalOutputManager().Initialize(l_map,isComp, compare_time);
+
   std::stringstream stream1;
   std::stringstream stream2;
   root->PrintHTML(stream1, stream2, l_map.size(), l_map);

@@ -10,6 +10,7 @@
 
 #include "pmeasure.hpp"
 #include "benchmark_case.hpp"
+#include "output_manager.hpp"
 
 #include <manak/util/version.hpp>
 #include <manak/util/macro_utils.hpp>

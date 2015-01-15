@@ -10,15 +10,6 @@
 
 #endif // MANAK_SIMPLE_BENCHMARK_MODULE
 
-//! If MANAK_ALTERNATE_INIT_FUNCTION is defined then that function will be
-//! called from generated main function for initializing unit benchmarking
-//! module. This function can be used manually registering cases.
-#ifdef MANAK_ALTERNATE_INIT_FUNCTION
-#define MANAK_INIT_FUNCTION MANAK_ALTERNATE_INIT_FUNCTION
-#else
-#define MANAK_INIT_FUNCTION manak::init_benchmarking_module
-#endif // MANAK_ALTERNATE_INIT_FUNCTION
-
 //! If no output file is given benchmarking statistics will be saved to this file
 #ifndef MANAK_DEFAULT_OUT_FILENAME
 #define MANAK_DEFAULT_OUT_FILENAME benchmark_stat
