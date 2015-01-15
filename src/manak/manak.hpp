@@ -12,6 +12,7 @@
 #include <manak/benchmark_suit/set_env.hpp>
 #include <manak/benchmark_suit/benchmark_suite.hpp>
 #include <manak/benchmark_suit/result_collector.hpp>
+#include <manak/benchmark_suit/manak_macros.hpp>
 
 #include <manak/benchmark_suit/output_manager.hpp>
 
