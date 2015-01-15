@@ -1,6 +1,8 @@
 #ifndef MANAK_SET_ENV_HPP_INCLUDED
 #define MANAK_SET_ENV_HPP_INCLUDED
 
+#include <fstream>
+
 //! Set the module name for further use
 #ifdef MANAK_SIMPLE_BENCHMARK_MODULE
 #define MANAK_MODULE_NAME MANAK_STRINGIZE(MANAK_SIMPLE_BENCHMARK_MODULE)

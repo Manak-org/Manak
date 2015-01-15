@@ -10,15 +10,10 @@
 
 #include <string>
 #include <functional>
-#include <stdint.h>
 #include <limits>
-#include <fstream>
-#include <iostream>
-#include <tuple>
-#include <type_traits>
-#include <typeinfo>
 #include <list>
 
+#include "manak_case.hpp"
 #include "pmeasure.hpp"
 
 #include <manak/util/timer.hpp>
@@ -29,7 +24,7 @@
 namespace manak
 {
 
-class BenchmarkCase
+class BenchmarkCase : public ManakCase
 {
  public:
   BenchmarkCase(const std::string& name,
@@ -37,11 +32,11 @@ class BenchmarkCase
                 const size_t iterations = MANAK_DEFAULT_ITERATIONS,
                 double tolerance = MANAK_DEFAULT_TOLERANCE,
                 const std::string& desc = "")
-    : name(name),
-    library_name(library_name),
-    desc(desc),
-    tolerance(tolerance),
-    iterations(iterations)
+    : ManakCase(name,
+                library_name,
+                iterations,
+                tolerance,
+                desc)
   {}
 
   template<typename T>
@@ -51,14 +46,13 @@ class BenchmarkCase
                 const size_t iterations =MANAK_DEFAULT_ITERATIONS,
                 double tolerance = MANAK_DEFAULT_TOLERANCE,
                 const std::string& desc = "")
-    : name(name),
-    library_name(library_name),
-    desc(desc),
-    tolerance(tolerance),
-    iterations(iterations)
-  {
-    run_functions.emplace_back([=](){run_function();});
-  }
+    : ManakCase(name,
+                library_name,
+                run_function,
+                iterations,
+                tolerance,
+                desc)
+  {}
 
   template<typename T>
   BenchmarkCase(const std::string& name,
@@ -67,52 +61,15 @@ class BenchmarkCase
                 const size_t iterations =MANAK_DEFAULT_ITERATIONS,
                 double tolerance = MANAK_DEFAULT_TOLERANCE,
                 const std::string& desc = "")
-    : name(name),
-    library_name(library_name),
-    desc(desc),
-    tolerance(tolerance),
-    iterations(iterations)
-  {
-    std::function<T()> fun(run_function);
-    run_functions.emplace_back("", [=](){fun();});
-  }
+    : ManakCase(name,
+                library_name,
+                run_function,
+                iterations,
+                tolerance,
+                desc)
+  {}
 
   std::list<utils::ObjectStore> Run();
-
-  void AddComparisonEntry(double d)
-  {
-    to_c.push_back(d);
-  }
-
-  const std::string& Name() const
-  {
-    return name;
-  }
-
-  const std::string& LibraryName() const
-  {
-    return library_name;
-  }
-  const std::string& UName() const
-  {
-    return uname;
-  }
-  std::string& UName()
-  {
-    return uname;
-  }
-
-
- protected:
-  std::string name;
-  std::string uname;
-  std::string library_name;
-  std::string desc;
-  std::list<std::pair<std::string, std::function<void()>>> run_functions;
-  double tolerance;
-  size_t iterations;
-
-  std::vector<double> to_c;
 };
 
 template<typename RType, typename... Args>
