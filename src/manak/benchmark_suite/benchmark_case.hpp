@@ -13,7 +13,7 @@
 #include <limits>
 #include <list>
 
-#include "manak_case.hpp"
+#include <manak/manak_suite/manak_case.hpp>
 #include "pmeasure.hpp"
 
 #include <manak/util/timer.hpp>

@@ -8,7 +8,6 @@
 #include <vector>
 
 #include "manak_case.hpp"
-#include "benchmark_case.hpp"
 #include "t_manak_case.hpp"
 
 #include <manak/util/macro_utils.hpp>
@@ -136,7 +135,6 @@ class ManakSuite
 
 }
 
-#include "pmeasure.hpp"
 #include "result_collector.hpp"
 
 #include "manak_suite_impl.hpp"

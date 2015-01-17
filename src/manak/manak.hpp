@@ -9,12 +9,15 @@
 
 #include <functional>
 
-#include <manak/benchmark_suit/set_env.hpp>
-#include <manak/benchmark_suit/manak_suite.hpp>
-#include <manak/benchmark_suit/result_collector.hpp>
-#include <manak/benchmark_suit/manak_macros.hpp>
+#include <manak/util/set_env.hpp>
 
-#include <manak/benchmark_suit/output_manager.hpp>
+#include <manak/manak_suite/manak_suite.hpp>
+#include <manak/manak_suite/result_collector.hpp>
+#include <manak/manak_suite/manak_macros.hpp>
+
+#include <manak/benchmark_suite/benchmark_suite.hpp>
+
+#include <manak/output_manager/output_manager.hpp>
 
 #include <manak/util/cli.hpp>
 

@@ -8,7 +8,7 @@
 #include <map>
 #include <list>
 
-#include "output_manager.hpp"
+#include <manak/output_manager/output_manager.hpp>
 
 #include <manak/util/version.hpp>
 

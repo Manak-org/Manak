@@ -77,9 +77,6 @@ private:
 
 class BenchmarkCase;
 
-template<typename RType, typename... Args>
-using T_Benchmark_Case = TManakCase<BenchmarkCase, RType, Args...>;
-
 template<class Case, typename RType, typename... Args>
 TManakCase<Case, RType, Args...>* CTManakCase(const std::string& name,
                                               const std::string& library_name,

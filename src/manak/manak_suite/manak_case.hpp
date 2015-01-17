@@ -6,8 +6,6 @@
 #include <limits>
 #include <list>
 
-#include "pmeasure.hpp"
-
 #include <manak/util/timer.hpp>
 #include <manak/util/macro_utils.hpp>
 #include <manak/util/template_utils.hpp>

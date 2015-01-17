@@ -45,10 +45,4 @@ void Name ## _ ## Library::Run()
 #define _MANAK_CREATE_WITH_TEMPLATE_TIS(Type, Name, Library, Function, Tol, Iter, SP)  \
 ( manak::CTManakCase<manak::Type>(#Name, MANAK_STRINGIZE(Library), Function, Tol, Iter, SP) )
 
-////////////////////////////////////////////////////////////////////////////////
-/// ADD BENCHMARK MACROS
-////////////////////////////////////////////////////////////////////////////////
-
-#include "manak_benchmark_macros.hpp"
-
 #endif // MANAK_MACROS_HPP_INCLUDED
