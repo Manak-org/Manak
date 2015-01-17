@@ -54,21 +54,24 @@ MANAK_AUTO_BENCHMARK_CASE_TI(Name, MANAK_DEFAULT_TOLERANCE, Iter)
 #define MANAK_AUTO_BENCHMARK_CASE(Name)                                       \
 MANAK_AUTO_BENCHMARK_CASE_T(Name, MANAK_DEFAULT_TOLERANCE)
 
-///
+////////////////////////////////////////////////////////////////////////////////
 /// MANAK_CREATE_BENCHMARK_WITH_TEMPLATE macros
-///
+////////////////////////////////////////////////////////////////////////////////
 
-#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_ITD(Name, f_name, Iter, tol, Desc)      \
-( manak::CTManakCase<manak::BenchmarkCase>(#Name, MANAK_STRINGIZE(MANAK_BASE_LIBRARY_NAME), Iter, tol, Desc, f_name) )
+#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS(Name, Fun, Tol, Iter, SP)    \
+_MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS(Name, MANAK_BASE_LIBRARY_NAME, Fun, Tol, Iter, SP)
 
-#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T(Name, f_name, tol)             \
-( manak::CTManakCase<manak::BenchmarkCase>(#Name, MANAK_STRINGIZE(MANAK_BASE_LIBRARY_NAME), MANAK_DEFAULT_ITERATIONS, tol, "", f_name) )
+#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI(Name, Fun, Tol, Iter)         \
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS(Name, Fun, Tol, Iter, MANAK_DEFAULT_SP)
 
-#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I(Name, f_name, Iter)             \
-( manak::CTManakCase<manak::BenchmarkCase>(#Name, MANAK_STRINGIZE(MANAK_BASE_LIBRARY_NAME), Iter, MANAK_DEFAULT_TOLERANCE, "", f_name) )
+#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS(Name, Fun, Iter, SP)          \
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS(Name, Fun, MANAK_DEFAULT_TOLERANCE, Iter, SP)
 
-#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(Name, f_name)             \
-( manak::CTManakCase<manak::BenchmarkCase>(#Name, MANAK_STRINGIZE(MANAK_BASE_LIBRARY_NAME), MANAK_DEFAULT_ITERATIONS, MANAK_DEFAULT_TOLERANCE, "", f_name) )
+#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T(Name, Fun, Tol)                \
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI(Name, Fun, Tol, MANAK_DEFAULT_ITERATIONS)
 
-#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT(Name, f_name, Iter, Tol)             \
-( manak::CTManakCase<manak::BenchmarkCase>(#Name, MANAK_STRINGIZE(MANAK_BASE_LIBRARY_NAME), Iter, Tol, "", f_name) )
+#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I(Name, Fun, Iter)               \
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI(Name, Fun, MANAK_DEFAULT_TOLERANCE, Iter)
+
+#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(Name, Fun)                       \
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T(Name, Fun, MANAK_DEFAULT_TOLERANCE)
