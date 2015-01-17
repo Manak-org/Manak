@@ -14,10 +14,10 @@ class TManakCase : public Case
   TManakCase(const std::string& name,
              const std::string& library_name,
              std::function<RType(Args...)> t_function,
-             const size_t iterations = MANAK_DEFAULT_ITERATIONS,
              double tolerance = MANAK_DEFAULT_TOLERANCE,
-             const std::string& desc = "")
-    : Case(name, library_name, iterations, tolerance, desc),
+             const size_t iterations = MANAK_DEFAULT_ITERATIONS,
+             double success_p = MANAK_DEFAULT_SP)
+    : Case(name, library_name, tolerance, iterations, success_p),
     t_function(t_function)
   {
 
@@ -83,23 +83,23 @@ using T_Benchmark_Case = TManakCase<BenchmarkCase, RType, Args...>;
 template<class Case, typename RType, typename... Args>
 TManakCase<Case, RType, Args...>* CTManakCase(const std::string& name,
                                               const std::string& library_name,
-                                              const size_t iterations,
+                                              RType (*fun)(Args...),
                                               double tolerance,
-                                              const std::string& desc,
-                                              RType (*fun)(Args...))
+                                              const size_t iterations,
+                                              double success_p)
 {
-  return new TManakCase<Case, RType, Args...>(name, library_name, std::function<RType(Args...)>(fun), iterations, tolerance, desc);
+  return new TManakCase<Case, RType, Args...>(name, library_name, std::function<RType(Args...)>(fun), tolerance, iterations, success_p);
 }
 
 template<class Case, typename RType, typename... Args>
 TManakCase<Case, RType, Args...>* CTManakCase(const std::string& name,
                                               const std::string& library_name,
-                                              const size_t iterations,
+                                              std::function<RType(Args...)> fun,
                                               double tolerance,
-                                              const std::string& desc,
-                                              std::function<RType(Args...)> fun)
+                                              const size_t iterations,
+                                              double success_p)
 {
-  return new TManakCase<RType, Args...>(name, library_name, fun, iterations, tolerance, desc);
+  return new TManakCase<RType, Args...>(name, library_name, fun, tolerance, iterations, success_p);
 }
 
 }

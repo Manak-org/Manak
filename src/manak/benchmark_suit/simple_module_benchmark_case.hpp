@@ -17,7 +17,10 @@
 _MANAK_BENCHMARK_CASE_TIS(Name, MANAK_BASE_LIBRARY_NAME, Function, Tol, Iter, SP)
 
 #define MANAK_BENCHMARK_CASE_TI(Name, Function, Tol, Iter)                    \
-MANAK_BENCHMARK_CASE_TIS(Name, Function, Iter, Tol, MANAK_DEFAULT_SP)
+MANAK_BENCHMARK_CASE_TIS(Name, Function, Tol, Iter, MANAK_DEFAULT_SP)
+
+#define MANAK_BENCHMARK_CASE_IS(Name, Function, Iter, SP)                     \
+MANAK_BENCHMARK_CASE_TIS(Name, Function, MANAK_DEFAULT_TOLERANCE, Iter, SP)
 
 #define MANAK_BENCHMARK_CASE_I(Name, Function, Iter)                          \
 MANAK_BENCHMARK_CASE_TI(Name, Function, Iter, MANAK_DEFAULT_TOLERANCE)
@@ -33,33 +36,23 @@ MANAK_BENCHMARK_CASE_T(Name, Function, MANAK_DEFAULT_TOLERANCE)
 /// MANAK_AUTO_BENCHMARK_CASE macros
 ////////////////////////////////////////////////////////////////////////////////
 
-#define MANAK_AUTO_BENCHMARK_CASE_ITD(Name, Iter, Tolerance, Desc)            \
-struct Name ## _ ## Benchmark                                                 \
-{                                                                             \
-  static void Run();                                               \
-  static manak::BenchmarkCase* static_temp;                                   \
-                                                                              \
-};                                                                            \
-manak::BenchmarkCase* Name ## _ ## Benchmark::static_temp =                   \
-manak::BenchmarkSuite::GetMasterSuite().GetCurrentSuite()->                  \
-AddCase(MANAK_BENCHMARK_CASE_ITD(Name,                                        \
-                                 Name ## _ ## Benchmark::Run,                 \
-                                 Iter,                                        \
-                                 Tolerance,                                   \
-                                 Desc));                                      \
-void Name ## _ ## Benchmark::Run()
+#define MANAK_AUTO_BENCHMARK_CASE_TIS(Name, Tol, Iter, SP)                    \
+_MANAK_AUTO_BENCHMARK_CASE_TIS(Name, MANAK_BASE_LIBRARY_NAME, Tol, Iter, SP)
 
-#define MANAK_AUTO_BENCHMARK_CASE(Name)                                       \
-MANAK_AUTO_BENCHMARK_CASE_ITD(Name, MANAK_DEFAULT_ITERATIONS, MANAK_DEFAULT_TOLERANCE, "")
+#define MANAK_AUTO_BENCHMARK_CASE_TI(Name, Tol, Iter)                         \
+MANAK_AUTO_BENCHMARK_CASE_TIS(Name, Tol, Iter, MANAK_DEFAULT_SP)
 
-#define MANAK_AUTO_BENCHMARK_CASE_T(Name, Tolerance)                          \
-MANAK_AUTO_BENCHMARK_CASE_ITD(Name, MANAK_DEFAULT_ITERATIONS, Tolerance, "")
+#define MANAK_AUTO_BENCHMARK_CASE_IS(Name, Iter, SP)                          \
+MANAK_AUTO_BENCHMARK_CASE_TIS(Name, MANAK_DEFAULT_TOLERANCE, Iter, SP)
+
+#define MANAK_AUTO_BENCHMARK_CASE_T(Name, Tol)                                \
+MANAK_AUTO_BENCHMARK_CASE_TI(Name, Tol, MANAK_DEFAULT_ITERATIONS)
 
 #define MANAK_AUTO_BENCHMARK_CASE_I(Name, Iter)                               \
-MANAK_AUTO_BENCHMARK_CASE_ITD(Name, Iter, MANAK_DEFAULT_TOLERANCE, "")
+MANAK_AUTO_BENCHMARK_CASE_TI(Name, MANAK_DEFAULT_TOLERANCE, Iter)
 
-#define MANAK_AUTO_BENCHMARK_CASE_IT(Name, Iter, Tol)                               \
-MANAK_AUTO_BENCHMARK_CASE_TD(Name, Iter, Tol, "");
+#define MANAK_AUTO_BENCHMARK_CASE(Name)                                       \
+MANAK_AUTO_BENCHMARK_CASE_T(Name, MANAK_DEFAULT_TOLERANCE)
 
 ///
 /// MANAK_CREATE_BENCHMARK_WITH_TEMPLATE macros
