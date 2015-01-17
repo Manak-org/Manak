@@ -82,7 +82,7 @@ RSuite::~RSuite()
   }
 }
 
-RNode* RSuite::AddSuite(BenchmarkSuite* suite)
+RNode* RSuite::AddSuite(ManakSuite* suite)
 {
   RNode* n;
   auto it = nexts.find(suite->Name());
@@ -96,7 +96,7 @@ RNode* RSuite::AddSuite(BenchmarkSuite* suite)
   return n;
 }
 
-RNode* RSuite::EraseSuite(BenchmarkSuite* suite)
+RNode* RSuite::EraseSuite(ManakSuite* suite)
 {
   auto it = nexts.find(suite->Name());
   if(it != nexts.end())
@@ -108,7 +108,7 @@ RNode* RSuite::EraseSuite(BenchmarkSuite* suite)
   return NULL;
 }
 
-RNode* RSuite::AddCase(BenchmarkCase* bc, size_t l_id)
+RNode* RSuite::AddCase(ManakCase* bc, size_t l_id)
 {
   RNode* n;
   auto it = nexts.find(bc->Name());
@@ -125,7 +125,7 @@ RNode* RSuite::AddCase(BenchmarkCase* bc, size_t l_id)
   return n->AddCase(bc, l_id);
 }
 
-RNode* RCase::AddCase(BenchmarkCase* bc, size_t l_id)
+RNode* RCase::AddCase(ManakCase* bc, size_t l_id)
 {
   children[l_id] = bc;
   return this;
@@ -182,13 +182,13 @@ void RSuite::LoadForComparison(const std::string& uname,
   }
 }
 
-void ResultCollector::OpenSuite(BenchmarkSuite* suite)
+void ResultCollector::OpenSuite(ManakSuite* suite)
 {
   RNode* temp = current_node->AddSuite(suite);
   current_node = temp;
 }
 
-void ResultCollector::AddCase(BenchmarkCase* bc)
+void ResultCollector::AddCase(ManakCase* bc)
 {
   size_t l_id;
   auto it = l_map.find(bc->LibraryName());

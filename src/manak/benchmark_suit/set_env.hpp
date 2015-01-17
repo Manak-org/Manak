@@ -4,11 +4,11 @@
 #include <fstream>
 
 //! Set the module name for further use
-#ifdef MANAK_SIMPLE_BENCHMARK_MODULE
-#define MANAK_MODULE_NAME MANAK_STRINGIZE(MANAK_SIMPLE_BENCHMARK_MODULE)
+#ifdef MANAK_SIMPLE_MODULE
+#define MANAK_MODULE_NAME MANAK_STRINGIZE(MANAK_SIMPLE_MODULE)
 
-#else // MANAK_SIMPLE_BENCHMARK_MODULE
-#define MANAK_MODULE_NAME MANAK_STRINGIZE(MANAK_BENCHMARK_MODULE)
+#else // MANAK_SIMPLE_MODULE
+#define MANAK_MODULE_NAME MANAK_STRINGIZE(MANAK_MODULE)
 
 #endif // MANAK_SIMPLE_BENCHMARK_MODULE
 
@@ -27,17 +27,24 @@
   #define MANAK_DEFAULT_ITERATIONS 10
 #endif
 
-//! Filename where the output of benchmark cases will be stored
+//! Set default success percentage for benchmark-test cases
+#ifndef MANAK_DEFAULT_SP
+  #define MANAK_DEFAULT_SP 100
+#endif // MANAK_DEFAULT_SP
+
+//! While the benchmark is running all the output on std::cout and std::cerr
+//! is redirected to another stream
+//! if MANAK_REDIRECTION_FILENAME is set the output is redirected to that file
 #ifndef MANAK_REDIRECTION_FILENAME
 
 #define MANAK_REDIRECTION_FILENAME benchmark_log.txt
 
 #endif // MANAK_REDIRECTION_FILENAME
 
-//! While the benchmark is running all the output on std::cout and std::cerr
-//! is redirected to another stream
-//! If that stream is not defined then define it ourselves
-#ifndef MANAK_BENCHMARK_REDIRECTION_STREAM
+//! MANAK_REDIRECTION_BUFFER is the buffer to which std::cout and std::cerr is
+//! redirected while benchmark is running. If its not defined it is redirected
+//! to file given by MANAK_REDIRECTION_FILENAME
+#ifndef MANAK_REDIRECTION_BUFFER
 
 //! Open the logging file stream
 #define MANAK_OPEN_LOG std::ofstream f(MANAK_STRINGIZE(MANAK_REDIRECTION_FILENAME), std::fstream::app);

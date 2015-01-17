@@ -26,7 +26,7 @@ class HTMLOutputHandler : public OutputHandler
                   bool compare,
                   const std::string& c_time);
 
-  void AddCase(const std::map<size_t, BenchmarkCase*>& children,
+  void AddCase(const std::map<size_t, ManakCase*>& children,
                const std::map<size_t, std::list<utils::ObjectStore>>& results);
 
   void OpenSuite(const std::string& name) {}

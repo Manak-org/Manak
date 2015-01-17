@@ -45,7 +45,7 @@ void TXTOutputHandler::Initialize(const std::map<std::string, size_t>& l_map,
   stream << std::endl;
 }
 
-void TXTOutputHandler::AddCase(const std::map<size_t, BenchmarkCase*>& children,
+void TXTOutputHandler::AddCase(const std::map<size_t, ManakCase*>& children,
                                const std::map<size_t, std::list<utils::ObjectStore>>& results)
 {
   size_t l_ids = l_map.size();

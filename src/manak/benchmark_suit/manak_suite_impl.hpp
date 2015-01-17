@@ -1,7 +1,7 @@
 namespace manak
 {
 
-BenchmarkSuite::~BenchmarkSuite()
+ManakSuite::~ManakSuite()
 {
   for(auto lbc : children)
   {
@@ -16,7 +16,7 @@ BenchmarkSuite::~BenchmarkSuite()
   }
 }
 
-bool BenchmarkSuite::LoadData(const std::string& name)
+bool ManakSuite::LoadData(const std::string& name)
 {
   std::ifstream stream(name);
 
@@ -47,7 +47,7 @@ bool BenchmarkSuite::LoadData(const std::string& name)
     size_t s_entries;
     stream >> s_entries;
 
-    std::list<BenchmarkCase*> lbc;
+    std::list<ManakCase*> lbc;
     if(Find(name, lbc))
     {
       for(size_t i = 0;i < s_entries;i++)
@@ -75,7 +75,7 @@ bool BenchmarkSuite::LoadData(const std::string& name)
   return true;
 }
 
-bool BenchmarkSuite::Find(const std::string& name, std::list<BenchmarkCase*>& lbc)
+bool ManakSuite::Find(const std::string& name, std::list<ManakCase*>& lbc)
 {
   size_t t = name.find("/", 1);
   if(t == std::string::npos)
@@ -99,9 +99,9 @@ bool BenchmarkSuite::Find(const std::string& name, std::list<BenchmarkCase*>& lb
   }
 }
 
- bool BenchmarkSuite::Run(const std::string& uname,
-                          const std::string& pattern,
-                          const bool compare)
+ bool ManakSuite::Run(const std::string& uname,
+                      const std::string& pattern,
+                      const bool compare)
 {
   this->uname = uname + "/" + name;
 

@@ -10,7 +10,7 @@
 #include <functional>
 
 #include <manak/benchmark_suit/set_env.hpp>
-#include <manak/benchmark_suit/benchmark_suite.hpp>
+#include <manak/benchmark_suit/manak_suite.hpp>
 #include <manak/benchmark_suit/result_collector.hpp>
 #include <manak/benchmark_suit/manak_macros.hpp>
 
@@ -21,13 +21,17 @@
 namespace manak /** C++ Unit Benchmarking Library. **/
 {
 
-bool init_benchmarking_module()
+/**
+ * Default initialization function. Manual initialization function is called
+ * from this function.
+ */
+bool manak_init_module()
 {
-  #ifndef MANAK_SIMPLE_BENCHMARK_MODULE
-  #ifndef MANAK_BENCHMARK_MODULE
-  static_assert(false, "Manak benchmarking module not defined. Use either MANAK_BENCHMARK_MODULE or MANAK_SIMPLE_BENCHMARK_MODULE");
+  #ifndef MANAK_SIMPLE_MODULE
+  #ifndef MANAK_MODULE
+  static_assert(false, "Manak module not defined. Define either MANAK_MODULE or MANAK_SIMPLE_MODULE to appropriate name.");
+  #endif // MANAK_MODULE
   #endif // MANAK_BENCHMARK_MODULE
-  #endif // MANAK_SIMPLE_BENCHMARK_MODULE
 
   //! If MANAK_MANUAL_INIT_FUNCTION is defined then that function will be
   //! called from default initialization function. This function can be used
@@ -36,7 +40,7 @@ bool init_benchmarking_module()
   MANAK_MANUAL_INIT_FUNCTION();
   #endif // MANAK_MANUAL_INIT_FUNCTION
 
-  manak::BenchmarkSuite::GetMasterSuite().Name() = MANAK_MODULE_NAME;
+  manak::ManakSuite::GetMasterSuite().Name() = MANAK_MODULE_NAME;
 
   return true;
 }
@@ -47,7 +51,7 @@ bool init_benchmarking_module()
 //!
 //! \return int
 //!
-int manak_benchmarking_main(int argc, char* argv[] )
+int manak_main(int argc, char* argv[] )
 {
   bool output_format_html = true;
   bool compare = false;
@@ -131,10 +135,13 @@ int manak_benchmarking_main(int argc, char* argv[] )
     manak::OutputManager::GlobalOutputManager().AddHandler(new manak::TXTOutputHandler(filename));
   }
 
-  manak::init_benchmarking_module();
+  // call the default init function
+  manak::manak_init_module();
 
-  BenchmarkSuite::GetMasterSuite().Run("", pattern, compare);
+  // Construct the running tree
+  ManakSuite::GetMasterSuite().Run("", pattern, compare);
 
+  // Run the generated run tree and collect results
   ResultCollector::GlobalResultCollector().Run();
 
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-c"))
@@ -144,6 +151,7 @@ int manak_benchmarking_main(int argc, char* argv[] )
     ResultCollector::GlobalResultCollector().LoadForComparison(com_file);
   }
 
+  // Pass the results to registered output handlers
   ResultCollector::GlobalResultCollector().Print();
 
   if(manak::utils::cli::CLI::cmdOptionExists(argv, argv + argc, "-s"))
@@ -161,13 +169,13 @@ int manak_benchmarking_main(int argc, char* argv[] )
 }; // namespace manak
 
 //! If main generation is set to auto following function will be added
-#ifdef MANAK_AUTO_BENCHMARK_MAIN
+#ifdef MANAK_AUTO_MAIN
 
 int main(int argc, char* argv[])
 {
-  return manak::manak_benchmarking_main(argc, argv);
+  return manak::manak_main(argc, argv);
 }
 
-#endif // MANAK_AUTO_BENCHMARK_MAIN
+#endif // MANAK_AUTO_MAIN
 
 #endif // MANAK_HPP_INCLUDED

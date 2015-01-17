@@ -124,7 +124,7 @@ void HTMLOutputHandler::Finalize()
   stream << "</html>" << std::endl;
 }
 
-void HTMLOutputHandler::AddCase(const std::map<size_t, BenchmarkCase*>& children,
+void HTMLOutputHandler::AddCase(const std::map<size_t, ManakCase*>& children,
                                 const std::map<size_t, std::list<utils::ObjectStore>>& results)
 {
 
@@ -227,10 +227,10 @@ void HTMLOutputHandler::AddCase(const std::map<size_t, BenchmarkCase*>& children
 
   if(num_entries > 1)
   {
-    stream << "<tr>" << std::endl;
-    stream << "<td rowspan = \"" << num_entries
-           << "\">" << children.begin()->second->Name()
-           << "</td>" << std::endl;
+    stream1 << "<tr>" << std::endl;
+    stream1 << "<td rowspan = \"" << num_entries
+            << "\">" << children.begin()->second->Name()
+            << "</td>" << std::endl;
 
     for(size_t index = 0;index < num_entries;index++)
     {
@@ -276,18 +276,18 @@ void HTMLOutputHandler::AddCase(const std::map<size_t, BenchmarkCase*>& children
         s_sub_name << "Parameter Set " << index;
       }
 
-      stream << "<td>" << s_sub_name.str() << "</td>" << std::endl;
-      stream << s_values.str() << std::endl;
-      stream << "</tr>" << std::endl;
+      stream1 << "<td>" << s_sub_name.str() << "</td>" << std::endl;
+      stream1 << s_values.str() << std::endl;
+      stream1 << "</tr>" << std::endl;
       if(index != num_entries - 1)
-        stream << "<tr>" << std::endl;
+        stream1 << "<tr>" << std::endl;
     }
   }
   else
   {
-    stream << "<tr>" << std::endl;
-    stream << "<td>" << children.begin()->second->Name() << "</td>" << std::endl;
-    stream << "<td></td>" << std::endl;
+    stream1 << "<tr>" << std::endl;
+    stream1 << "<td>" << children.begin()->second->Name() << "</td>" << std::endl;
+    stream1 << "<td></td>" << std::endl;
     for(size_t i = 0;i < l_ids;i++)
     {
       std::stringstream ss;
@@ -302,9 +302,9 @@ void HTMLOutputHandler::AddCase(const std::map<size_t, BenchmarkCase*>& children
       }
       else ss << "---";
 
-      stream << "<td>" << ss.str() << "</td>" << std::endl;
+      stream1 << "<td>" << ss.str() << "</td>" << std::endl;
     }
-    stream << "</tr>" << std::endl;
+    stream1 << "</tr>" << std::endl;
   }
 
   stream2 << "<hr width=100% align=left>" << std::endl;

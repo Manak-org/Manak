@@ -16,7 +16,7 @@ void OutputManager::Initialize(const std::map<std::string, size_t>& l_map,
   }
 }
 
-void OutputManager::AddCase(const std::map<size_t, BenchmarkCase*>& children,
+void OutputManager::AddCase(const std::map<size_t, ManakCase*>& children,
                             const std::map<size_t, std::list<utils::ObjectStore>>& results)
 {
   for(auto oh : handlers)

@@ -37,7 +37,7 @@ class OutputManager
 
   void CloseSuite();
 
-  void AddCase(const std::map<size_t, BenchmarkCase*>& children,
+  void AddCase(const std::map<size_t, ManakCase*>& children,
                const std::map<size_t, std::list<utils::ObjectStore>>& results);
 
   void Finalize();

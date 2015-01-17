@@ -23,11 +23,11 @@ struct RNode
 
   virtual ~RNode() {}
 
-  virtual RNode* AddSuite(BenchmarkSuite* suite) = 0;
+  virtual RNode* AddSuite(ManakSuite* suite) = 0;
 
-  virtual RNode* EraseSuite(BenchmarkSuite* suite) = 0;
+  virtual RNode* EraseSuite(ManakSuite* suite) = 0;
 
-  virtual RNode* AddCase(BenchmarkCase* bc, size_t l_id) = 0;
+  virtual RNode* AddCase(ManakCase* bc, size_t l_id) = 0;
 
   virtual void Run() = 0;
 
@@ -39,7 +39,7 @@ struct RNode
                                  size_t l_id,
                                  const std::list<double>& readings) = 0;
 
-  virtual BenchmarkSuite* GetSuite()
+  virtual ManakSuite* GetSuite()
   {
     return NULL;
   }
@@ -55,11 +55,11 @@ struct RCase : public RNode
 
   ~RCase();
 
-  RNode* AddSuite(BenchmarkSuite* Suite) { return NULL; }
+  RNode* AddSuite(ManakSuite* Suite) { return NULL; }
 
-  RNode* AddCase(BenchmarkCase* bc, size_t l_id);
+  RNode* AddCase(ManakCase* bc, size_t l_id);
 
-  RNode* EraseSuite(BenchmarkSuite* suite) { return NULL; }
+  RNode* EraseSuite(ManakSuite* suite) { return NULL; }
 
   void Run();
 
@@ -72,27 +72,27 @@ struct RCase : public RNode
                          const std::list<double>& readings);
 
   std::map<size_t, std::list<utils::ObjectStore>> results;
-  std::map<size_t, BenchmarkCase*> children;
+  std::map<size_t, ManakCase*> children;
 };
 
 struct RSuite : public RNode
 {
-  RSuite(RNode* parent, BenchmarkSuite* suite)
+  RSuite(RNode* parent, ManakSuite* suite)
     :RNode(parent), suite(suite) {}
 
   ~RSuite();
 
-  RNode* AddSuite(BenchmarkSuite* Suite);
+  RNode* AddSuite(ManakSuite* Suite);
 
-  RNode* EraseSuite(BenchmarkSuite* suite);
+  RNode* EraseSuite(ManakSuite* suite);
 
-  RNode* AddCase(BenchmarkCase* bc, size_t l_id);
+  RNode* AddCase(ManakCase* bc, size_t l_id);
 
   void Run();
 
   void Print();
 
-  BenchmarkSuite* GetSuite()
+  ManakSuite* GetSuite()
   {
     return suite;
   }
@@ -105,7 +105,7 @@ struct RSuite : public RNode
 
   std::map<std::string, RNode*> nexts;
 
-  BenchmarkSuite* suite;
+  ManakSuite* suite;
 };
 
 class ResultCollector
@@ -125,9 +125,9 @@ class ResultCollector
     return singleton;
   }
 
-  void OpenSuite(BenchmarkSuite* suite);
+  void OpenSuite(ManakSuite* suite);
 
-  void AddCase(BenchmarkCase* bc);
+  void AddCase(ManakCase* bc);
 
   void CloseSuite();
 
