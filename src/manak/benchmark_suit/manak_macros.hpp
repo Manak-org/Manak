@@ -2,19 +2,20 @@
 #define MANAK_MACROS_HPP_INCLUDED
 
 ////////////////////////////////////////////////////////////////////////////////
-/// MANAK CASE MACRO
+/// MANAK CASE MACROS
 ////////////////////////////////////////////////////////////////////////////////
+
+#define MANAK_ADD_CASE(bench)                                                 \
+class STRING_JOIN(unamed, STRING_JOIN(_, __LINE__))                           \
+{                                                                             \
+  static manak::ManakCase* static_temp;                                       \
+};                                                                            \
+manak::ManakCase*                                                             \
+STRING_JOIN(unamed, STRING_JOIN(_, __LINE__))::static_temp =                  \
+manak::ManakSuite::GetMasterSuite().GetCurrentSuite()->AddCase(bench)
 
 #define _MANAK_CASE_TIS(Type, Name, Library, Function, Tol, Iter, SP)         \
 ( new manak::Type(#Name, #Library, Function, Tol, Iter, SP) )
-
-
-////////////////////////////////////////////////////////////////////////////////
-/// MANAK BENCHMARK MACRO
-////////////////////////////////////////////////////////////////////////////////
-
-#define _MANAK_BENCHMARK_CASE_TIS(Name, Library, Function, Tol, Iter, SP)     \
-_MANAK_CASE_TIS(BenchmarkCase, Name, Library, Function, Tol, Iter, SP)
 
 ////////////////////////////////////////////////////////////////////////////////
 /// MANAK AUTO CASE MACRO
@@ -37,27 +38,10 @@ AddCase(_MANAK_CASE_TIS(Type,                                                 \
                         SP));                                                 \
 void Name ## _ ## Library::Run()
 
-#ifdef MANAK_SIMPLE_MODULE
-#include "simple_module_benchmark_case.hpp"
+////////////////////////////////////////////////////////////////////////////////
+/// ADD BENCHMARK MACROS
+////////////////////////////////////////////////////////////////////////////////
 
-#else // MANAK_SIMPLE_MODULE
-#include "module_benchmark_case.hpp"
-
-#endif // MANAK_SIMPLE_MODULE
-
-#define MANAK_ADD_CASE(bench)                                                 \
-class STRING_JOIN(unamed, STRING_JOIN(_, __LINE__))                           \
-{                                                                             \
-  static manak::ManakCase* static_temp;                                       \
-};                                                                            \
-manak::ManakCase*                                                             \
-STRING_JOIN(unamed, STRING_JOIN(_, __LINE__))::static_temp =                  \
-manak::ManakSuite::GetMasterSuite().GetCurrentSuite()->AddCase(bench)
-
-#define Measure(Code)                                                         \
-manak::Timer::StartTimer();                                                   \
-Code                                                                          \
-manak::Timer::StopTimer();
-
+#include "manak_benchmark_macros.hpp"
 
 #endif // MANAK_MACROS_HPP_INCLUDED
