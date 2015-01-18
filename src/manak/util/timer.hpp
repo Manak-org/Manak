@@ -12,8 +12,7 @@
 #include <iostream>
 #include <vector>
 
-#include <manak/benchmark_suit/pmeasure.hpp>
-#include <manak/util/object_store.hpp>
+#include "pmeasure.hpp"
 
 #if defined(__unix__) || defined(__unix)
   #include <time.h>       // clock_gettime()
@@ -139,73 +138,77 @@ class Timer
   //! Initialize a new Timer instance
   static void Initialize()
   {
-    size_t iter = 0;
-
-    utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
-
-    if(os.Get("Timer_CurrentSubIterations") != NULL)
-    {
-      size_t* temp = (size_t*)os.RGet("Timer_CurrentSubIterations");
-      iter = *temp;
-      delete temp;
-    }
-    else iter = *(size_t*)os.Get("Timer_CurrentIterations");
-
-    TotalTime() = 0;
+//    size_t iter = 0;
+//
+//    utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
+//
+//    if(os.Get("Timer_CurrentSubIterations") != NULL)
+//    {
+//      size_t* temp = (size_t*)os.RGet("Timer_CurrentSubIterations");
+//      iter = *temp;
+//      delete temp;
+//    }
+//    else iter = *(size_t*)os.Get("Timer_CurrentIterations");
+//
+//    TotalTime() = 0;
     Min() = std::numeric_limits<uint64_t>::max();
     Max() = std::numeric_limits<uint64_t>::min();
-    Iterations() = iter;
-    CIter() = Iterations();
+    //Iterations() = iter;
+    //CIter() = Iterations();
     StateInit() = true;
   }
 
   //! Deinitialize and register
-  static void Deinitialize()
+  static PMeasure Deinitialize(size_t iterations)
   {
-    utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
+    //utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
 
     if(StateInit())
     {
       StateInit() = false;
 
-      std::string sub_name = "";
-      std::string* temp = (std::string*)os.RGet("Timer_CurrentSubName");
-      if(temp)
-      {
-        sub_name = *temp;
-        delete temp;
-      }
+//      std::string sub_name = "";
+//      std::string* temp = (std::string*)os.RGet("Timer_CurrentSubName");
+//      if(temp)
+//      {
+//        sub_name = *temp;
+//        delete temp;
+//      }
 
-      typedef std::list<utils::ObjectStore> ResultList;
+//      typedef std::list<utils::ObjectStore> ResultList;
 
-      ResultList& re = *(ResultList*)os.Get("Timer_CurrentResultList");
+//      ResultList& re = *(ResultList*)os.Get("Timer_CurrentResultList");
+//
+      PMeasure pm = GetStats(iterations);
+//
+//      double tolerance = 0;
+//
+//      double* t_tol;
+//      if((t_tol = (double*)os.Get("Timer_CurrentSubTolerance")) == NULL)
+//      {
+//        t_tol = (double*)os.Get("Timer_CurrentTolerance");
+//        tolerance = *t_tol;
+//      }
+//      else
+//      {
+//        tolerance = *t_tol;
+//        os.RGet("Timer_CurrentSubTolerance");
+//        delete t_tol;
+//      }
 
-      PMeasure pm = GetStats();
+//      utils::ObjectStore os;
+//      os["name"] = new std::string(sub_name);
+//      os["tolerance"] = new double(tolerance);
+//      os["pmeasure"] = new PMeasure(pm);
+//      os["compare"] = new double(-1);
+//      os["iterations"] = new size_t(Iterations());
+//      os["sp"] = new double(*(double)os.Get("Timer_CurrentSP"));
 
-      double tolerance = 0;
+      //re.emplace_back(os);
 
-      double* t_tol;
-      if((t_tol = (double*)os.Get("Timer_CurrentSubTolerance")) == NULL)
-      {
-        t_tol = (double*)os.Get("Timer_CurrentTolerance");
-        tolerance = *t_tol;
-      }
-      else
-      {
-        tolerance = *t_tol;
-        os.RGet("Timer_CurrentSubTolerance");
-        delete t_tol;
-      }
-
-      utils::ObjectStore os;
-      os["name"] = new std::string(sub_name);
-      os["tolerance"] = new double(tolerance);
-      os["pmeasure"] = new PMeasure(pm);
-      os["compare"] = new double(-1);
-      os["iterations"] = new size_t(Iterations());
-
-      re.emplace_back(os);
+      return pm;
     }
+    return PMeasure();
   }
 
   //! Mark start of the iteration
@@ -239,7 +242,7 @@ class Timer
   }
 
   //! Mark end of the iteration
-  static bool EndIter()
+  static bool EndIter(size_t& iterations)
   {
     if(StateIter() == false)
       return false;
@@ -252,15 +255,15 @@ class Timer
     if(Max() < CTime())
       Max() = CTime();
 
-    CIter()--;
-    if(CIter() <= 0) return false;
+    iterations--;
+    if(iterations <= 0) return false;
     return true;
   }
 
   //! Get statistics of current timer instance
-  static PMeasure GetStats()
+  static PMeasure GetStats(size_t iterations)
   {
-    return PMeasure(Min(), Max(), (double)TotalTime()/ Iterations());
+    return PMeasure(Min(), Max(), (double)TotalTime()/ iterations);
   }
 
   //! Get-set total time
@@ -294,20 +297,6 @@ class Timer
   static uint64_t& Max()
   {
     static uint64_t singleton;
-    return singleton;
-  }
-
-  //! Get-set number
-  static size_t& Iterations()
-  {
-    static size_t singleton;
-    return singleton;
-  }
-
-  //! Get-set number of iterations
-  static int& CIter()
-  {
-    static int singleton;
     return singleton;
   }
 

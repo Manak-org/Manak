@@ -4,3 +4,10 @@ build/
 obj/
 releases/
 *~
+manak.cbp
+main.cpp
+manak.depend
+manak.bench
+benchmark_stat.html
+saved.bench
+benchmark_log.txt

@@ -17,6 +17,8 @@
 
 #include <manak/benchmark_suite/benchmark_suite.hpp>
 
+#include <manak/test_suite/test_suite.hpp>
+
 #include <manak/output_manager/output_manager.hpp>
 
 #include <manak/util/cli.hpp>

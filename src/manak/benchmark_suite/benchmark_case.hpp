@@ -14,7 +14,7 @@
 #include <list>
 
 #include <manak/manak_suite/manak_case.hpp>
-#include "pmeasure.hpp"
+#include <manak/util/pmeasure.hpp>
 
 #include <manak/util/timer.hpp>
 #include <manak/util/macro_utils.hpp>
