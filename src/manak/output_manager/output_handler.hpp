@@ -17,16 +17,15 @@ class OutputHandler
 
   virtual ~OutputHandler() {}
 
-  virtual void Initialize(const std::map<std::string, size_t>& l_map,
-                          bool compare,
+  virtual void Initialize(bool compare,
                           const std::string& c_time) = 0;
 
   virtual void OpenSuite(const std::string& name) = 0;
 
   virtual void CloseSuite() = 0;
 
-  virtual void AddCase(const std::map<size_t, ManakCase*>& children,
-                       const std::map<size_t, std::list<utils::ObjectStore>>& results) = 0;
+  virtual void AddCase(const std::map<std::string, ManakCase*>& children,
+                       const std::map<std::string, std::list<utils::ObjectStore>>& results) = 0;
 
   virtual void Finalize() = 0;
 

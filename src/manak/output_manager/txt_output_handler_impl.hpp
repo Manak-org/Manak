@@ -1,12 +1,10 @@
 namespace manak
 {
 
-void TXTOutputHandler::Initialize(const std::map<std::string, size_t>& l_map,
-                                  bool compare,
+void TXTOutputHandler::Initialize(bool compare,
                                   const std::string& c_time)
 {
-  this->l_map = l_map;
-
+  //! Print information about manak version which generated this output
   stream << std::setiosflags(std::ios::left);
   stream << "######################################################################"
          << std::endl;
@@ -26,131 +24,137 @@ void TXTOutputHandler::Initialize(const std::map<std::string, size_t>& l_map,
   stream << "######################################################################"
          << std::endl << std::endl;
 
-  stream << std::setprecision(3);
-  stream << std::setw(30) << "       Case Name";
-
-  for(size_t i = 0;i < l_map.size();i++)
-  {
-    stream << std::setw(20);
-    for(auto it : l_map)
-    {
-      if(it.second == i)
-      {
-        stream << it.first;
-        break;
-      }
-    }
-  }
+//  stream << std::setprecision(3);
+//  stream << std::setw(30) << "       Case Name";
+//
+//  for(size_t i = 0;i < l_map.size();i++)
+//  {
+//    stream << std::setw(20);
+//    for(auto it : l_map)
+//    {
+//      if(it.second == i)
+//      {
+//        stream << it.first;
+//        break;
+//      }
+//    }
+//  }
 
   stream << std::endl;
 }
 
-void TXTOutputHandler::AddCase(const std::map<size_t, ManakCase*>& children,
-                               const std::map<size_t, std::list<utils::ObjectStore>>& results)
+void TXTOutputHandler::AddCase(const std::map<std::string, ManakCase*>& children,
+                               const std::map<std::string, std::list<utils::ObjectStore>>& results)
 {
-  size_t l_ids = l_map.size();
+  //! print case name and libraries involved
+  stream << std::setprecision(3);
+  stream << std::setw(30) << "       Case Name";
 
-  if(children.size() != 0)
+  for(auto child : children)
   {
+    stream << std::setw(20);
+    stream << child.first;
+  }
+  stream << std::endl;
+
+  //! Check the highest number of sub-case count in all the libraries
+  size_t num_entries = 0;
+  for(auto l : results)
+  {
+    if(l.second.size() > num_entries)
+      num_entries = l.second.size();
+  }
+
+  //! if entries are more than 1 we need to print their name of temp name
+  //! if they don't have one
+  if(num_entries > 1)
+  {
+    //! put iterators to the start of result lists
     std::list<utils::ObjectStore> dummy;
-    std::list<utils::ObjectStore>::const_iterator it_s[l_ids];
+    std::list<utils::ObjectStore>::const_iterator it_s[children.size()];
 
-    for(size_t i = 0;i < l_ids;i++)
     {
-      auto it = results.find(i);
-      if(it != results.end())
-        it_s[i] = it->second.begin();
-      else it_s[i] = dummy.end();
-    }
-
-    size_t num_entries = 0;
-    for(auto l : results)
-    {
-      if(l.second.size() > num_entries)
-        num_entries = l.second.size();
-    }
-
-    if(num_entries > 1)
-    {
-      stream << children.begin()->second->Name() << std::endl;
-
-      for(size_t index = 0;index < num_entries;index++)
+      size_t index = 0;
+      for(auto res : results)
       {
-        std::stringstream s_values;
-        s_values << std::setiosflags(std::ios::left);
-
-        std::string sub_name = "";
-        bool name_mismatch = false;
-
-        for(size_t i = 0;i < l_ids;i++)
-        {
-          std::stringstream ss;
-
-          if(it_s[i] != dummy.end())
-          {
-            if(it_s[i] != results.find(i)->second.end())
-            {
-              if(!name_mismatch)
-              {
-                if(sub_name != "" && sub_name != *(std::string*)it_s[i]->Get("name"))
-                  name_mismatch = true;
-                else
-                  sub_name = *(std::string*)it_s[i]->Get("name");
-              }
-
-              ss << GetPMRep(*it_s[i]);
-
-              it_s[i]++;
-            }
-            else ss << "---";
-          }
-          else ss << "---";
-
-          s_values << std::setw(20) << ss.str();
-        }
-
-        std::stringstream s_sub_name;
-        s_sub_name << "  ";
-        if(!name_mismatch)
-        {
-          s_sub_name << sub_name;
-        }
-        else
-        {
-          s_sub_name << "Parameter Set " << index;
-        }
-
-        stream << std::setw(30) << s_sub_name.str();
-        stream << s_values.str();
-
-        stream << std::endl;
+        it_s[index++] = res.second.begin();
       }
     }
-    else
-    {
-      stream << std::setw(30) << children.begin()->second->Name();
 
-      for(size_t i = 0;i < l_ids;i++)
+    //! print the case name on one line
+    stream << children.begin()->second->Name() << std::endl;
+
+    //! loop for max entries and put '---' if the entry is missing
+    for(size_t entry_index = 0;entry_index < num_entries;entry_index++)
+    {
+      std::stringstream s_values;
+      s_values << std::setiosflags(std::ios::left);
+
+      //! the i'th sub-case name for all the libraries must be same
+      //! or else temp name will be printed
+      std::string sub_name = "";
+      bool name_mismatch = false;
+
+      //! check the entry_index entry of the result list and print accordingly
+      auto it_res = results.begin();
+      for(size_t i = 0;i < results.size();i++)
       {
+        //! temp stringstream
         std::stringstream ss;
 
-        if(it_s[i] != dummy.end())
+        //! check if there is an ith sub-case
+        if(it_s[i] != it_res->second.end())
         {
-          if(it_s[i] != results.find(i)->second.end())
+          //! check for sub-case name mismatch
+          if(!name_mismatch)
           {
-            ss << GetPMRep(*it_s[i]);
+            if(sub_name != "" && sub_name != *(std::string*)it_s[i]->Get("name"))
+              name_mismatch = true;
+            else
+              sub_name = *(std::string*)it_s[i]->Get("name");
           }
-          else ss << "---";
+
+          ss << GetPMRep(*it_s[i]);
+          it_s[i]++;
         }
         else ss << "---";
 
-        stream << std::setw(20) << ss.str();
+        s_values << std::setw(20) << ss.str();
+        it_res++;
       }
+
+      //! add the sub-case name
+      //! in case mismatch provide 'parameter set i' where i is replaced by
+      //! sub-case's chronological number
+      std::stringstream s_sub_name;
+      s_sub_name << "  ";
+      if(!name_mismatch)
+      {
+        s_sub_name << sub_name;
+      }
+      else
+      {
+        s_sub_name << "Parameter Set " << entry_index;
+      }
+
+      stream << std::setw(30) << s_sub_name.str();
+      stream << s_values.str();
 
       stream << std::endl;
     }
+  }
+  else
+  {
+    stream << std::setw(30) << children.begin()->second->Name();
+
+    for(auto res : results)
+    {
+      stream << std::setw(20) << GetPMRep(*(res.second.begin()));
+    }
+
     stream << std::endl;
   }
+  stream << std::endl;
 }
 
 }

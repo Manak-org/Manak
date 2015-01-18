@@ -27,7 +27,7 @@ struct RNode
 
   virtual RNode* EraseSuite(ManakSuite* suite) = 0;
 
-  virtual RNode* AddCase(ManakCase* bc, size_t l_id) = 0;
+  virtual RNode* AddCase(ManakCase* bc) = 0;
 
   virtual void Run() = 0;
 
@@ -36,7 +36,7 @@ struct RNode
   virtual void SaveForComparison(std::ostream& stream) = 0;
 
   virtual void LoadForComparison(const std::string& uname,
-                                 size_t l_id,
+                                 std::string library,
                                  const std::list<double>& readings) = 0;
 
   virtual ManakSuite* GetSuite()
@@ -57,7 +57,7 @@ struct RCase : public RNode
 
   RNode* AddSuite(ManakSuite* Suite) { return NULL; }
 
-  RNode* AddCase(ManakCase* bc, size_t l_id);
+  RNode* AddCase(ManakCase* bc);
 
   RNode* EraseSuite(ManakSuite* suite) { return NULL; }
 
@@ -68,11 +68,11 @@ struct RCase : public RNode
   void SaveForComparison(std::ostream& stream);
 
   void LoadForComparison(const std::string& uname,
-                         size_t l_id,
+                         std::string library,
                          const std::list<double>& readings);
 
-  std::map<size_t, std::list<utils::ObjectStore>> results;
-  std::map<size_t, ManakCase*> children;
+  std::map<std::string, std::list<utils::ObjectStore>> results;
+  std::map<std::string, ManakCase*> children;
 };
 
 struct RSuite : public RNode
@@ -86,7 +86,7 @@ struct RSuite : public RNode
 
   RNode* EraseSuite(ManakSuite* suite);
 
-  RNode* AddCase(ManakCase* bc, size_t l_id);
+  RNode* AddCase(ManakCase* bc);
 
   void Run();
 
@@ -100,7 +100,7 @@ struct RSuite : public RNode
   void SaveForComparison(std::ostream& stream);
 
   void LoadForComparison(const std::string& uname,
-                         size_t l_id,
+                         std::string library,
                          const std::list<double>& readings);
 
   std::map<std::string, RNode*> nexts;
@@ -143,10 +143,7 @@ class ResultCollector
   RNode* root;
   RNode* current_node;
 
-  std::map<std::string, size_t> l_map;
-
   size_t total_nodes;
-  size_t current_l_id;
 
   bool isComp;
   std::string compare_time;

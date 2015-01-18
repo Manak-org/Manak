@@ -150,7 +150,7 @@ class Timer
 //    }
 //    else iter = *(size_t*)os.Get("Timer_CurrentIterations");
 //
-//    TotalTime() = 0;
+    TotalTime() = 0;
     Min() = std::numeric_limits<uint64_t>::max();
     Max() = std::numeric_limits<uint64_t>::min();
     //Iterations() = iter;
