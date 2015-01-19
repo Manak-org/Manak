@@ -38,7 +38,9 @@ void RCase::Run()
 
 void RCase::Print()
 {
-  OutputManager::GlobalOutputManager().AddCase(children, results);
+  OutputManager::GlobalOutputManager().AddCase(children.begin()->second->UName(),
+                                               children.begin()->second->Name(),
+                                               results);
 }
 
 void RCase::SaveForComparison(std::ostream& stream)

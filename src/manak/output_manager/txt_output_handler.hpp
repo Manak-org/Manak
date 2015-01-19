@@ -24,7 +24,8 @@ class TXTOutputHandler : public OutputHandler
   void Initialize(bool compare,
                   const std::string& c_time);
 
-  void AddCase(const std::map<std::string, ManakCase*>& children,
+  void AddCase(const std::string& uname,
+               const std::string& name,
                const std::map<std::string, std::list<utils::ObjectStore>>& results);
 
   void OpenSuite(const std::string& name) {}

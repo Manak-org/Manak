@@ -43,14 +43,15 @@ void TXTOutputHandler::Initialize(bool compare,
   stream << std::endl;
 }
 
-void TXTOutputHandler::AddCase(const std::map<std::string, ManakCase*>& children,
+void TXTOutputHandler::AddCase(const std::string& uname,
+                               const std::string& name,
                                const std::map<std::string, std::list<utils::ObjectStore>>& results)
 {
   //! print case name and libraries involved
   stream << std::setprecision(3);
   stream << std::setw(30) << "       Case Name";
 
-  for(auto child : children)
+  for(auto child : results)
   {
     stream << std::setw(20);
     stream << child.first;
@@ -71,7 +72,7 @@ void TXTOutputHandler::AddCase(const std::map<std::string, ManakCase*>& children
   {
     //! put iterators to the start of result lists
     std::list<utils::ObjectStore> dummy;
-    std::list<utils::ObjectStore>::const_iterator it_s[children.size()];
+    std::list<utils::ObjectStore>::const_iterator it_s[results.size()];
 
     {
       size_t index = 0;
@@ -82,7 +83,7 @@ void TXTOutputHandler::AddCase(const std::map<std::string, ManakCase*>& children
     }
 
     //! print the case name on one line
-    stream << children.begin()->second->Name() << std::endl;
+    stream << name << std::endl;
 
     //! loop for max entries and put '---' if the entry is missing
     for(size_t entry_index = 0;entry_index < num_entries;entry_index++)
@@ -145,7 +146,7 @@ void TXTOutputHandler::AddCase(const std::map<std::string, ManakCase*>& children
   }
   else
   {
-    stream << std::setw(30) << children.begin()->second->Name();
+    stream << std::setw(30) << name;
 
     for(auto res : results)
     {

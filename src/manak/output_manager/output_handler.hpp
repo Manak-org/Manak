@@ -24,7 +24,8 @@ class OutputHandler
 
   virtual void CloseSuite() = 0;
 
-  virtual void AddCase(const std::map<std::string, ManakCase*>& children,
+  virtual void AddCase(const std::string& uname,
+                       const std::string& name,
                        const std::map<std::string, std::list<utils::ObjectStore>>& results) = 0;
 
   virtual void Finalize() = 0;

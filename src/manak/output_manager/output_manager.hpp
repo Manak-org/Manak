@@ -36,7 +36,8 @@ class OutputManager
 
   void CloseSuite();
 
-  void AddCase(const std::map<std::string, ManakCase*>& children,
+  void AddCase(const std::string& uname,
+               const std::string& name,
                const std::map<std::string, std::list<utils::ObjectStore>>& results);
 
   void Finalize();

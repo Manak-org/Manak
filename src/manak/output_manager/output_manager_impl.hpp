@@ -15,12 +15,13 @@ void OutputManager::Initialize(bool compare,
   }
 }
 
-void OutputManager::AddCase(const std::map<std::string, ManakCase*>& children,
+void OutputManager::AddCase(const std::string& uname,
+                            const std::string& name,
                             const std::map<std::string, std::list<utils::ObjectStore>>& results)
 {
   for(auto oh : handlers)
   {
-    oh->AddCase(children, results);
+    oh->AddCase(uname, name, results);
   }
 }
 
