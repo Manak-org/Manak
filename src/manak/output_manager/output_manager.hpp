@@ -5,7 +5,7 @@
 
 #include "output_handler.hpp"
 #include "txt_output_handler.hpp"
-//#include "html_output_handler.hpp"
+#include "html_output_handler.hpp"
 
 namespace manak
 {

@@ -22,12 +22,12 @@ class HTMLOutputHandler : public OutputHandler
 
   ~HTMLOutputHandler() {}
 
-  void Initialize(const std::map<std::string, size_t>& l_map,
-                  bool compare,
+  void Initialize(bool compare,
                   const std::string& c_time);
 
-  void AddCase(const std::map<size_t, ManakCase*>& children,
-               const std::map<size_t, std::list<utils::ObjectStore>>& results);
+  void AddCase(const std::string& uname,
+               const std::string& name,
+               const std::map<std::string, std::list<utils::ObjectStore>>& results);
 
   void OpenSuite(const std::string& name) {}
 
@@ -36,7 +36,6 @@ class HTMLOutputHandler : public OutputHandler
   void Finalize();
 
  private:
-  std::map<std::string, size_t> l_map;
   std::stringstream stream1;
   std::stringstream stream2;
 

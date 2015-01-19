@@ -123,7 +123,7 @@ int manak_main(int argc, char* argv[] )
 
     if(output_format_html)
     {
-      filename += ".txt";
+      filename += ".html";
     }
     else
     {
@@ -133,7 +133,8 @@ int manak_main(int argc, char* argv[] )
 
   if(output_format_html)
   {
-    manak::OutputManager::GlobalOutputManager().AddHandler(new manak::TXTOutputHandler(filename));
+    manak::OutputManager::GlobalOutputManager().AddHandler(new manak::HTMLOutputHandler(filename));
+    manak::OutputManager::GlobalOutputManager().AddHandler(new manak::TXTOutputHandler("test.txt"));
   }
   else
   {
