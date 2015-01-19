@@ -53,8 +53,8 @@ struct TestResult
       new_entry = false;
     }
 
-    std::get<1>(*entries.end()).AddAssert(entry);
-    std::get<0>(*entries.end()) = Res::FAIL;
+    std::get<1>(*(--entries.end())).AddAssert(entry);
+    std::get<0>(*(--entries.end())) = Res::FAIL;
   }
 
   void ConfirmEntry()
@@ -64,6 +64,16 @@ struct TestResult
       entries.emplace_back(Res::PASS, TestResultEntry());
       new_entry = false;
     }
+  }
+
+  bool GetStatus(double success_p) const
+  {
+    for(auto entry : entries)
+    {
+      if(std::get<0>(entry) == Res::FAIL)
+        return false;
+    }
+    return true;
   }
 
   std::list<std::tuple<Res, TestResultEntry>> entries;

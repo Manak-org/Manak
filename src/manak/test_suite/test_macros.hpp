@@ -19,7 +19,7 @@ try                                                                           \
 if(expr);                                                                     \
 else                                                                          \
 {                                                                             \
-  if(manak::TestMonitor::GetGlobalTestMonitor().AddAssert(new manak::TrueTestEntry(MANAK_STRINGIZE(__FILE__, __LINE__))); \
+  if(manak::TestMonitor::GetGlobalTestMonitor().AddAssert(new manak::TrueTestEntry(MANAK_STRINGIZE(__FILE__), __LINE__))); \
 }
 
 #endif // MANAK_TEST_MACROS_HPP_INCLUDED

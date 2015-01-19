@@ -61,6 +61,18 @@ std::list<utils::ObjectStore> BenchmarkCase::Run()
     os["iterations"] = new size_t(iterations);
     os["sp"] = new double(success_p);
 
+    if(TestMonitor::GetGlobalTestMonitor().IsTest())
+    {
+      TestResult tr = TestMonitor::GetGlobalTestMonitor().Result();
+      os["is_test"] = new bool(true);
+      os["test_res"] = new bool(tr.GetStatus(success_p));
+    }
+    else
+    {
+      os["is_test"] = new bool(false);
+      os["test_res"] = new bool(false);
+    }
+
     out.emplace_back(os);
   }
 
