@@ -30,8 +30,6 @@ class OutputHandler
 
   virtual void Finalize() = 0;
 
-  std::string GetPMRep(const utils::ObjectStore& entry);
-
  protected:
   std::ofstream stream;
 };

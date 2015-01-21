@@ -65,7 +65,7 @@ std::list<utils::ObjectStore> BenchmarkCase::Run()
     {
       TestResult tr = TestMonitor::GetGlobalTestMonitor().Result();
       os["is_test"] = new bool(true);
-      os["test_res"] = new bool(tr.GetStatus(success_p));
+      os["test_res"] = new TestResult(tr);
     }
     else
     {

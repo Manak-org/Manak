@@ -8,6 +8,8 @@
 
 #include "output_handler.hpp"
 
+#include <manak/test_suite/test_monitor.hpp>
+
 #include <manak/util/version.hpp>
 
 namespace manak
@@ -36,6 +38,8 @@ class HTMLOutputHandler : public OutputHandler
   void Finalize();
 
  private:
+  std::string GetPMRep(const utils::ObjectStore& entry);
+
   std::stringstream stream1;
   std::stringstream stream2;
 

@@ -7,6 +7,8 @@
 
 #include "output_handler.hpp"
 
+#include <manak/test_suite/test_monitor.hpp>
+
 #include <manak/util/version.hpp>
 
 namespace manak
@@ -33,6 +35,9 @@ class TXTOutputHandler : public OutputHandler
   void CloseSuite() {}
 
   void Finalize() {}
+
+ private:
+  std::string GetPMRep(const utils::ObjectStore& entry);
 };
 
 }

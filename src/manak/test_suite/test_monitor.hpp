@@ -30,6 +30,23 @@ struct TestResultEntry
     entries.emplace_back(Type::WARN, entry);
   }
 
+  void GetFailMsg(std::list<std::string>& l_str)
+  {
+    for(auto entry : entries)
+    {
+      std::stringstream ss;
+      ss << std::get<1>(entry)->Filename() << ":" << std::get<1>(entry)->LineNo();
+      ss << " : ";
+
+      if(std::get<0>(entry) == Type::ASSERT)
+        ss << "Assertion Failed! ";
+
+      ss << std::get<1>(entry)->Msg();
+
+      l_str.push_back(ss.str());
+    }
+  }
+
   std::list<std::tuple<Type, TestEntry*>> entries;
 };
 
@@ -74,6 +91,31 @@ struct TestResult
         return false;
     }
     return true;
+  }
+
+  bool GetFailMsg(size_t& n_itr, std::list<std::string>& l_str) const
+  {
+    n_itr = 1;
+    for(auto res : entries)
+    {
+      if(std::get<0>(res) == Res::FAIL)
+      {
+        std::get<1>(res).GetFailMsg(l_str);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  double GetSP() const
+  {
+    size_t cfail = 0;
+    for(auto entry : entries)
+    {
+      if(std::get<0>(entry) == Res::FAIL)
+        cfail++;
+    }
+    return (double)(entries.size() - cfail)/ entries.size();
   }
 
   std::list<std::tuple<Res, TestResultEntry>> entries;

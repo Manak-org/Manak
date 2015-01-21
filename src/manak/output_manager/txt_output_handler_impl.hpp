@@ -76,9 +76,9 @@ void TXTOutputHandler::AddCase(const std::string& uname,
 
     {
       size_t index = 0;
-      for(auto res : results)
+      for(auto res = results.begin();res != results.end();res++)
       {
-        it_s[index++] = res.second.begin();
+        it_s[index++] = res->second.begin();
       }
     }
 
@@ -156,6 +156,43 @@ void TXTOutputHandler::AddCase(const std::string& uname,
     stream << std::endl;
   }
   stream << std::endl;
+}
+
+std::string TXTOutputHandler::GetPMRep(const utils::ObjectStore& entry)
+{
+  std::stringstream ss;
+
+  double comp_val = *(double*)entry.Get("compare");
+  PMeasure pm = *(PMeasure*)entry.Get("pmeasure");
+  bool is_test = *(bool*)entry.Get("is_test");
+  bool test_res = true;
+
+  if(is_test)
+  {
+    TestResult
+    test_res = *(TestResult*)entry.Get("test_res");
+  }
+
+  if(test_res)
+  {
+    if(comp_val >= 0)
+    {
+      double tol = *(double*)entry.Get("tolerance");
+
+      int res = pm.Compare(comp_val, tol);
+
+      if(res > 0)
+        ss << "+";
+      else if(res < 0)
+        ss << "-";
+      ss << pm << "(" << comp_val << ")";
+    }
+    else
+      ss << pm;
+  }
+  else ss << "X";
+
+  return ss.str();
 }
 
 }
