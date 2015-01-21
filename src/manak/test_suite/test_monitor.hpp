@@ -13,7 +13,7 @@ namespace manak
 
 struct TestResultEntry
 {
-  enum class Type {ASSERT, CHECK, WARN};
+  enum class Type {ASSERT, CHECK, WARN, TEXT};
 
   void AddAssert(TestEntry* entry)
   {
@@ -23,6 +23,11 @@ struct TestResultEntry
   void AddCheck(TestEntry* entry)
   {
     entries.emplace_back(Type::CHECK, entry);
+  }
+
+  void AddText(TestEntry* entry)
+  {
+    entries.emplace_back(Type::TEXT, entry);
   }
 
   void AddWarn(TestEntry* entry)
@@ -72,6 +77,17 @@ struct TestResult
 
     std::get<1>(*(--entries.end())).AddAssert(entry);
     std::get<0>(*(--entries.end())) = Res::FAIL;
+  }
+
+  void AddText(TestEntry* entry)
+  {
+    if(new_entry)
+    {
+      entries.emplace_back(Res::PASS, TestResultEntry());
+      new_entry = false;
+    }
+
+    std::get<1>(*(--entries.end())).AddText(entry);
   }
 
   void ConfirmEntry()
@@ -158,6 +174,16 @@ class TestMonitor
     if(isEnabled)
     {
       tr.AddAssert(entry);
+      return true;
+    }
+    return false;
+  }
+
+  bool AddText(TestEntry* entry)
+  {
+    if(isEnabled)
+    {
+      tr.AddText(entry);
       return true;
     }
     return false;

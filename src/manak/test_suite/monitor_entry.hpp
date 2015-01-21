@@ -41,6 +41,14 @@ struct TrueTestEntry : public TestEntry
     : TestEntry(filename, line_no) {}
 };
 
+struct MsgEntry : public TestEntry
+{
+  MsgEntry(const std::string& filename,
+           size_t line_no,
+           const std::string& msg)
+    : TestEntry(filename, line_no, msg) {}
+};
+
 }
 
 #endif // MANAK_MONITOR_ENTRY_HPP_INCLUDED
