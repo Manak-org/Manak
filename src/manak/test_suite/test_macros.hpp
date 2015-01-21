@@ -35,4 +35,12 @@ else                                                                          \
     throw manak::ManakException();                                            \
 }
 
+#define MANAK_ASSERT_TRUE_MSG(expr, msg)                                      \
+if(expr);                                                                     \
+else                                                                          \
+{                                                                             \
+  if(manak::TestMonitor::GetGlobalTestMonitor().AddAssert(new manak::MsgEntry(MANAK_STRINGIZE(__FILE__), __LINE__, msg))) \
+    throw manak::ManakException();                                            \
+}
+
 #endif // MANAK_TEST_MACROS_HPP_INCLUDED

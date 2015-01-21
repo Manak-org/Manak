@@ -27,13 +27,13 @@ RCase::~RCase()
 
 void RCase::Run()
 {
+  std::cout << "Running case " << children.begin()->second->Name() << "...";
   for(auto c : children)
   {
-    std::cout << "Running " << c.second->Name() << "...";
     auto l = c.second->Run();
     results[c.first] = l;
-    std::cout << " [DONE]" << std::endl;
   }
+  std::cout << " [DONE]" << std::endl;
 }
 
 void RCase::Print()
@@ -237,9 +237,6 @@ void ResultCollector::Run()
   std::cout << "#  " << std::setw(66) << ss.str() << "#" << std::endl;
 
   std::cout << "######################################################################"
-            << std::endl << std::endl;
-
-  std::cout << "Running " << total_nodes << " benchmarks."
             << std::endl << std::endl;
 
   root->Run();
