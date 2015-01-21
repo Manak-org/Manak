@@ -80,7 +80,11 @@ void HTMLOutputHandler::Finalize()
 
   stream << "<br>" << std::endl;
 
+  stream << "<h2>Comparison Report</h2>" << std::endl;
+
   stream << stream1.str() << std::endl;
+
+  stream << "<br>" << std::endl;
 
   stream << "<h2>Detailed Report</h2>" << std::endl;
   stream << "<hr width=100% align=left>" << std::endl;
@@ -118,7 +122,9 @@ void HTMLOutputHandler::AddCase(const std::string& uname,
   }
 
   //! add a benchmark name heading
-  stream1 << "<h2>" << name << "</h2><br>" << std::endl;
+  stream1 << "<a href=\"#detail_" << uname << "\">"
+          << "<h2>" << name << "</h2></a><br>"
+          << std::endl;
 
   //! construct case table
   stream1 << "                                                                \
@@ -250,6 +256,7 @@ void HTMLOutputHandler::AddCase(const std::string& uname,
 
 
   //! Generate detailed report section
+  stream2 << "<a name=\"detail_" << uname << "\">" << std::endl;
   stream2 << "<h2>" << uname << "</h2>" << std::endl;
   stream2 << "<bold>Number of Libraries: </bold>" << results.size()
           << "<br>" << std::endl;
@@ -265,7 +272,8 @@ void HTMLOutputHandler::AddCase(const std::string& uname,
       }
       else temp = false;
 
-      stream2 << it.first;
+      stream2 << "<a href=\"#" << uname << "_lib_" << it.first << "\">"
+              << it.first << "</a>" << std::endl;
     }
     stream2 << "<br>" << std::endl;
   }
@@ -274,7 +282,8 @@ void HTMLOutputHandler::AddCase(const std::string& uname,
   {
     std::string l_name = lib.first;
 
-    stream2 << "<h3>" << l_name << "</h3>" << std::endl;
+    stream2 << "<a name=\"" << uname << "_lib_" << l_name << "\">"
+            << "<h3>" << l_name << "</h3>" << std::endl;
 
     //! add table
     stream2 << "<table style=\"width:100%\">" << std::endl;
@@ -325,20 +334,28 @@ void HTMLOutputHandler::AddCase(const std::string& uname,
       }
       else if(sub_name != "")
       {
-        stream21 << "<td>" << sub_name << "</td>" << std::endl;
+        stream21 << "<td><a href = \"#" << uname << "_lib_" << l_name << "_SC_"
+                 << sub_name << "\">"
+                 << sub_name << "</td></a>" << std::endl;
 
         if(is_test)
         {
-          stream22 << "<h4>" << sub_name << "</h4>" << std::endl;
+          stream22 << "<a name = \"" << uname << "_lib_" << l_name << "_SC_"
+                   << sub_name << "\">"
+                   << "<h4>" << sub_name << "</h4></a>" << std::endl;
         }
       }
       else
       {
-        stream21 << "<td>Parameter Set " << p_index << "</td>" << std::endl;
+        stream21 << "<td><a href = \"#" << uname << "_lib_" << l_name << "_SC_"
+                 << "Parameter Set " << p_index << "\">"
+                 << "Parameter Set " << p_index << "</td></a>" << std::endl;
 
         if(is_test)
         {
-          stream22 << "<h4>Parameter Set " << p_index << "</h4>" << std::endl;
+          stream22 << "<a name = \"" << uname << "_lib_" << l_name << "_SC_"
+                   << "Parameter Set " << p_index << "\">"
+                   << "<h4>Parameter Set " << p_index << "</h4></a>" << std::endl;
         }
       }
 
@@ -387,8 +404,11 @@ void HTMLOutputHandler::AddCase(const std::string& uname,
     stream2 << "</table>" << std::endl;
 
     stream2 << stream22.str() << std::endl;
+
+    stream2 << "</a>" << std::endl;
   }
 
+  stream2 << "</a>" << std::endl;
   stream2 << "<hr width=100% align=left>" << std::endl;
 }
 

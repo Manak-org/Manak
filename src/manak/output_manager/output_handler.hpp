@@ -36,6 +36,4 @@ class OutputHandler
 
 }
 
-#include "output_handler_impl.hpp"
-
 #endif // MANAK_OUTPUT_HANDLER_HPP_INCLUDED
