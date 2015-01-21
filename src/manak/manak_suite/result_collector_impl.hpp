@@ -45,39 +45,39 @@ void RCase::Print()
 
 void RCase::SaveForComparison(std::ostream& stream)
 {
-//  for(auto it : children)
-//  {
-//    stream << it.second->UName() << " " << it.second->LibraryName();
-//    auto result = results.find(it.first);
-//    stream << " " << result->second.size();
-//    for(auto res : result->second)
-//    {
-//      stream << " " << ((PMeasure*)res.Get("pmeasure"))->avg;
-//    }
-//    stream << std::endl;
-//  }
+  for(auto it : children)
+  {
+    stream << it.second->UName() << " " << it.second->LibraryName();
+    auto result = results.find(it.first);
+    stream << " " << result->second.size();
+    for(auto res : result->second)
+    {
+      stream << " " << ((PMeasure*)res.Get("pmeasure"))->avg;
+    }
+    stream << std::endl;
+  }
 }
 
 void RCase::LoadForComparison(const std::string& uname,
-                              std::string library,
+                              std::string lname,
                               const std::list<double>& readings)
 {
-//  if(uname == "")
-//  {
-//    auto it = results.find(l_id);
-//    if(it != results.end())
-//    {
-//      auto r_it = readings.begin();
-//      for(auto& l_it : it->second)
-//      {
-//        if(r_it != readings.end())
-//        {
-//          *(double*)l_it.Get("compare") = *r_it;
-//        }
-//        else break;
-//      }
-//    }
-//  }
+  if(uname == "")
+  {
+    auto it = results.find(lname);
+    if(it != results.end())
+    {
+      auto r_it = readings.begin();
+      for(auto& l_it : it->second)
+      {
+        if(r_it != readings.end())
+        {
+          *(double*)l_it.Get("compare") = *r_it;
+        }
+        else break;
+      }
+    }
+  }
 }
 
 RNode* RCase::AddCase(ManakCase* bc)
@@ -159,37 +159,37 @@ void RSuite::Print()
 
 void RSuite::SaveForComparison(std::ostream& stream)
 {
-//  for(auto it : nexts)
-//  {
-//    it.second->SaveForComparison(stream);
-//  }
+  for(auto it : nexts)
+  {
+    it.second->SaveForComparison(stream);
+  }
 }
 
 void RSuite::LoadForComparison(const std::string& uname,
-                               std::string l_id,
+                               std::string lname,
                                const std::list<double>& readings)
 {
-//  if(uname != "")
-//  {
-//    size_t index = uname.find("/");
-//
-//    std::string temp = "";
-//    std::string c_name = "";
-//
-//    if(index != std::string::npos)
-//    {
-//      temp = uname.substr(index + 1, uname.size());
-//      c_name = uname.substr(0, index);
-//    }
-//    else
-//      c_name = uname;
-//
-//    auto it = nexts.find(c_name);
-//    if(it != nexts.end())
-//    {
-//      it->second->LoadForComparison(temp, l_id, readings);
-//    }
-//  }
+  if(uname != "")
+  {
+    size_t index = uname.find("/");
+
+    std::string temp = "";
+    std::string c_name = "";
+
+    if(index != std::string::npos)
+    {
+      temp = uname.substr(index + 1, uname.size());
+      c_name = uname.substr(0, index);
+    }
+    else
+      c_name = uname;
+
+    auto it = nexts.find(c_name);
+    if(it != nexts.end())
+    {
+      it->second->LoadForComparison(temp, lname, readings);
+    }
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -247,58 +247,54 @@ void ResultCollector::Run()
 
 void ResultCollector::SaveForComparison(std::ostream& stream)
 {
-//  stream << GetVersionInfo() << std::endl;
-//
-//  stream << Timer::getTimeStamp() << std::endl;
-//
-//  root->SaveForComparison(stream);
+  stream << GetVersionInfo() << std::endl;
+
+  stream << Timer::getTimeStamp() << std::endl;
+
+  root->SaveForComparison(stream);
 }
 
 void ResultCollector::LoadForComparison(std::istream& stream)
 {
-//  isComp = true;
-//
-//  std::string temp;
-//
-//  getline(stream, temp);
-//  getline(stream, temp);
-//  getline(stream, temp);
-//
-//  //! extract time
-//  getline(stream, temp);
-//  compare_time = temp;
-//
-//  //! get all the cases
-//  while(getline(stream, temp))
-//  {
-//    std::stringstream ss;
-//    ss << temp;
-//    std::string uname;
-//    ss >> uname;
-//
-//    std::string l_name;
-//    ss >> l_name;
-//
-//    size_t num_readings = 0;
-//    ss >> num_readings;
-//
-//    std::list<double> readings;
-//
-//    for(size_t i = 0;i < num_readings;i++)
-//    {
-//      double temp;
-//      ss >> temp;
-//      readings.push_back(temp);
-//    }
-//
-//    uname = uname.substr(1, uname.length() - 1);
-//
-//    auto l_it = l_map.find(l_name);
-//    if(l_it != l_map.end())
-//    {
-//      root->LoadForComparison(uname, l_it->second, readings);
-//    }
-//  }
+  isComp = true;
+
+  std::string temp;
+
+  getline(stream, temp);
+  getline(stream, temp);
+  getline(stream, temp);
+
+  //! extract time
+  getline(stream, temp);
+  compare_time = temp;
+
+  //! get all the cases
+  while(getline(stream, temp))
+  {
+    std::stringstream ss;
+    ss << temp;
+    std::string uname;
+    ss >> uname;
+
+    std::string l_name;
+    ss >> l_name;
+
+    size_t num_readings = 0;
+    ss >> num_readings;
+
+    std::list<double> readings;
+
+    for(size_t i = 0;i < num_readings;i++)
+    {
+      double temp;
+      ss >> temp;
+      readings.push_back(temp);
+    }
+
+    uname = uname.substr(1, uname.length() - 1);
+
+    root->LoadForComparison(MANAK_MODULE_NAME + ("/" + uname), l_name, readings);
+  }
 }
 
 void ResultCollector::Print()

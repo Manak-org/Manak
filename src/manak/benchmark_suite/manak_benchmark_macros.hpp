@@ -40,7 +40,7 @@ _MANAK_CREATE_WITH_TEMPLATE_TIS(BenchmarkCase, Name, Lib, Fun, Tol, Iter, SP)
 
 #define Measure(Code)                                                         \
 manak::Timer::StartTimer();                                                   \
-Code                                                                          \
+Code;                                                                         \
 manak::Timer::StopTimer();
 
 
