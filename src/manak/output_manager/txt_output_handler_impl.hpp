@@ -72,7 +72,7 @@ void TXTOutputHandler::AddCase(const std::string& uname,
   {
     //! put iterators to the start of result lists
     std::list<utils::ObjectStore> dummy;
-    std::list<utils::ObjectStore>::const_iterator it_s[results.size()];
+    std::list<utils::ObjectStore>::const_iterator* it_s = new std::list<utils::ObjectStore>::const_iterator[results.size()];
 
     {
       size_t index = 0;

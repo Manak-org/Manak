@@ -16,7 +16,7 @@ struct ManakException : public std::exception
 
 }
 
-#define Test(Code)                                                            \
+#define TEST(Code)                                                            \
 manak::TestMonitor::GetGlobalTestMonitor().Enable();                          \
 try                                                                           \
 {                                                                             \

@@ -143,8 +143,6 @@ class ResultCollector
   RNode* root;
   RNode* current_node;
 
-  size_t total_nodes;
-
   bool isComp;
   std::string compare_time;
 };

@@ -1,6 +1,3 @@
-#ifndef MANAK_BENCHMARK_MACROS_HPP_INCLUDED
-#define MANAK_BENCHMARK_MACROS_HPP_INCLUDED
-
 ////////////////////////////////////////////////////////////////////////////////
 /// MANAK BENCHMARK MACRO
 ////////////////////////////////////////////////////////////////////////////////
@@ -38,10 +35,7 @@ _MANAK_CREATE_WITH_TEMPLATE_TIS(BenchmarkCase, Name, Lib, Fun, Tol, Iter, SP)
 /// MEASURE MACRO
 ////////////////////////////////////////////////////////////////////////////////
 
-#define Measure(Code)                                                         \
+#define MEASURE(Code)                                                         \
 manak::Timer::StartTimer();                                                   \
 Code;                                                                         \
 manak::Timer::StopTimer();
-
-
-#endif // MANAK_BENCHMARK_MACROS_HPP_INCLUDED

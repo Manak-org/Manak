@@ -111,7 +111,7 @@ void HTMLOutputHandler::AddCase(const std::string& uname,
   total_nodes++;
 
   //! generate compact table of this case
-  std::list<utils::ObjectStore>::const_iterator it_s[results.size()];
+  std::list<utils::ObjectStore>::const_iterator* it_s = new std::list<utils::ObjectStore>::const_iterator[results.size()];
 
   {
     size_t index = 0;

@@ -9,6 +9,7 @@
 
 #include "manak_case.hpp"
 #include "t_manak_case.hpp"
+#include "manak_group.hpp"
 
 #include <manak/util/macro_utils.hpp>
 
@@ -103,6 +104,18 @@ class ManakSuite
       children[obj->Name()].push_back(obj);
     }
     return obj;
+  }
+
+  template<typename T>
+  bool AddGroup(T& gr)
+  {
+    gr.ACCaller();
+    for(auto it : gr.cases)
+    {
+      AddCase(it);
+    }
+    gr.cases.clear();
+    return true;
   }
 
   const std::string& Name() const

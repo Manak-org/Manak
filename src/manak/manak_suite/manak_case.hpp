@@ -42,7 +42,7 @@ class ManakCase
     iterations(iterations),
     success_p(success_p)
   {
-    run_functions.emplace_back([=](){run_function();});
+    run_functions.emplace_back("", [=](){run_function();});
   }
 
   template<typename T>

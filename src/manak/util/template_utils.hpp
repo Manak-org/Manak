@@ -90,6 +90,18 @@ RType BindToObject2(F fun, O* o, Hold<S...>)
   return std::bind(fun, o, template_placeholder<S>()...);
 }
 
+template<typename RType, typename F, typename O>
+RType BindToObject2(F fun, const O* o)
+{
+  return std::bind(fun, o);
+}
+
+template<typename RType, typename F, typename O>
+RType BindToObject2(F fun, O* o)
+{
+  return std::bind(fun, o);
+}
+
 }; // namespace helpers
 
 template<typename RType, typename P, typename... Args>
@@ -128,6 +140,26 @@ std::function<RType(Args...)> BindToObject(RType (C::*fun)(Args...) const, C* c)
 {
   return helper::BindToObject2<std::function<RType(Args...)>>(fun, c, typename helper::SGenerate<sizeof...(Args)>::type());
 }
+
+template<typename RType, typename C, typename... Args>
+std::function<RType(Args...)> BindToObject(RType (C::*fun)(), C* c)
+{
+  return helper::BindToObject2<std::function<RType(Args...)>>(fun, c);
+}
+
+template<typename RType, typename C, typename... Args>
+std::function<RType(Args...)> BindToObject(RType (C::*fun)() const, const C* c)
+{
+  return helper::BindToObject2<std::function<RType(Args...)>>(fun, c);
+}
+
+template<typename RType, typename C, typename... Args>
+std::function<RType(Args...)> BindToObject(RType (C::*fun)() const, C* c)
+{
+  return helper::BindToObject2<std::function<RType(Args...)>>(fun, c);
+}
+
+template<typename U, void (U::*)()> struct manak_group_test{};
 
 }; // namespace utils
 }; // namespace manak

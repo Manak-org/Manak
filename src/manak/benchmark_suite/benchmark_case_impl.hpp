@@ -5,8 +5,6 @@ namespace manak
 
 std::list<utils::ObjectStore> BenchmarkCase::Run()
 {
-  utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
-
   TestMonitor& tm = TestMonitor::GetGlobalTestMonitor();
 
   std::list<utils::ObjectStore> out;
