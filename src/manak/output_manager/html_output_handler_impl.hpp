@@ -107,7 +107,6 @@ void HTMLOutputHandler::AddCase(const std::string& uname,
                                 const std::string& name,
                                 const std::map<std::string, std::list<utils::ObjectStore>>& results)
 {
-
   total_nodes++;
 
   //! generate compact table of this case
@@ -410,6 +409,8 @@ void HTMLOutputHandler::AddCase(const std::string& uname,
 
   stream2 << "</a>" << std::endl;
   stream2 << "<hr width=100% align=left>" << std::endl;
+
+  delete[] it_s;
 }
 
 std::string HTMLOutputHandler::GetPMRep(const utils::ObjectStore& entry)

@@ -15,42 +15,17 @@ struct TestResultEntry
 {
   enum class Type {ASSERT, CHECK, WARN, TEXT};
 
-  void AddAssert(TestEntry* entry)
-  {
-    entries.emplace_back(Type::ASSERT, entry);
-  }
+  ~TestResultEntry();
 
-  void AddCheck(TestEntry* entry)
-  {
-    entries.emplace_back(Type::CHECK, entry);
-  }
+  void AddAssert(TestEntry* entry);
 
-  void AddText(TestEntry* entry)
-  {
-    entries.emplace_back(Type::TEXT, entry);
-  }
+  void AddCheck(TestEntry* entry);
 
-  void AddWarn(TestEntry* entry)
-  {
-    entries.emplace_back(Type::WARN, entry);
-  }
+  void AddText(TestEntry* entry);
 
-  void GetFailMsg(std::list<std::string>& l_str)
-  {
-    for(auto entry : entries)
-    {
-      std::stringstream ss;
-      ss << std::get<1>(entry)->Filename() << ":" << std::get<1>(entry)->LineNo();
-      ss << " : ";
+  void AddWarn(TestEntry* entry);
 
-      if(std::get<0>(entry) == Type::ASSERT)
-        ss << "Assertion Failed! ";
-
-      ss << std::get<1>(entry)->Msg();
-
-      l_str.push_back(ss.str());
-    }
-  }
+  void GetFailMsg(std::list<std::string>& l_str);
 
   std::list<std::tuple<Type, TestEntry*>> entries;
 };
@@ -62,77 +37,19 @@ struct TestResult
 
   enum class Res {PASS, FAIL};
 
-  void NewEntry()
-  {
-    new_entry = true;
-  }
+  void NewEntry();
 
-  void AddAssert(TestEntry* entry)
-  {
-    if(new_entry)
-    {
-      entries.emplace_back(Res::PASS, TestResultEntry());
-      new_entry = false;
-    }
+  void AddAssert(TestEntry* entry);
 
-    std::get<1>(*(--entries.end())).AddAssert(entry);
-    std::get<0>(*(--entries.end())) = Res::FAIL;
-  }
+  void AddText(TestEntry* entry);
 
-  void AddText(TestEntry* entry)
-  {
-    if(new_entry)
-    {
-      entries.emplace_back(Res::PASS, TestResultEntry());
-      new_entry = false;
-    }
+  void ConfirmEntry();
 
-    std::get<1>(*(--entries.end())).AddText(entry);
-  }
+  bool GetStatus(double success_p) const;
 
-  void ConfirmEntry()
-  {
-    if(new_entry)
-    {
-      entries.emplace_back(Res::PASS, TestResultEntry());
-      new_entry = false;
-    }
-  }
+  bool GetFailMsg(size_t& n_itr, std::list<std::string>& l_str) const;
 
-  bool GetStatus(double success_p) const
-  {
-    for(auto entry : entries)
-    {
-      if(std::get<0>(entry) == Res::FAIL)
-        return false;
-    }
-    return true;
-  }
-
-  bool GetFailMsg(size_t& n_itr, std::list<std::string>& l_str) const
-  {
-    n_itr = 1;
-    for(auto res : entries)
-    {
-      if(std::get<0>(res) == Res::FAIL)
-      {
-        std::get<1>(res).GetFailMsg(l_str);
-        return true;
-      }
-    }
-    return false;
-  }
-
-  double GetSP() const
-  {
-    size_t cfail = 0;
-    for(auto entry : entries)
-    {
-      if(std::get<0>(entry) == Res::FAIL)
-        cfail++;
-    }
-    return (double)(entries.size() - cfail)/ entries.size();
-  }
+  double GetSP() const;
 
   std::list<std::tuple<Res, TestResultEntry>> entries;
   bool new_entry;
@@ -151,64 +68,23 @@ class TestMonitor
     return singleton;
   }
 
-  void Initialize()
-  {
-    tr = TestResult();
-    isTest = false;
-    isEnabled = false;
-  }
+  void Initialize();
 
-  void NewEntry()
-  {
-    tr.NewEntry();
-  }
+  void NewEntry();
 
-  void ConfirmEntry()
-  {
-    if(isTest)
-      tr.ConfirmEntry();
-  }
+  void ConfirmEntry();
 
-  bool AddAssert(TestEntry* entry)
-  {
-    if(isEnabled)
-    {
-      tr.AddAssert(entry);
-      return true;
-    }
-    return false;
-  }
+  bool AddAssert(TestEntry* entry);
 
-  bool AddText(TestEntry* entry)
-  {
-    if(isEnabled)
-    {
-      tr.AddText(entry);
-      return true;
-    }
-    return false;
-  }
+  bool AddText(TestEntry* entry);
 
-  void Enable()
-  {
-    isEnabled = true;
-    isTest = true;
-  }
+  void Enable();
 
-  void Disable()
-  {
-    isEnabled = false;
-  }
+  void Disable();
 
-  const bool& IsTest() const
-  {
-    return isTest;
-  }
+  const bool& IsTest() const;
 
-  TestResult Result()
-  {
-    return tr;
-  }
+  TestResult Result();
 
  private:
   TestResult tr;
@@ -219,5 +95,6 @@ class TestMonitor
 
 }
 
+#include "test_monitor_impl.hpp"
 
 #endif // MANAK_TEST_MONITOR_HPP_INCLUDED

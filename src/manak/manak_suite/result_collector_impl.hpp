@@ -21,6 +21,15 @@ RCase::~RCase()
       delete com;
       size_t* iter = (size_t*)it2.Get("iterations");
       delete iter;
+      double* sp = (double*)it2.Get("sp");
+      delete sp;
+      bool* is_test = (bool*)it2.Get("is_test");
+      if(*is_test)
+      {
+        TestResult* tr = (TestResult*)it2.Get("test_res");
+        delete tr;
+      }
+      delete is_test;
     }
   }
 }

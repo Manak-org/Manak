@@ -68,7 +68,6 @@ std::list<utils::ObjectStore> BenchmarkCase::Run()
     else
     {
       os["is_test"] = new bool(false);
-      os["test_res"] = new bool(false);
     }
 
     out.emplace_back(os);
