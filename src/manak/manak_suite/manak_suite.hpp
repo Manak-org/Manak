@@ -118,6 +118,19 @@ class ManakSuite
     return true;
   }
 
+  template<typename T, typename... Args>
+  bool AddGroup(T& gr)
+  {
+    gr.InitCaller();
+    gr.ACCaller();
+    for(auto it : gr.cases)
+    {
+      AddCase(it);
+    }
+    gr.cases.clear();
+    return true;
+  }
+
   const std::string& Name() const
   {
     return name;
