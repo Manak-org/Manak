@@ -15,6 +15,8 @@ struct TestEntry
     line_no(line_no),
     msg(msg)  {}
 
+  virtual ~TestEntry() {}
+
   const std::string& Filename() const
   {
     return filename;

@@ -86,16 +86,16 @@ class Name : public manak::ManakGroup<Name>                                   \
 }
 
 #define MANAK_ADD_GROUP(Name)                                                 \
-struct Manak_unamed ## _ ## __LINE__                                          \
+struct STRING_JOIN(Manak_unamed, __LINE__ )                                   \
 {                                                                             \
   static bool value;                                                          \
 };                                                                            \
-bool Manak_unamed ## _ ## __LINE__::value =                                   \
+bool STRING_JOIN(Manak_unamed,__LINE__)::value =                              \
  manak::ManakSuite::GetMasterSuite().GetCurrentSuite()->                      \
     AddGroup(manak_groups::Name::Global())
 
 #define MANAK_ADD_TO_GROUP(case)                                              \
-static void group_caller ## _ ## __LINE__()                                   \
+static void STRING_JOIN(group_caller, __LINE__)()                             \
 {                                                                             \
   Global().AddManakCase(case);                                                \
 }                                                                             \
@@ -104,7 +104,7 @@ struct AddCase<__LINE__, T>                                                   \
 {                                                                             \
   AddCase()                                                                   \
   {                                                                           \
-    group_caller ## _ ## __LINE__();                                          \
+    STRING_JOIN(group_caller, __LINE__)();                                    \
     AddCase<__LINE__ + 1, T>();                                               \
   }                                                                           \
 }
