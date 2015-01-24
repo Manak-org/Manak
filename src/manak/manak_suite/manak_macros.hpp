@@ -160,7 +160,7 @@ bool STRING_JOIN(Manak_unamed,__LINE__)::value =                              \
 ////////////////////////////////////////////////////////////////////////////////
 
 #define MANAK_ADD_TO_GROUP(case)                                              \
-static void STRING_JOIN(group_caller, __LINE__)()                             \
+void STRING_JOIN(group_caller, __LINE__)()                                    \
 {                                                                             \
   Global().AddManakCase(case);                                                \
 }                                                                             \
@@ -169,13 +169,13 @@ struct AddCase<__LINE__, T>                                                   \
 {                                                                             \
   AddCase()                                                                   \
   {                                                                           \
-    STRING_JOIN(group_caller, __LINE__)();                                    \
+    manak::utils::BindToObject(&decltype(GetType())::STRING_JOIN(group_caller, __LINE__), &Global())();                                    \
     AddCase<__LINE__ + 1, T>();                                               \
   }                                                                           \
 }
 
 #define _MANAK_GROUP_CASE_TIS(Type, Name, Library, Function, Tol, Iter, SP)         \
-( new manak::Type(#Name, #Library, manak::utils::BindToObject(&decltype(GetType())::Function, &Global()), Tol, Iter, SP) )
+( new manak::Type(Name, Library, manak::utils::BindToObject(&decltype(GetType())::Function, &Global()), Tol, Iter, SP) )
 
 ////////////////////////////////////////////////////////////////////////////////
 /// MANAK AUTO GROUP CASE
