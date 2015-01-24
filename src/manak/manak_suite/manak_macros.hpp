@@ -47,13 +47,13 @@ void Name ## _ ## Library::Run()
 ////////////////////////////////////////////////////////////////////////////////
 
 #define MANAK_GROUP(Name)                                                     \
-class Name                                                                    \
+class MG ## _ ## Name                                                         \
 {                                                                             \
  public:                                                                      \
-  Name()                                                                      \
+  MG ## _ ## Name()                                                           \
   {}                                                                          \
                                                                               \
-  ~Name()                                                                     \
+  ~MG ## _ ## Name()                                                          \
   {                                                                           \
     TDCaller<decltype(GetType())>(0);                                         \
   }                                                                           \
@@ -85,14 +85,14 @@ class Name                                                                    \
                                                                               \
   std::list<manak::ManakCase*> cases;                                         \
                                                                               \
-  static Name& Global()                                                       \
+  static MG ## _ ## Name& Global()                                            \
   {                                                                           \
-    static Name singleton;                                                    \
+    static MG ## _ ## Name singleton;                                         \
     return singleton;                                                         \
   }                                                                           \
-  static Name GetType()                                                       \
+  static MG ## _ ## Name GetType()                                            \
   {                                                                           \
-    Name t;                                                                   \
+    MG ## _ ## Name t;                                                        \
     return t;                                                                 \
   };                                                                          \
                                                                               \
@@ -124,7 +124,7 @@ struct STRING_JOIN(Manak_unamed, __LINE__ )                                   \
 };                                                                            \
 bool STRING_JOIN(Manak_unamed,__LINE__)::value =                              \
  manak::ManakSuite::GetMasterSuite().GetCurrentSuite()->                      \
-    AddGroup(Name::Global(), __VA_ARGS__)
+    AddGroup(MG ## _ ## Name::Global(), __VA_ARGS__)
 
 #define MANAK_ADD_TO_GROUP(case)                                              \
 static void STRING_JOIN(group_caller, __LINE__)()                             \
