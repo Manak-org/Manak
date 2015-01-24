@@ -106,22 +106,10 @@ class ManakSuite
   }
 
   template<typename T, typename... Args>
-  bool AddGroup(T& gr, Args... args)
+  bool AddGroup(Args... args)
   {
+    T& gr = T::Global();
     gr.InitCaller(args...);
-    gr.ACCaller();
-    for(auto it : gr.cases)
-    {
-      AddCase(it);
-    }
-    gr.cases.clear();
-    return true;
-  }
-
-  template<typename T, typename... Args>
-  bool AddGroup(T& gr)
-  {
-    gr.InitCaller();
     gr.ACCaller();
     for(auto it : gr.cases)
     {
