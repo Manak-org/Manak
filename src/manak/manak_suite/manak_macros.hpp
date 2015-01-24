@@ -50,19 +50,22 @@ void Name ## _ ## Library::Run()
 class Name                                                                    \
 {                                                                             \
  public:                                                                      \
-  Name(const std::string& iden = "")                                          \
+  Name()                                                                      \
+  {}                                                                          \
+                                                                              \
+  ~Name()                                                                     \
   {                                                                           \
-    InitCaller<decltype(GetType())>(0);                                       \
     TDCaller<decltype(GetType())>(0);                                         \
   }                                                                           \
                                                                               \
-  template<typename abcde>                                                    \
-  void InitCaller(manak::utils::manak_group_test<abcde, &abcde::Manak_Group_Initialize>*) \
+  template<typename... Args>                                                  \
+  void InitCaller(Args... args)                                               \
   {                                                                           \
-    static_cast<abcde*>(this)->Manak_Group_Initialize();                      \
+    InitCaller2<decltype(GetType())>(0, args...);                             \
   }                                                                           \
-  template<typename>                                                          \
-  void InitCaller(...)                                                        \
+                                                                              \
+  template<typename T, typename... Args>                                      \
+  void InitCaller2(...)                                                       \
   {}                                                                          \
                                                                               \
   template<typename abcde>                                                    \
@@ -81,11 +84,10 @@ class Name                                                                    \
   }                                                                           \
                                                                               \
   std::list<manak::ManakCase*> cases;                                         \
-  std::string iden;                                                           \
                                                                               \
-  static Name& Global(const std::string& iden = "")                           \
+  static Name& Global()                                                       \
   {                                                                           \
-    static Name singleton(iden);                                              \
+    static Name singleton;                                                    \
     return singleton;                                                         \
   }                                                                           \
   static Name GetType()                                                       \
@@ -115,14 +117,14 @@ class Name                                                                    \
   {};                                                                         \
 };
 
-#define MANAK_ADD_GROUP(Name)                                                 \
+#define MANAK_ADD_GROUP(Name, ...)                                            \
 struct STRING_JOIN(Manak_unamed, __LINE__ )                                   \
 {                                                                             \
   static bool value;                                                          \
 };                                                                            \
 bool STRING_JOIN(Manak_unamed,__LINE__)::value =                              \
  manak::ManakSuite::GetMasterSuite().GetCurrentSuite()->                      \
-    AddGroup(Name::Global())
+    AddGroup(Name::Global(), __VA_ARGS__)
 
 #define MANAK_ADD_TO_GROUP(case)                                              \
 static void STRING_JOIN(group_caller, __LINE__)()                             \
@@ -139,9 +141,15 @@ struct AddCase<__LINE__, T>                                                   \
   }                                                                           \
 }
 
-#define GINIT void Manak_Group_Initialize()
+#define GINIT                                                                 \
+template<typename abcde, typename... Args>                                    \
+void InitCaller2(abcde*, Args... args) \
+{                                                                             \
+  static_cast<abcde*>(this)->Manak_Group_Initialize(args...);                 \
+};                                                                            \
+void Manak_Group_Initialize
 
-#define GDOWN void Manak_Group_TearDown()
+#define GDOWN void Manak_Group_TearDown
 
 ////////////////////////////////////////////////////////////////////////////////
 /// MANAK GROUP CASE MACROS

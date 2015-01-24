@@ -105,9 +105,10 @@ class ManakSuite
     return obj;
   }
 
-  template<typename T>
-  bool AddGroup(T& gr)
+  template<typename T, typename... Args>
+  bool AddGroup(T& gr, Args... args)
   {
+    gr.InitCaller(args...);
     gr.ACCaller();
     for(auto it : gr.cases)
     {
