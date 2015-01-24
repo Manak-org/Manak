@@ -40,7 +40,7 @@ void Name ## _ ## Library::Run()
 ////////////////////////////////////////////////////////////////////////////////
 
 #define _MANAK_CREATE_WITH_TEMPLATE_TIS(Type, Name, Library, Function, Tol, Iter, SP)  \
-( manak::CTManakCase<manak::Type>(#Name, MANAK_STRINGIZE(Library), Function, Tol, Iter, SP) )
+( manak::CTManakCase<manak::Type>(#Name, #Library, Function, Tol, Iter, SP) )
 
 ////////////////////////////////////////////////////////////////////////////////
 /// MANAK GROUP MACROS
@@ -58,13 +58,13 @@ class MG ## _ ## Name                                                         \
     TDCaller<decltype(GetType())>(0);                                         \
   }                                                                           \
                                                                               \
-  template<typename... Args>                                                  \
-  void InitCaller(Args... args)                                               \
+  template<typename... ABCDE>                                                 \
+  void InitCaller(ABCDE... abcde)                                             \
   {                                                                           \
-    InitCaller2<decltype(GetType())>(0, args...);                             \
+    InitCaller2<decltype(GetType())>(0, abcde...);                            \
   }                                                                           \
                                                                               \
-  template<typename T, typename... Args>                                      \
+  template<typename, typename...>                                             \
   void InitCaller2(...)                                                       \
   {}                                                                          \
                                                                               \
@@ -101,25 +101,25 @@ class MG ## _ ## Name                                                         \
     AddCase<__LINE__, size_t> a;                                              \
   }                                                                           \
                                                                               \
-  template<size_t n, typename T>                                              \
+  template<size_t ABCDE, typename ABCDEF>                                     \
   struct AddCase                                                              \
   {                                                                           \
     AddCase()                                                                 \
     {                                                                         \
-      AddCase<n + 1, T>();                                                    \
+      AddCase<ABCDE + 1, ABCDEF>();                                           \
     }                                                                         \
   };
 
 
 #define MANAK_GROUP_END()                                                     \
-  template<typename T>                                                        \
-  struct AddCase<__LINE__, T>                                                 \
+  template<typename ABCDE>                                                    \
+  struct AddCase<__LINE__, ABCDE>                                             \
   {};                                                                         \
 };
 
 #define GINIT                                                                 \
-template<typename abcde, typename... Args>                                    \
-void InitCaller2(abcde*, Args... args)                                        \
+template<typename abcde, typename... ABCDEF>                                  \
+void InitCaller2(abcde*, ABCDEF... args)                                      \
 {                                                                             \
   static_cast<abcde*>(this)->Manak_Group_Initialize(args...);                 \
 };                                                                            \
@@ -174,7 +174,7 @@ struct AddCase<__LINE__, T>                                                   \
   }                                                                           \
 }
 
-#define _MANAK_GROUP_CASE_TIS(Type, Name, Library, Function, Tol, Iter, SP)         \
+#define _MANAK_GROUP_CASE_TIS(Type, Name, Library, Function, Tol, Iter, SP)   \
 ( new manak::Type(Name, Library, manak::utils::BindToObject(&decltype(GetType())::Function, &Global()), Tol, Iter, SP) )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -184,3 +184,11 @@ struct AddCase<__LINE__, T>                                                   \
 #define _MANAK_AUTO_GROUP_CASE_TIS(Type, Name, Lib, Tol, Iter, SP)            \
 MANAK_ADD_TO_GROUP(_MANAK_GROUP_CASE_TIS(Type, Name, Lib, STRING_JOIN(manak_auto_fun, __LINE__), Tol, Iter, SP));  \
 void STRING_JOIN(manak_auto_fun, __LINE__)()
+
+////////////////////////////////////////////////////////////////////////////////
+/// MANAK CREATE GROUP WITH TEMPLATE MACROS
+////////////////////////////////////////////////////////////////////////////////
+
+#define _MANAK_CREATE_GROUP_WITH_TEMPLATE_TIS(Type, Name, Lib, Fun, Tol, Iter, SP)  \
+( manak::CTManakCase<manak::Type>(Name, Lib, manak::utils::BindToObject(&decltype(GetType())::Fun, &Global()), Tol, Iter, SP) )
+

@@ -96,7 +96,7 @@ TManakCase<Case, RType, Args...>* CTManakCase(const std::string& name,
                                               const size_t iterations,
                                               double success_p)
 {
-  return new TManakCase<RType, Args...>(name, library_name, fun, tolerance, iterations, success_p);
+  return new TManakCase<Case, RType, Args...>(name, library_name, fun, tolerance, iterations, success_p);
 }
 
 }
