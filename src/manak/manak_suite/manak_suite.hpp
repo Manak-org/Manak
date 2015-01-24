@@ -9,7 +9,6 @@
 
 #include "manak_case.hpp"
 #include "t_manak_case.hpp"
-#include "manak_group.hpp"
 
 #include <manak/util/macro_utils.hpp>
 
