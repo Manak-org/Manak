@@ -1,4 +1,19 @@
 ////////////////////////////////////////////////////////////////////////////////
+/// MANAK SUITE MACROS
+////////////////////////////////////////////////////////////////////////////////
+
+#define MANAK_SUITE(Name)                                                     \
+( new manak::ManakSuite(#Name) )
+
+#define MANAK_AUTO_SUITE(Name)                                                \
+static manak::RegisterManakSuite STRING_JOIN(X, STRING_JOIN(invoker, __LINE__))(#Name)  \
+
+#define MANAK_AUTO_TEST(Name, X) static const size_t Name = 0
+
+#define MANAK_AUTO_SUITE_END()                                                \
+static manak::DeRegisterManakSuite STRING_JOIN(destroy, __LINE__)
+
+////////////////////////////////////////////////////////////////////////////////
 /// MANAK CASE MACROS
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -19,21 +34,21 @@ manak::ManakSuite::GetMasterSuite().GetCurrentSuite()->AddCase(bench)
 ////////////////////////////////////////////////////////////////////////////////
 
 #define _MANAK_AUTO_CASE_TIS(Type, Name, Library, Tol, Iter, SP)              \
-struct Name ## _ ## Library                                                   \
+struct STRING_JOIN(Name ## _ ## Library, __LINE__)                            \
 {                                                                             \
   static void Run();                                                          \
   static manak::ManakCase* static_temp;                                       \
 };                                                                            \
-manak::ManakCase* Name ## _ ## Library::static_temp =                         \
+manak::ManakCase* STRING_JOIN(Name ## _ ## Library, __LINE__)::static_temp =  \
 manak::ManakSuite::GetMasterSuite().GetCurrentSuite()->                       \
 AddCase(_MANAK_CASE_TIS(Type,                                                 \
                         Name,                                                 \
                         Library,                                              \
-                        Name ## _ ## Library::Run,                            \
+                        STRING_JOIN(Name ## _ ## Library, __LINE__)::Run,     \
                         Tol,                                                  \
                         Iter,                                                 \
                         SP));                                                 \
-void Name ## _ ## Library::Run()
+void STRING_JOIN(Name ## _ ## Library, __LINE__)::Run()
 
 ////////////////////////////////////////////////////////////////////////////////
 /// MANAK CREATE BENCHMARK WITH TEMPLATE MACRO
@@ -46,7 +61,7 @@ void Name ## _ ## Library::Run()
 /// MANAK GROUP MACROS
 ////////////////////////////////////////////////////////////////////////////////
 
-#define MANAK_GROUP_START(Name)                                               \
+#define MANAK_GROUP(Name)                                                     \
 class MG ## _ ## Name                                                         \
 {                                                                             \
  public:                                                                      \
@@ -132,12 +147,12 @@ void Manak_Group_Initialize
 ////////////////////////////////////////////////////////////////////////////////
 
 #define F_MANAK_ADD_GROUP(X) MANAK_ADD_GROUP(X)
-#define F_MANAK_GROUP_START(X) MANAK_GROUP_START(X)
+#define F_MANAK_GROUP(X) MANAK_GROUP(X)
 
-#define MANAK_AUTO_GROUP_START()                                              \
-class STRING_JOIN(MG_unamed, __LINE__);                                        \
+#define MANAK_AUTO_GROUP()                                                    \
+class STRING_JOIN(MG_unamed, __LINE__);                                       \
 F_MANAK_ADD_GROUP(STRING_JOIN(unamed, __LINE__));                             \
-F_MANAK_GROUP_START(STRING_JOIN(unamed, __LINE__));
+F_MANAK_GROUP(STRING_JOIN(unamed, __LINE__));
 
 #define MANAK_AUTO_GROUP_END()                                                \
 MANAK_GROUP_END();

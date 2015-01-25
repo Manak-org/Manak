@@ -1,0 +1,1 @@
+add_executable(sm_auto_reg_test auto_reg_test.cpp)

@@ -128,7 +128,7 @@ bool ManakSuite::Find(const std::string& name, std::list<ManakCase*>& lbc)
 
   for(auto it : child_suits)
   {
-    it.second->Run(uname + "/" + name, pattern, compare);
+    it.second->Run(uname + "/" + it.first, pattern, compare);
   }
 
   ResultCollector::GlobalResultCollector().CloseSuite();

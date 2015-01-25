@@ -75,3 +75,7 @@ MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI(Name, Fun, MANAK_DEFAULT_TOLERANCE, Iter
 
 #define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(Name, Fun)                       \
 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T(Name, Fun, MANAK_DEFAULT_TOLERANCE)
+
+////////////////////////////////////////////////////////////////////////////////
+///
+////////////////////////////////////////////////////////////////////////////////

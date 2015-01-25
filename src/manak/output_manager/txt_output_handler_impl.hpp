@@ -143,6 +143,8 @@ void TXTOutputHandler::AddCase(const std::string& uname,
 
       stream << std::endl;
     }
+
+    delete[] it_s;
   }
   else
   {

@@ -103,7 +103,8 @@ struct RSuite : public RNode
                          std::string library,
                          const std::list<double>& readings);
 
-  std::map<std::string, RNode*> nexts;
+  std::map<std::string, RNode*> next_suites;
+  std::map<std::string, RNode*> next_cases;
 
   ManakSuite* suite;
 };

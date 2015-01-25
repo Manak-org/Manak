@@ -101,7 +101,12 @@ RNode* RCase::AddCase(ManakCase* bc)
 
 RSuite::~RSuite()
 {
-  for(auto it : nexts)
+  for(auto it : next_cases)
+  {
+    delete it.second;
+  }
+
+  for(auto it : next_suites)
   {
     delete it.second;
   }
@@ -110,24 +115,24 @@ RSuite::~RSuite()
 RNode* RSuite::AddSuite(ManakSuite* suite)
 {
   RNode* n;
-  auto it = nexts.find(suite->Name());
-  if(it != nexts.end())
+  auto it = next_suites.find(suite->Name());
+  if(it != next_suites.end())
   {
     n = it->second;
     return n;
   }
   n = new RSuite(this, suite);
-  nexts[suite->Name()] = n;
+  next_suites[suite->Name()] = n;
   return n;
 }
 
 RNode* RSuite::EraseSuite(ManakSuite* suite)
 {
-  auto it = nexts.find(suite->Name());
-  if(it != nexts.end())
+  auto it = next_suites.find(suite->Name());
+  if(it != next_suites.end())
   {
     RNode* out = it->second;
-    nexts.erase(it);
+    next_suites.erase(it);
     return out;
   }
   return NULL;
@@ -136,15 +141,15 @@ RNode* RSuite::EraseSuite(ManakSuite* suite)
 RNode* RSuite::AddCase(ManakCase* bc)
 {
   RNode* n;
-  auto it = nexts.find(bc->Name());
-  if(it != nexts.end())
+  auto it = next_cases.find(bc->Name());
+  if(it != next_cases.end())
   {
     n = it->second;
   }
   else
   {
     n = new RCase(this);
-    nexts[bc->Name()] = n;
+    next_cases[bc->Name()] = n;
   }
 
   return n->AddCase(bc);
@@ -152,7 +157,12 @@ RNode* RSuite::AddCase(ManakCase* bc)
 
 void RSuite::Run()
 {
-  for(auto n : nexts)
+  for(auto n : next_cases)
+  {
+    n.second->Run();
+  }
+
+  for(auto n : next_suites)
   {
     n.second->Run();
   }
@@ -160,7 +170,12 @@ void RSuite::Run()
 
 void RSuite::Print()
 {
-  for(auto n : nexts)
+  for(auto n : next_cases)
+  {
+    n.second->Print();
+  }
+
+  for(auto n : next_suites)
   {
     n.second->Print();
   }
@@ -168,7 +183,12 @@ void RSuite::Print()
 
 void RSuite::SaveForComparison(std::ostream& stream)
 {
-  for(auto it : nexts)
+  for(auto it : next_cases)
+  {
+    it.second->SaveForComparison(stream);
+  }
+
+  for(auto it : next_suites)
   {
     it.second->SaveForComparison(stream);
   }
@@ -189,14 +209,22 @@ void RSuite::LoadForComparison(const std::string& uname,
     {
       temp = uname.substr(index + 1, uname.size());
       c_name = uname.substr(0, index);
+
+      auto it = next_suites.find(c_name);
+      if(it != next_suites.end())
+      {
+        it->second->LoadForComparison(temp, lname, readings);
+      }
     }
     else
+    {
       c_name = uname;
 
-    auto it = nexts.find(c_name);
-    if(it != nexts.end())
-    {
-      it->second->LoadForComparison(temp, lname, readings);
+      auto it = next_cases.find(c_name);
+      if(it != next_cases.end())
+      {
+        it->second->LoadForComparison(temp, lname, readings);
+      }
     }
   }
 }

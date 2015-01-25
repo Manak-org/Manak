@@ -37,3 +37,12 @@ set_target_properties(manak
 )
   
 add_dependencies(manak manak_headers)
+
+add_subdirectory(build_test)
+
+# For 'make test'.
+add_custom_target(test
+  COMMAND ${CMAKE_BINARY_DIR}/bin/sm_auto_reg_test
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/ # This is where test files are put.
+  COMMENT "Running MANAK build test"
+  DEPENDS sm_auto_reg_test)

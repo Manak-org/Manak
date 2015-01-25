@@ -161,6 +161,11 @@ class RegisterManakSuite
  public:
   RegisterManakSuite(const std::string& name)
   {
+    if(name == "")
+    {
+      std::cerr << "Invalid suite name!!" << std::endl;
+      exit(1);
+    }
     ManakSuite::GetMasterSuite().SetCurrentSuite(name);
   }
 };
@@ -175,15 +180,5 @@ class DeRegisterManakSuite
 };
 
 }
-
-#define MANAK_BENCHMARK_SUITE(X)  \
-( new manak::ManakSuite(#X) )
-
-#define MANAK_AUTO_BENCHMARK_SUITE(X)  \
-static manak::RegisterManakSuite STRING_JOIN(X, STRING_JOIN(invoker, __LINE__))(#X);\
-
-#define MANAK_AUTO_BENCHMARK_SUITE_END()  \
-static manak::DeRegisterManakSuite STRING_JOIN(destroy, __LINE__); \
-
 
 #endif // MANAK_MANAK_SUITE_HPP_INCLUDED

@@ -8,6 +8,10 @@ set(MANAK_MINOR_VERSION "0")
 set(MANAK_PATCH_VERSION "0")
 set(MANAK_VERSION_NAME "Begin")
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} "${CMAKE_BINARY_DIR}/bin")
+
 # Make a target to generate the documentation.  If Doxygen isn't installed, then
 # I guess this option will just be unavailable.
 find_package(Doxygen)
@@ -35,7 +39,6 @@ if (DOXYGEN_FOUND)
       OPTIONAL
   )
 endif (DOXYGEN_FOUND)
-
 
 # Recurse into the rest of the project.
 add_subdirectory(src/manak)
