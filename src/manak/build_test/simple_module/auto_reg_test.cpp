@@ -52,7 +52,7 @@ MANAK_AUTO_BENCHMARK_CASE_T(AutoBCaseT, 1)
 
 }
 
-MANAK_AUTO_BENCHMARK_CASE_I(AutoBcaseI, 1)
+MANAK_AUTO_BENCHMARK_CASE_I(AutoBCaseI, 1)
 {
   
 }
@@ -91,6 +91,19 @@ GINIT()
   count = 10;
 }
 
+void fun(size_t a)
+{
+
+}
+
+list<tuple<size_t>> GetCustomArgs()
+{
+  list<tuple<size_t>> out;
+  for(size_t i = 0;i < 10;i++)
+    out.emplace_back(i);
+  return out;
+}
+
 MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS("AutoGBCaseTIS", 1, 1, 1)
 {
 
@@ -120,5 +133,17 @@ MANAK_AUTO_GROUP_BENCHMARK_CASE("AutoGBCase")
 {
 
 }
+
+MANAK_ADD_TO_GROUP(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS("AutoGPBCaseTIS", fun, 1, 1, 1)->AddArgs(0));
+
+MANAK_ADD_TO_GROUP(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI("AutoGPBCaseTI", fun, 1, 1)->AddCustomArgs(MANAK_GROUP_FUNCTION(GetCustomArgs)));
+
+MANAK_ADD_TO_GROUP(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS("AutoGPBCaseIS", fun, 1, 1)->AddArgs(0));
+
+MANAK_ADD_TO_GROUP(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T("AutoGPBCaseT", fun, 1)->AddArgs(0));
+
+MANAK_ADD_TO_GROUP(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I("AutoGPBCaseI", fun, 1)->AddArgs(0));
+
+MANAK_ADD_TO_GROUP(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE("AutoGPBCase", fun)->AddArgs(0));
 
 MANAK_AUTO_GROUP_END();
