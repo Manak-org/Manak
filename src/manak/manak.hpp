@@ -38,6 +38,11 @@ bool manak_init_module()
   #endif // MANAK_MODULE
   #endif // MANAK_BENCHMARK_MODULE
 
+  //! for configuration file
+  #ifndef MANAK_CONFIG_FILE
+  #include MANAK_CONFIG_FILE
+  #endif // MANAK_CONFIG_FILE
+
   //! If MANAK_MANUAL_INIT_FUNCTION is defined then that function will be
   //! called from default initialization function. This function can be used
   //! manually registering cases.
