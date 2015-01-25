@@ -77,5 +77,23 @@ MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI(Name, Fun, MANAK_DEFAULT_TOLERANCE, Iter
 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T(Name, Fun, MANAK_DEFAULT_TOLERANCE)
 
 ////////////////////////////////////////////////////////////////////////////////
-///
+/// MANAK AUTO GROUP BENCHMARK CASE MACROS
 ////////////////////////////////////////////////////////////////////////////////
+
+#define MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS(Name, Tol, Iter, SP)              \
+_MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS(Name, MANAK_STRINGIZE(MANAK_BASE_LIBRARY_NAME), Tol, Iter, SP)
+
+#define MANAK_AUTO_GROUP_BENCHMARK_CASE_TI(Name, Tol, Iter)                   \
+MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS(Name, Tol, Iter, MANAK_DEFAULT_SP)
+
+#define MANAK_AUTO_GROUP_BENCHMARK_CASE_IS(Name, Iter, SP)                    \
+MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS(Name, MANAK_DEFAULT_TOLERANCE, Iter, SP)
+
+#define MANAK_AUTO_GROUP_BENCHMARK_CASE_T(Name, Tol)                          \
+MANAK_AUTO_GROUP_BENCHMARK_CASE_TI(Name, Tol, MANAK_DEFAULT_ITERATIONS)
+
+#define MANAK_AUTO_GROUP_BENCHMARK_CASE_I(Name, Iter)                         \
+MANAK_AUTO_GROUP_BENCHMARK_CASE_TI(Name, MANAK_DEFAULT_TOLERANCE, Iter)
+
+#define MANAK_AUTO_GROUP_BENCHMARK_CASE(Name)                                 \
+MANAK_AUTO_GROUP_BENCHMARK_CASE_T(Name, MANAK_DEFAULT_TOLERANCE)

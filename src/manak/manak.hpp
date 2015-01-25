@@ -39,7 +39,7 @@ bool manak_init_module()
   #endif // MANAK_BENCHMARK_MODULE
 
   //! for configuration file
-  #ifndef MANAK_CONFIG_FILE
+  #ifdef MANAK_CONFIG_FILE
   #include MANAK_CONFIG_FILE
   #endif // MANAK_CONFIG_FILE
 

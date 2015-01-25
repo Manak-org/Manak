@@ -36,7 +36,7 @@ RCase::~RCase()
 
 void RCase::Run()
 {
-  std::cout << "Running case " << children.begin()->second->Name() << "...";
+  std::cout << "Running case " << children.begin()->second->UName() << "...";
   for(auto c : children)
   {
     auto l = c.second->Run();

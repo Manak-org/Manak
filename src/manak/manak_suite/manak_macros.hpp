@@ -174,6 +174,8 @@ bool STRING_JOIN(Manak_unamed,__LINE__)::value =                              \
 /// MANAK GROUP CASE MACROS
 ////////////////////////////////////////////////////////////////////////////////
 
+#define F_MANAK_ADD_TO_GROUP(X) MANAK_ADD_TO_GROUP(X)
+
 #define MANAK_ADD_TO_GROUP(case)                                              \
 void STRING_JOIN(group_caller, __LINE__)()                                    \
 {                                                                             \
