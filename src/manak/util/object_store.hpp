@@ -14,84 +14,29 @@ namespace utils
 class ObjectStore : public std::map<std::string, void*>
 {
  public:
-  static ObjectStore& GetGlobalObjectStore()
-  {
-    static ObjectStore singleton;
-    return singleton;
-  }
+  MANAK_INLINE static ObjectStore& GetGlobalObjectStore();
 
-  void* Get(const std::string& name) const
-  {
-    auto it = this->find(name);
-    if(it != this->end())
-      return it->second;
+  MANAK_INLINE void* Get(const std::string& name) const;
 
-    return NULL;
-  }
+  void* RGet(const std::string& name);
 
-  void* RGet(const std::string& name)
-  {
-    void* out = NULL;
-    auto it = this->find(name);
-    if(it != this->end())
-    {
-      out = it->second;
-      this->erase(it);
-    }
-    return out;
-  }
+  bool Erase(const std::string& name);
 
-  bool Erase(const std::string& name)
-  {
-    auto it = this->find(name);
-    if(it != this->end())
-    {
-      this->erase(it);
-      return true;
-    }
+  void Insert(const std::string& name, void* obj, const std::string& group_name = "");
 
-    return false;
-  }
-
-  void Insert(const std::string& name, void* obj, const std::string& group_name = "")
-  {
-    (*this)[name] = obj;
-    if(group_name != "")
-      m_groups[group_name].push_back(name);
-  }
-
-  bool EraseGroup(const std::string& group_name)
-  {
-    auto g_it = m_groups.find(group_name);
-    if(g_it != m_groups.end())
-    {
-      for(auto name : g_it->second)
-      {
-        auto it = this->find(name);
-        if(it != this->end())
-          this->erase(it);
-      }
-      m_groups.erase(g_it);
-      return true;
-    }
-    return false;
-  }
+  bool EraseGroup(const std::string& group_name);
 
  private:
   std::map<std::string, std::list<std::string>> m_groups;
 };
 
-std::ostream& operator<<(std::ostream& s, const ObjectStore& os)
-{
-  for(auto it : os)
-  {
-    s << it.first << " -> " << it.second << std::endl;
-  }
-  return s;
-}
+MANAK_INLINE std::ostream& operator<<(std::ostream& s, const ObjectStore& os);
 
 }
 }
 
+#ifndef MANAK_USE_DYN_LINK
+#include "object_store_impl.hpp"
+#endif // MANAK_USE_DYN_LINK
 
 #endif // _MANAK_UTIL_OBJECT_STORE_HPP_INCLUDED

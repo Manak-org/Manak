@@ -136,225 +136,67 @@ class Timer
   }
 
   //! Initialize a new Timer instance
-  static void Initialize()
-  {
-//    size_t iter = 0;
-//
-//    utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
-//
-//    if(os.Get("Timer_CurrentSubIterations") != NULL)
-//    {
-//      size_t* temp = (size_t*)os.RGet("Timer_CurrentSubIterations");
-//      iter = *temp;
-//      delete temp;
-//    }
-//    else iter = *(size_t*)os.Get("Timer_CurrentIterations");
-//
-    TotalTime() = 0;
-    Min() = std::numeric_limits<uint64_t>::max();
-    Max() = std::numeric_limits<uint64_t>::min();
-    //Iterations() = iter;
-    //CIter() = Iterations();
-    StateInit() = true;
-  }
+  MANAK_INLINE static void Initialize();
 
   //! Deinitialize and register
-  static PMeasure Deinitialize(size_t iterations)
-  {
-    //utils::ObjectStore& os = utils::ObjectStore::GetGlobalObjectStore();
-
-    if(StateInit())
-    {
-      StateInit() = false;
-
-//      std::string sub_name = "";
-//      std::string* temp = (std::string*)os.RGet("Timer_CurrentSubName");
-//      if(temp)
-//      {
-//        sub_name = *temp;
-//        delete temp;
-//      }
-
-//      typedef std::list<utils::ObjectStore> ResultList;
-
-//      ResultList& re = *(ResultList*)os.Get("Timer_CurrentResultList");
-//
-      PMeasure pm = GetStats(iterations);
-//
-//      double tolerance = 0;
-//
-//      double* t_tol;
-//      if((t_tol = (double*)os.Get("Timer_CurrentSubTolerance")) == NULL)
-//      {
-//        t_tol = (double*)os.Get("Timer_CurrentTolerance");
-//        tolerance = *t_tol;
-//      }
-//      else
-//      {
-//        tolerance = *t_tol;
-//        os.RGet("Timer_CurrentSubTolerance");
-//        delete t_tol;
-//      }
-
-//      utils::ObjectStore os;
-//      os["name"] = new std::string(sub_name);
-//      os["tolerance"] = new double(tolerance);
-//      os["pmeasure"] = new PMeasure(pm);
-//      os["compare"] = new double(-1);
-//      os["iterations"] = new size_t(Iterations());
-//      os["sp"] = new double(*(double)os.Get("Timer_CurrentSP"));
-
-      //re.emplace_back(os);
-
-      return pm;
-    }
-    return PMeasure();
-  }
+  MANAK_INLINE static PMeasure Deinitialize(size_t iterations);
 
   //! Mark start of the iteration
-  static void StartIter()
-  {
-    if(StateInit())
-    {
-      CTime() = 0;
-      StateIter() = true;
-    }
-  }
+  MANAK_INLINE static void StartIter();
 
   //! Start timer
-  static void StartTimer()
-  {
-    if(StateIter())
-    {
-      Start() = microtimer();
-      StateTimer() = true;
-    }
-  }
+  MANAK_INLINE static void StartTimer();
 
   //! Stop timer
-  static void StopTimer()
-  {
-    if(StateTimer())
-    {
-      CTime() += microtimer() - Start();
-      StateTimer() = false;
-    }
-  }
+  MANAK_INLINE static void StopTimer();
 
   //! Mark end of the iteration
-  static bool EndIter(size_t& iterations)
-  {
-    if(StateIter() == false)
-      return false;
-    StateIter() = false;
-
-    TotalTime() += CTime();
-
-    if(Min() > CTime())
-      Min() = CTime();
-    if(Max() < CTime())
-      Max() = CTime();
-
-    iterations--;
-    if(iterations <= 0) return false;
-    return true;
-  }
+  MANAK_INLINE static bool EndIter(size_t& iterations);
 
   //! Get statistics of current timer instance
-  static PMeasure GetStats(size_t iterations)
-  {
-    return PMeasure(Min(), Max(), (double)TotalTime()/ iterations);
-  }
+  MANAK_INLINE static PMeasure GetStats(size_t iterations);
 
   //! Get-set total time
-  static uint64_t& TotalTime()
-  {
-    static uint64_t singleton;
-    return singleton;
-  }
+  MANAK_INLINE static uint64_t& TotalTime();
 
   //! Get-set current timing
-  static uint64_t& CTime()
-  {
-    static uint64_t singleton;
-    return singleton;
-  }
+  MANAK_INLINE static uint64_t& CTime();
 
   //! Get-set start time
-  static uint64_t& Start()
-  {
-    static uint64_t singleton;
-    return singleton;
-  }
+  MANAK_INLINE static uint64_t& Start();
 
   //! Get-set min time
-  static uint64_t& Min()
-  {
-    static uint64_t singleton;
-    return singleton;
-  }
+  MANAK_INLINE static uint64_t& Min();
+
   //! Get-set max time
-  static uint64_t& Max()
-  {
-    static uint64_t singleton;
-    return singleton;
-  }
+  MANAK_INLINE static uint64_t& Max();
 
   //! Get-set iteration state
-  static bool& StateIter()
-  {
-    static bool singleton;
-    return singleton;
-  }
+  MANAK_INLINE static bool& StateIter();
 
   //! Get-set timer state
-  static bool& StateTimer()
-  {
-    static bool singleton;
-    return singleton;
-  }
+  MANAK_INLINE static bool& StateTimer();
 
   //! Get-set initialization state
-  static bool& StateInit()
-  {
-    static bool singleton;
-    return singleton;
-  }
+  MANAK_INLINE static bool& StateInit();
 
   //! Replace all occurrences
-  static void replaceAll(std::string& str,
-                         const std::string& from,
-                         const std::string& to)
-  {
-    size_t start_pos = 0;
-    while((start_pos = str.find(from, start_pos)) != std::string::npos)
-    {
-      while((start_pos = str.find(from, start_pos)) != std::string::npos)
-      {
-        str.replace(start_pos, from.length(), to);
-        start_pos += to.length();
-      }
-      start_pos += to.length();
-    }
-  }
+  MANAK_INLINE static void replaceAll(std::string& str,
+                                      const std::string& from,
+                                      const std::string& to);
 
   //! Returns current time-stamp as string
   //!
   //! \return std::string
   //!
   //!
-  static std::string getTimeStamp(bool removeSpaces = false)
-  {
-    time_t tm;
-    time(&tm);
-    std::string timestamp = ctime(&tm);
-    timestamp.pop_back();
-    timestamp = timestamp.substr(4);
-    if(removeSpaces) replaceAll(timestamp, " ", "_");
-    return timestamp;
-  }
+  MANAK_INLINE static std::string getTimeStamp(bool removeSpaces = false);
 }; // class Timer
 
 }; // namespace manak
+
+#ifndef MANAK_USE_DYN_LINK
+#include "timer_impl.hpp"
+#endif // MANAK_USE_DYN_LINK
 
 #endif // MANAK_UTIL_TIMER_HPP_INCLUDED

@@ -61,4 +61,12 @@
 #define MANAK_CLOSE_LOG
 #endif
 
+//! Check if user has opt for dynamic linking
+#ifdef MANAK_USE_DYN_LINK
+#define MANAK_INLINE
+
+#else
+#define MANAK_INLINE inline
+#endif // MANAK_UE_DYNAMIC_LINK
+
 #endif // MANAK_SET_ENV_HPP_INCLUDED
