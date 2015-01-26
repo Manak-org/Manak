@@ -183,13 +183,13 @@ void STRING_JOIN(group_caller, __LINE__)()                                    \
 {                                                                             \
   Global().AddManakCase(case);                                                \
 }                                                                             \
-template<typename T>                                                          \
-struct AddCase<__LINE__, T>                                                   \
+template<typename abcde>                                                      \
+struct AddCase<__LINE__, abcde>                                               \
 {                                                                             \
   AddCase()                                                                   \
   {                                                                           \
     manak::utils::BindToObject(&decltype(GetType())::STRING_JOIN(group_caller, __LINE__), &Global())();                                    \
-    AddCase<__LINE__ + 1, T>();                                               \
+    AddCase<__LINE__ + 1, abcde>();                                               \
   }                                                                           \
 }
 

@@ -86,8 +86,10 @@ add_custom_target(test
   COMMAND ${CMAKE_BINARY_DIR}/bin/sm_auto_reg_test
   COMMAND ${CMAKE_BINARY_DIR}/bin/dl_sm_auto_reg_test
   COMMAND ${CMAKE_BINARY_DIR}/bin/sm_man_reg_test
+  COMMAND ${CMAKE_BINARY_DIR}/bin/dl_sm_man_reg_test
   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/ # This is where test files are put.
   COMMENT "Running MANAK build test"
   DEPENDS sm_auto_reg_test 
           dl_sm_auto_reg_test
-          sm_man_reg_test)
+          sm_man_reg_test
+          dl_sm_man_reg_test)
