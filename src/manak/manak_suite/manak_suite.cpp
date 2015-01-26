@@ -1,7 +1,12 @@
+#ifdef MANAK_USE_DYN_LINK
+#include <manak/util/macro_utils.hpp>
+#include "manak_suite.hpp"
+#endif // MANAK_USE_DYN_LINK
+
 namespace manak
 {
 
-ManakSuite::~ManakSuite()
+MANAK_INLINE ManakSuite::~ManakSuite()
 {
   for(auto lbc : children)
   {
@@ -16,7 +21,47 @@ ManakSuite::~ManakSuite()
   }
 }
 
-bool ManakSuite::LoadData(const std::string& name)
+MANAK_INLINE  ManakSuite* ManakSuite::SetCurrentSuite(const std::string& name)
+{
+  auto suite = current_manak_suite->child_suits.find(name);
+  if(suite != current_manak_suite->child_suits.end())
+  {
+    current_manak_suite = suite->second;
+  }
+  else
+  {
+    ManakSuite* n_s = new ManakSuite(name);
+    current_manak_suite->AddSuite(n_s);
+    current_manak_suite = n_s;
+  }
+  return current_manak_suite;
+}
+
+MANAK_INLINE ManakCase* ManakSuite::AddCase(ManakCase* obj)
+{
+  auto it = children.find(obj->Name());
+  if(it != children.end())
+  {
+    for(auto bc : it->second)
+    {
+      if(bc->LibraryName() == obj->LibraryName())
+      {
+        std::cerr << "Contains multiple entries for library "
+                  << obj->LibraryName() << " with case "
+                  << obj->Name() << std::endl;
+        exit(1);
+      }
+    }
+    it->second.push_back(obj);
+  }
+  else
+  {
+    children[obj->Name()].push_back(obj);
+  }
+  return obj;
+}
+
+MANAK_INLINE bool ManakSuite::LoadData(const std::string& name)
 {
   std::ifstream stream(name);
 
@@ -75,7 +120,7 @@ bool ManakSuite::LoadData(const std::string& name)
   return true;
 }
 
-bool ManakSuite::Find(const std::string& name, std::list<ManakCase*>& lbc)
+MANAK_INLINE bool ManakSuite::Find(const std::string& name, std::list<ManakCase*>& lbc)
 {
   size_t t = name.find("/", 1);
   if(t == std::string::npos)
@@ -99,7 +144,7 @@ bool ManakSuite::Find(const std::string& name, std::list<ManakCase*>& lbc)
   }
 }
 
- bool ManakSuite::Run(const std::string& uname,
+ MANAK_INLINE bool ManakSuite::Run(const std::string& uname,
                       const std::string& pattern,
                       const bool compare)
 {

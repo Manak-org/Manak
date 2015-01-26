@@ -2,8 +2,12 @@
 #define MANAK_OUTPUT_HANDLER_HPP_INCLUDED
 
 #include <iostream>
+#include <iomanip>
 #include <map>
 #include <string>
+#include <fstream>
+
+#include <manak/util/object_store.hpp>
 
 namespace manak
 {

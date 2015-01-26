@@ -9,6 +9,7 @@
 
 #include <functional>
 
+#include <manak/util/manak_env.hpp>
 #include <manak/util/set_env.hpp>
 
 #include <manak/manak_suite/manak_suite.hpp>
@@ -50,7 +51,7 @@ bool manak_init_module()
   MANAK_MANUAL_INIT_FUNCTION();
   #endif // MANAK_MANUAL_INIT_FUNCTION
 
-  manak::ManakSuite::GetMasterSuite().Name() = MANAK_MODULE_NAME;
+  manak::ManakEnv::GlobalEnv().GetModuleName() = MANAK_MODULE_NAME;
 
   return true;
 }

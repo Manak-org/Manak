@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "pmeasure.hpp"
+#include "macro_utils.hpp"
 
 #if defined(__unix__) || defined(__unix)
   #include <time.h>       // clock_gettime()
@@ -196,7 +197,7 @@ class Timer
 }; // namespace manak
 
 #ifndef MANAK_USE_DYN_LINK
-#include "timer_impl.hpp"
+#include "timer.cpp"
 #endif // MANAK_USE_DYN_LINK
 
 #endif // MANAK_UTIL_TIMER_HPP_INCLUDED

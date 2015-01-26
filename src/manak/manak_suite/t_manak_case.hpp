@@ -14,9 +14,9 @@ class TManakCase : public Case
   TManakCase(const std::string& name,
              const std::string& library_name,
              std::function<RType(Args...)> t_function,
-             double tolerance = MANAK_DEFAULT_TOLERANCE,
-             const size_t iterations = MANAK_DEFAULT_ITERATIONS,
-             double success_p = MANAK_DEFAULT_SP)
+             double tolerance,
+             const size_t iterations,
+             double success_p)
     : Case(name, library_name, tolerance, iterations, success_p),
     t_function(t_function)
   {
@@ -37,8 +37,8 @@ class TManakCase : public Case
     return this;
   }
 
-  template<typename... Args2>
-  TManakCase* AddCustomArgs(std::function<std::list<std::tuple<Args...>>(Args2...)> fun, Args2... params)
+  template<typename T, typename... Args2>
+  TManakCase* AddCustomArgs(T fun, Args2... params)
   {
     std::list<std::tuple<Args...>> args = fun(params...);
     for(auto s_arg : args)

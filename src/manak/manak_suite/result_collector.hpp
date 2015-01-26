@@ -2,8 +2,6 @@
 #define MANAK_RESULT_COLLECTOR_HPP_INCLUDED
 
 #include <iostream>
-#include <iostream>
-#include <iomanip>
 #include <string>
 #include <map>
 #include <list>
@@ -11,6 +9,7 @@
 #include <manak/output_manager/output_manager.hpp>
 
 #include <manak/util/version.hpp>
+#include <manak/util/macro_utils.hpp>
 
 namespace manak
 {
@@ -55,21 +54,29 @@ struct RCase : public RNode
 
   ~RCase();
 
-  RNode* AddSuite(ManakSuite* Suite) { return NULL; }
+  RNode* AddSuite(ManakSuite* Suite)
+  {
+    (void)Suite;
+    return NULL;
+  }
 
-  RNode* AddCase(ManakCase* bc);
+  MANAK_INLINE RNode* AddCase(ManakCase* bc);
 
-  RNode* EraseSuite(ManakSuite* suite) { return NULL; }
+  RNode* EraseSuite(ManakSuite* suite)
+  {
+    (void)suite;
+    return NULL;
+  }
 
-  void Run();
+  MANAK_INLINE void Run();
 
-  void Print();
+  MANAK_INLINE void Print();
 
-  void SaveForComparison(std::ostream& stream);
+  MANAK_INLINE void SaveForComparison(std::ostream& stream);
 
-  void LoadForComparison(const std::string& uname,
-                         std::string library,
-                         const std::list<double>& readings);
+  MANAK_INLINE void LoadForComparison(const std::string& uname,
+                                      std::string library,
+                                      const std::list<double>& readings);
 
   std::map<std::string, std::list<utils::ObjectStore>> results;
   std::map<std::string, ManakCase*> children;
@@ -80,28 +87,28 @@ struct RSuite : public RNode
   RSuite(RNode* parent, ManakSuite* suite)
     :RNode(parent), suite(suite) {}
 
-  ~RSuite();
+  MANAK_INLINE ~RSuite();
 
-  RNode* AddSuite(ManakSuite* Suite);
+  MANAK_INLINE RNode* AddSuite(ManakSuite* Suite);
 
-  RNode* EraseSuite(ManakSuite* suite);
+  MANAK_INLINE RNode* EraseSuite(ManakSuite* suite);
 
-  RNode* AddCase(ManakCase* bc);
+  MANAK_INLINE RNode* AddCase(ManakCase* bc);
 
-  void Run();
+  MANAK_INLINE void Run();
 
-  void Print();
+  MANAK_INLINE void Print();
 
   ManakSuite* GetSuite()
   {
     return suite;
   }
 
-  void SaveForComparison(std::ostream& stream);
+  MANAK_INLINE void SaveForComparison(std::ostream& stream);
 
-  void LoadForComparison(const std::string& uname,
-                         std::string library,
-                         const std::list<double>& readings);
+  MANAK_INLINE void LoadForComparison(const std::string& uname,
+                                      std::string library,
+                                      const std::list<double>& readings);
 
   std::map<std::string, RNode*> next_suites;
   std::map<std::string, RNode*> next_cases;
@@ -126,19 +133,19 @@ class ResultCollector
     return singleton;
   }
 
-  void OpenSuite(ManakSuite* suite);
+  MANAK_INLINE void OpenSuite(ManakSuite* suite);
 
-  void AddCase(ManakCase* bc);
+  MANAK_INLINE void AddCase(ManakCase* bc);
 
-  void CloseSuite();
+  MANAK_INLINE void CloseSuite();
 
-  void Run();
+  MANAK_INLINE void Run();
 
-  void SaveForComparison(std::ostream& stream);
+  MANAK_INLINE void SaveForComparison(std::ostream& stream);
 
-  void LoadForComparison(std::istream& stream);
+  MANAK_INLINE void LoadForComparison(std::istream& stream);
 
-  void Print();
+  MANAK_INLINE void Print();
 
  private:
   RNode* root;
@@ -150,7 +157,8 @@ class ResultCollector
 
 }
 
-#include "result_collector_impl.hpp"
-
+#ifndef MANAK_USE_DYN_LINK
+#include "result_collector.cpp"
+#endif // MANAK_USE_DYN_LINK
 
 #endif // MANAK_RESULT_COLLECTOR_HPP_INCLUDED

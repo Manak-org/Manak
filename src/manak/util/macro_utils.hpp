@@ -17,4 +17,12 @@
 //! Joins given parameters
 #define STRING_JOIN(X, Y) STRING_JOIN2(X, Y)
 
+//! Check if user has opt for dynamic linking
+#ifdef MANAK_USE_DYN_LINK
+#define MANAK_INLINE
+
+#else
+#define MANAK_INLINE inline
+#endif // MANAK_UE_DYNAMIC_LINK
+
 #endif // MANAK_UTIL_MACRO_ARG_COUNT_HPP_INCLUDED

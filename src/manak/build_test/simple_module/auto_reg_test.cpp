@@ -59,10 +59,10 @@ MANAK_AUTO_BENCHMARK_CASE_I(AutoBCaseI, 1)
 
 void test(int a)
 {
-
+  (void)a;
 }
 
-list<tuple<int>> GetCustomArgs(int a)
+list<tuple<int>> GetCustomArgs(size_t a)
 {
   list<tuple<int>> out;
   for(size_t i = 0;i < a;i++)
@@ -93,7 +93,7 @@ GINIT()
 
 void fun(size_t a)
 {
-
+  (void)a;
 }
 
 list<tuple<size_t>> GetCustomArgs()

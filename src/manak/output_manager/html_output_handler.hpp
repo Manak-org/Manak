@@ -7,10 +7,14 @@
 #include <sstream>
 
 #include "output_handler.hpp"
-
 #include <manak/test_suite/test_monitor.hpp>
-
 #include <manak/util/version.hpp>
+#include <manak/util/object_store.hpp>
+#include <manak/util/pmeasure.hpp>
+#include <manak/util/macro_utils.hpp>
+#include <manak/util/timer.hpp>
+
+#include <manak/util/manak_env.hpp>
 
 namespace manak
 {
@@ -24,21 +28,24 @@ class HTMLOutputHandler : public OutputHandler
 
   ~HTMLOutputHandler() {}
 
-  void Initialize(bool compare,
-                  const std::string& c_time);
+  MANAK_INLINE void Initialize(bool compare,
+                               const std::string& c_time);
 
-  void AddCase(const std::string& uname,
-               const std::string& name,
-               const std::map<std::string, std::list<utils::ObjectStore>>& results);
+  MANAK_INLINE void AddCase(const std::string& uname,
+                            const std::string& name,
+                            const std::map<std::string, std::list<utils::ObjectStore>>& results);
 
-  void OpenSuite(const std::string& name) {}
+  void OpenSuite(const std::string& name)
+  {
+    (void)name;
+  }
 
   void CloseSuite() {}
 
-  void Finalize();
+  MANAK_INLINE void Finalize();
 
  private:
-  std::string GetPMRep(const utils::ObjectStore& entry);
+  MANAK_INLINE std::string GetPMRep(const utils::ObjectStore& entry);
 
   std::stringstream stream1;
   std::stringstream stream2;
@@ -50,6 +57,8 @@ class HTMLOutputHandler : public OutputHandler
 
 }
 
-#include "html_output_handler_impl.hpp"
+#ifndef MANAK_USE_DYN_LINK
+#include "html_output_handler.cpp"
+#endif // MANAK_USE_DYN_LINK
 
 #endif // MANAK_HTML_OUPUT_HANDLER_HPP_INCLUDED

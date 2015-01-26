@@ -19,9 +19,9 @@ class ManakCase
  public:
   ManakCase(const std::string& name,
             const std::string& library_name,
-            double tolerance = MANAK_DEFAULT_TOLERANCE,
-            const size_t iterations = MANAK_DEFAULT_ITERATIONS,
-            double success_p = MANAK_DEFAULT_SP)
+            double tolerance,
+            const size_t iterations,
+            double success_p)
     : name(name),
     library_name(library_name),
     tolerance(tolerance),
@@ -33,9 +33,9 @@ class ManakCase
   ManakCase(const std::string& name,
             const std::string& library_name,
             std::function<T()> run_function,
-            double tolerance = MANAK_DEFAULT_TOLERANCE,
-            const size_t iterations = MANAK_DEFAULT_ITERATIONS,
-            const double success_p = MANAK_DEFAULT_SP)
+            double tolerance,
+            const size_t iterations,
+            const double success_p)
     : name(name),
     library_name(library_name),
     tolerance(tolerance),
@@ -49,9 +49,9 @@ class ManakCase
   ManakCase(const std::string& name,
             const std::string& library_name,
             T (run_function)(),
-            double tolerance = MANAK_DEFAULT_TOLERANCE,
-            const size_t iterations = MANAK_DEFAULT_ITERATIONS,
-            double success_p = MANAK_DEFAULT_SP)
+            double tolerance,
+            const size_t iterations,
+            double success_p)
     : name(name),
     library_name(library_name),
     tolerance(tolerance),

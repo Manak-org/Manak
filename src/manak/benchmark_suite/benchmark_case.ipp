@@ -1,18 +1,11 @@
-#include <manak/test_suite/test_suite.hpp>
-
 namespace manak
 {
 
-std::list<utils::ObjectStore> BenchmarkCase::Run()
+inline std::list<utils::ObjectStore> BenchmarkCase::Run()
 {
   TestMonitor& tm = TestMonitor::GetGlobalTestMonitor();
 
   std::list<utils::ObjectStore> out;
-
-  //os.Insert("Timer_CurrentTolerance", &tolerance, "Current_Run");
-  //os.Insert("Timer_CurrentResultList", &out, "Current_Run");
-  //os.Insert("Timer_CurrentIterations", &iterations, "Current_Run");
-  //os.Insert("Timer_CurrentSP", &sp, "Current_Run");
 
   for(auto run_function : run_functions)
   {
@@ -20,10 +13,8 @@ std::list<utils::ObjectStore> BenchmarkCase::Run()
     std::streambuf *coutbuf = std::cout.rdbuf();
     std::streambuf *cerrbuf = std::cout.rdbuf();
 
-    std::cout.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
-    std::cerr.rdbuf(MANAK_BENCHMARK_REDIRECTION_STREAM);
-
-    //os["Timer_CurrentSubName"] = new std::string(run_function.first);
+    std::cout.rdbuf(MANAK_REDIRECTION_BUFFER);
+    std::cerr.rdbuf(MANAK_REDIRECTION_BUFFER);
 
     Timer::Initialize();
     tm.Initialize();
@@ -72,16 +63,6 @@ std::list<utils::ObjectStore> BenchmarkCase::Run()
 
     out.emplace_back(os);
   }
-
-//  os.EraseGroup("Current_Run");
-//
-//  double* t_tol = (double*)os.Get("Timer_CurrentSubTolerance");
-//  if(t_tol != NULL)
-//    delete t_tol;
-//
-//  size_t* t_iter = (size_t*)os.Get("Timer_CurrentSubIterations");
-//  if(t_iter != NULL)
-//    delete t_iter;
 
   return out;
 }

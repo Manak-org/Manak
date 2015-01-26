@@ -55,12 +55,13 @@ class BenchmarkCase : public ManakCase
     : ManakCase(name, library_name, run_function, tolerance, iterations, success_p)
   {}
 
-  std::list<utils::ObjectStore> Run();
+  inline std::list<utils::ObjectStore> Run();
 };
 
 }
 
-//! Add implementation
-#include "benchmark_case_impl.hpp"
+#ifndef MANAK_GEN_PRECOMPILE
+#include "benchmark_case.ipp"
+#endif // MANAK_GEN_PRECOMPILE
 
 #endif // MANAK_BENCHMARK_CASE_HPP_INCLUDED

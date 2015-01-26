@@ -6,6 +6,7 @@
 #include <map>
 #include <regex>
 #include <vector>
+#include <fstream>
 
 #include "manak_case.hpp"
 #include "t_manak_case.hpp"
@@ -27,15 +28,15 @@ class ManakSuite
     current_manak_suite(this),
     parent(NULL) {}
 
-  ~ManakSuite();
+  MANAK_INLINE ~ManakSuite();
 
-  bool Run(const std::string& uname = "",
-           const std::string& pattern = "",
-           const bool compare = false);
+  MANAK_INLINE bool Run(const std::string& uname = "",
+                        const std::string& pattern = "",
+                        const bool compare = false);
 
-  bool Find(const std::string& name, std::list<ManakCase*>& lbc);
+  MANAK_INLINE bool Find(const std::string& name, std::list<ManakCase*>& lbc);
 
-  bool LoadData(const std::string& name);
+  MANAK_INLINE bool LoadData(const std::string& name);
 
   static ManakSuite& GetMasterSuite()
   {
@@ -60,50 +61,14 @@ class ManakSuite
     return (current_manak_suite = suite);
   }
 
-  ManakSuite* SetCurrentSuite(const std::string& name)
-  {
-    auto suite = current_manak_suite->child_suits.find(name);
-    if(suite != current_manak_suite->child_suits.end())
-    {
-      current_manak_suite = suite->second;
-    }
-    else
-    {
-      ManakSuite* n_s = new ManakSuite(name);
-      current_manak_suite->AddSuite(n_s);
-      current_manak_suite = n_s;
-    }
-    return current_manak_suite;
-  }
+  MANAK_INLINE ManakSuite* SetCurrentSuite(const std::string& name);
 
   ManakSuite* SetCurrentSuiteToParent()
   {
     return (current_manak_suite = current_manak_suite->parent);
   }
 
-  ManakCase* AddCase(ManakCase* obj)
-  {
-    auto it = children.find(obj->Name());
-    if(it != children.end())
-    {
-      for(auto bc : it->second)
-      {
-        if(bc->LibraryName() == obj->LibraryName())
-        {
-          std::cerr << "Contains multiple entries for library "
-                    << obj->LibraryName() << " with case "
-                    << obj->Name() << std::endl;
-          exit(1);
-        }
-      }
-      it->second.push_back(obj);
-    }
-    else
-    {
-      children[obj->Name()].push_back(obj);
-    }
-    return obj;
-  }
+  MANAK_INLINE ManakCase* AddCase(ManakCase* obj);
 
   template<typename T, typename... Args>
   bool AddGroup(Args... args)
@@ -151,7 +116,9 @@ class ManakSuite
 
 #include "result_collector.hpp"
 
-#include "manak_suite_impl.hpp"
+#ifndef MANAK_USE_DYN_LINK
+#include "manak_suite.cpp"
+#endif // MANAK_USE_DYN_LINK
 
 namespace manak
 {

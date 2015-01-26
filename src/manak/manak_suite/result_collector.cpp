@@ -1,3 +1,11 @@
+#ifdef MANAK_USE_DYN_LINK
+#include <manak/util/macro_utils.hpp>
+#include <manak/util/manak_env.hpp>
+#include "manak_suite.hpp"
+
+#include "result_collector.hpp"
+#endif // MANAK_USE_DYN_LINK
+
 namespace manak
 {
 
@@ -5,7 +13,7 @@ namespace manak
 /// RCASE IMPLEMENTATION
 ////////////////////////////////////////////////////////////////////////////////
 
-RCase::~RCase()
+MANAK_INLINE RCase::~RCase()
 {
   for(auto it : results)
   {
@@ -34,7 +42,7 @@ RCase::~RCase()
   }
 }
 
-void RCase::Run()
+MANAK_INLINE void RCase::Run()
 {
   std::cout << "Running case " << children.begin()->second->UName() << "...";
   for(auto c : children)
@@ -45,14 +53,14 @@ void RCase::Run()
   std::cout << " [DONE]" << std::endl;
 }
 
-void RCase::Print()
+MANAK_INLINE void RCase::Print()
 {
   OutputManager::GlobalOutputManager().AddCase(children.begin()->second->UName(),
                                                children.begin()->second->Name(),
                                                results);
 }
 
-void RCase::SaveForComparison(std::ostream& stream)
+MANAK_INLINE void RCase::SaveForComparison(std::ostream& stream)
 {
   for(auto it : children)
   {
@@ -67,9 +75,9 @@ void RCase::SaveForComparison(std::ostream& stream)
   }
 }
 
-void RCase::LoadForComparison(const std::string& uname,
-                              std::string lname,
-                              const std::list<double>& readings)
+MANAK_INLINE void RCase::LoadForComparison(const std::string& uname,
+                                           std::string lname,
+                                           const std::list<double>& readings)
 {
   if(uname == "")
   {
@@ -89,7 +97,7 @@ void RCase::LoadForComparison(const std::string& uname,
   }
 }
 
-RNode* RCase::AddCase(ManakCase* bc)
+MANAK_INLINE RNode* RCase::AddCase(ManakCase* bc)
 {
   children[bc->LibraryName()] = bc;
   return this;
@@ -99,7 +107,7 @@ RNode* RCase::AddCase(ManakCase* bc)
 /// RSUITE IMPLEMENTATION
 ////////////////////////////////////////////////////////////////////////////////
 
-RSuite::~RSuite()
+MANAK_INLINE RSuite::~RSuite()
 {
   for(auto it : next_cases)
   {
@@ -112,7 +120,7 @@ RSuite::~RSuite()
   }
 }
 
-RNode* RSuite::AddSuite(ManakSuite* suite)
+MANAK_INLINE RNode* RSuite::AddSuite(ManakSuite* suite)
 {
   RNode* n;
   auto it = next_suites.find(suite->Name());
@@ -126,7 +134,7 @@ RNode* RSuite::AddSuite(ManakSuite* suite)
   return n;
 }
 
-RNode* RSuite::EraseSuite(ManakSuite* suite)
+MANAK_INLINE RNode* RSuite::EraseSuite(ManakSuite* suite)
 {
   auto it = next_suites.find(suite->Name());
   if(it != next_suites.end())
@@ -138,7 +146,7 @@ RNode* RSuite::EraseSuite(ManakSuite* suite)
   return NULL;
 }
 
-RNode* RSuite::AddCase(ManakCase* bc)
+MANAK_INLINE RNode* RSuite::AddCase(ManakCase* bc)
 {
   RNode* n;
   auto it = next_cases.find(bc->Name());
@@ -155,7 +163,7 @@ RNode* RSuite::AddCase(ManakCase* bc)
   return n->AddCase(bc);
 }
 
-void RSuite::Run()
+MANAK_INLINE void RSuite::Run()
 {
   for(auto n : next_cases)
   {
@@ -168,7 +176,7 @@ void RSuite::Run()
   }
 }
 
-void RSuite::Print()
+MANAK_INLINE void RSuite::Print()
 {
   for(auto n : next_cases)
   {
@@ -181,7 +189,7 @@ void RSuite::Print()
   }
 }
 
-void RSuite::SaveForComparison(std::ostream& stream)
+MANAK_INLINE void RSuite::SaveForComparison(std::ostream& stream)
 {
   for(auto it : next_cases)
   {
@@ -194,9 +202,9 @@ void RSuite::SaveForComparison(std::ostream& stream)
   }
 }
 
-void RSuite::LoadForComparison(const std::string& uname,
-                               std::string lname,
-                               const std::list<double>& readings)
+MANAK_INLINE void RSuite::LoadForComparison(const std::string& uname,
+                                            std::string lname,
+                                            const std::list<double>& readings)
 {
   if(uname != "")
   {
@@ -233,19 +241,19 @@ void RSuite::LoadForComparison(const std::string& uname,
 /// RESULT COLLECTOR IMPLEMENTATION
 ////////////////////////////////////////////////////////////////////////////////
 
-void ResultCollector::OpenSuite(ManakSuite* suite)
+MANAK_INLINE void ResultCollector::OpenSuite(ManakSuite* suite)
 {
   RNode* temp = current_node->AddSuite(suite);
   current_node = temp;
 }
 
-void ResultCollector::AddCase(ManakCase* bc)
+MANAK_INLINE void ResultCollector::AddCase(ManakCase* bc)
 {
   current_node->AddCase(bc);
   current_node->count++;
 }
 
-void ResultCollector::CloseSuite()
+MANAK_INLINE void ResultCollector::CloseSuite()
 {
   if(current_node->count == 0)
   {
@@ -260,7 +268,7 @@ void ResultCollector::CloseSuite()
   current_node = current_node->parent;
 }
 
-void ResultCollector::Run()
+MANAK_INLINE void ResultCollector::Run()
 {
   std::cout << std::setiosflags(std::ios::left);
   std::cout << "######################################################################"
@@ -279,7 +287,7 @@ void ResultCollector::Run()
   root->Run();
 }
 
-void ResultCollector::SaveForComparison(std::ostream& stream)
+MANAK_INLINE void ResultCollector::SaveForComparison(std::ostream& stream)
 {
   stream << GetVersionInfo() << std::endl;
 
@@ -288,7 +296,7 @@ void ResultCollector::SaveForComparison(std::ostream& stream)
   root->SaveForComparison(stream);
 }
 
-void ResultCollector::LoadForComparison(std::istream& stream)
+MANAK_INLINE void ResultCollector::LoadForComparison(std::istream& stream)
 {
   isComp = true;
 
@@ -327,11 +335,11 @@ void ResultCollector::LoadForComparison(std::istream& stream)
 
     uname = uname.substr(1, uname.length() - 1);
 
-    root->LoadForComparison(MANAK_MODULE_NAME + ("/" + uname), l_name, readings);
+    root->LoadForComparison(ManakEnv::GlobalEnv().GetModuleName() + "/" + uname, l_name, readings);
   }
 }
 
-void ResultCollector::Print()
+MANAK_INLINE void ResultCollector::Print()
 {
   OutputManager::GlobalOutputManager().Initialize(isComp, compare_time);
 

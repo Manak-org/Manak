@@ -1,3 +1,7 @@
+#ifdef MANAK_USE_DYN_LINK
+#include "test_monitor.hpp"
+#endif // MANAK_USE_DYN_LINK
+
 namespace manak
 {
 
@@ -5,7 +9,7 @@ namespace manak
 /// TestResultEntry Implementation
 ////////////////////////////////////////////////////////////////////////////////
 
-TestResultEntry::~TestResultEntry()
+MANAK_INLINE TestResultEntry::~TestResultEntry()
 {
   for(auto it : entries)
   {
@@ -13,27 +17,27 @@ TestResultEntry::~TestResultEntry()
   }
 }
 
-void TestResultEntry::AddAssert(TestEntry* entry)
+MANAK_INLINE void TestResultEntry::AddAssert(TestEntry* entry)
 {
   entries.emplace_back(Type::ASSERT, entry);
 }
 
-void TestResultEntry::AddCheck(TestEntry* entry)
+MANAK_INLINE void TestResultEntry::AddCheck(TestEntry* entry)
 {
   entries.emplace_back(Type::CHECK, entry);
 }
 
-void TestResultEntry::AddText(TestEntry* entry)
+MANAK_INLINE void TestResultEntry::AddText(TestEntry* entry)
 {
   entries.emplace_back(Type::TEXT, entry);
 }
 
-void TestResultEntry::AddWarn(TestEntry* entry)
+MANAK_INLINE void TestResultEntry::AddWarn(TestEntry* entry)
 {
   entries.emplace_back(Type::WARN, entry);
 }
 
-void TestResultEntry::GetFailMsg(std::list<std::string>& l_str)
+MANAK_INLINE void TestResultEntry::GetFailMsg(std::list<std::string>& l_str)
 {
   for(auto entry : entries)
   {
@@ -54,12 +58,12 @@ void TestResultEntry::GetFailMsg(std::list<std::string>& l_str)
 /// TestResult Implementation
 ////////////////////////////////////////////////////////////////////////////////
 
-void TestResult::NewEntry()
+MANAK_INLINE void TestResult::NewEntry()
 {
   new_entry = true;
 }
 
-void TestResult::AddAssert(TestEntry* entry)
+MANAK_INLINE void TestResult::AddAssert(TestEntry* entry)
 {
   if(new_entry)
   {
@@ -71,7 +75,7 @@ void TestResult::AddAssert(TestEntry* entry)
   std::get<0>(*(--entries.end())) = Res::FAIL;
 }
 
-void TestResult::AddText(TestEntry* entry)
+MANAK_INLINE void TestResult::AddText(TestEntry* entry)
 {
   if(new_entry)
   {
@@ -82,7 +86,7 @@ void TestResult::AddText(TestEntry* entry)
   std::get<1>(*(--entries.end())).AddText(entry);
 }
 
-void TestResult::ConfirmEntry()
+MANAK_INLINE void TestResult::ConfirmEntry()
 {
   if(new_entry)
   {
@@ -91,7 +95,7 @@ void TestResult::ConfirmEntry()
   }
 }
 
-bool TestResult::GetStatus(double success_p) const
+MANAK_INLINE bool TestResult::GetStatus(double success_p) const
 {
   for(auto entry : entries)
   {
@@ -101,7 +105,7 @@ bool TestResult::GetStatus(double success_p) const
   return true;
 }
 
-bool TestResult::GetFailMsg(size_t& n_itr, std::list<std::string>& l_str) const
+MANAK_INLINE bool TestResult::GetFailMsg(size_t& n_itr, std::list<std::string>& l_str) const
 {
   n_itr = 1;
   for(auto res : entries)
@@ -115,7 +119,7 @@ bool TestResult::GetFailMsg(size_t& n_itr, std::list<std::string>& l_str) const
   return false;
 }
 
-double TestResult::GetSP() const
+MANAK_INLINE double TestResult::GetSP() const
 {
   size_t cfail = 0;
   for(auto entry : entries)
@@ -130,25 +134,25 @@ double TestResult::GetSP() const
 /// TestMonitor Implementation
 ////////////////////////////////////////////////////////////////////////////////
 
-void TestMonitor::Initialize()
+MANAK_INLINE void TestMonitor::Initialize()
 {
   tr = TestResult();
   isTest = false;
   isEnabled = false;
 }
 
-void TestMonitor::NewEntry()
+MANAK_INLINE void TestMonitor::NewEntry()
 {
   tr.NewEntry();
 }
 
-void TestMonitor::ConfirmEntry()
+MANAK_INLINE void TestMonitor::ConfirmEntry()
 {
   if(isTest)
     tr.ConfirmEntry();
 }
 
-bool TestMonitor::AddAssert(TestEntry* entry)
+MANAK_INLINE bool TestMonitor::AddAssert(TestEntry* entry)
 {
   if(isEnabled)
   {
@@ -158,7 +162,7 @@ bool TestMonitor::AddAssert(TestEntry* entry)
   return false;
 }
 
-bool TestMonitor::AddText(TestEntry* entry)
+MANAK_INLINE bool TestMonitor::AddText(TestEntry* entry)
 {
   if(isEnabled)
   {
@@ -168,23 +172,23 @@ bool TestMonitor::AddText(TestEntry* entry)
   return false;
 }
 
-void TestMonitor::Enable()
+MANAK_INLINE void TestMonitor::Enable()
 {
   isEnabled = true;
   isTest = true;
 }
 
-void TestMonitor::Disable()
+MANAK_INLINE void TestMonitor::Disable()
 {
   isEnabled = false;
 }
 
-const bool& TestMonitor::IsTest() const
+MANAK_INLINE const bool& TestMonitor::IsTest() const
 {
   return isTest;
 }
 
-TestResult TestMonitor::Result()
+MANAK_INLINE TestResult TestMonitor::Result()
 {
   return tr;
 }

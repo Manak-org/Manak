@@ -27,4 +27,6 @@ bool module_init()
   
   ManakSuite* suite2 = g.AddSuite(MANAK_SUITE(Suite2));
   suite2->AddCase(MANAK_BENCHMARK_CASE(InSuite2, fun));
+  
+  return true;
 }

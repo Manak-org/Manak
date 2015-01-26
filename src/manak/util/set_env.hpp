@@ -3,6 +3,8 @@
 
 #include <fstream>
 
+#include "macro_utils.hpp"
+
 //! Set the module name for further use
 #ifdef MANAK_SIMPLE_MODULE
 #define MANAK_MODULE_NAME MANAK_STRINGIZE(MANAK_SIMPLE_MODULE)
@@ -49,9 +51,9 @@
 //! Open the logging file stream
 #define MANAK_OPEN_LOG std::ofstream f(MANAK_STRINGIZE(MANAK_REDIRECTION_FILENAME), std::fstream::app);
 #define MANAK_CLOSE_LOG f.close();
-#define MANAK_BENCHMARK_REDIRECTION_STREAM f.rdbuf()
+#define MANAK_REDIRECTION_BUFFER f.rdbuf()
 
-#endif
+#endif //MANAK_REDIRECTION_BUFFER
 
 #ifndef MANAK_OPEN_LOG
 #define MANAK_OPEN_LOG
@@ -60,13 +62,5 @@
 #ifndef MANAK_CLOSE_LOG
 #define MANAK_CLOSE_LOG
 #endif
-
-//! Check if user has opt for dynamic linking
-#ifdef MANAK_USE_DYN_LINK
-#define MANAK_INLINE
-
-#else
-#define MANAK_INLINE inline
-#endif // MANAK_UE_DYNAMIC_LINK
 
 #endif // MANAK_SET_ENV_HPP_INCLUDED

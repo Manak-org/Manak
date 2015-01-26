@@ -1,14 +1,18 @@
+#ifdef MANAK_USE_DYN_LINK
+#include "html_output_handler.hpp"
+#endif // MANAK_USE_DYN_LINK
+
 namespace manak
 {
 
-void HTMLOutputHandler::Initialize(bool compare,
-                                   const std::string& c_time)
+MANAK_INLINE void HTMLOutputHandler::Initialize(bool compare,
+                                                const std::string& c_time)
 {
   isComp = compare;
   compare_time = c_time;
 }
 
-void HTMLOutputHandler::Finalize()
+MANAK_INLINE void HTMLOutputHandler::Finalize()
 {
   stream << "<!DOCTYPE html>" << std::endl;
 
@@ -20,7 +24,7 @@ void HTMLOutputHandler::Finalize()
 
   //! add title
   stream << "<title> Benchmarking log for module '"
-         << MANAK_MODULE_NAME << "'"
+         << ManakEnv::GlobalEnv().GetModuleName() << "'"
          << "</title>" << std::endl;
 
   //! add styles
@@ -32,9 +36,9 @@ void HTMLOutputHandler::Finalize()
 
   //! Table styles
   stream << "table, th, td { border: 1px solid black; \
-                               border-collapse: collapse; \
-                             } \
-               th, td { \
+                             border-collapse: collapse; \
+                           } \
+              th, td { \
                         padding: 5px; \
                         text-align: left; \
                       }" << std::endl;
@@ -51,7 +55,7 @@ void HTMLOutputHandler::Finalize()
 
   //! Add heading
   stream << "<h1 style=\"text-align:center\"> Benchmarking Log for Module '"
-         << MANAK_MODULE_NAME << "'" << "</h1>" << std::endl;
+         << ManakEnv::GlobalEnv().GetModuleName() << "'" << "</h1>" << std::endl;
 
   //! add blank line
   stream << "<br>" << std::endl;
@@ -60,7 +64,7 @@ void HTMLOutputHandler::Finalize()
   stream << "<ul>" << std::endl;
 
   //! add module name
-  stream << "<li><bold>Module: </bold><info>" << MANAK_MODULE_NAME << "</info>"
+  stream << "<li><bold>Module: </bold><info>" << ManakEnv::GlobalEnv().GetModuleName() << "</info>"
          << "</li>" << std::endl;
   //! add timestamp
   stream << "<li><bold>Timestamp: </bold><info>"
@@ -95,7 +99,6 @@ void HTMLOutputHandler::Finalize()
   stream << "<p>Created by Manak:C++ Unit Benchmarking Library</p>" << std::endl;
   stream << "</footer>" << std::endl;
 
-
   //! close body
   stream << "</body>" << std::endl;
 
@@ -103,9 +106,9 @@ void HTMLOutputHandler::Finalize()
   stream << "</html>" << std::endl;
 }
 
-void HTMLOutputHandler::AddCase(const std::string& uname,
-                                const std::string& name,
-                                const std::map<std::string, std::list<utils::ObjectStore>>& results)
+MANAK_INLINE void HTMLOutputHandler::AddCase(const std::string& uname,
+                                             const std::string& name,
+                                             const std::map<std::string, std::list<utils::ObjectStore>>& results)
 {
   total_nodes++;
 
@@ -313,7 +316,7 @@ void HTMLOutputHandler::AddCase(const std::string& uname,
       bool is_test = *(bool*)res["is_test"];
       TestResult& test_res = *(TestResult*)res["test_res"];
 
-      bool test_res_b;
+      bool test_res_b = false;
       if(is_test)
         test_res_b = test_res.GetStatus(sp);
 
@@ -413,7 +416,7 @@ void HTMLOutputHandler::AddCase(const std::string& uname,
   delete[] it_s;
 }
 
-std::string HTMLOutputHandler::GetPMRep(const utils::ObjectStore& entry)
+MANAK_INLINE std::string HTMLOutputHandler::GetPMRep(const utils::ObjectStore& entry)
 {
   std::stringstream ss;
 

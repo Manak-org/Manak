@@ -1,9 +1,18 @@
+#ifdef MANAK_USE_DYN_LINK
+#include <manak/util/macro_utils.hpp>
+#include <manak/util/timer.hpp>
+#include "txt_output_handler.hpp"
+#endif // MANAK_USE_DYN_LINK
+
 namespace manak
 {
 
-void TXTOutputHandler::Initialize(bool compare,
-                                  const std::string& c_time)
+MANAK_INLINE void TXTOutputHandler::Initialize(bool compare,
+                                               const std::string& c_time)
 {
+  (void)compare;
+  (void)c_time;
+
   //! Print information about manak version which generated this output
   stream << std::setiosflags(std::ios::left);
   stream << "######################################################################"
@@ -24,29 +33,15 @@ void TXTOutputHandler::Initialize(bool compare,
   stream << "######################################################################"
          << std::endl << std::endl;
 
-//  stream << std::setprecision(3);
-//  stream << std::setw(30) << "       Case Name";
-//
-//  for(size_t i = 0;i < l_map.size();i++)
-//  {
-//    stream << std::setw(20);
-//    for(auto it : l_map)
-//    {
-//      if(it.second == i)
-//      {
-//        stream << it.first;
-//        break;
-//      }
-//    }
-//  }
-
   stream << std::endl;
 }
 
-void TXTOutputHandler::AddCase(const std::string& uname,
-                               const std::string& name,
-                               const std::map<std::string, std::list<utils::ObjectStore>>& results)
+MANAK_INLINE void TXTOutputHandler::AddCase(const std::string& uname,
+                                            const std::string& name,
+                                            const std::map<std::string, std::list<utils::ObjectStore>>& results)
 {
+  (void)uname;
+
   //! print case name and libraries involved
   stream << std::setprecision(3);
   stream << std::setw(30) << "       Case Name";
@@ -160,7 +155,7 @@ void TXTOutputHandler::AddCase(const std::string& uname,
   stream << std::endl;
 }
 
-std::string TXTOutputHandler::GetPMRep(const utils::ObjectStore& entry)
+MANAK_INLINE std::string TXTOutputHandler::GetPMRep(const utils::ObjectStore& entry)
 {
   std::stringstream ss;
 

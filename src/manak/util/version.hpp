@@ -21,7 +21,7 @@ namespace manak
 {
 
 //! Returns the version information in string
-std::string GetVersionInfo()
+inline std::string GetVersionInfo()
 {
   std::stringstream stream;
   stream << "Manak C++ Benchmarking Library" << std::endl;

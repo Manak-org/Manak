@@ -8,7 +8,40 @@ set(MANAK_MINOR_VERSION "0")
 set(MANAK_PATCH_VERSION "0")
 set(MANAK_VERSION_NAME "Begin")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+# First, define all the compilation options.
+# We default to debugging mode for developers.
+option(DEBUG "Compile with debugging information" OFF)
+option(PROFILE "Compile with profiling information" OFF)
+
+# This is as of yet unused.
+#option(PGO "Use profile-guided optimization if not a debug build" ON)
+
+# Set the CFLAGS and CXXFLAGS depending on the options the user specified.
+# Only GCC-like compilers support -Wextra, and other compilers give tons of
+# output for -Wall, so only -Wall and -Wextra on GCC.
+if(CMAKE_COMPILER_IS_GNUCC OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
+endif(CMAKE_COMPILER_IS_GNUCC OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+
+# Debugging CFLAGS.  Turn optimizations off; turn debugging symbols on.
+if(DEBUG)
+  add_definitions(-DDEBUG)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11 -O0")
+else()
+  add_definitions(-DARMA_NO_DEBUG)
+  add_definitions(-DNDEBUG)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O3")
+endif(DEBUG)
+
+# Profiling CFLAGS.  Turn profiling information on.
+if(PROFILE)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pg")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
+endif(PROFILE)
+
+set(CMAKE_CXX_IGNORE_EXTENSIONS ".cpp")
+set(CMAKE_CXX_SOURCE_FILE_EXTENSIONS ipp)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} "${CMAKE_BINARY_DIR}/bin")
 
