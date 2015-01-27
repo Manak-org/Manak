@@ -72,6 +72,11 @@ class TestMonitor
       isEnabled(false),
       isTest(false){}
 
+  ~TestMonitor()
+  {
+    delete tr;
+  }
+
   static TestMonitor& GetGlobalTestMonitor()
   {
     static TestMonitor singleton;

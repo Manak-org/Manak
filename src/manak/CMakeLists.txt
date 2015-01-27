@@ -96,13 +96,65 @@ add_dependencies(manak manak_headers)
 
 # For 'make test'.
 add_custom_target(test
-  COMMAND ${CMAKE_BINARY_DIR}/bin/sm_auto_reg_test
-  COMMAND ${CMAKE_BINARY_DIR}/bin/dl_sm_auto_reg_test
-  COMMAND ${CMAKE_BINARY_DIR}/bin/sm_man_reg_test
-  COMMAND ${CMAKE_BINARY_DIR}/bin/dl_sm_man_reg_test
+  COMMAND ${CMAKE_BINARY_DIR}/bin/sm_auto_reg_test > out.txt
+  COMMAND valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ${CMAKE_BINARY_DIR}/bin/sm_auto_reg_test 3>&1 2>&3 >output | tee grindout
+  COMMAND echo ""
+  COMMAND echo -e "Simple Module Auto Registartion Test Passed"
+  COMMAND echo ""
+  COMMAND ${CMAKE_BINARY_DIR}/bin/dl_sm_auto_reg_test > out.txt
+  COMMAND valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ${CMAKE_BINARY_DIR}/bin/dl_sm_auto_reg_test 3>&1 2>&3 >output | tee grindout
+  COMMAND echo ""
+  COMMAND echo -e "Simple Module Auto Registartion With Dynamic Linkage Test Passed"
+  COMMAND echo ""
+  COMMAND ${CMAKE_BINARY_DIR}/bin/sm_man_reg_test > out.txt
+  COMMAND valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ${CMAKE_BINARY_DIR}/bin/sm_man_reg_test 3>&1 2>&3 >output | tee grindout
+  COMMAND echo ""
+  COMMAND echo -e "Simple Module Manual Registartion Test Passed"
+  COMMAND echo ""
+  COMMAND ${CMAKE_BINARY_DIR}/bin/dl_sm_man_reg_test > out.txt
+  COMMAND valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ${CMAKE_BINARY_DIR}/bin/dl_sm_man_reg_test 3>&1 2>&3 >output | tee grindout
+  COMMAND echo ""
+  COMMAND echo -e "Simple Module Manual Registartion With Dynamic Linkage Test Passed"
+  COMMAND echo ""
+  COMMAND ${CMAKE_BINARY_DIR}/bin/m_auto_reg_test > out.txt
+  COMMAND valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ${CMAKE_BINARY_DIR}/bin/m_auto_reg_test 3>&1 2>&3 >output | tee grindout
+  COMMAND echo ""
+  COMMAND echo -e "Manak Module Auto Registartion Test Passed"
+  COMMAND echo ""
+  COMMAND ${CMAKE_BINARY_DIR}/bin/dl_m_auto_reg_test > out.txt
+  COMMAND valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ${CMAKE_BINARY_DIR}/bin/dl_m_auto_reg_test 3>&1 2>&3 >output | tee grindout
+  COMMAND echo ""
+  COMMAND echo -e "Manak Module Auto Registartion With Dynamic Linkage Test Passed"
+  COMMAND echo ""
+  COMMAND ${CMAKE_BINARY_DIR}/bin/m_man_reg_test > out.txt
+  COMMAND valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ${CMAKE_BINARY_DIR}/bin/m_man_reg_test 3>&1 2>&3 >output | tee grindout
+  COMMAND echo ""
+  COMMAND echo -e "Manak Module Manual Registartion Test Passed"
+  COMMAND echo ""
+  COMMAND ${CMAKE_BINARY_DIR}/bin/dl_m_man_reg_test > out.txt
+  COMMAND valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ${CMAKE_BINARY_DIR}/bin/dl_m_man_reg_test 3>&1 2>&3 >output | tee grindout
+  COMMAND echo ""
+  COMMAND echo -e "Manak Module Manual Registartion With Dynamic Linkage Test Passed"
+  COMMAND echo ""
+  COMMAND ${CMAKE_BINARY_DIR}/bin/mfile_test > out.txt
+  COMMAND valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ${CMAKE_BINARY_DIR}/bin/mfile_test 3>&1 2>&3 >output | tee grindout
+  COMMAND echo ""
+  COMMAND echo -e "Multi-File Test Passed"
+  COMMAND echo ""
+  COMMAND ${CMAKE_BINARY_DIR}/bin/dl_mfile_test > out.txt
+  COMMAND valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ${CMAKE_BINARY_DIR}/bin/dl_mfile_test 3>&1 2>&3 >output | tee grindout
+  COMMAND echo ""
+  COMMAND echo -e "Multi-File With Dynamic Linkage Test Passed"
+  COMMAND echo ""
   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/ # This is where test files are put.
   COMMENT "Running MANAK build test"
   DEPENDS sm_auto_reg_test 
           dl_sm_auto_reg_test
           sm_man_reg_test
-          dl_sm_man_reg_test)
+          dl_sm_man_reg_test
+          m_auto_reg_test
+          dl_m_auto_reg_test
+          m_man_reg_test
+          dl_m_man_reg_test
+          mfile_test
+          dl_mfile_test)
