@@ -69,3 +69,47 @@ MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI(Name, Lib, Fun, MANAK_DEFAULT_TOLERANCE,
 
 #define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(Name, Lib, Fun)                  \
 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T(Name, Lib, Fun, MANAK_DEFAULT_TOLERANCE)
+
+////////////////////////////////////////////////////////////////////////////////
+/// MANAK GROUP BENCHMARK CASE macros
+////////////////////////////////////////////////////////////////////////////////
+
+#define MANAK_GROUP_BENCHMARK_CASE_TIS(Name, Lib, Fun, Tol, Iter, SP)         \
+_MANAK_GROUP_BENCHMARK_CASE_TIS(Name, Lib, Fun, Tol, Iter, SP)
+
+#define MANAK_GROUP_BENCHMARK_CASE_TI(Name, Lib, Fun, Tol, Iter)              \
+MANAK_GROUP_BENCHMARK_CASE_TIS(Name, Lib, Tol, Iter, MANAK_DEFAULT_SP)
+
+#define MANAK_GROUP_BENCHMARK_CASE_IS(Name, Lib, Fun, Iter, SP)               \
+MANAK_GROUP_BENCHMARK_CASE_TIS(Name, Lib, MANAK_EFAULT_TOLERANCE, Iter, SP)
+
+#define MANAK_GROUP_BENCHMARK_CASE_T(Name, Lib, Fun, Tol)                     \
+MANAK_GROUP_BENCHMARK_CASE_TI(Name, Lib, Tol, MANAK_DEFAULT_ITERATIONS)
+
+#define MANAK_GROUP_BENCHMARK_CASE_I(Name, Lib, Fun, Iter)                    \
+MANAK_GROUP_BENCHMARK_CASE_TI(Name, Lib, MANAK_DEFAULT_TOLERANCE, Iter)
+
+#define MANAK_GROUP_BENCHMARK_CASE(Name, Lib, Fun)                            \
+MANAK_GROUP_BENCHMARK_CASE_T(Name, Lib, MANAK_DEFAULT_TOLERANCE)
+
+////////////////////////////////////////////////////////////////////////////////
+/// MANAK AUTO GROUP BENCHMAK CASE macros
+////////////////////////////////////////////////////////////////////////////////
+
+#define MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS(Name, Lib, Tol, Iter, SP)         \
+_MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS(Name, Lib, Tol, Iter, SP)
+
+#define MANAK_AUTO_GROUP_BENCHMARK_CASE_TI(Name, Lib, Tol, Iter)              \
+MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS(Name, Lib, Tol, Iter, MANAK_DEFAULT_SP)
+
+#define MANAK_AUTO_GROUP_BENCHMARK_CASE_IS(Name, Lib, Iter, SP)               \
+MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS(Name, Lib, MANAK_DEFAULT_TOLERANCE, Iter, SP)
+
+#define MANAK_AUTO_GROUP_BENCHMARK_CASE_T(Name, Lib, Tol)                     \
+MANAK_AUTO_GROUP_BENCHMARK_CASE_TI(Name, Lib, Tol, MANAK_DEFAULT_ITERATIONS)
+
+#define MANAK_AUTO_GROUP_BENCHMARK_CASE_I(Name, Lib, Iter)                    \
+MANAK_AUTO_GROUP_BENCHMARK_CASE_TI(Name, Lib, MANAK_DEFAULT_TOLERANCE, Iter)
+
+#define MANAK_AUTO_GROUP_BENCHMARK_CASE(Name, Lib)                            \
+MANAK_AUTO_GROUP_BENCHMARK_CASE_T(Name, Lib, MANAK_DEFAULT_TOLERANCE)

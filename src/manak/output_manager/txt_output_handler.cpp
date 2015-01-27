@@ -161,13 +161,13 @@ MANAK_INLINE std::string TXTOutputHandler::GetPMRep(const utils::ObjectStore& en
 
   double comp_val = *(double*)entry.Get("compare");
   PMeasure pm = *(PMeasure*)entry.Get("pmeasure");
+  double sp = *(double*)entry.Get("sp");
   bool is_test = *(bool*)entry.Get("is_test");
   bool test_res = true;
 
   if(is_test)
   {
-    TestResult
-    test_res = *(TestResult*)entry.Get("test_res");
+    test_res = ((TestResult*)entry.Get("test_res"))->GetStatus(sp);
   }
 
   if(test_res)

@@ -43,6 +43,12 @@ struct TrueTestEntry : public TestEntry
     : TestEntry(filename, line_no) {}
 };
 
+struct FalseTestEntry : public TestEntry
+{
+  FalseTestEntry(const std::string& filename, size_t line_no)
+    : TestEntry(filename, line_no) {}
+};
+
 struct MsgEntry : public TestEntry
 {
   MsgEntry(const std::string& filename,

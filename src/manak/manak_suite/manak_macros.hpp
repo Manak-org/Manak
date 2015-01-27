@@ -76,12 +76,8 @@ class MG ## _ ## Name                                                         \
   template<typename... ABCDE>                                                 \
   void InitCaller(ABCDE... abcde)                                             \
   {                                                                           \
-    InitCaller2<decltype(GetType())>(0, abcde...);                            \
+    Manak_Group_Initialize(abcde...);                                         \
   }                                                                           \
-                                                                              \
-  template<typename, typename...>                                             \
-  void InitCaller2(...)                                                       \
-  {}                                                                          \
                                                                               \
   template<typename abcde>                                                    \
   void TDCaller(manak::utils::manak_group_test<abcde, &abcde::Manak_Group_TearDown>*) \
@@ -133,11 +129,6 @@ class MG ## _ ## Name                                                         \
 };
 
 #define GINIT                                                                 \
-template<typename abcde, typename... ABCDEF>                                  \
-void InitCaller2(abcde*, ABCDEF... args)                                      \
-{                                                                             \
-  static_cast<abcde*>(this)->Manak_Group_Initialize(args...);                 \
-};                                                                            \
 void Manak_Group_Initialize
 
 #define GDOWN void Manak_Group_TearDown

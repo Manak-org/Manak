@@ -18,6 +18,8 @@ struct TestResultEntry
 {
   enum class Type {ASSERT, CHECK, WARN, TEXT};
 
+  TestResultEntry() {}
+
   MANAK_INLINE ~TestResultEntry();
 
   MANAK_INLINE void AddAssert(TestEntry* entry);
@@ -28,7 +30,7 @@ struct TestResultEntry
 
   MANAK_INLINE void AddWarn(TestEntry* entry);
 
-  MANAK_INLINE void GetFailMsg(std::list<std::string>& l_str);
+  MANAK_INLINE void GetFailMsg(std::list<std::string>& l_str) const;
 
   std::list<std::tuple<Type, TestEntry*>> entries;
 };
@@ -40,9 +42,13 @@ struct TestResult
 
   enum class Res {PASS, FAIL};
 
+  MANAK_INLINE void Clear();
+
   MANAK_INLINE void NewEntry();
 
   MANAK_INLINE void AddAssert(TestEntry* entry);
+
+  MANAK_INLINE void AddCheck(TestEntry* entry);
 
   MANAK_INLINE void AddText(TestEntry* entry);
 
@@ -62,8 +68,9 @@ class TestMonitor
 {
  public:
   TestMonitor()
-    : isEnabled(false),
-      isTest(false) {}
+    : tr(NULL),
+      isEnabled(false),
+      isTest(false){}
 
   static TestMonitor& GetGlobalTestMonitor()
   {
@@ -79,6 +86,8 @@ class TestMonitor
 
   MANAK_INLINE bool AddAssert(TestEntry* entry);
 
+  MANAK_INLINE bool AddCheck(TestEntry* entry);
+
   MANAK_INLINE bool AddText(TestEntry* entry);
 
   MANAK_INLINE void Enable();
@@ -87,10 +96,10 @@ class TestMonitor
 
   MANAK_INLINE const bool& IsTest() const;
 
-  MANAK_INLINE TestResult Result();
+  MANAK_INLINE TestResult*& Result();
 
  private:
-  TestResult tr;
+  TestResult* tr;
 
   bool isEnabled;
   bool isTest;

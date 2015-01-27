@@ -44,7 +44,7 @@ MANAK_INLINE RCase::~RCase()
 
 MANAK_INLINE void RCase::Run()
 {
-  std::cout << "Running case " << children.begin()->second->UName() << "...";
+  std::cout << "Running case " << children.begin()->second->UName() << "..." << std::flush;
   for(auto c : children)
   {
     auto l = c.second->Run();

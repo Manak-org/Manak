@@ -173,7 +173,10 @@ MANAK_INLINE void HTMLOutputHandler::AddCase(const std::string& uname,
           is_test = *(bool*)it_s[i]->Get("is_test");
 
           if(is_test)
+          {
+            std::cout << sp << std::endl;
             test_res = ((TestResult*)it_s[i]->Get("test_res"))->GetStatus(sp);
+          }
 
           if(!name_mismatch)
           {
@@ -231,10 +234,12 @@ MANAK_INLINE void HTMLOutputHandler::AddCase(const std::string& uname,
     {
       const utils::ObjectStore& os = *(res.second.begin());
       bool is_test = *(bool*)os.Get("is_test");
-      bool sp = *(double*)os.Get("sp");
+      double sp = *(double*)os.Get("sp");
       bool test_res;
       if(is_test)
+      {
         test_res = ((TestResult*)os.Get("test_res"))->GetStatus(sp);
+      }
 
       stream1 << "<td";
       if(is_test)
@@ -314,11 +319,11 @@ MANAK_INLINE void HTMLOutputHandler::AddCase(const std::string& uname,
       size_t iter = *(size_t*)res["iterations"];
       size_t sp = *(double*)res["sp"];
       bool is_test = *(bool*)res["is_test"];
-      TestResult& test_res = *(TestResult*)res["test_res"];
+      TestResult* test_res = (TestResult*)res["test_res"];
 
       bool test_res_b = false;
       if(is_test)
-        test_res_b = test_res.GetStatus(sp);
+        test_res_b = test_res->GetStatus(sp);
 
       if(is_test && !test_res_b)
       {
@@ -380,13 +385,13 @@ MANAK_INLINE void HTMLOutputHandler::AddCase(const std::string& uname,
         stream22 << "</li>" << std::endl;
 
         stream22 << "<li>Expected success percentage: " << sp << "</li>" << std::endl;
-        stream22 << "<li>Observed success percentage: " << test_res.GetSP() * 100 << "</li>" << std::endl;
+        stream22 << "<li>Observed success percentage: " << test_res->GetSP() * 100 << "</li>" << std::endl;
 
         stream22 << "</ul>" << std::endl;
 
         std::list<std::string> msgs;
         size_t n_itr;
-        if(test_res.GetFailMsg(n_itr, msgs))
+        if(test_res->GetFailMsg(n_itr, msgs))
         {
           stream22 << "Failure Msg: " << std::endl;
           stream22 << "<ul>" << std::endl;

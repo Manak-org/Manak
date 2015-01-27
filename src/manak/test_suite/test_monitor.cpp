@@ -37,7 +37,7 @@ MANAK_INLINE void TestResultEntry::AddWarn(TestEntry* entry)
   entries.emplace_back(Type::WARN, entry);
 }
 
-MANAK_INLINE void TestResultEntry::GetFailMsg(std::list<std::string>& l_str)
+MANAK_INLINE void TestResultEntry::GetFailMsg(std::list<std::string>& l_str) const
 {
   for(auto entry : entries)
   {
@@ -47,6 +47,8 @@ MANAK_INLINE void TestResultEntry::GetFailMsg(std::list<std::string>& l_str)
 
     if(std::get<0>(entry) == Type::ASSERT)
       ss << "Assertion Failed! ";
+    else if(std::get<0>(entry) == Type::CHECK)
+      ss << "Check Failed! ";
 
     ss << std::get<1>(entry)->Msg();
 
@@ -57,6 +59,11 @@ MANAK_INLINE void TestResultEntry::GetFailMsg(std::list<std::string>& l_str)
 ////////////////////////////////////////////////////////////////////////////////
 /// TestResult Implementation
 ////////////////////////////////////////////////////////////////////////////////
+
+MANAK_INLINE void TestResult::Clear()
+{
+  entries.clear();
+}
 
 MANAK_INLINE void TestResult::NewEntry()
 {
@@ -72,6 +79,18 @@ MANAK_INLINE void TestResult::AddAssert(TestEntry* entry)
   }
 
   std::get<1>(*(--entries.end())).AddAssert(entry);
+  std::get<0>(*(--entries.end())) = Res::FAIL;
+}
+
+MANAK_INLINE void TestResult::AddCheck(TestEntry* entry)
+{
+  if(new_entry)
+  {
+    entries.emplace_back(Res::PASS, TestResultEntry());
+    new_entry = false;
+  }
+
+  std::get<1>(*(--entries.end())).AddCheck(entry);
   std::get<0>(*(--entries.end())) = Res::FAIL;
 }
 
@@ -97,22 +116,28 @@ MANAK_INLINE void TestResult::ConfirmEntry()
 
 MANAK_INLINE bool TestResult::GetStatus(double success_p) const
 {
-  for(auto entry : entries)
+  double s_count = 0;
+  for(std::list<std::tuple<Res, TestResultEntry>>::const_iterator it = entries.begin();
+      it != entries.end();it++)
   {
-    if(std::get<0>(entry) == Res::FAIL)
-      return false;
+    if(std::get<0>(*it) == Res::PASS)
+      s_count++;
   }
-  return true;
+
+  if(s_count * 100/ entries.size() >= success_p)
+    return true;
+  else return false;
 }
 
 MANAK_INLINE bool TestResult::GetFailMsg(size_t& n_itr, std::list<std::string>& l_str) const
 {
   n_itr = 1;
-  for(auto res : entries)
+  for(std::list<std::tuple<Res, TestResultEntry>>::const_iterator it = entries.begin();
+      it != entries.end();it++)
   {
-    if(std::get<0>(res) == Res::FAIL)
+    if(std::get<0>(*it) == Res::FAIL)
     {
-      std::get<1>(res).GetFailMsg(l_str);
+      std::get<1>(*it).GetFailMsg(l_str);
       return true;
     }
   }
@@ -122,7 +147,7 @@ MANAK_INLINE bool TestResult::GetFailMsg(size_t& n_itr, std::list<std::string>& 
 MANAK_INLINE double TestResult::GetSP() const
 {
   size_t cfail = 0;
-  for(auto entry : entries)
+  for(const auto& entry : entries)
   {
     if(std::get<0>(entry) == Res::FAIL)
       cfail++;
@@ -136,27 +161,38 @@ MANAK_INLINE double TestResult::GetSP() const
 
 MANAK_INLINE void TestMonitor::Initialize()
 {
-  tr = TestResult();
+  delete tr;
+  tr = new TestResult();
   isTest = false;
   isEnabled = false;
 }
 
 MANAK_INLINE void TestMonitor::NewEntry()
 {
-  tr.NewEntry();
+  tr->NewEntry();
 }
 
 MANAK_INLINE void TestMonitor::ConfirmEntry()
 {
   if(isTest)
-    tr.ConfirmEntry();
+    tr->ConfirmEntry();
 }
 
 MANAK_INLINE bool TestMonitor::AddAssert(TestEntry* entry)
 {
   if(isEnabled)
   {
-    tr.AddAssert(entry);
+    tr->AddAssert(entry);
+    return true;
+  }
+  return false;
+}
+
+MANAK_INLINE bool TestMonitor::AddCheck(TestEntry* entry)
+{
+  if(isEnabled)
+  {
+    tr->AddCheck(entry);
     return true;
   }
   return false;
@@ -166,7 +202,7 @@ MANAK_INLINE bool TestMonitor::AddText(TestEntry* entry)
 {
   if(isEnabled)
   {
-    tr.AddText(entry);
+    tr->AddText(entry);
     return true;
   }
   return false;
@@ -188,7 +224,7 @@ MANAK_INLINE const bool& TestMonitor::IsTest() const
   return isTest;
 }
 
-MANAK_INLINE TestResult TestMonitor::Result()
+MANAK_INLINE TestResult*& TestMonitor::Result()
 {
   return tr;
 }

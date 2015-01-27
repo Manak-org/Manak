@@ -27,18 +27,14 @@
 namespace manak /** C++ Unit Benchmarking Library. **/
 {
 
+#ifdef MANAK_INIT
+
 /**
  * Default initialization function. Manual initialization function is called
  * from this function.
  */
-bool manak_init_module()
+inline bool manak_init_module()
 {
-  #ifndef MANAK_SIMPLE_MODULE
-  #ifndef MANAK_MODULE
-  static_assert(false, "Manak module not defined. Define either MANAK_MODULE or MANAK_SIMPLE_MODULE to appropriate name.");
-  #endif // MANAK_MODULE
-  #endif // MANAK_BENCHMARK_MODULE
-
   //! for configuration file
   #ifdef MANAK_CONFIG_FILE
   #include MANAK_CONFIG_FILE
@@ -62,7 +58,7 @@ bool manak_init_module()
 //!
 //! \return int
 //!
-int manak_main(int argc, char* argv[] )
+inline int manak_main(int argc, char* argv[] )
 {
   bool output_format_html = true;
   bool compare = false;
@@ -177,6 +173,11 @@ int manak_main(int argc, char* argv[] )
 
   return 0;
 }
+
+#else
+bool manak_init_module();
+
+#endif // defind
 
 }; // namespace manak
 

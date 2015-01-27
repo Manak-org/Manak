@@ -52,9 +52,10 @@ inline std::list<utils::ObjectStore> BenchmarkCase::Run()
 
     if(TestMonitor::GetGlobalTestMonitor().IsTest())
     {
-      TestResult tr = TestMonitor::GetGlobalTestMonitor().Result();
+      TestResult* tr = TestMonitor::GetGlobalTestMonitor().Result();
+      TestMonitor::GetGlobalTestMonitor().Result() = NULL;
       os["is_test"] = new bool(true);
-      os["test_res"] = new TestResult(tr);
+      os["test_res"] = tr;
     }
     else
     {

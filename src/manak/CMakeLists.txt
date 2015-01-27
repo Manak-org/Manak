@@ -13,6 +13,26 @@ foreach(dir ${DIRS})
     add_subdirectory(${dir})
 endforeach()
 
+# use, i.e. don't skip the full RPATH for the build tree
+SET(CMAKE_SKIP_BUILD_RPATH  FALSE)
+
+# when building, don't use the install RPATH already
+# (but later on when installing)
+SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
+
+# the RPATH to be used when installing
+SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+
+# don't add the automatically determined parts of the RPATH
+# which point to directories outside the build tree to the install RPATH
+SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+
+# the RPATH to be used when installing, but only if it's not a system directory
+LIST(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES "${CMAKE_INSTALL_PREFIX}/lib" isSystemDir)
+IF("${isSystemDir}" STREQUAL "-1")
+   SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+ENDIF("${isSystemDir}" STREQUAL "-1")
+
 # MANAK_SRCS is set in the subdirectories.
 # We don't use a DLL (shared) on Windows because it's a nightmare.  We can't
 # easily generate the .def file and we won't put __declspec(dllexport) next to
@@ -23,15 +43,7 @@ else (WIN32)
   add_library(manak SHARED ${MANAK_SRCS})
 endif (WIN32)
 
-#SET_SOURCE_FILES_PROPERTIES(manak_suite_impl.ipp PROPERTIES LANGUAGE CXX)
-
-set_target_properties(manak PROPERTIES LINKER_LANGUAGE CXX
-                                       COMPILE_FLAGS "-DMANAK_USE_DYN_LINK -DMANAK_GEN_PRECOMPILE")
-
-set_target_properties(manak
-  PROPERTIES
-  VERSION 1.0.0
-)
+set_target_properties(manak PROPERTIES COMPILE_FLAGS "-DMANAK_USE_DYN_LINK -DMANAK_GEN_PRECOMPILE")
 
 # Make sure the linker can find the needed library.
 # rt: clock_gettime()
@@ -44,7 +56,8 @@ file(GLOB_RECURSE INCLUDE_H_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h)
 file(GLOB_RECURSE INCLUDE_HPP_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
 file(GLOB_RECURSE INCLUDE_HH_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hh)
 file(GLOB_RECURSE INCLUDE_IPP_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.ipp)
-set(INCLUDE_FILES ${INCLUDE_H_FILES} ${INCLUDE_HPP_FILES} ${INCLUDE_HH_FILES} ${INCLUDE_IPP_FILES})
+file(GLOB_RECURSE INCLUDE_CPP_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
+set(INCLUDE_FILES ${INCLUDE_H_FILES} ${INCLUDE_HPP_FILES} ${INCLUDE_HH_FILES} ${INCLUDE_IPP_FILES} ${INCLUDE_CPP_FILES})
 
 # Move all of these header files to <builddir>/include/libgdl/ after the library
 # is built.  First we have to create that directory though.

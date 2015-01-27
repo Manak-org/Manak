@@ -3,6 +3,7 @@
 #define MANAK_SIMPLE_MODULE manual_reg_test
 #define MANAK_MANUAL_INIT_FUNCTION module_init
 #define MANAK_AUTO_MAIN
+#define MANAK_INIT
 
 #define MANAK_DEFAULT_OUT_FILENAME sm_man_reg_test
 

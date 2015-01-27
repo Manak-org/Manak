@@ -2,6 +2,7 @@
 
 #define MANAK_SIMPLE_MODULE auto_reg_test
 #define MANAK_AUTO_MAIN
+#define MANAK_INIT
 
 #define MANAK_DEFAULT_OUT_FILENAME sm_auto_reg_test
 
