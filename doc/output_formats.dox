@@ -2,23 +2,29 @@
 
 @section out_format_intro Introduction
 
-MANAK(since 1.1.0) also supports HTML output generation. HTML output is more 
+Manak(since 1.1.0) also supports HTML output generation. HTML output is more 
 intuitive as well as infomative. HTML is easy to use for users and is widely 
-acceptible. MANAK can still generate TXT output but the default output is now 
-HTML. To force MANAK to generate TXT output pass '-f TXT' as command line 
+acceptible. Manak can still generate TXT output but the default output is now 
+HTML. To force Manak to generate TXT output pass '-f TXT' as command line 
 arguments while running the executable. 
 
 @section out_format_html HTML
 
-MANAK, by default generates output in HTML. A sample page can be seen 
-<a href="samples/qg_intro_sec_1.html">Here</a>. As you can see the output shows
+Manak, by default generates output in HTML. A sample page can be seen 
+<a href="samples/out_format_1.html">Here</a>. As you can see, the output shows
 information about the module and instance loaded for comparison. Check out 
-@ref comp for more information on comparison framework. The first table shows 
-all the benchmark cases, which gives the overall comparative look at the run.
-The libraries are compared against each other horizontally while the time 
-dependent comparison is done with values in brackets. 
+@ref comp for more information on comparison framework. The first shows all the 
+main tables, which gives the overall comparative look at the run. The libraries 
+are compared against each other horizontally while the time dependent comparison 
+is done with values in brackets. The colors indicate the test status. Green 
+indicates that the tests in that benchmark case passed while red indicates failure.
+No color indicates that there were no tests inside that benchmark case. To see 
+the failure msg the headers of the tables provides in page links to detailed 
+report. 
 
-After that detailed report can be viewed. Each case is considered separately.
-All the information about the case and its sub-cases can be viewed here. 
+In the 'Detailed Report' section, all the information about all the cases is 
+displayed. Even in this section color indicates test status and failure msg can 
+be seen directly below the case or the correspoding sub-case. Look out for easy 
+to use in page links, they provide the ease.
 
 */

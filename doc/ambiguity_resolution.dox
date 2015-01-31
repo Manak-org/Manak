@@ -1,9 +1,9 @@
 /*! @page use_afr Advance Function Registration
 
 @section use_afr_rtf Registration of Templatized Functions
-With overloadedtemplatized functions the template substitution becomes
+With overloaded templatized functions the template substitution becomes
 ambiguous. To remove this ambiguity in case of templatized functions specific 
-template signature must be given as auto template substitution won't work.
+template signature must be given.
 
 @code
 template<typename T>
@@ -12,7 +12,7 @@ int fun(T a)
   Code;
 }
 
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun<size_t>)->AddArgs(1000));
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun<size_t>)->AddArgs(1000));
 @endcode
 
 @section use_afr_ofr Overloaded Function Registration 
@@ -24,12 +24,12 @@ int fun(int a)
 {
   Code;
 }
-int fun(int b)
+int fun(double b)
 {
   Code;
 }
 
-MANAK_ADD_BENCHMARK(MANAK_BENCHMARK_CASE(B1, static_cast<int(&)(int)>(fun)));
+MANAK_ADD_CASE(MANAK_BENCHMARK_CASE(B1, static_cast<int(&)(int)>(fun)));
 @endcode
 
 
@@ -46,7 +46,7 @@ class A
   }
 };
 
-MANAK_ADD_BENCHMARK(MANAK_BENCHMARK_CASE(B1, A::fun));
+MANAK_ADD_CASE(MANAK_BENCHMARK_CASE(B1, A::fun));
 @endcode
 
 The use of non static members is little complex. Manak provides a useful
@@ -72,6 +72,9 @@ bool manual_init()
 }
 @endcode
 
+In this case it is important to assign memory in heap as the actual call to 
+this registered function happens after the execution of initialization. 
+
 With auto registration -
 @code
 class A
@@ -88,6 +91,6 @@ A* Test()
   return new A();
 } 
 
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, manak::utils::BindToObject(&A::fun, Test()))->AddArgs(1000));
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, manak::utils::BindToObject(&A::fun, Test()))->AddArgs(1000));
 @endcode
 */
