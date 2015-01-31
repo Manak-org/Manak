@@ -1,11 +1,11 @@
-/*! @page mhierarchy MANAK Hierarchical Structure
+/*! @page mhierarchy Manak Hierarchical Structure
 
 MANAK hierarchical structure - 
 
       Master Suite
             |
             |
-     Benchmark Suite
+       Manak Suite
             |
             |
       Benchmark Case
@@ -16,13 +16,13 @@ MANAK hierarchical structure -
 @section hierarchy_master Master Suite
 
 When you include manak.hpp, it also adds a master suite to the program. Master 
-suite is ancestor of all benchmark suites and cases. Main function of MANAK
+suite is ancestor of all benchmark suites and cases. The 'main' function of Manak
 always runs this master suite which eventually runs the cases. Check out 
 @ref set_env_smft for more information on main functions.
 
-@section hierarchy_suite Benchmark Suite
+@section hierarchy_suite Manak Suite
 
-Benchmark Suite is a collection of benchmark suites and cases which can be 
+Manak Suite is a collection of Manak suites and cases which can be 
 accessed by a unique name. For example,
 
       Master Suite
@@ -37,34 +37,128 @@ accessed by a unique name. For example,
             
 Here, Suite1 is a direct child of master suite having name /Suite1. Suite2 will
 have name /Suite1/Suite2. Specific benchmarking suites can be run with regular
-expression support provided by MANAK. Check out @ref qg_rsc for regular expression 
+expression support provided by Manak. Check out @ref qg_rsc for regular expression 
 support.
 
 @section hierarchy_case Benchmark Case
 
-Like benchmark suites, benchmarking cases in MANAK are also accessed by unique 
-hierarchical names. MANAK also supports running specific case with regular 
-expressions(see @ref qg_rsc). Benchmark is not associated to any function to run,
-it simply contains sub-benchmark cases which holds the actual code to be 
-benchmarked.
+Like benchmark suites, benchmarking cases in Manak are also accessed by unique 
+hierarchical names. Benchmarking cases in Manak can also perform testing with
+'TEST' blocks. Check out @ref quick_guide for more information on 'TEST' blocks.
+Manak also supports running specific case with regular expressions(see @ref qg_rsc).
+For comparison cases can have muliple entries under different library names. 
+For example - 
+
+@code
+#define MANAK_MODULE Bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
+
+#include <manak/manak.hpp>
+
+MANAK_AUTO_BENCHMARK_CASE(Test, Lib1)
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
+}
+
+MANAK_AUTO_BENCHMARK_CASE(Test, Lib2)
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
+}
+@endcode
+
+In the above example there are 2 entries under Benchmark Case 'Test' with libraries
+'Lib1' and 'Lib2'. Check <a href="samples/hierarchy_2.html">Sample HTML ouput</a>
+for output of above code. In the output you will notice that library entries
+are compared against each other. Check out @ref comp for more information on
+comparison framework. 
 
 @section hierarchy_sub Sub-Benchmark Case
+
+Sub-Benchmark cases are only used in case of parametrized benchmarks. Check out 
+@ref p_bench for guide on parametrized benchmarking. 
 
 Sub-Benchmark case may be the smallest unit in this hierarchy but it is the most
 important and complex. There can be any number of sub-benchmark cases in a 
 benchmark case and they are identified with index rather than a name(although a 
 name can be assigned). Index is provided based on the chronological order(starting 
-with 0). So when benchmark cases are compared against each other(see @ref comp if you don't
-know when they are compared), sub-benchmark cases are compared against each other.
-The benchmark cases in comparison can have different number of sub-benchmark cases.
-For example - look at this <a href="samples/hierarchy_1.html">Sample HTML ouput</a>.
-Check out @ref out_format_html for information on HTML output.
-You can see here that case B1 for lib1 contains 3 sub-cases while B1 for lib2 
-contains 2 sub-cases. Take a look at the detailed report, in B1-lib1 all the 
-sub-cases are named but the second one does not reflect into the main table. 
-This is because the name of second sub-case name of lib1 and second sub-case of lib2 
-does not match(there is an extra space). As sub-cases are indexed by numbers, 
-Names of sub-cases only reflect in the main table if they match for every library. 
-This also applied to TXT output. Check out @ref p_bench for guide on 
-templatized benchmarking.
+with 0). So when multiple library entries of benchmark case are compared against 
+each other(see @ref comp if you don't know when they are compared), the 
+corresponding sub-benchmark cases are compared against each other with index. 
+The benchmark cases in comparison can have different number of sub-benchmark cases. 
+For example - 
+
+@code
+#include <iostream>
+
+#define MANAK_MODULE Test
+
+#define MANAK_INIT
+#define MANAK_AUTO_MAIN
+
+#include <manak/manak.hpp>
+
+using namespace std;
+
+void ForLoops(size_t a)
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < a;i++);
+  )
+}
+
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, Lib1, ForLoops)->AddArgs_N("With100", 100)->AddArgs_N("With1000", 1000)->AddArgs_N("With10000", 10000));
+
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, Lib2, ForLoops)->AddArgs_N("With100", 100)->AddArgs_N("With 1000", 1000));
+
+@endcode
+
+The output of above code - <a href="samples/hierarchy_1.html">Sample HTML ouput</a>. 
+Check out @ref out_format_html for information on HTML output. You can see here 
+that case 'B1' with Lib1 contains 3 sub-cases while with Lib2 contains 2 sub-cases. 
+Take a look at the detailed report, in B1-lib1 all the sub-cases are named but 
+the second one does not reflect into the main table of 'B1'. This is because,
+second sub-case name of lib1 and second sub-case name of lib2 do not 
+match(there is an extra space). As sub-cases are characterized only by their index, 
+names of sub-cases only reflect in the main table if they match for every library.
+
+@code
+#include <iostream>
+
+#define MANAK_MODULE Test
+
+#define MANAK_INIT
+#define MANAK_AUTO_MAIN
+
+#include <manak/manak.hpp>
+
+using namespace std;
+
+void ForLoops(size_t a)
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < a;i++);
+  )
+}
+
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, Lib1, ForLoops)->AddArgs_N("With100", 100)->AddArgs_N("With1000", 1000)->AddArgs_N("With10000", 10000));
+
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, Lib2, ForLoops)->AddArgs_N("With100", 100)->AddArgs_N("With 1000", 1000));
+
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B2, Lib1, ForLoops)->AddArgs_N("With100", 100)->AddArgs_N("With1000", 1000)->AddArgs_N("With10000", 10000));
+
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B2, Lib2, ForLoops)->AddArgs_N("With100", 100)->AddArgs_N("With1000", 1000));
+@endcode 
+
+Check out the output of the above code <a href="samples/hierarchy_3.html">HERE</a>
+
+This also applies to TXT output.
 */

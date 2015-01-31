@@ -5,27 +5,36 @@ Let us start by timing the simplest function.
 @code
 MANAK_AUTO_BENCHMARK_CASE(B1)
 {
-  Code;
+  SetUp;
+  
+  MEASURE
+  (
+    Code;
+  )
+  
+  TearDown;
 }
 @endcode
 
-In this case the entire function call will be timed. Sometimes the Code to 
-measure is more time sensetive. The code to measue may require some other code for
-setup or tear down. For this Manak provides 'Measure' macro.
+Here the code inside the 'MEASURE' block will be timed. Important thing to 
+remember is that 'MEASURE' block does not change the scope. 
+
+There can be any number of 'MEASURE' blocks inside a benchmark case. The time 
+of all the 'Measure' blocks will be sumed. 
 
 @code
 MANAK_AUTO_BENCHMARK_CASE(B1)
 {
   SetUp Code;
   
-  Measure
+  MEASURE
   (
     Code
   )
   
   TearDown Code;
   
-  Measure
+  MEASURE
   (
     Code;
   )
@@ -34,66 +43,25 @@ MANAK_AUTO_BENCHMARK_CASE(B1)
 }
 @endcode
 
-In this case only the code inside Measure blocks will be timed. There can be any
-number of 'Measure' blocks inside a benchmark case. The time of all the 'Measure'
-blocks will be sumed. 
-
-All the benchmarks cases run for certain number of iterations and the final time
-is taken as the average of all the iterations. If number of iterations are not 
-specified for any benchmark case default is used(which is 10). Check out 
-@ref set_env_mdi for setting default number of iterations. Sometimes the setup
-code or the tear down is very expensive in terms of time and is required 
-to be executed only once. Even with 'Measure' blocks, setup and teardown code is 
-executed every iteration. This problem can be solved with 'Repeat' macro.
+'MEASURE' blocks can also appear user created function.
 
 @code
-MANAK_AUTO_BENCHMARK_CASE(B1)
+void fun(size_t a)
 {
-  SetUp Code;
+  SetUp;
   
-  Repeat
+  MEASURE
   (
-    Measure
-    (
-      Code
-    )
-  
     Code;
-  
-    Measure
-    (
-      Code;
-    )
   )
-  TearDown Code;
+  
+  TearDown;
 }
+
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(Test, fun)->AddArgs(0));
 @endcode
 
-With 'Repeat' block, only the code inside the 'Repeat' block is executed for number
-of iterations. Any code outside of 'Repeat' block will not be timed, even
-'Measure' blocks. 
-
-There can be multiple 'Repeat' blocks inside a case, in such a case each 'Repeat'
-block will be timed separately and added as a sub-benchmark case. For more 
-information on multiple 'Repeat' blocks see @ref p_bench_mr
-
-'Measure' and 'Repeat' blocks can also be used in manually added benchmark cases.
-For example - 
-
-@code
-int fun(int a, int b)
-{
-  Code;
-
-  Repeat
-  (
-    Measure
-    (
-      Code to measure;
-    )
-  )
-}
-
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddArgs(0,0)...);
+'MANAK_ADD_BENCHMARK_WITH_TEMPLATE' creates a parametrized benchmark case. For
+more information on parametrized benchmarks check @ref p_bench.
 @endcode
 */

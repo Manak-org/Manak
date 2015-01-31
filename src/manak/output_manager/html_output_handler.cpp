@@ -428,7 +428,7 @@ MANAK_INLINE std::string HTMLOutputHandler::GetPMRep(const utils::ObjectStore& e
   double comp_val = *(double*)entry.Get("compare");
   PMeasure pm = *(PMeasure*)entry.Get("pmeasure");
 
-  if(comp_val >= 0)
+  if(comp_val > -1)
   {
     double tol = *(double*)entry.Get("tolerance");
 

@@ -1,46 +1,54 @@
-/*! @page p_bench Complete guide on Templatized Benchmarking
+/*! @page p_bench Complete guide on Parametrized Benchmarking
 
-With the use advance C++11 features, Manak implements simple to use template 
-benchmarking. Template benchmarking is useful when a same function is benchmarked
-with many different parameters. 
+With the use of advance C++11 features, Manak implements simple to use 
+parametrized benchmarking. Parametrized benchmarking is useful when a same function 
+is benchmarkek with many different parameters. 
 
-@section p_bench_para Templatized Benchmarking with Parametrized Benchmarks
 @code 
 MANAK_AUTO_BENCHMARK_CASE(ForLoops_1000)
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
 }
 
 MANAK_AUTO_BENCHMARK_CASE(ForLoops_2000)
 {
-  for(size_t i = 0;i < 200;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 200;i++);
+  )
 }
 @endcode
 
-Parametrized benchmark cases in Manak helps reduce code duplication and the above 
+Parametrized benchmark cases in Manak helps reduce code duplication. The above 
 code can be written like - 
 
 @code
 void ForLoops(size_t a)
 {
-  for(size_t i = 0;i < a;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < a;i++);
+  )
 }
 
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, ForLoops)->AddArgs(1000)->AddArgs(2000));
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, ForLoops)->AddArgs(1000)->AddArgs(2000));
 @endcode 
 
 The output(HTML) can be seen <a href="samples/p_bench_1.html">HERE</a>. As you
 can see there are 2 sub-cases in B1. Notice that all the sub-cases share the same 
 tolerance and iteration values.
 
-Reducing code redundancy helps minimize erros. In the above code 'B1' is a 
-parametrized benchmark holding 2 sets of parameter set. With 'AddArgs' you
+Reducing code redundancy helps minimize errors. In the above code 'B1' is a 
+parametrized benchmark holding 2 sets of parameter. With 'AddArgs' you
 can add more parameter sets to the parametrized benchmark. There can be any number
 of 'AddArgs' calls linked to a parametrized benchmark case. Parametrized benchmark 
-case will run the function given on all the parameter sets. There is no restriction 
+case will run the given function on all the parameter sets. There is no restriction 
 on type of function accepted by parametrized benchmark but number and type of 
 parameters given to 'AddArgs' must match the given benchmark function. The only 
-thing is that the auto template substitution wont work with benchmark functions. 
+thing is that the auto template substitution won't work with functions. 
 For templatized function the entire template signature must be provided.
 
 @code
@@ -50,7 +58,7 @@ int fun(const T& t)
   Code;
 }
 
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun<std::string>)->AddArgs("Test"));
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun<std::string>)->AddArgs("Test"));
 @endcode
 
 @subsection p_bench_aan AddArgs_N
@@ -58,28 +66,31 @@ MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun<std::string>)->
 'AddArgs' adds an unamed sub-case to the benchmark case. Sub-benchmark cases are
 characterized by the chronological index rather than a name. Check out @ref hierarchy_sub
 for more information on the structure. But still it sometimes helps to associate 
-a name. For example <a href="samples/p_bench_2.html">THIS</a> output is better 
+it with a name. For example <a href="samples/p_bench_2.html">THIS</a> output is better 
 than <a href="samples/p_bench_1.html">THIS</a> output. AddArgs_N can be used to
 add name to the sub-case.
 
 @code
 void ForLoops(size_t a)
 {
-  for(size_t i = 0;i < a;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < a;i++);
+  )
 }
 
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, ForLoops)->AddArgs_N("With 1000", 1000)->AddArgs_N("With 2000", 2000));
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, ForLoops)->AddArgs_N("With 1000", 1000)->AddArgs_N("With 2000", 2000));
 @endcode
 
-AddArgs_N works as same as AddArgs but always accepts one parameter as name.
+'AddArgs_N' works as same as AddArgs but always accepts first parameter as name.
 Remember even though name is added to the sub-case they are accessed only by
 their chronological index. To understand this better see @ref hierarchy_sub.
 
 @subsection p_bench_aca AddCustomArgs
 
 If number of parameter sets gets large its inconvenient to write each one 
-down in AddArgs. On top of that they may be part of the sequence which
-can be generated at runtime. For that 'AddCustomArgs' is useful. 
+down in 'AddArgs'. On top of that they may be part of the sequence which
+can be generated at runtime. In this case 'AddCustomArgs' is useful. 
 
 @code
 int fun(int a, int b)
@@ -95,11 +106,11 @@ list<tuple<int, int>> GetArgs()
   return out;
 }
 
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs(GetArgs));
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs(GetArgs));
 @endcode
 
 'AddCustomArgs' accepts a function which should return list of appropriate
-tuples. This custom function may have parameters which can be passed to 
+tuples. This custom function can have parameters which can be passed to 
 'AddCustomArgs' after the function name.
 
 @code
@@ -116,12 +127,10 @@ list<tuple<int, int>> GetArgs(int a)
   return out;
 }
 
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs(GetArgs, 50));
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs(GetArgs, 50));
 @endcode
 
-@section p_bench_acan AddCuctomArgs_N
-
-To name sub-cases use AddCustomArgs_N
+To name sub-cases use AddCustomArgs_N.
 
 @code
 int fun(int a, int b)
@@ -137,139 +146,8 @@ list<tuple<std::string, int, int>> GetArgs(int a)
   return out;
 }
 
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs_N(GetArgs, 50));
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs_N(GetArgs, 50));
 @endcode
 
 For more advance function passing see @ref use_afr.
-
-@section p_bench_sm_m Parametrized Benchmark Macros for Simple Module
-Manak offers following macros for creating parametrized benchmarks
-  - @ref p_bench_m1
-  - @ref p_bench_m2
-  - @ref p_bench_m3
-  - @ref p_bench_m4
-  
-@subsection p_bench_m1 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE
-Creates a parametrized benchmark case with given name and function and return 
-pointer to the created case. The returned pointer can be registered manually or
-auto with 'MANAK_ADD_BENCHMARK'.
-
-@subsection p_bench_m2 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I
-Creates a parametrized benchmark case with given name, function and number of
-iterations. 
-
-@subsection p_bench_m3 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T
-Creates a parmetrized benchmark case with given name, function and tolerance.
-
-@subsection p_bench_m4 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT
-Creates a parametrized benchmark case with given name, function, number of 
-iterations and tolerance.
-
-@section p_bench_m_m Parametrized Benchmark Macros for Normal Module
-Manak offers following macros for creating parametrized benchmarks
-  - @ref p_bench_m5
-  - @ref p_bench_m6
-  - @ref p_bench_m7
-  - @ref p_bench_m8
-  
-@subsection p_bench_m5 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE
-Creates a parametrized benchmark case with name, library and function and return 
-pointer to the created case. The returned pointer can be registered manually or
-auto with 'MANAK_ADD_BENCHMARK'.
-
-@subsection p_bench_m6 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I
-Creates a parametrized benchmark case with name, library, function and number of
-iterations. 
-
-@subsection p_bench_m7 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T
-Creates a parmetrized benchmark case with name, library, function and tolerance.
-
-@subsection p_bench_m8 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT
-Creates a parametrized benchmark case with name, library, function, number of 
-iterations and tolerance.
-
-@section p_bench_mr Templatized Benchmarking with Multiple 'Repeat' blocks.
-Check out @ref all_time to understand what 'Repeat' blocks are. Each 'Repeat'
-blocks registers a sub-benchmark case under the benchmark case. This property can 
-be used to simulate the effect of templatized benchmarking. 
-For example - 
-@code
-#include <iostream>
-
-#define MANAK_SIMPLE_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN
-
-#include <manak/manak.hpp>
-
-using namespace std;
-
-MANAK_AUTO_BENCHMARK_CASE(B1)
-{
-  for(size_t i = 1000;i < 2000;i = i + 100)
-  {
-    Repeat
-    (
-      for(size_t j = 0;j < i;j++);
-    )
-  }
-}
-@endcode
-
-The output of this code is <a href="samples/p_bench_3.html">HTML</a>
-
-TXT output is given below - 
-
-@code
-######################################################################
-#  Manak C++ Benchmarking Library                                    #
-#  Version master                                                    #
-#  Created at Nov 26 15:38:38 2014                                   #
-######################################################################
-
-       Case Name              base_library        
-
-B1
-  Parameter Set 0             3                   
-  Parameter Set 1             3.4                 
-  Parameter Set 2             3.7                 
-  Parameter Set 3             4                   
-  Parameter Set 4             4.4                 
-  Parameter Set 5             4.6                 
-  Parameter Set 6             5                   
-  Parameter Set 7             5                   
-  Parameter Set 8             5.4                 
-  Parameter Set 9             5.8
-@endcode
-
-If you want to assign different tolerance and iteration values to sub-cases,
-multiple repeat is the way to go. This is not possible with parametrized 
-benchmark cases. 
-
-@code
-#include <iostream>
-
-#define MANAK_SIMPLE_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN
-
-#include <manak/manak.hpp>
-
-using namespace std;
-
-MANAK_AUTO_BENCHMARK_CASE_T(B1, <value>)
-{
-  for(size_t i = 1000;i < 2000;i = i + 100)
-  {
-    SetTol(<value>);
-    SetIter(<value>);
-    Repeat
-    (
-      for(size_t j = 0;j < i;j++);
-    )
-  }
-}
-@endcode
-
-SetIter and SetTol only takes effect for the next sub-case. It is trivial to 
-mention that if no SetTol is given for a sub-case the default is taken which is 
-the tolerance set for the parent benchmark case.
 */

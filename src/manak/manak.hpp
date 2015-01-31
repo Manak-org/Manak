@@ -48,6 +48,7 @@ inline bool manak_init_module()
   #endif // MANAK_MANUAL_INIT_FUNCTION
 
   manak::ManakEnv::GlobalEnv().GetModuleName() = MANAK_MODULE_NAME;
+  manak::ManakSuite::GetMasterSuite().Name() = MANAK_MODULE_NAME;
 
   return true;
 }

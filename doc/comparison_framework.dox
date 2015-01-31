@@ -1,26 +1,31 @@
 /*! @page comp Comparison Framework
 
 @section comp_sm Comparison Framework for Simple Module
-In simple module there is only one library which is compared against itself along
-time. The current result can be saved for comparison by passing '-s <filename>'
-command line option to the executable. This saved file can be later loaded with 
-'-c <filename>' for comparison. Remember while saving, only the benchmarks which
-run will be saved. For example, if given '-r' options for running specific, only
-the benchmark cases satisfying the regular expression will be saved. See 
-@ref qg_rsc for more information on running specific benchmarks.
+In simple module benchmark cases are added witha default library name. Understand
+the library by checking out @ref hierarchy_case. The current results can be 
+saved for comparison by passing '-s <filename>' command line option to the 
+executable. This saved file can be later loaded with '-c <filename>' for 
+comparison. Remember while saving, only the benchmarks which
+actually ran will be saved. For example, if given '-r' options for running 
+specific cases, only the benchmark cases satisfying the regular expression will 
+be saved. See @ref qg_rsc for more information on running specific benchmarks.
 
-@subsection comp_sm_ex Comparison framework examples
+@subsection comp_sm_ex Comparison framework Examples
 @code
 #include <iostream>
 
-#define MANAK_SIMPLE_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN 
+#define MANAK_SIMPLE_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
 
 #include <manak/manak.hpp>
 
 MANAK_AUTO_BENCHMARK_CASE(B1)
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
 }
 @endcode
 
@@ -36,14 +41,18 @@ Change <name>.cpp to -
 @code
 #include <iostream>
 
-#define MANAK_SIMPLE_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN 
+#define MANAK_SIMPLE_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
 
 #include <manak/manak.hpp>
 
 MANAK_AUTO_BENCHMARK_CASE(B1)
 {
-  for(size_t i = 0;i < 10000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
 }
 @endcode
 
@@ -61,52 +70,59 @@ The sample TXT output is -
 @code
 ######################################################################
 #  Manak C++ Benchmarking Library                                    #
-#  Version 1.0.0                                                     #
-#  Created at Nov 15 03:40:08 2014                                   #
+#  Version 1.1.0                                                     #
+#  Created at Jan 31 23:27:53 2015                                   #
 ######################################################################
- 
-       Case Name              base_library        
 
-B1                            +34(3.7) 
+
+       Case Name              bench               
+B1                            +30.7(3.4) 
 @endcode
 
-MANAK by default generates HTML output. Check out @ref out_format for more 
+Manak by default generates HTML output. Check out @ref out_format for more 
 information on output formats.
 
 The value in the bracket is the old benchmarked value which was saved in 
 'bench1.txt'. The '+' sign in front of the entry suggests that 
 the current benchmark is higher in magnitude. On the other hand if the current 
 entry is lower in magnitude, output will show a negative sign. This comparison
-is done based on tolerance. Hence no sign implies the benchmarks are equivalent
-with respect to given tolerance. Here no tolerance is given for 'B1' so 
+is done based on tolerance. Lack of sign implies the benchmarks are equivalent
+with respect to given tolerance. Here no tolerance value is given for 'B1' so 
 default tolerance is assumed(10 microseconds). See @ref set_env_mdt for setting 
 default tolerance value. In comparison with tolerance 'value +- tolerance' is
-considered equivalent. Tolerance can be given for a perticular benchmark case with 
-'MANAK_AUTO_BENCHMARK_CASE_T' or 'MANAK_BENCHMARK_CASE_T'. See @ref s_mod for
-more information on these macros.
+considered equivalent. Tolerance value can be given for a perticular benchmark 
+case with 'MANAK_AUTO_BENCHMARK_CASE_T' or 'MANAK_BENCHMARK_CASE_T'. See 
+@ref s_mod for more information on these macros.
 
 For loading the appropriate old value into the benchmark case each benchmark 
 case is assigned a unique name. This unique name depends on its location in 
-the hierarchy and its library. Hence its not necessary to maintain the exact
-state of the benchmarking module to load the old saved results.
+the hierarchy. Hence its not necessary to maintain the exact state of the 
+benchmarking module to load the old saved results.
 
 For example let us change the code of <name>.cpp to -
 @code
 #include <iostream>
 
-#define MANAK_SIMPLE_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN 
+#define MANAK_SIMPLE_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT 
 
 #include <manak/manak.hpp>
 
 MANAK_AUTO_BENCHMARK_CASE(B1)
 {
-  for(size_t i = 0;i < 10000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
 }
 
 MANAK_AUTO_BENCHMARK_CASE(B2)
 {
-  for(size_t i = 0;i < 100000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 100000;i++);
+  )
 }
 @endcode
 
@@ -127,28 +143,37 @@ B2                            337.2
 
 Here only 'B1' is compared as only its old data was available. Here if we shift
 'B1' inside any suite, its unique signature will change and it won't be compared 
-with the old entry.
+with the old entry. Also remember the values are loaded against the associated
+library in a benchmark case, changing the library name will also affect the 
+loading process.
 
 @code
 #include <iostream>
 
-#define MANAK_SIMPLE_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_SIMPLE_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
 
 #include <manak/manak.hpp>
 
-MANAK_AUTO_BENCHMARK_SUITE(Suite1);
+MANAK_AUTO_SUITE(Suite1);
 
 MANAK_AUTO_BENCHMARK_CASE(B1)
 {
-  for(size_t i = 0;i < 10000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
 }
 
-MANAK_AUTO_BENCHMARK_SUITE_END();
+MANAK_AUTO_SUITE_END();
 
 MANAK_AUTO_BENCHMARK_CASE(B2)
 {
-  for(size_t i = 0;i < 100000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 100000;i++);
+  )
 }
 @endcode
 
@@ -169,97 +194,88 @@ B1                            33.6
 
 @section comp_nm Comparison Framework of Normal Module
 In normal benchmarking module multiple libraries are compared against each other.
-The libraries can also be compared with themselves along time. The comparison
-framework of normal module is built around the comparison structure of simple
-module. Time based comparison structure of both modules is identical hence 
-see @ref comp_sm for time based comparison of libraries.
-libraries with themselves along time @see comp_sm. In normal module comparison
-framework benchmark cases having identical name but different library name are
-also compared against each other.
+The libraries can also be compared along time. The comparison framework of normal 
+module is built around the comparison structure of simple module. Time based 
+comparison structure of both modules is identical hence see @ref comp_sm for time 
+based comparison. In normal module comparison framework, libraries associed with 
+benchmark case are compared against each other.
 
 For example -
 @code
 #include <iostream>
 
-#define MANAK_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN 
+#define MANAK_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT 
 
 #include <manak/manak.hpp>
 
 MANAK_AUTO_BENCHMARK_CASE(B1, lib1)
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
 }
+
 MANAK_AUTO_BENCHMARK_CASE(B1, lib2)
 {
-  for(size_t i = 0;i < 10000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
 }
+
 MANAK_AUTO_BENCHMARK_CASE(B2, lib2)
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
 }
 @endcode
 
-The output(TXT) of this code will be - 
-
-@code
-######################################################################
-#  Manak C++ Benchmarking Library                                    #
-#  Version master.0.0                                                #
-#  Created at Nov 15 04:36:52 2014                                   #
-######################################################################
-
-       Case Name              lib1                lib2                
-
-B1                            3.6                 33.7                
-B2                                                3.8
-@endcode
+The output of this code can be seen <a href="samples/comp_2.html">HERE</a>.
 
 The examples shown in @ref comp_sm_ex would work equivalently on this code in
-time based comparison. Remember, all benchmark suites carry their own namespace 
-hence benchmark suite having same name and different suite and library won't be 
-compared against each other.
+time based comparison. Remember, all suites carry their own namespace.
 
 @code
 #include <iostream>
 
-#define MANAK_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
 
 #include <manak/manak.hpp>
 
-MANAK_AUTO_BENCHMARK_SUITE(Suite1);
+MANAK_AUTO_SUITE(Suite1);
 
 MANAK_AUTO_BENCHMARK_CASE(B1, lib1)
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
 }
 
-MANAK_AUTO_BENCHMARK_SUITE_END();
+MANAK_AUTO_SUITE_END();
 
 MANAK_AUTO_BENCHMARK_CASE(B1, lib2)
 {
-  for(size_t i = 0;i < 10000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
 }
 MANAK_AUTO_BENCHMARK_CASE(B2, lib2)
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
 }
 @endcode
 
-And the output(TXT) - 
-
-@code
-######################################################################
-#  Manak C++ Benchmarking Library                                    #
-#  Version master.0.0                                                #
-#  Created at Nov 15 04:41:25 2014                                   #
-######################################################################
-
-       Case Name              lib2                lib1                
-
-B1                            33.5                
-B2                            3.5                 
-B1                                                4.6
-@endcode
+And the output <a href="samples/comp_3.html">HERE</a>.
 */
