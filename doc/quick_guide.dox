@@ -72,10 +72,8 @@ Here as you can see the module name is provided with 'MANAK_SIMPLE_MODULE'. Modu
 name is required only where 'MANAK_INIT' is defined(This is important for multi 
 file setup). 
 
-Manak offers 2 benchmarking modules. For more information on benchmarking modules
-check out @ref set_env_smt. 'MANAK_SIMPLE_MODULE' and 'MANAK_MODULE' are defines
-which can togle the module. Check out @ref ... for how they can be effectively 
-used to make multi file projects simpler.
+Manak offers 2 benchmarking modules. Check out @ref ... for how they can be 
+effectively used to make multi file projects simpler.
 
 Simple benchmarking module can be used when the library name is constant for all 
 the cases registered in that file. For detailed information on Simple Benchmark 
@@ -334,7 +332,6 @@ under Suite1. And in the same way Suite2 will be registered under Suite1 and
 Suite1 under master. This hierarchical structure helps in running specific 
 benchmarks at a time. For more information on auto registration see @ref auto_reg.
 
-
 @section qg_comp Manak Comparison Framework
 
 Manak also offers saving these results for comparison. This comparison type is 
@@ -359,13 +356,6 @@ runs. The default tolerance is 10 which can be changed by setting
 set by using 'MANAK_AUTO_BENCHMARK_CASE_T' macro. For more available macros 
 check @ref auto_reg.
 
-@code
-MANAK_AUTO_BENCHMARK_CASE_T(ForLoops, lib1, 50)
-{
-  Code;
-}
-@endcode
-
 The default measure of tolerance is in microseconds. Pass command line argument 
 '-h' for more help.
 
@@ -377,27 +367,24 @@ matching the regex will run.
 
 How to write a regex:
  - To access the child of any suite "/" token can be used. 
- - If an entire suite matches the regex, all the children of that suite will run.
  - Manak uses c++11 regex expressions.
+ - All valid regrex is supported
  
 Example -
 To run a suite named 'B1' under master suite 
 @code
-bench -r B1
+bench -r /B1/.*
 @endcode
 
 To run a suite named 'B2' under B1
 
 @code
-bench -r B1/B2
+bench -r /B1/B2/.*
 @endcode
 
 To run all children of suite B1(child of master) starting with "Bench"
 
 @code
-bench -r B1/Bench.*
+bench -r /B1/Bench.*
 @endcode
-
-For more information on regex expressions check ...
-
 */
