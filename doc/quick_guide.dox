@@ -2,75 +2,93 @@
 
 @section qg_intro_sec Introduction
 
-So let us take a moment to understand the hierarchical structure that MANAK
-uses. When manak.hpp is included in the project it also included the master 
+So let us take a moment to understand the hierarchical structure that Manak
+uses. When manak.hpp is included in the project it also includes the master 
 benchmarking suit which registers all the benchmarking cases. This master suit 
-is a special case of a benchmarking suit which may have more test suits or 
+is a special case of a manak suit which may have more manak suits or 
 cases as its children. On the other hand benchmarking case is a leaf node in 
-this tree(or so we assume until template benchmarks come into picture).
+this tree(or so we assume until parametrized benchmarks come into picture).
 Each benchmark case is charectorized by a unique name. This name contains the 
 path to this case from the root. This hierarchical structure helps us to run 
 specific benchmarks. Now that we know the hierarchical structure we can introduce 
-the concept of library into this picture. Libaries in MANAK are considered groups 
-of benchmarking cases that are compared against each other. So now we can say 
-that a benchmark case is characterized by name and a library. The benchmark cases 
-having same name and different library are compared against each other in the 
-output. Check out @ref mhierarchy for more details on the MANAK hierarchy.
+the concept of library into this picture. A benchmark case can contain multiple
+library entries which are compared against each other. Benchmark cases in Manak
+can perform testing work. Check out @ref mhierarchy for more details on the 
+MANAK hierarchy. 
 
-So now we can start benchmarking. The benchmark cases and suits in Manak
+So now we can start using Manak. The benchmark cases and suits in Manak
 can be registred either manually or automatically. But in this quick guide we 
 are only going to consider auto registration. For more information on manual 
 registration check out @ref man_reg
 
 Before we start registration of cases let us understand the timing features
-of MANAK. The time is measured in microseconds. The function runs for given
+of Manak. The time is measured in microseconds. The function runs for given
 number of iterations and the average of all iterations is taken as the final 
 result. When number of iterations is not given the default is used(Which is 10
 if not set otherwise). The default can be changed by setting 
 'MANAK_DEFAULT_ITERATIONS' to the desired value.
 
-MANAK can generate ouput in 2 different formats, HTML and TXT. A simple HTML 
-output looks like this - <a href="samples/qg_intro_sec_1.html">Sample HTML ouput</a>.
-The equivalent TXT log -
+Manak can generate ouput in 2 different formats, HTML and TXT. A simple HTML 
+output looks like this - <a href="samples/out_format_1.html">Sample HTML ouput</a>.
 
+The values in bracket are values added for comprison. For more information on 
+comparison framework check @ref comp. Manak by default generates HTML output 
+but user can force Manak to generate TXT output with '-f' 
+option(also stands for format :P). Passing argument '-f TXT' will force Manak
+to generate TXT output. Check out @ref out_format for more information on 
+output formats.
+
+The usual one file usage will look like this - 
 @code
-######################################################################
-#  Manak C++ Benchmarking Library                                    #
-#  Version 0.0.0                                                     #
-#  Created at Jan  7 15:47:09 2015                                   #
-######################################################################
+//! Needed includes
 
-       Case Name              lib1                lib2                
-Test                          5(3.1)              0.9(0.4)            
+//! Set manak environment
 
-Test2
-                              0.7(0.4)            ---                 
-                              4.9(0.4)            ---
+#include <manak/manak.hpp>
+
+//! register cases
 @endcode
 
-The values in bracket for both HTML and TXT output are values added for comprison.
-For more information on comparison framework check @ref comp. Manak by default 
-generates HTML output but user can force Manak to generate TXT output with -f 
-option(also stands for format :P). Passing argument '-f TXT' will force MANAK 
-to generate TXT output.
+Manak can generate main function for you which runs all your registered cases
+with given command line arguments. To create such a main we need to define 
+'MANAK_AUTO_MAIN'. Manak needs to initialize some variable such as module name,
+master suit etc. This initialization needs to be done only once. For this we need 
+to define 'MANAK_INIT'. This looks foolish in case of one file setup but it plays
+major role in muli file setup. Next we need to provide a module name to manak.
+For example a simple Manak program -
+@code
+#include <iostream>
 
-MANAK offers 2 benchmarking modules. For more information on benchmarking modules
-check out @ref set_env_smt.
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
+#define MANAK_SIMPLE_MODULE Bench
 
-@section qg_sbm Simple Benchmarking Module
+#include <manak/manak.hpp>
 
-Simple benchmarking module can be used when only one library is compared against
-itself with time. For detailed information on Simple Benchmark Module see 
-@ref s_mod
+//! register cases
+@endcode
 
-To set the module to simple benchmark module, set
-'MANAK_SIMPLE_BENCHMARK_MODULE' to the name of the module.
+Here as you can see the module name is provided with 'MANAK_SIMPLE_MODULE'. Module
+name is required only where 'MANAK_INIT' is defined(This is important for multi 
+file setup). 
+
+Manak offers 2 benchmarking modules. For more information on benchmarking modules
+check out @ref set_env_smt. 'MANAK_SIMPLE_MODULE' and 'MANAK_MODULE' are defines
+which can togle the module. Check out @ref ... for how they can be effectively 
+used to make multi file projects simpler.
+
+Simple benchmarking module can be used when the library name is constant for all 
+the cases registered in that file. For detailed information on Simple Benchmark 
+Module see @ref s_mod.
+
+To set the module type of a file to simple module, set
+'MANAK_SIMPLE_MODULE' to the name of the module.
            
 @code
-#define MANAK_SIMPLE_BENCHMARK_MODULE name
+#define MANAK_SIMPLE_MODULE name
 @endcode
 
-This will by default add all the cases to library by the name "base_library".
+This will by default add all the cases with library name as module name.
 This name can be changed by setting MANAK_BASE_LIBRARY_NAME to desired name. 
 
 So let us register our first benchmark case to the master suit. 
@@ -78,91 +96,88 @@ So let us register our first benchmark case to the master suit.
 @code
 #include <iostream>
 
-#define MANAK_SIMPLE_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_SIMPLE_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
 
 #include <manak/manak.hpp>
 
 MANAK_AUTO_BENCHMARK_CASE(ForLoops)
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
+  
+  TEST
+  (
+    MANAK_ASSERT_TRUE(1 == 1);
+  )
 }
 @endcode
 
 Thats it! This will automatically registers the case in master suit and the 
-MANAK_AUTO_BENCHMARK_MAIN will generate the main for you. Manak uses C++11
+MANAK_AUTO_MAIN will generate the main for you. Manak uses C++11
 features so don't forget compile the code with C++11 support. By default 
 the output will be saved to file 'benchmark_stat.html' and will look like -
-<a href="samples/qg_intro_sec_2.html">Sample HTML ouput</a>
+<a href="samples/qg_1.html">Sample HTML ouput</a>
 
-TXT output for above code -
+TXT output for above code in file 'benchmark_stat.txt'
 
 @code
 ######################################################################
 #  Manak C++ Benchmarking Library                                    #
-#  Version 1.0.0                                                     #
-#  Created at Nov 13 16:21:39 2014                                   #
+#  Version 1.1.0                                                     #
+#  Created at Feb  1 13:56:01 2015                                   #
 ######################################################################
 
-       Case Name              base_library        
 
-ForLoops                      3.3  
+       Case Name              bench               
+ForLoops                      4.6                 
 @endcode
+
+As you can see 'MEASURE' block can be used to time the code inside in. This block
+does not change the scope. There can be any number of 'MEASURE' blocks in a case,
+and the effect will be the sum of all. 'TEST' block can be used for testing. 
+'TEST' block create a special environment for testing which may slow down the 
+code inside. Thats why its not preferred to have 'MEASURE' block inside the 'TEST'
+block. Like 'MEASURE', there can be any number of 'TEST' blocks. Remember,
+'MANAK_ASSERT_TRUE' or any other test has to used inside 'TEST' block to register
+it.
 
 To change the default output file, set 'MANAK_DEFAULT_OUT_FILENAME' to desired 
 value. Check out @ref set_env_soof for more options. While running the benchmark 
-case all the ouput to the standard output will be redirected by default to the 
+cases, all the ouput to the standard output will be redirected by default to the 
 file 'benchmark_log.txt'. To chnage the default, set 'MANAK_REDIRECTION_FILENAME' to 
 desired value. For more options about redirection check @ref set_env_sro.
 
 If you want to generate the main for yourselves check @ref set_env_mcmf.
 
-Sometimes the code to be measured requires another code to be executed before or 
-after, sort of like set up and tear down. To measure such a code 'Measure' macro
-can be used. For example - 
-
-@code
-MANAK_AUTO_BENCHMARK_CASE(B1)
-{
-  Set up code;
-  
-  Measure
-  (
-    Code to be measured;
-  )
-  
-  Tear down;
-}
-@endcode
-
-This way only the run time of code inside the 'Measure' block will be measured.
-There can be more than one 'Measure' blocks inside a function. The total time 
-will be considered as the sum of all such 'Measure' blocks inside the function.
-
-@code
-MANAK_AUTO_BENCHMARK_CASE(B1)
-{
-  Set up code;
-  
-  Measure
-  (
-    Code to be measured;
-  )
-  
-  Code;
-  
-  Measure
-  (
-    Another code to be measured;
-  )
-  
-  Tear down;
-}
-@endcode
-
 For more time related features check out @ref all_time
 
-For providing the number of iteration use 'MANAK_AUTO_BENCHMARK_CASE_I'.
+There are 3 numbers associated with any benchmark case. Number of iterations, 
+tolerance for time based comparison and success percentage. Let us understand 
+each one of them. Each benchmark case is run for ceratin number of iteration to 
+take the average performance. If number of iterations are not mentioned(like in 
+above example) default is taken. While comparing the new implementation to the 
+old each benchmark case is compared against the old stored values. This comparison
+is done with tolerance. And now the success percentage, as any case is run for 
+certain number of iterations test may pass for ceratain number of iteration 
+and fail for others. Success percentage defines the percentage number of iteration
+for which the test should pass. The default success percentage is 100. Success 
+percentage is helpful while running randomized tests.
+
+The default -
+ - Iterations: 10, can be set with 'MANAK_DEFAULT_ITERATIONS'
+ - Tolerance: 10ms can be set with 'MANAK_DEFAULT_TOLERANCE'
+ - Success percentage: 100 can be set with 'MANAK_DEFAULT_SP'
+
+Check out the macros for providing the above mentioned arguments -
+ - Iterations alone: MANAK_AUTO_BENCHMARK_CASE_I
+ - Tolerance alone: MANAK_AUTO_BENCHMARK_CASE_T
+ - Iterations and tolerance: MANAK_AUTO_BENCHMARK_CASE_TI
+ - Iterations and success percentage: MANAK_AUTO_BENCHMARK_CASE_IS
+ - All: MANAK_AUTO_BENCHMARK_CASE_TIS
 
 @code
 MANAK_AUTO_BENCHMARK_CASE_I(B1, 100)
@@ -171,7 +186,46 @@ MANAK_AUTO_BENCHMARK_CASE_I(B1, 100)
 }
 @endcode
 
-For more auto benchmark options check @ref auto_reg
+Check out @ref comp_sm_ex for how to save the results and load them at later times
+for comparison.
+
+Now we will start with 'MANAK_MODULE'.
+
+@code
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
+#define MANAK_MODULE Bench
+
+#include <manak/manak.hpp>
+
+MANAK_AUTO_BENCHMARK_CASE(B1, Lib1)
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  ) 
+}
+
+MANAK_AUTO_BENCHMARK_CASE(B1, Lib2)
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
+  
+  TEST
+  (
+    MANAK_ASSERT_TRUE(1 == 1);
+  )
+}
+@endcode
+
+The output of this code is - <a href="samples/qg_2.html">HTML ouput</a>.
+In this output you can see that the different library entries of case 'B1' are
+compared horizontally in the main table of 'B1'. Check out @ref comp_nm for more 
+information on this comparison framework.
+
+For more information on auto benchmark options check @ref auto_reg
 
 To register a function as benchmark case -
 
@@ -182,37 +236,38 @@ int fun()
 MANAK_ADD_BENCHMARK(MANAK_BENCHMARK_CASE(B1, fun));
 @endcode
 
-Remember 'Measure' block can also be used inside manually generated functions.
+Remember 'MEASURE' block can also be used inside manually generated functions.
 
 @subsection qg_pbc Parametrized Benchmark Cases
 Functions with parameters can be used as templated benchmarks.
 For example - 
 
 @code
-
 int fun(int a, int b)
 {
   Code;
 }
 
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddArgs(0,0)->AddArgs(1,0)...);
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddArgs(0,0)->AddArgs(1,0)...);
 @endcode
 
+Sample output can be seen <a href="samples/qg_3.html">HERE</a>.
+
 Here we can see that benchmark case contains 2 benchmark sub-cases corresponding 
-to each paramter set. These can be considered as paremeterized benchmark cases. 
-'MANAK_CREATE_BENCHMARK_WITH_TEMPLATE' generates a parametrized benchmark case
-which can hold any number of benchmark sub-cases. Function 'AddArgs' adds a new
-benchmark sub-case to the parametrized benchmark case with given parameters.
-Sometimes number of parameter sets is too large and 'AddArgs' becomes inconvenient.
-In such cases 'AddCustomArgs' can be used.
+to each paramter set. 'MANAK_CREATE_BENCHMARK_WITH_TEMPLATE' generates a 
+parametrized benchmark case which can hold any number of parameter sets. 
+Function 'AddArgs' adds a new parameter set. Sometimes number of parameter sets 
+is too large and 'AddArgs' becomes inconvenient. In such cases 'AddCustomArgs' 
+can be used.
 
 @code
 #include <iostream>
 #include <tuple>
 #include <list>
 
-#define MANAK_SIMPLE_BENCHMARK_MODULE lib
-#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_SIMPLE_MODULE Bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
 
 #include <manak/manak.hpp>
 
@@ -231,20 +286,20 @@ list<tuple<int, int>> get_args()
   return out;
 }
 
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs(get_args));
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs(get_args));
 @endcode 
 
 The function passed to 'AddCustomArgs' must return list of tuples. These returned
 tuples will be unfolded and passed to the parametrized benchmark case one by one.
-For more advance parametrized benchmark options check @ref p_bench_para .
+For more advance parametrized benchmark options check @ref p_bench.
 
 The auto test registration registers the case to the current suit(which happens 
-to be the master suit in global space). 'MANAK_AUTO_BENCHMARK_SUITE' registers
+to be the master suit in global space). 'MANAK_AUTO_SUITE' registers
 a new suite under the current suit and sets the newly created suite as the 
 current suite. 
 
 @code
-MANAK_AUTO_BENCHMARK_SUITE(Suite1);
+MANAK_AUTO_SUITE(Suite1);
 
 MANAK_AUTO_BENCHMARK_CASE(B1)
 {
@@ -252,21 +307,21 @@ MANAK_AUTO_BENCHMARK_CASE(B1)
 }
 @endcode
 
-Here B1 will be registered under Suite1 and Suite1 will be registered under the 
-master suite. 'MANAK_AUTO_BENCHMARK_SUITE_END()' can be used to set current suite 
+Here B1 will be registered under 'Suite1' and 'Suite1' will be registered under 
+the master suite. 'MANAK_AUTO_SUITE_END()' can be used to set current suite 
 to the parent. For example -
 
 @code
-MANAK_AUTO_BENCHMARK_SUITE(Suite1);
+MANAK_AUTO_SUITE(Suite1);
 
-MANAK_AUTO_BENCHMARK_SUITE(Suite2);
+MANAK_AUTO_SUITE(Suite2);
 
 MANAK_AUTO_BENCHMARK_CASE(B1)
 {
   Code;
 }
 
-MANAK_AUTO_BENCHMARK_SUITE_END();
+MANAK_AUTO_SUITE_END();
 
 MANAK_AUTO_BENCHMARK_CASE(B1)
 {
@@ -279,104 +334,8 @@ under Suite1. And in the same way Suite2 will be registered under Suite1 and
 Suite1 under master. This hierarchical structure helps in running specific 
 benchmarks at a time. For more information on auto registration see @ref auto_reg.
 
-@section qg_bm Benchmaking Module
-
-This module is useful when the code also needs to be compared against other 
-libraries. For detailed information on this module see @ref n_mod
-
-A simple cases registration in this module will look like - 
-
-@code
-#include <iostream>
-
-#define MANAK_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN
-
-MANAK_AUTO_BENCHMARK_CASE(B1, lib1)
-{
-  Code;
-}
-MANAK_AUTO_BENCHMARK_CASE(B1, lib2)
-{
-  Code;
-}
-@endcode
-
-The output will compare the lib1 and lib2 with results of B1.
-
-All the macros used in 'MANAK_SIMPLE_BENCHMARK_MODULE' are still valid with one
-extra parameter. 
-
-@code
-MANAK_AUTO_BENCHMARK_CASE_I(B1, lib1, 10)
-{
-  Code;
-}
-
-int fun()
-{}
-
-MANAK_ADD_BENCHMARK(MANAK_BENCHMARK_CASE(B1, lib2, fun));
-
-int fun2(int a, int b)
-{
-  Code;
-}
-
-list<tuple<int, int>> get_args()
-{
-  list<tuple<int, int>> out;
-  for(size_t i = 0;i < 100;i++)
-    out.emplace_back(i, i);
-  return out;
-}
-
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B2, lib2, fun2)->AddCustomArgs(get_args));
-@endcode
-
-See @ref auto_reg for more information on auto registration.
 
 @section qg_comp Manak Comparison Framework
-
-In 'MANAK_BENCHMARK_MODULE' benchmark cases having same name(and same suite) 
-and different library will automatically get compared against in the output.
-For example for code 
-
-@code
-#include <iostream>
-
-#define MANAK_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN
-
-#include <manak/manak.hpp>
-
-MANAK_AUTO_BENCHMARK_CASE(ForLoops, lib1)
-{
-  for(size_t i = 0;i < 1000;i++);
-}
-
-MANAK_AUTO_BENCHMARK_CASE(ForLoops, lib2)
-{
-  for(size_t i = 0;i < 10000;i++);
-}
-@endcode
-
-The HTML output will look like - <a href="samples/qg_intro_sec_3.html">Sample HTML ouput</a>
-
-And TXT output - 
-
-
-@code
-######################################################################
-#  Manak C++ Benchmarking Library                                    #
-#  Version 1.0.0                                                     #
-#  Created at Nov 13 16:15:39 2014                                   #
-######################################################################
-
-       Case Name              lib1                lib2                
-
-ForLoops                      3.4                 31.8
-@endcode
 
 Manak also offers saving these results for comparison. This comparison type is 
 available for both simple and normal modules. Pass argument '-s <filename>'
@@ -390,19 +349,7 @@ bench -c saved.txt
 @endcode
 
 The output of the second run will be saved to 'benchmark_stat.html'.
-The output will look like - <a href="samples/qg_intro_sec_4.html">Sample HTML ouput</a>
-
-@code
-######################################################################
-#  Manak C++ Benchmarking Library                                    #
-#  Version 1.0.0                                                     #
-#  Created at Nov 13 17:03:46 2014                                   #
-######################################################################
-
-       Case Name              lib1                lib2                
-
-ForLoops                      +42.4(3.2)          -0.1(31.6)
-@endcode
+The output will look like - <a href="samples/comp_1.html">Sample HTML ouput</a>
 
 The values in bracket are the values loaded for comparison. Loaded values are 
 compared with the current values with tolerance. The result of the comparison
