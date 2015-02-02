@@ -56,7 +56,7 @@ executable.
  - '-s <filename>': Save the generated for later comparisons. See @ref comp for more information.
  - '-c <filename>': Load previously saved benchmarks for comparison. See @ref comp for more information.
  - '-r <regex>': Run benchmark cases matching given regex. See @ref qg_rsc for more information.
- - '-f <format>: Change format of default output. Available formats are "HTML" and "TXT". Default is set to "HTML".
+ - '-f <format>: Change format of default output. Available formats are "HTML" and "TXT". Default is set to "HTML". See @ref out_format for more information.
  - '-o <filename>: Redirect the output to given file. See @ref set_env_soof for more information.
  - '-v': Get version information
 */

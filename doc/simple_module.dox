@@ -1,9 +1,11 @@
 /*! @page s_mod Simple Benchmark Module
 
 @section s_mod_intro Introduction
-This module is useful when only one library is benchmarked agaist itself with time.
-This module can be used by setting 'MANAK_SIMPLE_BENCHMARK_MODULE' to a desired 
-name. For more information on setting module type see @ref set_env_smt.
+This module is useful when the library name is constant for all the cases 
+registered in the scope. This module can be set by defining 'MANAK_SIMPLE_MODULE'
+to appropriate module name. After this definition the default library or 
+constant library name is taken as the module name. To change the name
+define 'MANAK_BASE_LIBRARY_NAME' to desired value.
 
 @section s_mod_ar Auto Registration
 For detalied information on auto registration of benchmark cases and benchmark 
@@ -14,62 +16,121 @@ The macros provided for auto registartion of benchmark case:
  - @ref auto_reg_sbm2
  - @ref auto_reg_sbm3
  - @ref auto_reg_sbm4
- - @ref auto_reg_sbm8
+ - @ref auto_reg_sbm5
+ - @ref auto_reg_sbm6
+ 
+Macro to register manually generated functions as cases:
  - @ref auto_reg_sbm7
  
 The macros provided for auto registration of benchmark suite:
- - @ref auto_reg_sbm5
- - @ref auto_reg_sbm6
+ - @ref auto_reg_sbm8
+ - @ref auto_reg_sbm9
+ 
+The macros provided for auto registration of parametrized benchmark:
+ - @ref auto_reg_sbm10
+ - @ref auto_reg_sbm11
+ - @ref auto_reg_sbm12
+ - @ref auto_reg_sbm13
+ - @ref auto_reg_sbm14
+ - @ref auto_reg_sbm15
+ 
+The macros provided for auto registration of groups:
+ - @ref auto_reg_sbm16
+ 
+The macros provided for auto registration of group benchmark cases:
+ - @ref auto_reg_sbm17
+ - @ref auto_reg_sbm18
+ - @ref auto_reg_sbm19
+ - @ref auto_reg_sbm20
+ - @ref auto_reg_sbm21
+ - @ref auto_reg_sbm22
+ - @ref auto_reg_sbm23
+ 
+The macros provided for auto registation of group parametrized benchmark case:
+ - @ref auto_reg_sbm24
+ - @ref auto_reg_sbm25
+ - @ref auto_reg_sbm26
+ - @ref auto_reg_sbm27
+ - @ref auto_reg_sbm28
+ - @ref auto_reg_sbm29
  
 @section s_mod_ar_ex Example
 
 @code
-#include <iostream>
-
-#define MANAK_SIMPLE_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_SIMPLE_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
+#define MANAK_BASE_LIBRARY_NAME Lib1
 
 #include <manak/manak.hpp>
 
 MANAK_AUTO_BENCHMARK_CASE_I(B1, 10)
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
 }
 
-MANAK_AUTO_BENCHMARK_SUITE(Suite1);
+MANAK_AUTO_SUITE(Suite1);
 
 MANAK_AUTO_BENCHMARK_CASE_T(B2, 50)
 {
-  for(size_t i = 0;i < 10000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
 }
 
-MANAK_AUTO_BENCHMARK_SUITE(Suite2);
+MANAK_AUTO_SUITE(Suite2);
 
 void fun3(size_t a)
 {
-  for(size_t i = 0;i < a;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < a;i++);
+  )
 }
 
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B3, fun3)->AddArgs((size_t)2000)->AddArgs((size_t)3000));
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B3, fun3)->AddArgs(2000)->AddArgs(3000));
+
+MANAK_AUTO_GROUP();
+
+size_t iter;
+
+GINIT()
+{
+  iter = 1000;
+}
+
+MANAK_AUTO_GROUP_BENCHMARK_CASE("InGroup")
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < iter;i++);
+  )
+}
+
+void fun(size_t a)
+{
+
+}
+
+MANAK_ADD_TO_GROUP(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE("InGroup2", fun)->AddArgs(100)->AddArgs(200));
+
+MANAK_ADD_TO_GROUP(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE("InGroup3", fun3)->AddArgs(100)->AddArgs(200));
+
+MANAK_AUTO_GROUP_END();
 @endcode
+
+Note: To register the function inside the group as parametrized benchmark use
+'MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE'. To register the function outside the
+group as parametrized benchmark use 'MANAK_CREATE_BENCHMARK_WITH_TEMPLATE'. 
+See registration of cases 'InGroup2' and 'InGroup3' for examples.
 
 Output -
 
-@code
-######################################################################
-#  Manak C++ Benchmarking Library                                    #
-#  Version 1.0.0                                                     #
-#  Created at Nov 14 16:16:41 2014                                   #
-######################################################################
-
-       Case Name              base_library        
-
-B1                            3.2                 
-B2                            32                  
-B3
-  Parameter Set 0             7.8                 
-  Parameter Set 1             11.5   
-@endcode
+HTML output can be seen <a href="samples/s_mod_1.html">HERE</a>
 
 The equivalent manual registration code can be found at @ref s_mod_mr_ex.
 
