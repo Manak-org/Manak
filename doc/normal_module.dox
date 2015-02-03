@@ -1,9 +1,8 @@
 /*! @page n_mod Benchmark Module
 
 @section n_mod_intro Introduction
-This module is useful when 2 or more libraries ar compared against each other
-with time. This module can be used by setting 'MANAK_BENCHMARK_MODULE' to a 
-desired name. For more information on setting module type see @ref set_env_smt.
+This module is useful when cases are need to be registered with different library
+names.
 
 @section n_mod_ar Auto Registration
 For detalied information on auto registration of benchmark cases and benchmark 
@@ -14,77 +13,144 @@ The macros provided for auto registartion of benchmark case:
  - @ref auto_reg_bm2
  - @ref auto_reg_bm3
  - @ref auto_reg_bm4
- - @ref auto_reg_bm8
+ - @ref auto_reg_bm5
+ - @ref auto_reg_bm6
  - @ref auto_reg_bm7
  
 The macros provided for auto registration of benchmark suite:
- - @ref auto_reg_bm5
- - @ref auto_reg_bm6
+ - @ref auto_reg_bm8
+ - @ref auto_reg_bm9
+ 
+The macros provided for auto registration of parametrized benchmark cases:
+ - @ref auto_reg_bm10
+ - @ref auto_reg_bm11
+ - @ref auto_reg_bm12
+ - @ref auto_reg_bm13
+ - @ref auto_reg_bm14
+ - @ref auto_reg_bm15
+ 
+The macros provided for auto registration of groups:
+ - @ref auto_reg_bm16
+ - @ref auto_reg_bm30
+ 
+The macros provided for auto registration of group benchmark cases:
+ - @ref auto_reg_bm17
+ - @ref auto_reg_bm18
+ - @ref auto_reg_bm19
+ - @ref auto_reg_bm20
+ - @ref auto_reg_bm21
+ - @ref auto_reg_bm22
+ - @ref auto_reg_bm23
+
+The macros provided for auto registration of group parametrized benchmark cases:
+ - @ref auto_reg_bm24
+ - @ref auto_reg_bm25
+ - @ref auto_reg_bm26
+ - @ref auto_reg_bm27
+ - @ref auto_reg_bm28
+ - @ref auto_reg_bm29
  
 @section n_mod_ar_ex Example
 
 @code
-#include <iostream>
-
-#define MANAK_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
 
 #include <manak/manak.hpp>
 
 void fun3(size_t a)
 {
-  for(size_t i = 0;i < a;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < a;i++);
+  )
 }
 
 MANAK_AUTO_BENCHMARK_CASE_I(B1, lib1, 10)
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
 }
 
-MANAK_AUTO_BENCHMARK_CASE_IT(B1, lib2, 10, 50)
+MANAK_AUTO_BENCHMARK_CASE_TI(B1, lib2, 10, 50)
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
 }
 
-MANAK_AUTO_BENCHMARK_SUITE(Suite1);
+MANAK_AUTO_SUITE(Suite1);
 
 MANAK_AUTO_BENCHMARK_CASE_T(B2, lib1, 50)
 {
-  for(size_t i = 0;i < 10000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
 }
 
 MANAK_AUTO_BENCHMARK_CASE_I(B2, lib2, 10)
 {
-  for(size_t i = 0;i < 10000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
 }
 
-MANAK_AUTO_BENCHMARK_SUITE(Suite2);
+MANAK_AUTO_SUITE(Suite2);
 
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I(B3, lib1, fun3, 10)->AddArgs((size_t)2000)->AddArgs((size_t)3000));
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T(B3, lib2, fun3, 50)->AddArgs((size_t)4000)->AddArgs((size_t)6000));
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I(B3, lib1, fun3, 10)->AddArgs((size_t)2000)->AddArgs((size_t)3000));
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T(B3, lib2, fun3, 50)->AddArgs((size_t)4000)->AddArgs((size_t)6000));
+
+MANAK_AUTO_GROUP();
+
+size_t iter;
+
+GINIT()
+{
+  iter = 100;
+}
+
+MANAK_AUTO_GROUP_BENCHMARK_CASE("InGroup1", "Lib1")
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < iter;i++);
+  )
+}
+
+MANAK_AUTO_GROUP_BENCHMARK_CASE_I("InGroup1", "Lib2", 10)
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < 10 * iter;i++);
+  )
+}
+
+void fun1(size_t a)
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < a * iter;i++);
+  )
+}
+
+MANAK_ADD_TO_GROUP(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI("InGroup2", "Lib1", fun1, 10, 50)->AddArgs(100)->AddArgs(1000));
+
+MANAK_AUTO_GROUP_END();
 @endcode
 
 Output - 
 
-@code
-######################################################################
-#  Manak C++ Benchmarking Library                                    #
-#  Version 1.0.0                                                     #
-#  Created at Nov 14 16:34:18 2014                                   #
-######################################################################
-
-       Case Name              lib1                lib2                
-
-B1                            3.2                 3.3                 
-B2                            31.5                32.2                
-B3
-  Parameter Set 0             7.7                 14.5                
-  Parameter Set 1             11.1                21.6    
-@endcode
+HTML output can be seen <a href="samples/n_mod_1.html">HERE</a>
 
 The equivalent manual registration code can be found at @ref n_mod_mr_ex.
 
-@section n_mod_mr Manual Registration 
+@section n_mod_mr Manual Registration with Normal Mode
 For detailed information on manual registration of benchmark cases and benchmark
 suites in benchmark module see @ref man_reg_mbm.
 
@@ -93,10 +159,38 @@ The macros provided for manual registartion of benchmark case:
  - @ref man_reg_mbm2
  - @ref man_reg_mbm3
  - @ref man_reg_mbm4
+ - @ref man_reg_mbm5
  - @ref man_reg_mbm6
  
 The macros provided for manual registration of benchmark suite:
- - @ref man_reg_mbm5
+ - @ref man_reg_mbm7
+ 
+The macros provided for manual registration of parametrized benchmark cases:
+ - @ref man_reg_mbm8
+ - @ref man_reg_mbm9
+ - @ref man_reg_mbm10
+ - @ref man_reg_mbm11
+ - @ref man_reg_mbm12
+ - @ref man_reg_mbm13
+ 
+The macros provided for manual registration of groups:
+ - @ref man_reg_mbm14
+ 
+The macros provided for manual registration of group benchmark cases:
+ - @ref man_reg_mbm15
+ - @ref man_reg_mbm16
+ - @ref man_reg_mbm17
+ - @ref man_reg_mbm18
+ - @ref man_reg_mbm19
+ - @ref man_reg_mbm20
+ 
+The macros provided for manual registration of group parametrized benchmark cases:
+ - @ref man_reg_mbm21
+ - @ref man_reg_mbm22
+ - @ref man_reg_mbm23
+ - @ref man_reg_mbm24
+ - @ref man_reg_mbm25
+ - @ref man_reg_mbm26
  
 @section n_mod_mr_ex Example
 

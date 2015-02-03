@@ -454,134 +454,449 @@ For more advance parametrized benchmark options check @ref p_bench.
 
 For example on simple module manual registration check @ref s_mod_mr_ex.
 
+
+
 @section man_reg_mbm Manual Registartion with Normal Module
+
 Simplest manual case registration can be done with the following code
 
 @code
-#include <iostream>
-
 bool bench_init();
 
-#define MANAK_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN
-#define MANAK_ALTERNATE_INIT_FUNCTION bench_init
+#define MANAK_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
+#define MANAK_MANUAL_INIT_FUNCTION bench_init
 
 #include <manak/manak.hpp>
 
 void fun()
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
 }
 
 bool bench_init()
 {
-  if(!manak::init_benchmarking_module())
-    exit(1);
-  
-  manak::ManakSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE(B1, lib1, fun));
+  manak::ManakSuite::GetMasterSuite().AddCase(MANAK_BENCHMARK_CASE(B1, Lib1, fun));
   return true;
 }
 @endcode
 
-The function to be registered must have no parameters. The function with 
+NOTE: 'MANAK_AUTO_MAIN' or 'MANAK_INIT' has to be defined only once in case of multi 
+file project. Check out @ref ... for more information.
+
+The function to be registered as a case must have no parameters. The function with 
 parameters can used to generate parametrized benchmark cases. See 
 @ref p_bench for more information. Also see @ref use_afr for registration of
 complex functions such as overloaded functions, template functions and 
 class member functions.
 
-When iteration or tolerance is not specified for any benchmark case the default 
-will be used. See @ref set_env_mdi and @ref set_env_mdt for more details.
+When iteration, tolerance or succes percentage is not specified for any benchmark 
+case the default will be used. See @ref set_env_mdi, @ref set_env_mdt and 
+@ref set_env_mdsp for more details.
 
-See @ref comp_nm to understand the comparison framework in normal module.
+@subsection man_reg_nmmbcr Normal Module Manual Benchmark Case Registration Macros 
 
-@subsection man_reg_mbm1 MANAK_BENCHMARK_CASE
-Creates a benchmark case with name, library and benchmark function. Returns 
-pointer to created manak::BenchmarkCase object. This can be passed to 
+@subsection man_reg_mbm1 MANAK_BENCHMARK_CASE_TIS
+Creates a benchmark case with name, library, benchmark function, tolerance, iterations
+and success percentage. Returns pointer to created manak::BenchmarkCase object. 
+This can be passed to manak::ManakSuite::AddCase.
+
+@code
+suite1->AddCase(MANAK_BENCHMARK_CASE_TIS(B1, Lib1, fun, 10, 50, 90));
+@endcode
+
+@subsection man_reg_mbm2 MANAK_BENCHMARK_CASE_TI
+Creates a benchmark case with name, library, benchmark function, tolerance and iterations.
+The value of success percentage is taken to be default. Returns pointer to created 
+manak::BenchmarkCase object. This can be passed to manak::ManakSuite::AddCase.
+
+@code
+suite1->AddCase(MANAK_BENCHMARK_CASE_TI(B1, Lib1, fun, 10, 50));
+@endcode
+
+@subsection man_reg_mbm3 MANAK_BENCHMARK_CASE_IS
+Creates a benchmark case with name, library, benchmark function, iterations and success percentage.
+The value of tolerance is taken to be default. Returns pointer to created 
+manak::BenchmarkCase object. This can be passed to manak::ManakSuite::AddCase.
+
+@code
+suite1->AddCase(MANAK_BENCHMARK_CASE_IS(B1, Lib1, fun, 10, 50));
+@endcode
+
+@subsection man_reg_mbm4 MANAK_BENCHMARK_CASE_T
+Creates a benchmark case with name, library, benchmark function and tolerance.
+The values of iterations and success percentage are taken to be default. 
+Returns pointer to created manak::BenchmarkCase object. This can be passed to 
 manak::ManakSuite::AddCase.
 
-@subsection man_reg_mbm2 MANAK_BENCHMARK_CASE_I
-Creates a benchmark case with name, library, benchmark function and number of 
-iterations. Returns pointer to created manak::BenchmarkCase object. 
-
 @code
-manak::ManakSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE_I(B1, lib1, fun, 10));
+suite1->AddCase(MANAK_BENCHMARK_CASE_T(B1, Lib1, fun, 10));
 @endcode
 
-@subsection man_reg_mbm3 MANAK_BENCHMARK_CASE_T
-Creates a benchmark case with name, library, benchmark function and tolerance.
-Returns pointer to created manak::BenchmarkCase object. 
+@subsection man_reg_mbm5 MANAK_BENCHMARK_CASE_I
+Creates a benchmark case with name, library, benchmark function and iterations.
+The values of tolerance and success percentage are taken to be default. 
+Returns pointer to created manak::BenchmarkCase object. This can be passed to 
+manak::ManakSuite::AddCase.
 
 @code
-manak::ManakSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE_T(B1, lib1, fun, 50));
+suite1->AddCase(MANAK_BENCHMARK_CASE_I(B1, Lib1, fun, 10));
 @endcode
 
-@subsection man_reg_mbm4 MANAK_BENCHMARK_CASE_IT
-Creates a benchmark case with name, library, benchmark function, number of iterations
-and tolerance. Returns pointer to created manak::BenchmarkCase object. 
+@subsection man_reg_mbm6 MANAK_BENCHMARK_CASE
+Creates a benchmark case with name, library and benchmark function.
+The values of tolerance, iterations and success percentage are taken to be default. 
+Returns pointer to created manak::BenchmarkCase object. This can be passed to 
+manak::ManakSuite::AddCase.
 
 @code
-manak::ManakSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE_T(B1, lib1, fun, 10, 50));
+suite1->AddCase(MANAK_BENCHMARK_CASE(B1, Lib1, fun));
 @endcode
 
-@subsection man_reg_mbm5 MANAK_BENCHMARK_SUITE
+@subsection man_reg_nmmsr Normal Module Manual Suite Registration Macros
+
+@subsection man_reg_mbm7 MANAK_BENCHMARK_SUITE
 Creates an empty unregistered benchmark suite with name. This benchmark suite can 
 be registred by passing it to any registered benchmark suite by
 manak::ManakSuite::AddSuite function.
 
 @code
-#include <iostream>
-
 bool bench_init();
 
-#define MANAK_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN
-#define MANAK_ALTERNATE_INIT_FUNCTION bench_init
+#define MANAK_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
+#define MANAK_MANUAL_INIT_FUNCTION bench_init
 
 #include <manak/manak.hpp>
 
 void fun()
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
 }
 
 bool bench_init()
 {
-  if(!manak::init_benchmarking_module())
-    exit(1);
+  manak::ManakSuite* suite1 = manak::ManakSuite::GetMasterSuite().AddSuite(MANAK_BENCHMARK_SUITE(Suite1));
   
-  manak::ManakSuite* suite1 = manak::ManakSuite::GetMasterSuite()->AddSuite(MANAK_BENCHMARK_SUITE(Suite1));
-  
-  suite1->AddCase(MANAK_BENCHMARK_CASE(B1, lib1, fun));
+  suite1->AddCase(MANAK_BENCHMARK_CASE(B1, Lib1, fun));
   return true;
 }
 @endcode
 
-@subsection man_reg_mbm6 Parametrized Benchmark cases
+@subsection man_reg_nmmpbcr Normal Module Manual Parametrized Benchmark Case Registration Macros
+
 You can also use parametrized benchmarks with manual registartion.
 
 @code
-#include <iostream>
-
 bool bench_init();
 
-#define MANAK_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN
-#define MANAK_ALTERNATE_INIT_FUNCTION bench_init
+#define MANAK_SIMPLE_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
+#define MANAK_MANUAL_INIT_FUNCTION bench_init
 
 #include <manak/manak.hpp>
 
 void fun(int a, int b)
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
 }
 
 bool bench_init()
 {
-  if(!manak::init_benchmarking_module())
-    exit(1);
-  
-  manak::ManakSuite::GetMasterSuite()->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, lib1, fun)->AddArgs(0,0));
+  manak::ManakSuite::GetMasterSuite().AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, Lib1, fun)->AddArgs(0,0));
   return true;
+}
+@endcode
+
+@subsection man_reg_mbm8 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS
+Creates a parametrized benchmark with name, library, function, tolerance, iterations and
+success percentage. Returns pointer to created manak::BenchmarkCase object. This 
+can be passed to manak::ManakSuite::AddCase.
+
+@code
+suite->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS(B1, Lib1, fun, 10, 50, 90)->AddArgs(100));
+@endcode
+
+@subsection man_reg_mbm9 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI
+Creates a parametrized benchmark with name, library, function, tolerance and iterations.
+The value of success percentage is taken as default. Returns pointer to created 
+manak::BenchmarkCase object. This can be passed to manak::ManakSuite::AddCase.
+
+@code
+suite->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI(B1, Lib1, fun, 10, 50)->AddArgs(100));
+@endcode
+
+@subsection man_reg_mbm10 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS
+Creates a parametrized benchmark with name, library, function, iterations and success percentage.
+The value of tolerance is taken s default. Returns pointer to created 
+manak::BenchmarkCase object. This can be passed to manak::ManakSuite::AddCase.
+
+@code
+suite->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS(B1, Lib1, fun, 10, 50)->AddArgs(100));
+@endcode
+
+@subsection man_reg_mbm11 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T
+Creates a parametrized benchmark with name, library, function and tolerance.
+The values of iterations and succes percentage are taken as default. Returns 
+pointer to created manak::BenchmarkCase object. This can be passed to 
+manak::ManakSuite::AddCase.
+
+@code
+suite->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T(B1, Lib1, fun, 10)->AddArgs(100));
+@endcode
+
+@subsection man_reg_mbm12 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I
+Creates a parametrized benchmark with name, library, function and iterations.
+The values of tolerance and succes percentage are taken as default. Returns 
+pointer to created manak::BenchmarkCase object. This can be passed to 
+manak::ManakSuite::AddCase.
+
+@code
+suite->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I(B1, Lib1, fun, 10)->AddArgs(100));
+@endcode
+
+@subsection man_reg_mbm13 MANAK_CREATE_BENCHMARK_WITH_TEMPLATE
+Creates a parametrized benchmark with name, libary, function. The values of tolerance, 
+iterations and succes percentage are taken as default. Returns 
+pointer to created manak::BenchmarkCase object. This can be passed to 
+manak::ManakSuite::AddCase.
+
+@code
+suite->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, Lib1, fun)->AddArgs(100));
+@endcode
+
+For more advance parametrized benchmark options check @ref p_bench.
+
+@subsection man_reg_nmmgrm Normal Module Manual Group Registration Macros
+
+@subsection man_reg_mbm14 MANAK_GROUP and MANAK_GROUP_END
+Marks the start and end of the group with name. Manak manual group can also be 
+templatized. Use 'MANAK_ADD_GROUP' to register a group. For more advance manual
+group registration see @ref ...
+
+@code
+MANAK_GROUP(TestGroup);
+
+GINIT(size_t a)
+{
+
+}
+
+//! Register cases
+
+MANAK_GROUP_END();
+
+bool bench_init()
+{
+  manak::ManakSuite::GetMasterSuite().AddGroup<MG_TestGroup>(100);
+}
+@endcode
+
+@subsection man_reg_nmmgbcrm Normal Module Manual Group Benchmark Case Registration Macros
+
+Note: Manual registration group benchmark cases needs to be done in 'GINIT'
+function. Remember while initialization only one 'GINIT' function is called depending
+on the parameters given. This may sometimes be usefull but can also create 
+confusion. 
+
+@subsection man_reg_mbm15 MANAK_GROUP_BENCHMARK_CASE_TIS
+Creates a benchmark case with name, library, benchmark function, tolerance, iterations
+and success percentage. Returns pointer to created manak::BenchmarkCase object. 
+This can be added to member std::list named 'cases'.
+
+@code
+GINIT()
+{
+  cases.push_back(MANAK_GROUP_BENCHMARK_CASE_TIS("B1", "Lib1", fun, 10, 50, 90));
+}
+@endcode
+
+@subsection man_reg_mbm16 MANAK_GROUP_BENCHMARK_CASE_TI
+Creates a benchmark case with name, library, benchmark function, tolerance and iterations.
+The value of success percentage is taken to be default. Returns pointer to created 
+manak::BenchmarkCase object. This can be added to member std::list named 'cases'.
+
+@code
+GINIT()
+{
+  cases.push_back(MANAK_GROUP_BENCHMARK_CASE_TI("B1", "Lib1", fun, 10, 50));
+}
+@endcode
+
+@subsection man_reg_mbm17 MANAK_GROUP_BENCHMARK_CASE_IS
+Creates a benchmark case with name, library, benchmark function, iterations and success percentage.
+The value of tolerance is taken to be default. Returns pointer to created 
+manak::BenchmarkCase object. This can be added to member std::list named 'cases'.
+
+@code
+GINIT()
+{
+  cases.push_back(MANAK_GROUP_BENCHMARK_CASE_IS("B1", "Lib1", fun, 10, 50));
+}
+@endcode
+
+@subsection man_reg_mbm18 MANAK_GROUP_BENCHMARK_CASE_T
+Creates a benchmark case with name, library, benchmark function and tolerance.
+The values of iterations and success percentage are taken to be default. 
+Returns pointer to created manak::BenchmarkCase object. This can be added to 
+member std::list named 'cases'.
+@code
+GINIT()
+{
+  cases.push_back(MANAK_GROUP_BENCHMARK_CASE_T("B1", "Lib1", fun, 10));
+}
+@endcode
+
+@subsection man_reg_mbm19 MANAK_GROUP_BENCHMARK_CASE_I
+Creates a benchmark case with name, benchmark function and iterations.
+The values of tolerance and success percentage are taken to be default. 
+Returns pointer to created manak::BenchmarkCase object. This can be added to 
+member std::list named 'cases'.
+
+@code
+GINIT()
+{
+  cases.push_back(MANAK_GROUP_BENCHMARK_CASE_I("B1", fun, 10));
+}
+@endcode
+
+@subsection man_reg_mbm20 MANAK_GROUP_BENCHMARK_CASE
+Creates a benchmark case with name, library and benchmark function.
+The values of tolerance, iterations and success percentage are taken to be default. 
+Returns pointer to created manak::BenchmarkCase object. This can be added to 
+member std::list named 'cases'.
+
+@code
+GINIT()
+{
+  cases.push_back(MANAK_GROUP_BENCHMARK_CASE("B1", "Lib1", fun));
+}
+@endcode
+
+@subsection man_reg_nmmgpbcr Normal Module Manual Group Parametrized Benchmark Case Registration Macros
+
+Note: Manual registration group benchmark cases needs to be done in 'GINIT'
+function. Remember while initialization only one 'GINIT' function is called depending
+on the parameters given. This may sometimes be usefull but can also create 
+confusion. 
+
+You can also use group parametrized benchmarks with manual registartion.
+
+@code
+bool bench_init();
+
+#define MANAK_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
+#define MANAK_MANUAL_INIT_FUNCTION bench_init
+
+#include <manak/manak.hpp>
+
+MANAK_GROUP(TestGroup);
+
+GINIT()
+{
+  cases.push_back(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE("B1", "Lib1", fun)->AddArgs(100));
+}
+
+int fun(size_t a)
+{
+  
+}
+
+MANAK_GROUP_END();
+
+bool bench_init()
+{
+  manak::ManakSuite::GetMasterSuite().AddGroup<MG_TestGroup>();
+  return true;
+}
+@endcode
+
+@subsection man_reg_mbm21 MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS
+Creates a parametrized benchmark with name, library, function, tolerance, iterations and
+success percentage. Returns pointer to created manak::BenchmarkCase object. 
+This can be added to member std::list named 'cases'.
+
+@code
+GINIT()
+{
+  cases.push_back(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS("B1", "Lib1", fun, 10, 50, 90)->AddArgs(100));
+}
+@endcode
+
+@subsection man_reg_mbm22 MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI
+Creates a parametrized benchmark with name, library, function, tolerance and iterations.
+The value of success percentage is taken as default. Returns pointer to created 
+manak::BenchmarkCase object. This can be added to member std::list named 'cases'.
+
+@code
+GINIT()
+{
+  cases.push_back(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI("B1", "Lib1", fun, 10, 50)->AddArgs(100));
+}
+@endcode
+
+@subsection man_reg_mbm23 MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS
+Creates a parametrized benchmark with name, library, function, iterations and success percentage.
+The value of tolerance is taken s default. Returns pointer to created 
+manak::BenchmarkCase object. This can be added to member std::list named 'cases'.
+
+@code
+GINIT()
+{
+  cases.push_back(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS("B1", "Lib1", fun, 10, 50)->AddArgs(100));
+}
+@endcode
+
+@subsection man_reg_mbm24 MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T
+Creates a parametrized benchmark with name, library, function and tolerance.
+The values of iterations and succes percentage are taken as default. Returns 
+pointer to created manak::BenchmarkCase object. This can be added to member 
+std::list named 'cases'.
+
+@code
+GINIT()
+{
+  cases.push_back(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T("B1", "Lib1", fun, 10)->AddArgs(100));
+}
+@endcode
+
+@subsection man_reg_mbm25 MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I
+Creates a parametrized benchmark with name, library, function and iterations.
+The values of tolerance and succes percentage are taken as default. Returns 
+pointer to created manak::BenchmarkCase object. This can be added to member 
+std::list named 'cases'.
+
+@code
+GINIT()
+{
+  cases.push_back(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I("B1", "Lib1", fun, 10)->AddArgs(100));
+}
+@endcode
+
+@subsection man_reg_mbm26 MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE
+Creates a parametrized benchmark with name, library, function. The values of tolerance, 
+iterations and succes percentage are taken as default. Returns 
+pointer to created manak::BenchmarkCase object. This can be added to member 
+std::list named 'cases'.
+
+@code
+GINIT()
+{
+  cases.push_back(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE("B1", "Lib1", fun)->AddArgs(100));
 }
 @endcode
 
