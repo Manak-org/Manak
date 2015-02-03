@@ -136,6 +136,19 @@ void Manak_Group_Initialize
 #define MANAK_GROUP_FUNCTION(Name) manak::utils::BindToObject(&decltype(GetType())::Name, &Global())
 
 ////////////////////////////////////////////////////////////////////////////////
+/// MANAK ADD GROUP MACROS
+////////////////////////////////////////////////////////////////////////////////
+
+#define MANAK_ADD_GROUP(Name, ...)                                            \
+struct STRING_JOIN(Manak_unamed, __LINE__ )                                   \
+{                                                                             \
+  static bool value;                                                          \
+};                                                                            \
+bool STRING_JOIN(Manak_unamed,__LINE__)::value =                              \
+ manak::ManakSuite::GetMasterSuite().GetCurrentSuite()->                      \
+    AddGroup<MG ## _ ## Name>(__VA_ARGS__)
+
+////////////////////////////////////////////////////////////////////////////////
 /// MANAK AUTO GROUP MACROS
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -149,19 +162,6 @@ F_MANAK_GROUP(STRING_JOIN(unamed, __LINE__));
 
 #define MANAK_AUTO_GROUP_END()                                                \
 MANAK_GROUP_END();
-
-////////////////////////////////////////////////////////////////////////////////
-/// MANAK ADD GROUP MACROS
-////////////////////////////////////////////////////////////////////////////////
-
-#define MANAK_ADD_GROUP(Name, ...)                                            \
-struct STRING_JOIN(Manak_unamed, __LINE__ )                                   \
-{                                                                             \
-  static bool value;                                                          \
-};                                                                            \
-bool STRING_JOIN(Manak_unamed,__LINE__)::value =                              \
- manak::ManakSuite::GetMasterSuite().GetCurrentSuite()->                      \
-    AddGroup<MG ## _ ## Name>(__VA_ARGS__)
 
 ////////////////////////////////////////////////////////////////////////////////
 /// MANAK GROUP CASE MACROS

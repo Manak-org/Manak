@@ -31,7 +31,7 @@ benchmark case the default will be used. See @ref set_env_mdi, @ref set_env_mdt
 and @ref set_env_mdsp for more details.
 
 The library name is taken as default library name in the simple module. Check out 
-@ref ... for how to set default library name of simple module. 
+@ref s_mod_intro for how to set default library name of simple module. 
 
 @subsection auto_reg_sbm_smacr Simple Module Auto Case Registration Macros
 
@@ -300,11 +300,32 @@ GINIT()
 MANAK_AUTO_GROUP_END();
 @endcode
 
+@subsection auto_reg_sbm30 MANAK_ADD_GROUP
+Add the manually created group to current suite. Accepts first argument as the
+group name with complete template specialization. After this any number of 
+argument can be passed which will be directed to initialization of the group.
+
+@code
+MANAK_GROUP(TestGroup);
+
+GINIT(size_t a, size_t b)
+{
+
+}
+
+//! Case Registration
+
+MANAK_GROUP_END();
+
+MANAK_ADD_GROUP(TestGroup, 10, 10);
+@endcode
+
 @subsection auto_reg_sbm_smagbcr Simple Module Auto Group Benchmark Case Registration Macros
 
 @subsection auto_reg_sbm17 MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS
 Create a benchmark case with name, tolerance, iterations and success percentage, 
-and registers it automatically to the current group.
+and registers it automatically to the current group. Check out @ref ... for 
+tutorial o advance group registration.
 
 @code
 MANAK_AUTO_GROUP();

@@ -36,6 +36,7 @@ The macros provided for auto registration of parametrized benchmark:
  
 The macros provided for auto registration of groups:
  - @ref auto_reg_sbm16
+ - @ref auto_reg_sbm30
  
 The macros provided for auto registration of group benchmark cases:
  - @ref auto_reg_sbm17
@@ -118,7 +119,7 @@ void fun(size_t a)
 
 MANAK_ADD_TO_GROUP(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE("InGroup2", fun)->AddArgs(100)->AddArgs(200));
 
-MANAK_ADD_TO_GROUP(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE("InGroup3", fun3)->AddArgs(100)->AddArgs(200));
+MANAK_ADD_TO_GROUP(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(InGroup3, fun3)->AddArgs(100)->AddArgs(200));
 
 MANAK_AUTO_GROUP_END();
 @endcode
@@ -143,73 +144,128 @@ The macros provided for manual registartion of benchmark case:
  - @ref man_reg_msbm2
  - @ref man_reg_msbm3
  - @ref man_reg_msbm4
+ - @ref man_reg_msbm5
  - @ref man_reg_msbm6
  
 The macros provided for manual registration of benchmark suite:
- - @ref man_reg_msbm5
+ - @ref man_reg_msbm7
+
+The macros provided for manual regstration of parametrized benchmark cases:
+ - @ref man_reg_msbm8
+ - @ref man_reg_msbm9
+ - @ref man_reg_msbm10
+ - @ref man_reg_msbm11
+ - @ref man_reg_msbm12
+ - @ref man_reg_msbm13
+ 
+The macros provided for manual registration of groups:
+ - @ref man_reg_msbm14
+
+The macros provided for manual registration of group benchmark cases:
+ - @ref man_reg_msbm15
+ - @ref man_reg_msbm16
+ - @ref man_reg_msbm17
+ - @ref man_reg_msbm18
+ - @ref man_reg_msbm19
+ - @ref man_reg_msbm20
+ 
+The macros provided for manual registration of group parametrized benchmark cases:
+ - @ref man_reg_msbm21
+ - @ref man_reg_msbm22
+ - @ref man_reg_msbm23
+ - @ref man_reg_msbm24
+ - @ref man_reg_msbm25
+ - @ref man_reg_msbm26
+  
  
 @section s_mod_mr_ex Example
 @code
-#include <iostream>
-
 bool bench_init();
 
-#define MANAK_SIMPLE_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN
-#define MANAK_ALTERNATE_INIT_FUNCTION bench_init
+#define MANAK_SIMPLE_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
+#define MANAK_BASE_LIBRARY_NAME Lib1
+#define MANAK_MANUAL_INIT_FUNCTION bench_init
 
 #include <manak/manak.hpp>
 
-void fun()
+using namespace manak;
+using namespace std;
+
+void fun1()
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
 }
 
 void fun2()
 {
-  for(size_t i = 0;i < 10000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
 }
 
 void fun3(size_t a)
 {
-  for(size_t i = 0;i < a;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < a;i++);
+  )
 }
+
+MANAK_GROUP(TestGroup);
+
+size_t iter;
+
+GINIT()
+{
+  iter = 1000;
+
+  cases.push_back(MANAK_GROUP_BENCHMARK_CASE("InGroup", fun1));
+
+  cases.push_back(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE("InGroup2", fun)->AddArgs(100)->AddArgs(200));
+
+  cases.push_back(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(InGroup3, fun3)->AddArgs(100)->AddArgs(200));
+}
+
+void fun1()
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < iter;i++);
+  )
+}
+
+void fun(size_t a)
+{
+
+}
+
+MANAK_GROUP_END();
 
 bool bench_init()
 {
-  if(!manak::init_benchmarking_module())
-    exit(1);
+  ManakSuite& master_suite = ManakSuite::GetMasterSuite();
 
-  manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE_I(B1, fun, 10));
+  master_suite.AddCase(MANAK_BENCHMARK_CASE_I(B1, fun1, 10));
 
-  manak::BenchmarkSuite* suite1 = manak::BenchmarkSuite::GetMasterSuite()->AddSuite(MANAK_BENCHMARK_SUITE(Suite1));
+  ManakSuite* Suite1 = master_suite.AddSuite(MANAK_SUITE(Suite1));
 
-  suite1->AddCase(MANAK_BENCHMARK_CASE_T(B2, fun2, 50));
+  Suite1->AddCase(MANAK_BENCHMARK_CASE_T(B2, fun2, 50));
 
-  manak::BenchmarkSuite* suite2 = suite1->AddSuite(MANAK_BENCHMARK_SUITE(Suite2));
+  master_suite.AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B3, fun3)->AddArgs(2000)->AddArgs(3000));
 
-  suite2->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B3, fun3)->AddArgs((size_t)2000)->AddArgs((size_t)3000));
-  return true;
+  master_suite.AddGroup<MG_TestGroup>();
 }
 @endcode
 
 Ouput - 
 
-@code
-######################################################################
-#  Manak C++ Benchmarking Library                                    #
-#  Version 1.0.0                                                     #
-#  Created at Nov 14 01:13:16 2014                                   #
-######################################################################
-
-       Case Name              base_library        
-
-B1                            3.4                 
-B2                            31.4                
-B3
-  Parameter Set 0             7.3                 
-  Parameter Set 1             11.1  
-@endcode
+HTML output can be seen <a href="samples/s_mod_2.html">HERE</a>
 
 The equivalent auto registration code can be found at @ref s_mod_ar_ex.
 
