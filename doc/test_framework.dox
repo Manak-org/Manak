@@ -1,0 +1,156 @@
+/*! @page test_fr Test Framework
+
+A benchmarkin case of Manak can perform testing with 'TEST' blocks. 
+For example - 
+
+@code
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
+#define MANAK_SIMPLE_MODULE bench
+
+#include <manak/manak.hpp>
+
+MANAK_AUTO_BENCHMARK_CASE(B1)
+{
+  TEST
+  (
+    MANAK_ASSERT_TRUE(1 == 2);
+  )
+}
+@endcode
+
+The output can be seen <a href="samples/test_fr_1.html">HERE</a>.
+
+The failure message can seen in the detailed report of case 'B1'. The red color
+indicates the test is failed. 
+
+Test macros can only be used inside 'TEST' blocks. 'TEST' block create an 
+environment suitable for testing, but it may slow down the code. Hence it is 
+not advisable to put 'MEASURE' blocks inside the 'TEST' block, but it can be done
+and the effect is same. Remember 'TEST' block creates a new scope while 'MEASURE'
+block evaluates in the same scope. There can be multiple 'TEST' blocks. 
+
+As the case is run for certain number of iteration, test is also run for that 
+many iterations. This provides us with the concept success percentage which 
+is very helpful in case of randomized tests. Let us assume the benchmark case 
+is supposed to run for 10 iterations and the test passed for 8 iterations, then 
+the success percentage is 8/10. You can provide the expected success percentage
+with macros. Check out @ref s_mod and n_mod for available macros. If the 
+observed success percentage is greater than or equal to the expected success 
+percentage the benchmark case is considered passed. 
+
+For example - 
+@code
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
+#define MANAK_SIMPLE_MODULE
+
+#include <manak/manak.hpp>
+
+size_t test = 0;
+
+MANAK_AUTO_BENCHMARK_CASE_IS(B1, 10, 75)
+{
+  TEST
+  (
+    MANAK_ASSERT_TRUE(test++ < 8);
+  )
+}
+@endcode
+
+The output can be seen <a href="samples/test_fr_2.html">HERE</a>. 
+
+As you can see from the output that case 'B1' is shown in green as the expected 
+success percentage is satisfied. Although the common failure message is also 
+shown in the detailed report. Another importatant thing to notice here is that
+the expression in macros is evaluated exactly once. This is true for all the 
+macros provided by Manak.
+
+The ASSERT macros:
+ - @ref test_fr_m_at
+ - @ref test_fr_m_atm
+ - @ref test_fr_m_af
+ - @ref test_fr_m_afm
+ 
+The CHECK macros:
+ - @ref test_fr_m_ct
+ - @ref test_fr_m_ctm
+ - @ref test_fr_m_cf
+ - @ref test_fr_m_cfm
+
+@section test_fr_ma Macros
+
+@subsection test_fr_m_a ASSERT Macros
+With ASSERT macros, if the condition fails the execution of that iteration
+is stopped immediately.
+
+@subsection test_fr_m_at MANAK_ASSERT_TRUE
+Checks if the expression given evaluates to false else fails. If failed, terminates 
+the current iteration. 
+
+@code
+MANAK_ASSERT_TRUE(1 == 1);
+@endcode
+
+@subsection test_fr_m_atm MANAK_ASSERT_TRUE_MSG
+Checks if the expression given evaluates to false else fails. If failed, terminates 
+the current iteration. Custom failure message has to be given as second argument.
+
+@code
+MANAK_ASSERT_TRUE_MSG(1 == 1, "What is wrong with this compiler?");
+@endcode
+
+@subsection test_fr_m_af MANAK_ASSERT_FALSE
+Checks if the expression given evaluates to false else fails. If failed, terminates 
+the current iteration. 
+
+@code
+MANAK_ASSERT_FALSE(1 == 2);
+@endcode
+
+@subsection test_fr_m_afm MANAK_ASSERT_FALSE_MSG
+Checks if the expression given evaluates to false else fails. If failed, terminates 
+the current iteration. Custom failure message has to be given as second argument.
+
+@code
+MANAK_ASSERT_FALSE_MSG(1 == 2, "What is wrong with this compiler?");
+@endcode
+
+@subsection test_fr_m_c CHECK Macros
+With CHECK macros, if the condition fails the failure is reported but the test
+continues. 
+
+@subsection test_fr_m_ct MANAK_CHECK_TRUE
+Checks if the expression given evaluates to false else fails. In case of failure,
+the failure is reportd and test continue.
+
+@code
+MANAK_CHECK_TRUE(1 == 1);
+@endcode
+
+@subsection test_fr_m_ctm MANAK_CHECK_TRUE_MSG
+Checks if the expression given evaluates to false else fails. In case of failure,
+the failure is reportd and test continue. Custom failure message has to be given 
+as second argument.
+
+@code
+MANAK_CHECK_TRUE_MSG(1 == 1, "What is wrong with this compiler?");
+@endcode
+
+@subsection test_fr_m_cf MANAK_CHECK_FALSE
+Checks if the expression given evaluates to false else fails. In case of failure,
+the failure is reportd and test continue.
+
+@code
+MANAK_CHECK_FALSE(1 == 2);
+@endcode
+
+@subsection test_fr_m_cfm MANAK_CHECK_FALSE_MSG
+Checks if the expression given evaluates to false else fails. In case of failure,
+the failure is reportd and test continue. Custom failure message has to be given 
+as second argument.
+
+@code
+MANAK_CHECK_FALSE_MSG(1 == 2, "What is wrong with this compiler?");
+@endcode
+*/

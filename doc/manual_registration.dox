@@ -234,7 +234,7 @@ For more advance parametrized benchmark options check @ref p_bench.
 @subsection man_reg_msbm14 MANAK_GROUP and MANAK_GROUP_END
 Marks the start and end of the group with name. Manak manual group can also be 
 templatized. Use 'MANAK_ADD_GROUP' to register a group. For more advance manual
-group registration see @ref ...
+group registration see @ref com_gr
 
 @code
 MANAK_GROUP(TestGroup);
@@ -684,7 +684,7 @@ For more advance parametrized benchmark options check @ref p_bench.
 @subsection man_reg_mbm14 MANAK_GROUP and MANAK_GROUP_END
 Marks the start and end of the group with name. Manak manual group can also be 
 templatized. Use 'MANAK_ADD_GROUP' to register a group. For more advance manual
-group registration see @ref ...
+group registration see @ref com_gr
 
 @code
 MANAK_GROUP(TestGroup);

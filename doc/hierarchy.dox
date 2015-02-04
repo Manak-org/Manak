@@ -44,7 +44,7 @@ support.
 
 Like benchmark suites, benchmarking cases in Manak are also accessed by unique 
 hierarchical names. Benchmarking cases in Manak can also perform testing with
-'TEST' blocks. Check out @ref ... for more information on 'TEST' blocks.
+'TEST' blocks. Check out @ref test_fr for more information on 'TEST' blocks.
 Manak also supports running specific case with regular expressions(see @ref qg_rsc).
 For comparison, cases can have muliple entries under different library names. 
 For example - 
