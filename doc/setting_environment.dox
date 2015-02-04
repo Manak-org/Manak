@@ -24,9 +24,9 @@ int main(int argc, char* argv[])
 @endcode
 
 NOTE: 'MANAK_AUTO_MAIN' or 'MANAK_INIT' has to be defined only once in case of multi 
-file project. Check out @ref ... for more information.
+file project. Check out @ref multi_file for more information.
 
-@section set_env_sbif Set benchmark initialization function
+@section set_env_sbif Set Manual initialization function
 The deafult initialization function is manak::manak_init_module. This 
 initialization function set all the primary environment variables. To register
 benchmarking cases manually you need to create and register your own benchmark
@@ -54,7 +54,7 @@ bool bench_init()
 @endcode
 
 NOTE: 'MANAK_AUTO_MAIN' or 'MANAK_INIT' has to be defined only once in case of multi 
-file project. Check out @ref ... for more information.
+file project. Check out @ref multi_file for more information.
 
 For guide on manual case registration check out @ref man_reg
 
@@ -126,7 +126,7 @@ If number of iterations is not specified for any benchmark case the default
 number of iterations are used(which is 10). The default can be chnaged by setting 
 'MANAK_DEFAULT_ITERATIONS' to the desired value. The scope of this macro is
 limited by file, hence you can set different defaults for each file in your multi 
-file project. Check out @ref ... for tutorial on using Manak in multi file 
+file project. Check out @ref multi_file for tutorial on using Manak in multi file 
 environment.
 
 @code
@@ -140,7 +140,7 @@ is 10ms). The default can be chnaged by setting 'MANAK_DEFAULT_TOLERANCE' to
 desired value. The measure of tolerance is microseconds. To understand the use of 
 tolerance see @ref comp. The scope of this macro is limited by file, hence you 
 can set different defaults for each file in your multi file project. Check out 
-@ref ... for tutorial on using Manak in multi file environment.
+@ref multi_file for tutorial on using Manak in multi file environment.
 
 @code
 #define MANAK_DEFAULT_TOLERANCE <value in microseconds>
@@ -152,7 +152,7 @@ If success percentage is not specified for any benchmark case the default is
 used(which is 100). The default can be chnaged by setting 'MANAK_DEFAULT_SP' to
 desired value. The scope of this macro is limited by file, hence you 
 can set different defaults for each file in your multi file project. Check out 
-@ref ... for tutorial on using Manak in multi file environment.
+@ref multi_file for tutorial on using Manak in multi file environment.
 
 @code
 #define MANAK_DEFAULT_SP <value in percentage>

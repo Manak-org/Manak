@@ -39,7 +39,8 @@ Manak for dynamic linkage you have to use CMake for windows.
 @section build_um Using Manak
 To use manak you only have to add manak.hpp to your project, which will let you 
 use all the macros and functions available. But before including manak.hpp you 
-should set the environment for Manak. See @ref set_env.
+should set the environment for Manak. See @ref set_env. Check out @ref multi_file 
+to use Manak in multi file projects.
 
 @code
 #include <iostream>

@@ -74,7 +74,7 @@ MANAK_AUTO_BENCHMARK_CASE(Test, Lib2)
 @endcode
 
 NOTE: 'MANAK_AUTO_MAIN' or 'MANAK_INIT' has to be defined only once in case of multi 
-file project. Check out @ref ... for more information.
+file project. Check out @ref multi_file for more information.
 
 In the above example there are 2 entries under Benchmark Case 'Test' with libraries
 'Lib1' and 'Lib2'. Check <a href="samples/hierarchy_2.html">Sample HTML ouput</a>
@@ -124,7 +124,7 @@ MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, Lib2, ForLoops)->AddArgs
 @endcode
 
 NOTE: 'MANAK_AUTO_MAIN' or 'MANAK_INIT' has to be defined only once in case of multi 
-file project. Check out @ref ... for more information.
+file project. Check out @ref multi_file for more information.
 
 The output of above code - <a href="samples/hierarchy_1.html">Sample HTML ouput</a>. 
 Check out @ref out_format_html for information on HTML output. You can see here 

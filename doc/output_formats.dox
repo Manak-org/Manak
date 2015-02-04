@@ -1,4 +1,4 @@
-/*! @page out_format Output Formats
+/*! @page out_format All About Outputs
 
 @section out_format_intro Introduction
 
@@ -27,4 +27,33 @@ displayed. Even in this section color indicates test status and failure msg can
 be seen directly below the case or the correspoding sub-case. Look out for easy 
 to use in page links, they provide the ease.
 
+@section out_format_gmto Generating More Than One Output
+Manak supports generating generating of more than one outputs. This can be done
+in manual init function. Check out @ref set_env_sbif for more information on
+manual init function.
+For example
+
+@code
+bool bench_init();
+
+#define MANAK_INIT
+#define MANAK_AUTO_MAIN
+#define MANAK_SIMPLE_MODULE bench
+#define MANAK_MANUAL_INIT_FUNCTION bench_init
+
+using namespace manak;
+using namespace std;
+
+bool bench_init()
+{
+  //! Will add another TXT output to file <filename>
+  OutputManager::GlobalOutputManager().AddHandler(new TXTOutputHandler(<filename>));
+  
+  //! Will add another HTML output to file <filename>
+  OutputManager::GlobalOutputManager().AddHandler(new HTMLOutputHandler(<filename>));
+}
+@endcode
+
+The user can create their own output handlers by extending class manak::OutputHandler.
+Use manak::TXTOutputHandler and manak::HTMLOutputHandler as examples.
 */

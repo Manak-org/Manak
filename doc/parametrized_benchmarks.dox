@@ -61,7 +61,13 @@ int fun(const T& t)
 MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun<std::string>)->AddArgs("Test"));
 @endcode
 
-@subsection p_bench_aan AddArgs_N
+Check out @ref s_mod_ar and @ref n_mod_ar for more supported parametrized 
+benchmark macros with auto registration.
+
+Check out @ref s_mod_mr and @ref n_mod_mr for more supported parametrized 
+benchmark macros with manual registration.
+
+@section p_bench_aan AddArgs_N
 
 'AddArgs' adds an unamed sub-case to the benchmark case. Sub-benchmark cases are
 characterized by the chronological index rather than a name. Check out @ref hierarchy_sub
@@ -86,7 +92,7 @@ MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, ForLoops)->AddArgs_N("Wi
 Remember even though name is added to the sub-case they are accessed only by
 their chronological index. To understand this better see @ref hierarchy_sub.
 
-@subsection p_bench_aca AddCustomArgs
+@section p_bench_aca AddCustomArgs
 
 If number of parameter sets gets large its inconvenient to write each one 
 down in 'AddArgs'. On top of that they may be part of the sequence which
@@ -150,4 +156,28 @@ MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs_N(Ge
 @endcode
 
 For more advance function passing see @ref use_afr.
+
+Parametrized benchmark cases can also be used inside a group.
+for example - 
+
+@code
+MANAK_AUTO_GROUP()
+
+GINIT()
+{
+
+}
+
+void fun(size_t a)
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < 100;i++);
+  )
+}
+
+MANAK_ADD_TO_GROUP(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE("InGroup", fun)->AddArgs(100));
+
+MANAK_AUTO_GROUP_END();
+@endcode
 */

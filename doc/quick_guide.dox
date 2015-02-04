@@ -72,7 +72,7 @@ Here as you can see the module name is provided with 'MANAK_SIMPLE_MODULE'. Modu
 name is required only where 'MANAK_INIT' is defined(This is important for multi 
 file setup). 
 
-Manak offers 2 benchmarking modules. Check out @ref ... for how they can be 
+Manak offers 2 benchmarking modules. Check out @ref multi_file for how they can be 
 effectively used to make multi file projects simpler.
 
 Simple benchmarking module can be used when the library name is constant for all 

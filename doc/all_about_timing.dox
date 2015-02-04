@@ -63,5 +63,4 @@ MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(Test, fun)->AddArgs(0));
 
 'MANAK_ADD_BENCHMARK_WITH_TEMPLATE' creates a parametrized benchmark case. For
 more information on parametrized benchmarks check @ref p_bench.
-@endcode
 */

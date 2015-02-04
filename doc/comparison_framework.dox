@@ -1,7 +1,7 @@
 /*! @page comp Comparison Framework
 
 @section comp_sm Comparison Framework for Simple Module
-In simple module benchmark cases are added with a default library name. Understand
+In simple module, benchmark cases are added with a default library name. Understand
 the library concept by checking out @ref hierarchy_case. The current results can 
 be saved for comparison by passing '-s <filename>' command line option to the 
 executable. This saved file can be later loaded with '-c <filename>' for 
@@ -29,8 +29,8 @@ MANAK_AUTO_BENCHMARK_CASE(B1)
 }
 @endcode
 
-NOTE: 'MANAK_AUTO_MAIN' or 'MANAK_INIT' has to be defined only once in case of multi 
-file project. Check out @ref ... for more information.
+NOTE: 'MANAK_AUTO_MAIN' or 'MANAK_INIT' has to be defined only once in case of 
+multi file project. Check out @ref multi_file for more information.
 
 Save the results of this benchmark in 'bench1.txt' for comparison.
 

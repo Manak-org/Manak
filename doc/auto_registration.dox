@@ -325,7 +325,7 @@ MANAK_ADD_GROUP(TestGroup, 10, 10);
 @subsection auto_reg_sbm17 MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS
 Create a benchmark case with name, tolerance, iterations and success percentage, 
 and registers it automatically to the current group. Check out @ref ... for 
-tutorial o advance group registration.
+tutorial on advance group registration.
 
 @code
 MANAK_AUTO_GROUP();

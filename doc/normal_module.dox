@@ -1,4 +1,4 @@
-/*! @page n_mod Benchmark Module
+/*! @page n_mod Normal Module
 
 @section n_mod_intro Introduction
 This module is useful when cases are need to be registered with different library
@@ -195,80 +195,121 @@ The macros provided for manual registration of group parametrized benchmark case
 @section n_mod_mr_ex Example
 
 @code
-#include <iostream>
-
 bool bench_init();
 
-#define MANAK_BENCHMARK_MODULE bench
-#define MANAK_AUTO_BENCHMARK_MAIN
-#define MANAK_ALTERNATE_INIT_FUNCTION bench_init
+#define MANAK_MODULE bench
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
+#define MANAK_MANUAL_INIT_FUNCTION bench_init
 
 #include <manak/manak.hpp>
 
-void lib1_fun()
-{
-  for(size_t i = 0;i < 1000;i++);
-}
-
-void lib2_fun()
-{
-  for(size_t i = 0;i < 1000;i++);
-}
-
-void lib1_fun2()
-{
-  for(size_t i = 0;i < 10000;i++);
-}
-
-void lib2_fun2()
-{
-  for(size_t i = 0;i < 10000;i++);
-}
+using namespace std;
+using namespace manak;
 
 void fun3(size_t a)
 {
-  for(size_t i = 0;i < a;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < a;i++);
+  )
 }
+
+void fun1()
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
+}
+
+void fun2()
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < 1000;i++);
+  )
+}
+
+void fun4()
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
+}
+
+void fun5()
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
+}
+
+MANAK_GROUP(TestGroup);
+
+size_t iter;
+
+GINIT()
+{
+  iter = 100;
+
+  cases.push_back(MANAK_GROUP_BENCHMARK_CASE("InGroup1", "Lib1", fun2));
+  cases.push_back(MANAK_GROUP_BENCHMARK_CASE_I("InGroup1", "Lib2", fun3, 10));
+  cases.push_back(MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI("InGroup2", "Lib1", fun1, 10, 50)->AddArgs(100)->AddArgs(1000));
+}
+
+void fun2()
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < iter;i++);
+  )
+}
+
+void fun3()
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < 10 * iter;i++);
+  )
+}
+
+void fun1(size_t a)
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < a * iter;i++);
+  )
+}
+
+MANAK_GROUP_END();
 
 bool bench_init()
 {
-  if(!manak::init_benchmarking_module())
-    exit(1);
+  ManakSuite& master_suite = ManakSuite::GetMasterSuite();
+  master_suite.AddCase(MANAK_BENCHMARK_CASE_I(B1, lib1, fun1, 10));
+  master_suite.AddCase(MANAK_BENCHMARK_CASE_TI(B1, lib2, fun2, 10, 50));
 
-  manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE_I(B1, lib1, lib1_fun, 10));
+  ManakSuite* Suite1 = master_suite.AddSuite(MANAK_SUITE(Suite1));
 
-  manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_BENCHMARK_CASE_IT(B1, lib2, lib2_fun, 10, 50));
+  Suite1->AddCase(MANAK_BENCHMARK_CASE_T(B2, lib1, fun4, 50));
+  Suite1->AddCase(MANAK_BENCHMARK_CASE_I(B2, lib2, fun5, 10));
 
-  manak::BenchmarkSuite* suite1 = manak::BenchmarkSuite::GetMasterSuite()->AddSuite(MANAK_BENCHMARK_SUITE(Suite1));
+  ManakSuite* Suite2 = Suite1->AddSuite(MANAK_SUITE(Suite2));
 
-  suite1->AddCase(MANAK_BENCHMARK_CASE_T(B2, lib1, lib1_fun2, 50));
-  suite1->AddCase(MANAK_BENCHMARK_CASE_I(B2, lib2, lib2_fun2, 10));
+  Suite2->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I(B3, lib1, fun3, 10)->AddArgs((size_t)2000)->AddArgs((size_t)3000));
+  Suite2->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T(B3, lib2, fun3, 50)->AddArgs((size_t)4000)->AddArgs((size_t)6000));
 
-  manak::BenchmarkSuite* suite2 = suite1->AddSuite(MANAK_BENCHMARK_SUITE(Suite2));
+  master_suite.AddGroup<MG_TestGroup>();
 
-  suite2->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I(B3, lib1, fun3, 10)->AddArgs((size_t)2000)->AddArgs((size_t)3000));
-  suite2->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T(B3, lib2, fun3, 50)->AddArgs((size_t)4000)->AddArgs((size_t)6000));
   return true;
 }
-@endcode
-
-Output -
-@code
-######################################################################
-#  Manak C++ Benchmarking Library                                    #
-#  Version 1.0.0                                                     #
-#  Created at Nov 14 14:14:50 2014                                   #
-######################################################################
-
-       Case Name              lib1                lib2                
-
-B1                            3.5                 3.5                 
-B2                            33.3                34                  
-B3
-  Parameter Set 0             7.9                 15.2                
-  Parameter Set 1             11.4                22.8                
 
 @endcode
+
+HTML output can be seen <a href="samples/n_mod_2.html">HERE</a>
 
 The equivalent auto registration code can be found at @ref n_mod_ar_ex.
 

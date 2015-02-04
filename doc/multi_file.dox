@@ -1,0 +1,88 @@
+/*! @page multi_file Using Manak Effectively in Multi File Project
+
+Manak provided many features so as to make things easier while handling multi
+file projects. 
+
+Let us first take a look at a typical one file usage of Manak -
+
+@code
+#define MANAK_INIT
+#define MANAK_AUTO_MAIN
+#define MANAK_SIMPLE_MODULE bench
+
+#include <manak/manak.hpp>
+
+Case Registration.
+@endcode
+
+Now we will how can we handler this same thing in multiple files.
+Here the macros 'MANAK_AUTO_MAIN' and 'MANAK_INIT' should only be declared once
+as they include the associated 'main' and initialization function to the file.
+The initialization function registers the module name hence where ever 'MANAK_INIT'
+is defined that file must contain the correct module name which can be defined
+with 'MANAK_SIMPLE_MODULE' or 'MANAK_MODULE'. Okay so ideally we should have a 
+project initialization file which takes care of these things. Let us call it
+'proj_init.cpp'.
+
+@code
+#define MANAK_INIT
+#define MANAK_AUTO_MAIN
+#define MANAK_SIMPLE_MODULE bench
+
+#include <manak/manak.hpp>
+@endcode
+
+Okay so now we have a '.cpp' file which will initialize Manak and we are free 
+to add files to this project.
+
+For example let us add file 'file1.cpp'.
+
+@code
+#define MANAK_MODULE 
+
+#include <manak/manak.hpp>
+
+Case Registration
+@endcode
+
+You can notice here that we just defined 'MANAK_MODULE', nothing else is required.
+This definition contradicts with the old definition 'MANAK_SIMPLE_MODULE', but
+it does not matter as the scope of this definition is file specific. This module
+definition only imports the appropriate macros to the file, nothing else, even
+the name is not required except, obviously where 'MANAK_INIT' is defined. So 
+in this file we will register some benchmark cases with different library names.
+Check out @ref s_mod and @ref n_mod if you want to know the available macros
+in the respective modules.
+
+Now let us say in one file you want to register cases all with same library name
+you can shift to simple module. 
+
+We add file 'file2.cpp'
+
+@code
+#define MANAK_SIMPLE_MODULE Lib1
+
+#include <manak/manak.hpp>
+
+Case Registration.
+@endcode
+
+Here we defined 'MANAK_SIMPLE_MODULE' to the constant library name we are going 
+to use. This is simple hack. You can also set 'MANAK_BASE_LIBRARY_NAME' to 
+appropriate value. Remember, 'MANAK_BASE_LIBRARY_NAME' overrides 'MANAK_SIMPLE_MODULE'.
+
+The following macros are also file secific or in other words takes affect in the
+file they are defined
+ - MANAK_DEFAULT_TOLERANCE
+ - MANAK_DEFAULT_ITERATIONS
+ - MANAK_DEFAULT_SP
+
+With these functionality splitting up registration in multiple files is a smart
+choice as different files can hold different Manak environment. On the other
+hand if you want a constant Manak environment we add a 'proj.hpp' file with the
+environment set and include it in all the files. But do remember to define 
+'MANAK_AUTO_MAIN' and 'MANAK_INIT' only once or you will face the weird c++
+errors on your terminal.
+
+Note: You can find the code in Examples.
+*/
