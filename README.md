@@ -29,7 +29,7 @@ Manak offers following unique features -
  
 ###Check out [Wiki](https://github.com/Manak-org/Manak/wiki) for User Guide.
 
-###Check out [Developer's Guide](http://Manak-org.github.io/Manak/).
+###Check out [Developer's Guide](http://Manak-org.github.io/Manak/html/index.html).
 
 ##How To Install
 

@@ -86,6 +86,8 @@ if (DOXYGEN_FOUND)
 
   # Generate documentation.
   add_custom_target(doc
+      COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/doc/samples
+      ${PROJECT_BINARY_DIR}/doc/html/samples
       COMMAND "${DOXYGEN_EXECUTABLE}" "${CMAKE_BINARY_DIR}/Doxyfile"
       DEPENDS "${CMAKE_BINARY_DIR}/Doxyfile"
       WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
