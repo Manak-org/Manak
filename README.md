@@ -4,6 +4,11 @@
 
 ###Latest Stable Release: [Manak 2.0.0](https://github.com/Manak-org/Manak/archive/v2.0.0.zip)
 
+###Contact Us:
+ - Join IRC channel #manak on Freenode
+ - Get in touch with Gitter
+ - Or you can just drop a mail on sumedhghaisas@gmail.com
+
 ##Introduction
 
 Manak unit benchmarking and testing library provides both easy to use and flexible 
