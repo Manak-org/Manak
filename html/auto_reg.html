@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -63,14 +63,13 @@ $(document).ready(function(){initNavTree('auto_reg.html','');});
 <div class="title">Automatic Registration </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Manak offers auto case and suite registation with a user friendly API. Auto registration can be done anywhere where <a class="el" href="manak_8hpp.html">manak.hpp</a> is included. It cannot be inside any class or a function but it can be inside a namespace. For support of timing macros inside auto registration see <a class="el" href="all_time.html">All About Timing</a>.</p>
+<div class="textblock"><p>Manak offers auto case and suite registation with a user friendly API. Auto registration can be done anywhere where <a class="el" href="manak_8hpp.html">manak.hpp</a> is included. It cannot be inside any class or a function but it can be inside a namespace.</p>
 <h1><a class="anchor" id="auto_reg_sbm"></a>
 Auto Registration With Simple Module</h1>
 <p>Simplest auto benchmark case registration -</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#define MANAK_SIMPLE_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
@@ -78,40 +77,55 @@ Auto Registration With Simple Module</h1>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Any auto registration registers the case or suite to the current benchmark suite. When no benchmark suite is set the current benchmark suite is set to master suite. So in the example above 'MANAK_AUTO_BENCHMARK_CASE' will register 'B1' to master suite.</p>
-<p>When iteration or tolerance is not specified for any benchmark case the default will be used. See <a class="el" href="set_env.html#set_env_mdi">MANAK_DEFAULT_ITERATIONS</a> and <a class="el" href="set_env.html#set_env_mdt">MANAK_DEFAULT_TOLERANCE</a> for more details.</p>
-<p>See <a class="el" href="comp.html#comp_sm">Comparison Framework for Simple Module</a> to understand the comparison framework in simple module.</p>
+</div><!-- fragment --><p>Any auto registration registers the case or suite to the current suite. When no suite is set the current suite is set to master suite. So in the example above 'MANAK_AUTO_BENCHMARK_CASE' will register 'B1' to master suite.</p>
+<p>When iteration, tolerance or success percentage is not specified for any benchmark case the default will be used. See <a class="el" href="set_env.html#set_env_mdi">MANAK_DEFAULT_ITERATIONS</a>, <a class="el" href="set_env.html#set_env_mdt">MANAK_DEFAULT_TOLERANCE</a> and <a class="el" href="set_env.html#set_env_mdsp">MANAK_DEFAULT_SP</a> for more details.</p>
+<p>The library name is taken as default library name in the simple module. Check out <a class="el" href="s_mod.html#s_mod_intro">Introduction</a> for how to set default library name of simple module.</p>
+<h2><a class="anchor" id="auto_reg_smacr"></a>
+Simple Module Auto Case Registration Macros</h2>
 <h2><a class="anchor" id="auto_reg_sbm1"></a>
-MANAK_AUTO_BENCHMARK_CASE</h2>
-<p>Creates benchmark case with name, and registers it to the current benchmark suite. Iterations and tolerance for the benchmark case are taken to be defaults.</p>
-<h2><a class="anchor" id="auto_reg_sbm2"></a>
-MANAK_AUTO_BENCHMARK_CASE_I</h2>
-<p>Creates benchmark case with name and iterations, and registers it to the current benchmark suite.</p>
-<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ac57cc187439c0bff8b688ca09b689d9c">MANAK_AUTO_BENCHMARK_CASE_I</a>(B1, 10)</div>
+MANAK_AUTO_BENCHMARK_CASE_TIS</h2>
+<p>Creates a benchmark case with name, tolerance, iterations and success percentage, and registers it under the current suite.</p>
+<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a724f74b9ed6df7f5ccd8e23dc1a0860d">MANAK_AUTO_BENCHMARK_CASE_TIS</a>(B1, 10, 50, 90)</div>
+<div class="line">{</div>
+<div class="line">  Code;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm2"></a>
+MANAK_AUTO_BENCHMARK_CASE_TI</h2>
+<p>Creates a benchmark case with name, tolerance and iterations, and registers it under the current suite. The success percentage is taken as the defaut value.</p>
+<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#af1126e30e86e54b86742e1102ae74c36">MANAK_AUTO_BENCHMARK_CASE_TI</a>(B1, 10, 50)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
 </div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm3"></a>
-MANAK_AUTO_BENCHMARK_CASE_T</h2>
-<p>Creates benchmark case with name and tolerance, and registers it to the current benchmark suite.</p>
-<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ab449c770b6d3bc90c0e1dcb8a38cd23e">MANAK_AUTO_BENCHMARK_CASE_T</a>(B1, 50)</div>
+MANAK_AUTO_BENCHMARK_CASE_IS</h2>
+<p>Creates a benchmark case with name, iterations and success percentage, and registers it under the current suite. The tolerance is taken as the default value.</p>
+<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a2f0af965aa3a7d770333fe6a210267c8">MANAK_AUTO_BENCHMARK_CASE_IS</a>(B1, 10, 90)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
 </div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm4"></a>
-MANAK_AUTO_BENCHMARK_CASE_IT</h2>
-<p>Creates benchmark case with name, iterations and tolerance, and registers it to the current benchmark suite.</p>
-<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#aab497fb679c4c1b52176ce8f6dd89eb9">MANAK_AUTO_BENCHMARK_CASE_IT</a>(B1, 10, 50)</div>
+MANAK_AUTO_BENCHMARK_CASE_I</h2>
+<p>Creates benchmark case with name and iterations, and registers it to the current benchmark suite. The tolerance and success percenatge is taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ac57cc187439c0bff8b688ca09b689d9c">MANAK_AUTO_BENCHMARK_CASE_I</a>(B1, 10)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm8"></a>
-MANAK_ADD_BENCHMARK</h2>
-<p>'MANAK_ADD_BENCHMARK' can be used to register manually generated benchmark case. This is especially useful when written function needs to be added as benchmark case.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN </span></div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm5"></a>
+MANAK_AUTO_BENCHMARK_CASE_T</h2>
+<p>Creates benchmark case with name and tolerance, and registers it to the current benchmark suite. The value of iterations and success percentage is taken to be default.</p>
+<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ae2f2660c6a6b9ac778648c5aad36b8d5">MANAK_AUTO_BENCHMARK_CASE_T</a>(B1, 50)</div>
+<div class="line">{</div>
+<div class="line">  Code;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm6"></a>
+MANAK_AUTO_BENCHMARK_CASE</h2>
+<p>Creates benchmark case with name, and registers it to the current benchmark suite. Iterations, tolerance and success percentage for the benchmark case are taken to be defaults.</p>
+<h2><a class="anchor" id="auto_reg_sbm7"></a>
+MANAK_ADD_CASE</h2>
+<p>'MANAK_ADD_CASE' can be used to register manually generated benchmark case. This is especially useful when written function needs to be added as benchmark case.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#define MANAK_SIMPLE_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT </span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
@@ -120,116 +134,442 @@ MANAK_ADD_BENCHMARK</h2>
 <div class="line">  Code to benchmark;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, fun));</div>
+<div class="line">MANAK_ADD_case(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, fun));</div>
 </div><!-- fragment --><p>'MANAK_BENCHMARK_CASE' is a directive for manual registration. For more such directives see <a class="el" href="man_reg.html">Manual Registration</a>.</p>
-<p>The function to be registered must have no parameters. The function with parameters can used to generate parametrized benchmark cases. See <a class="el" href="p_bench.html">Complete guide on Templatized Benchmarking</a> for more information. Also see <a class="el" href="use_afr.html">Advance Function Registration</a> for registration of complex functions such as overloaded functions, template functions and class member functions.</p>
-<h2><a class="anchor" id="auto_reg_sbm5"></a>
-MANAK_AUTO_BENCHMARK_SUITE</h2>
+<p>The function to be registered must have no parameters. The function with parameters can used to generate parametrized benchmark cases. See <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmarking</a> for more information. Also see <a class="el" href="use_afr.html">Advance Function Registration</a> for registration of complex functions such as overloaded functions, template functions and class member functions.</p>
+<h2><a class="anchor" id="auto_reg_smasr"></a>
+Simple Module Auto Suite Registration Macros</h2>
+<h2><a class="anchor" id="auto_reg_sbm8"></a>
+MANAK_AUTO_SUITE</h2>
 <p>Creates a new benchmarking suite with given name and registers it to the current benchmarking suite. It also sets the newly generated benchmarking suite as the current suite.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#define MANAK_SIMPLE_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__suite_8hpp.html#ae2cb39c3eedb85936f963b6e9a48b546">MANAK_AUTO_BENCHMARK_SUITE</a>(Suite1);</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#ac70ac27f45a67029b99088a024b7ec09">MANAK_AUTO_SUITE</a>(Suite1);</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>In the above example 'Suite1' will be registered under master suite and 'B1' will be registered under 'Suite1'.</p>
-<h2><a class="anchor" id="auto_reg_sbm6"></a>
-MANAK_AUTO_BENCHMARK_END</h2>
+<h2><a class="anchor" id="auto_reg_sbm9"></a>
+MANAK_AUTO_SUITE_END</h2>
 <p>Sets the current benchmark suite to the parent of current of benchmark suite.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#define MANAK_SIMPLE_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__suite_8hpp.html#ae2cb39c3eedb85936f963b6e9a48b546">MANAK_AUTO_BENCHMARK_SUITE</a>(Suite1);</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#ac70ac27f45a67029b99088a024b7ec09">MANAK_AUTO_SUITE</a>(Suite1);</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__suite_8hpp.html#a2b688eb84da0738790f8cf8448d47341">MANAK_AUTO_BENCHMARK_SUITE_END</a>();</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#adffecc8a604080c811777e4e513b9beb">MANAK_AUTO_SUITE_END</a>();</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B2)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">} </div>
 </div><!-- fragment --><p>In the above example 'B1' will be registered under 'Suite1' but 'B2' will be registered under master suite.</p>
-<h2><a class="anchor" id="auto_reg_sbm7"></a>
-Parametrized Benchmark cases</h2>
-<p>Parametrized benchmark cases can be registered with macro 'MANAK_ADD_BENCHMARK'.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
-<div class="line"><span class="preprocessor"></span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<h2><a class="anchor" id="auto_reg_smapbcr"></a>
+Simple Module Auto Parametrized Benchmark Case Registration Macros</h2>
+<h2><a class="anchor" id="auto_reg_sbm10"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</h2>
+<p>Creates a parametrized benchmark case with name, function, tolerance, iterations and success percentage. To register use 'MANAK_ADD_CASE'.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(ForLoops, fun)-&gt;AddArgs((<span class="keywordtype">size_t</span>)1000)-&gt;AddArgs((<span class="keywordtype">size_t</span>)2000));</div>
-</div><!-- fragment --><p>For more advance parametrized benchmark options check <a class="el" href="p_bench.html">Complete guide on Templatized Benchmarking</a>.</p>
-<p>For example on simple module auto registration check <a class="el" href="s_mod.html#s_mod_ar_ex">Example</a>.</p>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#aa9c9e057e1eca8fa29fcf66b159abcca">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</a>(ForLoops, fun, 10 50, 90)-&gt;AddArgs(1000)-&gt;AddArgs(2000));</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm11"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</h2>
+<p>Creates a parametrized benchmark case with name, function, tolerance and iterations. To register use 'MANAK_ADD_CASE'. The value of success percentage is taken as constant.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#ae4eb7982c13cc282c19835d911dd0e55">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</a>(ForLoops, fun)-&gt;AddArgs(1000)-&gt;AddArgs(2000));</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm12"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS</h2>
+<p>Creates a parametrized benchmark case with name, function, iterations and success percentage. To register use 'MANAK_ADD_CASE'. The value of tolerance is taken as constant.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#ad08682f5ccdd1f35ac3d61cd5b03e32b">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS</a>(ForLoops, fun, 10, 90)-&gt;AddArgs(1000)-&gt;AddArgs(2000));</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm13"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</h2>
+<p>Creates a parametrized benchmark case with name, function and iterations. To register use 'MANAK_ADD_CASE'. The values of tolerance and success percentage are taken as constant.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#a9b9ee06845d61aad173310764cf5a64c">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a>(ForLoops, fun, 10)-&gt;AddArgs(1000)-&gt;AddArgs(2000));</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm14"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</h2>
+<p>Creates a parametrized benchmark case with name, function and tolerance. To register use 'MANAK_ADD_CASE'. The values of iterations and success percentage are taken as constant.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#a9b9ee06845d61aad173310764cf5a64c">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a>(ForLoops, fun, 10)-&gt;AddArgs(1000)-&gt;AddArgs(2000));</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm15"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</h2>
+<p>Creates a parametrized benchmark case with name and function. To register use 'MANAK_ADD_CASE'. The values of tolerance, iterations and success percentage are taken as constant.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(ForLoops, fun)-&gt;AddArgs(1000)-&gt;AddArgs(2000));</div>
+</div><!-- fragment --><p>For more advance parametrized benchmark options check <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmarking</a>.</p>
+<h2><a class="anchor" id="auto_reg_smagr"></a>
+Simple Module Auto Group Registration Macros</h2>
+<h2><a class="anchor" id="auto_reg_sbm16"></a>
+MANAK_AUTO_GROUP AND MANAK_AUTO_GROUP_END</h2>
+<p>'MANAK_AUTO_GROUP' starts a group and registers the cases inside to current suite.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm30"></a>
+MANAK_ADD_GROUP</h2>
+<p>Add the manually created group to current suite. Accepts first argument as the group name with complete template specialization. After this any number of argument can be passed which will be directed to initialization of the group.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a41b5a5c7c25baeac43fdb2fd534906ed">MANAK_GROUP</a>(TestGroup);</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>(<span class="keywordtype">size_t</span> a, <span class="keywordtype">size_t</span> b)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a4fc4b895702281393159572745a2c679">MANAK_ADD_GROUP</a>(TestGroup, 10, 10);</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_smagbcr"></a>
+Simple Module Auto Group Benchmark Case Registration Macros</h2>
+<h2><a class="anchor" id="auto_reg_sbm17"></a>
+MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS</h2>
+<p>Create a benchmark case with name, tolerance, iterations and success percentage, and registers it automatically to the current group. Check out <a class="el" href="com_gr.html">Tutorial on Using Groups</a> for tutorial on advance group registration.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ac9604810531e17e8e2bd54ca37fe25c1">MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, 10, 50, 90)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm18"></a>
+MANAK_AUTO_GROUP_BENCHMARK_CASE_TI</h2>
+<p>Create a benchmark case with name, tolerance and iterations, and registers it automatically to the current group. The value of success percentage is taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#af258aeee615e28e4417b9eab9c98cfbd">MANAK_AUTO_GROUP_BENCHMARK_CASE_TI</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, 10, 50)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm19"></a>
+MANAK_AUTO_GROUP_BENCHMARK_CASE_IS</h2>
+<p>Create a benchmark case with name, iterations and success percentage, and registers it automatically to the current group. The value of tolerance is taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a2b39b1f6d33b67aec60f07604d364550">MANAK_AUTO_GROUP_BENCHMARK_CASE_IS</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, 10, 50)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm20"></a>
+MANAK_AUTO_GROUP_BENCHMARK_CASE_I</h2>
+<p>Create a benchmark case with name and iterations, and registers it automatically to the current group. The values of tolerance and success percentage are taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a48c4ef71e3cd26bb77c8274282ab9388">MANAK_AUTO_GROUP_BENCHMARK_CASE_I</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, 10)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm21"></a>
+MANAK_AUTO_GROUP_BENCHMARK_CASE_T</h2>
+<p>Create a benchmark case with name and tolerance, and registers it automatically to the current group. The values of iterations and success percentage are taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a9bccf7178b2908bf90f5712ccad93cff">MANAK_AUTO_GROUP_BENCHMARK_CASE_T</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, 10)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm22"></a>
+MANAK_AUTO_GROUP_BENCHMARK_CASE</h2>
+<p>Create a benchmark case with name, and registers it automatically to the current group. The values of tolerance, iterations and success percentage are taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#afecf2683d7fd06c9b4c8975191df59c0">MANAK_AUTO_GROUP_BENCHMARK_CASE</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+</div><!-- fragment --><p>For tutorial on manak group check out <a class="el" href="com_gr.html">Tutorial on Using Groups</a></p>
+<h2><a class="anchor" id="auto_reg_sbm23"></a>
+MANAK_ADD_TO_GROUP</h2>
+<p>Registers the given case to the current group.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#adc8a60c4368fea71c54332ff0f9be4b4">MANAK_GROUP_BENCHMARK_CASE</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, fun));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_smagpbcr"></a>
+Simple Module Auto Group Parametrized Benchmark Case Registration Macros</h2>
+<h2><a class="anchor" id="auto_reg_sbm24"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</h2>
+<p>Creates a parametrized benchmark case with name, function, tolerance, iterations and success percentage. Use 'MANAK_ADD_TO_GROUP' to register it to the current group.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#acee437281c9d4eb384831bf8a383c3ae">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, fun, 1, 50, 90)-&gt;AddArgs(100));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm25"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</h2>
+<p>Creates a parametrized benchmark case with name, function, tolerance and iterations. Use 'MANAK_ADD_TO_GROUP' to register it to the current group. The value of the success percentage is taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#a84646b1a367e1d32bcbded0c67c5eedc">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, fun, 1, 50)-&gt;AddArgs(100));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm26"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS</h2>
+<p>Creates a parametrized benchmark case with name, function, iterations and success percentage. Use 'MANAK_ADD_TO_GROUP' to register it to the current group. The value of tolerance is taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#a284ed8c40844ffe9f1067d74f4865bfb">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, fun, 1, 50)-&gt;AddArgs(100));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm27"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I</h2>
+<p>Creates a parametrized benchmark case with name, function and iterations. Use 'MANAK_ADD_TO_GROUP' to register it to the current group. The values of tolerance and success percentage are taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#ac2c41fb6d064130d5a95df293b0a7d1b">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, fun, 1)-&gt;AddArgs(100));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm28"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T</h2>
+<p>Creates a parametrized benchmark case with name, function and tolerance. Use 'MANAK_ADD_TO_GROUP' to register it to the current group. The values of iterations and success percentage are taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#a07a92dcbe49a15c6b24038a2ded2684a">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, fun, 1)-&gt;AddArgs(100));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_sbm29"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</h2>
+<p>Creates a parametrized benchmark case with name and function. Use 'MANAK_ADD_TO_GROUP' to register it to the current group. The values of tolerance, iterations and success percentage are taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#a04b828f51e0252234dc645e9a33710fa">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, fun)-&gt;AddArgs(100));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><p>For example on simple module auto registration check <a class="el" href="s_mod.html#s_mod_ar_ex">Example</a>.</p>
 <h1><a class="anchor" id="auto_reg_bm"></a>
 Auto Registration With Normal Module</h1>
 <p>Simplest auto benchmark case registration -</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#define MANAK_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1, lib1)</div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1, Lib1)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Any auto registration registers the case or suite to the current benchmark suite. When no benchmark suite is set the current benchmark suite is set to master suite. So in the example above 'MANAK_AUTO_BENCHMARK_CASE' will register 'B1' to master suite.</p>
-<p>When iteration or tolerance is not specified for any benchmark case the default will be used. See <a class="el" href="set_env.html#set_env_mdi">MANAK_DEFAULT_ITERATIONS</a> and <a class="el" href="set_env.html#set_env_mdt">MANAK_DEFAULT_TOLERANCE</a> for more details.</p>
-<p>See <a class="el" href="comp.html#comp_nm">Comparison Framework of Normal Module</a> to understand the comparison framework in normal module.</p>
+</div><!-- fragment --><p>Any auto registration registers the case or suite to the current suite. When no suite is set the current suite is set to master suite. So in the example above 'MANAK_AUTO_BENCHMARK_CASE' will register 'B1' to master suite.</p>
+<p>When iteration, tolerance or success percentage is not specified for any benchmark case the default will be used. See <a class="el" href="set_env.html#set_env_mdi">MANAK_DEFAULT_ITERATIONS</a>, <a class="el" href="set_env.html#set_env_mdt">MANAK_DEFAULT_TOLERANCE</a> and <a class="el" href="set_env.html#set_env_mdsp">MANAK_DEFAULT_SP</a> for more details.</p>
+<h2><a class="anchor" id="auto_reg_nmacr"></a>
+Normal Module Auto Case Registration Macros</h2>
 <h2><a class="anchor" id="auto_reg_bm1"></a>
-MANAK_AUTO_BENCHMARK_CASE</h2>
-<p>Creates benchmark case with name and library, and registers it to the current benchmark suite.Iterations and tolerance for the benchmark case are taken to be defaults.</p>
-<h2><a class="anchor" id="auto_reg_bm2"></a>
-MANAK_AUTO_BENCHMARK_CASE_I</h2>
-<p>Creates benchmark case with name, library and iterations, and registers it to the current benchmark suite.</p>
-<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ac57cc187439c0bff8b688ca09b689d9c">MANAK_AUTO_BENCHMARK_CASE_I</a>(B1, lib1, 10)</div>
+MANAK_AUTO_BENCHMARK_CASE_TIS</h2>
+<p>Creates a benchmark case with name, library, tolerance, iterations and success percentage, and registers it under the current suite.</p>
+<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a724f74b9ed6df7f5ccd8e23dc1a0860d">MANAK_AUTO_BENCHMARK_CASE_TIS</a>(B1, Lib1, 10, 50, 90)</div>
+<div class="line">{</div>
+<div class="line">  Code;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm2"></a>
+MANAK_AUTO_BENCHMARK_CASE_TI</h2>
+<p>Creates a benchmark case with name, library, tolerance and iterations, and registers it under the current suite. The success percentage is taken as the defaut value.</p>
+<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#af1126e30e86e54b86742e1102ae74c36">MANAK_AUTO_BENCHMARK_CASE_TI</a>(B1, Lib1, 10, 50)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
 </div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm3"></a>
-MANAK_AUTO_BENCHMARK_CASE_T</h2>
-<p>Creates benchmark case with name, library and tolerance, and registers it to the current benchmark suite.</p>
-<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ab449c770b6d3bc90c0e1dcb8a38cd23e">MANAK_AUTO_BENCHMARK_CASE_T</a>(B1, lib1, 50)</div>
+MANAK_AUTO_BENCHMARK_CASE_IS</h2>
+<p>Creates a benchmark case with name, iterations and success percentage, and registers it under the current suite. The tolerance is taken as the default value.</p>
+<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a2f0af965aa3a7d770333fe6a210267c8">MANAK_AUTO_BENCHMARK_CASE_IS</a>(B1, Lib1, 10, 90)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
 </div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm4"></a>
-MANAK_AUTO_BENCHMARK_CASE_IT</h2>
-<p>Creates benchmark case with name, library, iterations and tolerance, and registers it to the current benchmark suite.</p>
-<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#aab497fb679c4c1b52176ce8f6dd89eb9">MANAK_AUTO_BENCHMARK_CASE_IT</a>(B1, lib1, 10, 50)</div>
+MANAK_AUTO_BENCHMARK_CASE_I</h2>
+<p>Creates benchmark case with name, library and iterations, and registers it to the current benchmark suite. The tolerance and success percenatge is taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ac57cc187439c0bff8b688ca09b689d9c">MANAK_AUTO_BENCHMARK_CASE_I</a>(B1, Lib1, 10)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm8"></a>
-MANAK_ADD_BENCHMARK</h2>
-<p>'MANAK_ADD_BENCHMARK' can be used to register manually generated benchmark case. This is especially useful when written function needs to be added as benchmark case.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN </span></div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm5"></a>
+MANAK_AUTO_BENCHMARK_CASE_T</h2>
+<p>Creates benchmark case with name, libray and tolerance, and registers it to the current benchmark suite. The value of iterations and success percentage is taken to be default.</p>
+<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ae2f2660c6a6b9ac778648c5aad36b8d5">MANAK_AUTO_BENCHMARK_CASE_T</a>(B1, Lib1, 50)</div>
+<div class="line">{</div>
+<div class="line">  Code;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm6"></a>
+MANAK_AUTO_BENCHMARK_CASE</h2>
+<p>Creates benchmark case with name, and registers it to the current benchmark suite. Iterations, tolerance and success percentage for the benchmark case are taken to be defaults.</p>
+<h2><a class="anchor" id="auto_reg_bm7"></a>
+MANAK_ADD_CASE</h2>
+<p>'MANAK_ADD_CASE' can be used to register manually generated benchmark case. This is especially useful when written function needs to be added as benchmark case.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#define MANAK_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT </span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
@@ -238,74 +578,387 @@ MANAK_ADD_BENCHMARK</h2>
 <div class="line">  Code to benchmark;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, lib1, fun));</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, Lib1, fun));</div>
 </div><!-- fragment --><p>'MANAK_BENCHMARK_CASE' is a directive for manual registration. For more such directives see <a class="el" href="man_reg.html">Manual Registration</a>.</p>
-<p>The function to be registered must have no parameters. The function with parameters can used to generate parametrized benchmark cases. See <a class="el" href="p_bench.html">Complete guide on Templatized Benchmarking</a> for more information. Also see <a class="el" href="use_afr.html">Advance Function Registration</a> for registration of complex functions such as overloaded functions, template functions and class member functions.</p>
-<h2><a class="anchor" id="auto_reg_bm5"></a>
-MANAK_AUTO_BENCHMARK_SUITE</h2>
+<p>The function to be registered must have no parameters. The function with parameters can used to generate parametrized benchmark cases. See <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmarking</a> for more information. Also see <a class="el" href="use_afr.html">Advance Function Registration</a> for registration of complex functions such as overloaded functions, template functions and class member functions.</p>
+<h2><a class="anchor" id="auto_reg_nmasr"></a>
+Normal Module Auto Suite Registration Macros</h2>
+<h2><a class="anchor" id="auto_reg_bm8"></a>
+MANAK_AUTO_SUITE</h2>
 <p>Creates a new benchmarking suite with given name and registers it to the current benchmarking suite. It also sets the newly generated benchmarking suite as the current suite.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#define MANAK_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__suite_8hpp.html#ae2cb39c3eedb85936f963b6e9a48b546">MANAK_AUTO_BENCHMARK_SUITE</a>(Suite1);</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#ac70ac27f45a67029b99088a024b7ec09">MANAK_AUTO_SUITE</a>(Suite1);</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1, lib1)</div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1, Lib1)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>In the above example 'Suite1' will be registered under master suite and 'B1' will be registered under 'Suite1'.</p>
-<h2><a class="anchor" id="auto_reg_bm6"></a>
-MANAK_AUTO_BENCHMARK_END</h2>
+<h2><a class="anchor" id="auto_reg_bm9"></a>
+MANAK_AUTO_SUITE_END</h2>
 <p>Sets the current benchmark suite to the parent of current of benchmark suite.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#define MANAK_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__suite_8hpp.html#ae2cb39c3eedb85936f963b6e9a48b546">MANAK_AUTO_BENCHMARK_SUITE</a>(Suite1);</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#ac70ac27f45a67029b99088a024b7ec09">MANAK_AUTO_SUITE</a>(Suite1);</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1, lib1)</div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1, Lib1)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__suite_8hpp.html#a2b688eb84da0738790f8cf8448d47341">MANAK_AUTO_BENCHMARK_SUITE_END</a>();</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#adffecc8a604080c811777e4e513b9beb">MANAK_AUTO_SUITE_END</a>();</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B2, lib2)</div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B2, Lib1)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">} </div>
 </div><!-- fragment --><p>In the above example 'B1' will be registered under 'Suite1' but 'B2' will be registered under master suite.</p>
-<h2><a class="anchor" id="auto_reg_bm7"></a>
-Parametrized Benchmark cases</h2>
-<p>Parametrized benchmark cases can be registered with macro 'MANAK_ADD_BENCHMARK'.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
-<div class="line"><span class="preprocessor"></span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<h2><a class="anchor" id="auto_reg_nmapbcr"></a>
+Normal Module Auto Parametrized Benchmark Case Registration Macros</h2>
+<h2><a class="anchor" id="auto_reg_bm10"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</h2>
+<p>Creates a parametrized benchmark case with name, function, tolerance, iterations and success percentage. To register use 'MANAK_ADD_CASE'.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(ForLoops, lib1, fun)-&gt;AddArgs((<span class="keywordtype">size_t</span>)1000)-&gt;AddArgs((<span class="keywordtype">size_t</span>)2000));</div>
-</div><!-- fragment --><p>For more advance parametrized benchmark options check <a class="el" href="p_bench.html">Complete guide on Templatized Benchmarking</a>.</p>
-<p>For example on normal module auto registration check <a class="el" href="n_mod.html#n_mod_ar_ex">Example</a>. </p>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#aa9c9e057e1eca8fa29fcf66b159abcca">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</a>(ForLoops, Lib1, fun, 10 50, 90)-&gt;AddArgs(1000)-&gt;AddArgs(2000));</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm11"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</h2>
+<p>Creates a parametrized benchmark case with name, function, tolerance and iterations. To register use 'MANAK_ADD_CASE'. The value of success percentage is taken as constant.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#ae4eb7982c13cc282c19835d911dd0e55">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</a>(ForLoops, Lib1, fun)-&gt;AddArgs(1000)-&gt;AddArgs(2000));</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm12"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS</h2>
+<p>Creates a parametrized benchmark case with name, function, iterations and success percentage. To register use 'MANAK_ADD_CASE'. The value of tolerance is taken as constant.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#ad08682f5ccdd1f35ac3d61cd5b03e32b">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS</a>(ForLoops, Lib1, fun, 10, 90)-&gt;AddArgs(1000)-&gt;AddArgs(2000));</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm13"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</h2>
+<p>Creates a parametrized benchmark case with name, function and iterations. To register use 'MANAK_ADD_CASE'. The values of tolerance and success percentage are taken as constant.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#a9b9ee06845d61aad173310764cf5a64c">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a>(ForLoops, Lib1, fun, 10)-&gt;AddArgs(1000)-&gt;AddArgs(2000));</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm14"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</h2>
+<p>Creates a parametrized benchmark case with name, function and tolerance. To register use 'MANAK_ADD_CASE'. The values of iterations and success percentage are taken as constant.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#a9b9ee06845d61aad173310764cf5a64c">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a>(ForLoops, Lib1, fun, 10)-&gt;AddArgs(1000)-&gt;AddArgs(2000));</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm15"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</h2>
+<p>Creates a parametrized benchmark case with name and function. To register use 'MANAK_ADD_CASE'. The values of tolerance, iterations and success percentage are taken as constant.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(ForLoops, Lib1, fun)-&gt;AddArgs(1000)-&gt;AddArgs(2000));</div>
+</div><!-- fragment --><p>For more advance parametrized benchmark options check <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmarking</a>.</p>
+<h2><a class="anchor" id="auto_reg_nmagr"></a>
+Normal Module Auto Group Registration Macros</h2>
+<h2><a class="anchor" id="auto_reg_bm16"></a>
+MANAK_AUTO_GROUP AND MANAK_AUTO_GROUP_END</h2>
+<p>'MANAK_AUTO_GROUP' starts a group and registers the cases inside to current suite.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm30"></a>
+MANAK_ADD_GROUP</h2>
+<p>Add the manually created group to current suite. Accepts first argument as the group name with complete template specialization. After this any number of argument can be passed which will be directed to initialization of the group.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a41b5a5c7c25baeac43fdb2fd534906ed">MANAK_GROUP</a>(TestGroup);</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>(<span class="keywordtype">size_t</span> a, <span class="keywordtype">size_t</span> b)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a4fc4b895702281393159572745a2c679">MANAK_ADD_GROUP</a>(TestGroup, 10, 10);</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_nmagbcr"></a>
+Normal Module Auto Group Benchmark Case Registration Macros</h2>
+<h2><a class="anchor" id="auto_reg_bm17"></a>
+MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS</h2>
+<p>Create a benchmark case with name, tolerance, iterations and success percentage, and registers it automatically to the current group. Check out <a class="el" href="com_gr.html">Tutorial on Using Groups</a> for tutorial o advance group registration.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ac9604810531e17e8e2bd54ca37fe25c1">MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, 10, 50, 90)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm18"></a>
+MANAK_AUTO_GROUP_BENCHMARK_CASE_TI</h2>
+<p>Create a benchmark case with name, tolerance and iterations, and registers it automatically to the current group. The value of success percentage is taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#af258aeee615e28e4417b9eab9c98cfbd">MANAK_AUTO_GROUP_BENCHMARK_CASE_TI</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, 10, 50)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm19"></a>
+MANAK_AUTO_GROUP_BENCHMARK_CASE_IS</h2>
+<p>Create a benchmark case with name, iterations and success percentage, and registers it automatically to the current group. The value of tolerance is taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a2b39b1f6d33b67aec60f07604d364550">MANAK_AUTO_GROUP_BENCHMARK_CASE_IS</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, 10, 50)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm20"></a>
+MANAK_AUTO_GROUP_BENCHMARK_CASE_I</h2>
+<p>Create a benchmark case with name and iterations, and registers it automatically to the current group. The values of tolerance and success percentage are taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a48c4ef71e3cd26bb77c8274282ab9388">MANAK_AUTO_GROUP_BENCHMARK_CASE_I</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, 10)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm21"></a>
+MANAK_AUTO_GROUP_BENCHMARK_CASE_T</h2>
+<p>Create a benchmark case with name and tolerance, and registers it automatically to the current group. The values of iterations and success percentage are taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a9bccf7178b2908bf90f5712ccad93cff">MANAK_AUTO_GROUP_BENCHMARK_CASE_T</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, 10)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm22"></a>
+MANAK_AUTO_GROUP_BENCHMARK_CASE</h2>
+<p>Create a benchmark case with name, and registers it automatically to the current group. The values of tolerance, iterations and success percentage are taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#afecf2683d7fd06c9b4c8975191df59c0">MANAK_AUTO_GROUP_BENCHMARK_CASE</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+</div><!-- fragment --><p>For tutorial on manak group check out <a class="el" href="com_gr.html">Tutorial on Using Groups</a></p>
+<h2><a class="anchor" id="auto_reg_bm23"></a>
+MANAK_ADD_TO_GROUP</h2>
+<p>Registers the given case to the current group.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#adc8a60c4368fea71c54332ff0f9be4b4">MANAK_GROUP_BENCHMARK_CASE</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_nmagpbcr"></a>
+Normal Module Auto Group Parametrized Benchmark Case Registration Macros</h2>
+<h2><a class="anchor" id="auto_reg_bm24"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</h2>
+<p>Creates a parametrized benchmark case with name, function, tolerance, iterations and success percentage. Use 'MANAK_ADD_TO_GROUP' to register it to the current group.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#acee437281c9d4eb384831bf8a383c3ae">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun, 1, 50, 90)-&gt;AddArgs(100));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm25"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</h2>
+<p>Creates a parametrized benchmark case with name, function, tolerance and iterations. Use 'MANAK_ADD_TO_GROUP' to register it to the current group. The value of the success percentage is taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#a84646b1a367e1d32bcbded0c67c5eedc">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun, 1, 50)-&gt;AddArgs(100));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm26"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS</h2>
+<p>Creates a parametrized benchmark case with name, function, iterations and success percentage. Use 'MANAK_ADD_TO_GROUP' to register it to the current group. The value of tolerance is taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#a284ed8c40844ffe9f1067d74f4865bfb">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun, 1, 50)-&gt;AddArgs(100));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm27"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I</h2>
+<p>Creates a parametrized benchmark case with name, function and iterations. Use 'MANAK_ADD_TO_GROUP' to register it to the current group. The values of tolerance and success percentage are taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#ac2c41fb6d064130d5a95df293b0a7d1b">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun, 1)-&gt;AddArgs(100));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm28"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T</h2>
+<p>Creates a parametrized benchmark case with name, function and tolerance. Use 'MANAK_ADD_TO_GROUP' to register it to the current group. The values of iterations and success percentage are taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#a07a92dcbe49a15c6b24038a2ded2684a">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun, 1)-&gt;AddArgs(100));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><h2><a class="anchor" id="auto_reg_bm29"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</h2>
+<p>Creates a parametrized benchmark case with name and function. Use 'MANAK_ADD_TO_GROUP' to register it to the current group. The values of tolerance, iterations and success percentage are taken as default.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#a04b828f51e0252234dc645e9a33710fa">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</a>(<span class="stringliteral">&quot;ForLoops&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun)-&gt;AddArgs(100));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --><p>For example on normal module auto registration check <a class="el" href="n_mod.html#n_mod_ar_ex">Example</a>. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

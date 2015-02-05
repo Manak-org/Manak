@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -63,213 +63,560 @@ $(document).ready(function(){initNavTree('man_reg.html','');});
 <div class="title">Manual Registration </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Manual case registration can only be done inside init function. Check out <a class="el" href="set_env.html#set_env_sbif">Set benchmark initialization function</a> for setting manual init function. For manual registration code to benchmark must be written in a separate function, but still timing macros provided by Manak can be used. For more information see <a class="el" href="all_time.html">All About Timing</a>.</p>
+<div class="textblock"><p>Manual case registration can only be done inside init function. Check out <a class="el" href="set_env.html#set_env_sbif">Set Manual initialization function</a> for setting manual init function.</p>
 <h1><a class="anchor" id="man_reg_msbm"></a>
 Manual Registartion with Simple Module</h1>
 <p>Simplest manual case registration can be done with the following code</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="fragment"><div class="line"><span class="keywordtype">bool</span> bench_init();</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">bool</span> bench_init();</div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_ALTERNATE_INIT_FUNCTION bench_init</span></div>
+<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_MANUAL_INIT_FUNCTION bench_init</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> fun()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">bool</span> bench_init()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">if</span>(!<a class="code" href="namespacemanak.html#a93543497ad183da42bf3aad4995621d3">manak::init_benchmarking_module</a>())</div>
-<div class="line">    exit(1);</div>
-<div class="line">  </div>
-<div class="line">  <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, fun));</div>
+<div class="line">  <a class="code" href="classmanak_1_1ManakSuite.html#a5d22e3a5e90d84787e6fd74651473f40">manak::ManakSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, fun));</div>
 <div class="line">  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>The function to be registered must have no parameters. The function with parameters can used to generate parametrized benchmark cases. See <a class="el" href="p_bench.html">Complete guide on Templatized Benchmarking</a> for more information. Also see <a class="el" href="use_afr.html">Advance Function Registration</a> for registration of complex functions such as overloaded functions, template functions and class member functions.</p>
-<p>When iteration or tolerance is not specified for any benchmark case the default will be used. See <a class="el" href="set_env.html#set_env_mdi">MANAK_DEFAULT_ITERATIONS</a> and <a class="el" href="set_env.html#set_env_mdt">MANAK_DEFAULT_TOLERANCE</a> for more details.</p>
-<p>See <a class="el" href="comp.html#comp_sm">Comparison Framework for Simple Module</a> to understand the comparison framework in simple module.</p>
+</div><!-- fragment --><p>NOTE: 'MANAK_AUTO_MAIN' or 'MANAK_INIT' has to be defined only once in case of multi file project. Check out <a class="el" href="multi_file.html">Using Manak Effectively in Multi File Project</a> for more information.</p>
+<p>The function to be registered as a case must have no parameters. The function with parameters can used to generate parametrized benchmark cases. See <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmarking</a> for more information. Also see <a class="el" href="use_afr.html">Advance Function Registration</a> for registration of complex functions such as overloaded functions, template functions and class member functions.</p>
+<p>When iteration, tolerance or succes percentage is not specified for any benchmark case the default will be used. See <a class="el" href="set_env.html#set_env_mdi">MANAK_DEFAULT_ITERATIONS</a>, <a class="el" href="set_env.html#set_env_mdt">MANAK_DEFAULT_TOLERANCE</a> and <a class="el" href="set_env.html#set_env_mdsp">MANAK_DEFAULT_SP</a> for more details.</p>
+<p>The library name is taken as default library name in the simple module. Check out <a class="el" href="s_mod.html#s_mod_intro">Introduction</a> for how to set default library name of simple module.</p>
+<h2><a class="anchor" id="man_reg_smmbcr"></a>
+Simple Module Manual Benchmark Case Registration Macros</h2>
 <h2><a class="anchor" id="man_reg_msbm1"></a>
-MANAK_BENCHMARK_CASE</h2>
-<p>Creates a benchmark case with name and benchmark function. Number of iterations and tolerance is taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">manak::BenchmarkSuite::AddCase</a>.</p>
-<h2><a class="anchor" id="man_reg_msbm2"></a>
-MANAK_BENCHMARK_CASE_I</h2>
-<p>Creates a benchmark case with name, benchmark function and number of iterations. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object.</p>
-<div class="fragment"><div class="line"><a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#ae91698abb025e5a9d51e0a062d2e1084">MANAK_BENCHMARK_CASE_I</a>(B1, fun, 10));</div>
+MANAK_BENCHMARK_CASE_TIS</h2>
+<p>Creates a benchmark case with name, benchmark function, tolerance, iterations and success percentage. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite1-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#ac4eafe1d53d07b9ba7a8f179d0498e0d">MANAK_BENCHMARK_CASE_TIS</a>(B1, fun, 10, 50, 90));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm2"></a>
+MANAK_BENCHMARK_CASE_TI</h2>
+<p>Creates a benchmark case with name, benchmark function, tolerance and iterations. The value of success percentage is taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite1-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#a65b08c81f8378d4a91a070e3d60ef8bd">MANAK_BENCHMARK_CASE_TI</a>(B1, fun, 10, 50));</div>
 </div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm3"></a>
-MANAK_BENCHMARK_CASE_T</h2>
-<p>Creates a benchmark case with name, benchmark function and tolerance. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object.</p>
-<div class="fragment"><div class="line"><a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#ac3ae1ccbe4d914d66690f650bb647b76">MANAK_BENCHMARK_CASE_T</a>(B1, fun, 50));</div>
+MANAK_BENCHMARK_CASE_IS</h2>
+<p>Creates a benchmark case with name, benchmark function, iterations and success percentage. The value of tolerance is taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite1-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#aaa99fcb571cfd87f87eba98fe04ba744">MANAK_BENCHMARK_CASE_IS</a>(B1, fun, 10, 50));</div>
 </div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm4"></a>
-MANAK_BENCHMARK_CASE_IT</h2>
-<p>Creates a benchmark case with name, benchmark function, number of iterations and tolerance. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object.</p>
-<div class="fragment"><div class="line"><a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#ac3ae1ccbe4d914d66690f650bb647b76">MANAK_BENCHMARK_CASE_T</a>(B1, fun, 10, 50));</div>
+MANAK_BENCHMARK_CASE_T</h2>
+<p>Creates a benchmark case with name, benchmark function and tolerance. The values of iterations and success percentage are taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite1-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#a964bd52c244dcb3b100dbb91972c6889">MANAK_BENCHMARK_CASE_T</a>(B1, fun, 10));</div>
 </div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm5"></a>
+MANAK_BENCHMARK_CASE_I</h2>
+<p>Creates a benchmark case with name, benchmark function and iterations. The values of tolerance and success percentage are taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite1-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#ae91698abb025e5a9d51e0a062d2e1084">MANAK_BENCHMARK_CASE_I</a>(B1, fun, 10));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm6"></a>
+MANAK_BENCHMARK_CASE</h2>
+<p>Creates a benchmark case with name and benchmark function. The values of tolerance, iterations and success percentage are taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite1-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, fun));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_smmsr"></a>
+Simple Module Manual Suite Registration Macros</h2>
+<h2><a class="anchor" id="man_reg_msbm7"></a>
 MANAK_BENCHMARK_SUITE</h2>
-<p>Creates an empty unregistered benchmark suite with name. This benchmark suite can be registred by passing it to any registered benchmark suite by <a class="el" href="classmanak_1_1BenchmarkSuite.html#a62ca596fa52af0e6684371d74c85668d">manak::BenchmarkSuite::AddSuite</a> function.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<p>Creates an empty unregistered benchmark suite with name. This benchmark suite can be registred by passing it to any registered benchmark suite by <a class="el" href="classmanak_1_1ManakSuite.html#a4b88a314d5ec1940aef64a39d35c019d">manak::ManakSuite::AddSuite</a> function.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">bool</span> bench_init();</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">bool</span> bench_init();</div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_ALTERNATE_INIT_FUNCTION bench_init</span></div>
+<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_MANUAL_INIT_FUNCTION bench_init</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> fun()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">bool</span> bench_init()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">if</span>(!<a class="code" href="namespacemanak.html#a93543497ad183da42bf3aad4995621d3">manak::init_benchmarking_module</a>())</div>
-<div class="line">    exit(1);</div>
+<div class="line">  <a class="code" href="classmanak_1_1ManakSuite.html">manak::ManakSuite</a>* suite1 = <a class="code" href="classmanak_1_1ManakSuite.html#a5d22e3a5e90d84787e6fd74651473f40">manak::ManakSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1ManakSuite.html#a4b88a314d5ec1940aef64a39d35c019d">AddSuite</a>(MANAK_BENCHMARK_SUITE(Suite1));</div>
 <div class="line">  </div>
-<div class="line">  <a class="code" href="classmanak_1_1BenchmarkSuite.html">manak::BenchmarkSuite</a>* suite1 = <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#a62ca596fa52af0e6684371d74c85668d">AddSuite</a>(<a class="code" href="benchmark__suite_8hpp.html#a8189866f141e05991cccd875935e7d05">MANAK_BENCHMARK_SUITE</a>(Suite1));</div>
-<div class="line">  </div>
-<div class="line">  suite1-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, fun));</div>
+<div class="line">  suite1-&gt;<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, fun));</div>
 <div class="line">  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm6"></a>
-Parametrized Benchmark cases</h2>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_smmpbcr"></a>
+Simple Module Manual Parametrized Benchmark Case Registration Macros</h2>
 <p>You can also use parametrized benchmarks with manual registartion.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="fragment"><div class="line"><span class="keywordtype">bool</span> bench_init();</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">bool</span> bench_init();</div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_ALTERNATE_INIT_FUNCTION bench_init</span></div>
+<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_MANUAL_INIT_FUNCTION bench_init</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">bool</span> bench_init()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">if</span>(!<a class="code" href="namespacemanak.html#a93543497ad183da42bf3aad4995621d3">manak::init_benchmarking_module</a>())</div>
-<div class="line">    exit(1);</div>
-<div class="line">  </div>
-<div class="line">  <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun)-&gt;AddArgs(0,0));</div>
+<div class="line">  <a class="code" href="classmanak_1_1ManakSuite.html#a5d22e3a5e90d84787e6fd74651473f40">manak::ManakSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun)-&gt;AddArgs(0,0));</div>
 <div class="line">  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>For more advance parametrized benchmark options check <a class="el" href="p_bench.html">Complete guide on Templatized Benchmarking</a>.</p>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm8"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</h2>
+<p>Creates a parametrized benchmark with name, function, tolerance, iterations and success percentage. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#aa9c9e057e1eca8fa29fcf66b159abcca">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</a>(B1, fun, 10, 50, 90)-&gt;AddArgs(100));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm9"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</h2>
+<p>Creates a parametrized benchmark with name, function, tolerance and iterations. The value of success percentage is taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#ae4eb7982c13cc282c19835d911dd0e55">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</a>(B1, fun, 10, 50)-&gt;AddArgs(100));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm10"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS</h2>
+<p>Creates a parametrized benchmark with name, function, iterations and success percentage. The value of tolerance is taken s default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#ad08682f5ccdd1f35ac3d61cd5b03e32b">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS</a>(B1, fun, 10, 50)-&gt;AddArgs(100));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm11"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</h2>
+<p>Creates a parametrized benchmark with name, function and tolerance. The values of iterations and succes percentage are taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#a2eda1eac14133048c0a81e82a1f57f3c">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</a>(B1, fun, 10)-&gt;AddArgs(100));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm12"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</h2>
+<p>Creates a parametrized benchmark with name, function and iterations. The values of tolerance and succes percentage are taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#a9b9ee06845d61aad173310764cf5a64c">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a>(B1, fun, 10)-&gt;AddArgs(100));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm13"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</h2>
+<p>Creates a parametrized benchmark with name, function. The values of tolerance, iterations and succes percentage are taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun)-&gt;AddArgs(100));</div>
+</div><!-- fragment --><p>For more advance parametrized benchmark options check <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmarking</a>.</p>
+<h2><a class="anchor" id="man_reg_smmgrm"></a>
+Simple Module Manual Group Registration Macros</h2>
+<h2><a class="anchor" id="man_reg_msbm14"></a>
+MANAK_GROUP and MANAK_GROUP_END</h2>
+<p>Marks the start and end of the group with name. Manak manual group can also be templatized. Use 'MANAK_ADD_GROUP' to register a group. For more advance manual group registration see <a class="el" href="com_gr.html">Tutorial on Using Groups</a></p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a41b5a5c7c25baeac43fdb2fd534906ed">MANAK_GROUP</a>(TestGroup);</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">bool</span> bench_init()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="classmanak_1_1ManakSuite.html#a5d22e3a5e90d84787e6fd74651473f40">manak::ManakSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1ManakSuite.html#abce0088aebffb405be3d18b0c6ceb0aa">AddGroup</a>&lt;MG_TestGroup&gt;(100);</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_smmgbcrm"></a>
+Simple Module Manual Group Benchmark Case Registration Macros</h2>
+<p>Note: Manual registration group benchmark cases needs to be done in 'GINIT' function. Remember while initialization only one 'GINIT' function is called depending on the parameters given. This may sometimes be usefull but can also create confusion.</p>
+<h2><a class="anchor" id="man_reg_msbm15"></a>
+MANAK_GROUP_BENCHMARK_CASE_TIS</h2>
+<p>Creates a benchmark case with name, benchmark function, tolerance, iterations and success percentage. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#afee24eb6f1adab1f0cf4fbdb2039de48">MANAK_GROUP_BENCHMARK_CASE_TIS</a>(<span class="stringliteral">&quot;B1&quot;</span>, fun, 10, 50, 90));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm16"></a>
+MANAK_GROUP_BENCHMARK_CASE_TI</h2>
+<p>Creates a benchmark case with name, benchmark function, tolerance and iterations. The value of success percentage is taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#aae073349da7cd35265ab5978a5f7a883">MANAK_GROUP_BENCHMARK_CASE_TI</a>(<span class="stringliteral">&quot;B1&quot;</span>, fun, 10, 50));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm17"></a>
+MANAK_GROUP_BENCHMARK_CASE_IS</h2>
+<p>Creates a benchmark case with name, benchmark function, iterations and success percentage. The value of tolerance is taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a5ed8091dd77f9c1e2c1d6232b5f142d8">MANAK_GROUP_BENCHMARK_CASE_IS</a>(<span class="stringliteral">&quot;B1&quot;</span>, fun, 10, 50));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm18"></a>
+MANAK_GROUP_BENCHMARK_CASE_T</h2>
+<p>Creates a benchmark case with name, benchmark function and tolerance. The values of iterations and success percentage are taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'. </p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#ae34dad2ee2b016ef03ec16d6fbaea171">MANAK_GROUP_BENCHMARK_CASE_T</a>(<span class="stringliteral">&quot;B1&quot;</span>, fun, 10));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm19"></a>
+MANAK_GROUP_BENCHMARK_CASE_I</h2>
+<p>Creates a benchmark case with name, benchmark function and iterations. The values of tolerance and success percentage are taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a2aadc70254c3a8aa3df6f7519e3de118">MANAK_GROUP_BENCHMARK_CASE_I</a>(<span class="stringliteral">&quot;B1&quot;</span>, fun, 10));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm20"></a>
+MANAK_GROUP_BENCHMARK_CASE</h2>
+<p>Creates a benchmark case with name and benchmark function. The values of tolerance, iterations and success percentage are taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#adc8a60c4368fea71c54332ff0f9be4b4">MANAK_GROUP_BENCHMARK_CASE</a>(<span class="stringliteral">&quot;B1&quot;</span>, fun));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="Simple"></a>
+Module Manual Group Parametrized Benchmark Case Registration Macros</h2>
+<p>Note: Manual registration group benchmark cases needs to be done in 'GINIT' function. Remember while initialization only one 'GINIT' function is called depending on the parameters given. This may sometimes be usefull but can also create confusion.</p>
+<p>You can also use group parametrized benchmarks with manual registartion.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">bool</span> bench_init();</div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_MANUAL_INIT_FUNCTION bench_init</span></div>
+<div class="line"><span class="preprocessor"></span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a41b5a5c7c25baeac43fdb2fd534906ed">MANAK_GROUP</a>(TestGroup);</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a04b828f51e0252234dc645e9a33710fa">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</a>(<span class="stringliteral">&quot;B1&quot;</span>, fun)-&gt;AddArgs(100));</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  </div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">bool</span> bench_init()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="classmanak_1_1ManakSuite.html#a5d22e3a5e90d84787e6fd74651473f40">manak::ManakSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1ManakSuite.html#abce0088aebffb405be3d18b0c6ceb0aa">AddGroup</a>&lt;MG_TestGroup&gt;();</div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm21"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</h2>
+<p>Creates a parametrized benchmark with name, function, tolerance, iterations and success percentage. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#acee437281c9d4eb384831bf8a383c3ae">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</a>(<span class="stringliteral">&quot;B1&quot;</span>, fun, 10, 50, 90)-&gt;AddArgs(100));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm22"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</h2>
+<p>Creates a parametrized benchmark with name, function, tolerance and iterations. The value of success percentage is taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a84646b1a367e1d32bcbded0c67c5eedc">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</a>(<span class="stringliteral">&quot;B1&quot;</span>, fun, 10, 50)-&gt;AddArgs(100));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm23"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS</h2>
+<p>Creates a parametrized benchmark with name, function, iterations and success percentage. The value of tolerance is taken s default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a284ed8c40844ffe9f1067d74f4865bfb">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS</a>(<span class="stringliteral">&quot;B1&quot;</span>, fun, 10, 50)-&gt;AddArgs(100));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm24"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T</h2>
+<p>Creates a parametrized benchmark with name, function and tolerance. The values of iterations and succes percentage are taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a07a92dcbe49a15c6b24038a2ded2684a">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T</a>(<span class="stringliteral">&quot;B1&quot;</span>, fun, 10)-&gt;AddArgs(100));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm25"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I</h2>
+<p>Creates a parametrized benchmark with name, function and iterations. The values of tolerance and succes percentage are taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#ac2c41fb6d064130d5a95df293b0a7d1b">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I</a>(<span class="stringliteral">&quot;B1&quot;</span>, fun, 10)-&gt;AddArgs(100));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_msbm26"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</h2>
+<p>Creates a parametrized benchmark with name, function. The values of tolerance, iterations and succes percentage are taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a04b828f51e0252234dc645e9a33710fa">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</a>(<span class="stringliteral">&quot;B1&quot;</span>, fun)-&gt;AddArgs(100));</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>For more advance parametrized benchmark options check <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmarking</a>.</p>
 <p>For example on simple module manual registration check <a class="el" href="s_mod.html#s_mod_mr_ex">Example</a>.</p>
 <h1><a class="anchor" id="man_reg_mbm"></a>
 Manual Registartion with Normal Module</h1>
 <p>Simplest manual case registration can be done with the following code</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="fragment"><div class="line"><span class="keywordtype">bool</span> bench_init();</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">bool</span> bench_init();</div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_ALTERNATE_INIT_FUNCTION bench_init</span></div>
+<div class="line"><span class="preprocessor">#define MANAK_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_MANUAL_INIT_FUNCTION bench_init</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> fun()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">bool</span> bench_init()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">if</span>(!<a class="code" href="namespacemanak.html#a93543497ad183da42bf3aad4995621d3">manak::init_benchmarking_module</a>())</div>
-<div class="line">    exit(1);</div>
-<div class="line">  </div>
-<div class="line">  <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, lib1, fun));</div>
+<div class="line">  <a class="code" href="classmanak_1_1ManakSuite.html#a5d22e3a5e90d84787e6fd74651473f40">manak::ManakSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, Lib1, fun));</div>
 <div class="line">  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>The function to be registered must have no parameters. The function with parameters can used to generate parametrized benchmark cases. See <a class="el" href="p_bench.html">Complete guide on Templatized Benchmarking</a> for more information. Also see <a class="el" href="use_afr.html">Advance Function Registration</a> for registration of complex functions such as overloaded functions, template functions and class member functions.</p>
-<p>When iteration or tolerance is not specified for any benchmark case the default will be used. See <a class="el" href="set_env.html#set_env_mdi">MANAK_DEFAULT_ITERATIONS</a> and <a class="el" href="set_env.html#set_env_mdt">MANAK_DEFAULT_TOLERANCE</a> for more details.</p>
-<p>See <a class="el" href="comp.html#comp_nm">Comparison Framework of Normal Module</a> to understand the comparison framework in normal module.</p>
+</div><!-- fragment --><p>NOTE: 'MANAK_AUTO_MAIN' or 'MANAK_INIT' has to be defined only once in case of multi file project. Check out <a class="el" href="multi_file.html">Using Manak Effectively in Multi File Project</a> for more information.</p>
+<p>The function to be registered as a case must have no parameters. The function with parameters can used to generate parametrized benchmark cases. See <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmarking</a> for more information. Also see <a class="el" href="use_afr.html">Advance Function Registration</a> for registration of complex functions such as overloaded functions, template functions and class member functions.</p>
+<p>When iteration, tolerance or succes percentage is not specified for any benchmark case the default will be used. See <a class="el" href="set_env.html#set_env_mdi">MANAK_DEFAULT_ITERATIONS</a>, <a class="el" href="set_env.html#set_env_mdt">MANAK_DEFAULT_TOLERANCE</a> and <a class="el" href="set_env.html#set_env_mdsp">MANAK_DEFAULT_SP</a> for more details.</p>
+<h2><a class="anchor" id="man_reg_nmmbcr"></a>
+Normal Module Manual Benchmark Case Registration Macros</h2>
 <h2><a class="anchor" id="man_reg_mbm1"></a>
-MANAK_BENCHMARK_CASE</h2>
-<p>Creates a benchmark case with name, library and benchmark function. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">manak::BenchmarkSuite::AddCase</a>.</p>
-<h2><a class="anchor" id="man_reg_mbm2"></a>
-MANAK_BENCHMARK_CASE_I</h2>
-<p>Creates a benchmark case with name, library, benchmark function and number of iterations. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object.</p>
-<div class="fragment"><div class="line"><a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#ae91698abb025e5a9d51e0a062d2e1084">MANAK_BENCHMARK_CASE_I</a>(B1, lib1, fun, 10));</div>
+MANAK_BENCHMARK_CASE_TIS</h2>
+<p>Creates a benchmark case with name, library, benchmark function, tolerance, iterations and success percentage. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite1-&gt;<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#ac4eafe1d53d07b9ba7a8f179d0498e0d">MANAK_BENCHMARK_CASE_TIS</a>(B1, Lib1, fun, 10, 50, 90));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm2"></a>
+MANAK_BENCHMARK_CASE_TI</h2>
+<p>Creates a benchmark case with name, library, benchmark function, tolerance and iterations. The value of success percentage is taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite1-&gt;<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a65b08c81f8378d4a91a070e3d60ef8bd">MANAK_BENCHMARK_CASE_TI</a>(B1, Lib1, fun, 10, 50));</div>
 </div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm3"></a>
-MANAK_BENCHMARK_CASE_T</h2>
-<p>Creates a benchmark case with name, library, benchmark function and tolerance. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object.</p>
-<div class="fragment"><div class="line"><a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#ac3ae1ccbe4d914d66690f650bb647b76">MANAK_BENCHMARK_CASE_T</a>(B1, lib1, fun, 50));</div>
+MANAK_BENCHMARK_CASE_IS</h2>
+<p>Creates a benchmark case with name, library, benchmark function, iterations and success percentage. The value of tolerance is taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite1-&gt;<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#aaa99fcb571cfd87f87eba98fe04ba744">MANAK_BENCHMARK_CASE_IS</a>(B1, Lib1, fun, 10, 50));</div>
 </div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm4"></a>
-MANAK_BENCHMARK_CASE_IT</h2>
-<p>Creates a benchmark case with name, library, benchmark function, number of iterations and tolerance. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object.</p>
-<div class="fragment"><div class="line"><a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#ac3ae1ccbe4d914d66690f650bb647b76">MANAK_BENCHMARK_CASE_T</a>(B1, lib1, fun, 10, 50));</div>
+MANAK_BENCHMARK_CASE_T</h2>
+<p>Creates a benchmark case with name, library, benchmark function and tolerance. The values of iterations and success percentage are taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite1-&gt;<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a964bd52c244dcb3b100dbb91972c6889">MANAK_BENCHMARK_CASE_T</a>(B1, Lib1, fun, 10));</div>
 </div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm5"></a>
+MANAK_BENCHMARK_CASE_I</h2>
+<p>Creates a benchmark case with name, library, benchmark function and iterations. The values of tolerance and success percentage are taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite1-&gt;<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#ae91698abb025e5a9d51e0a062d2e1084">MANAK_BENCHMARK_CASE_I</a>(B1, Lib1, fun, 10));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm6"></a>
+MANAK_BENCHMARK_CASE</h2>
+<p>Creates a benchmark case with name, library and benchmark function. The values of tolerance, iterations and success percentage are taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite1-&gt;<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, Lib1, fun));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_nmmsr"></a>
+Normal Module Manual Suite Registration Macros</h2>
+<h2><a class="anchor" id="man_reg_mbm7"></a>
 MANAK_BENCHMARK_SUITE</h2>
-<p>Creates an empty unregistered benchmark suite with name. This benchmark suite can be registred by passing it to any registered benchmark suite by <a class="el" href="classmanak_1_1BenchmarkSuite.html#a62ca596fa52af0e6684371d74c85668d">manak::BenchmarkSuite::AddSuite</a> function.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<p>Creates an empty unregistered benchmark suite with name. This benchmark suite can be registred by passing it to any registered benchmark suite by <a class="el" href="classmanak_1_1ManakSuite.html#a4b88a314d5ec1940aef64a39d35c019d">manak::ManakSuite::AddSuite</a> function.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">bool</span> bench_init();</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">bool</span> bench_init();</div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_ALTERNATE_INIT_FUNCTION bench_init</span></div>
+<div class="line"><span class="preprocessor">#define MANAK_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_MANUAL_INIT_FUNCTION bench_init</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> fun()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">bool</span> bench_init()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">if</span>(!<a class="code" href="namespacemanak.html#a93543497ad183da42bf3aad4995621d3">manak::init_benchmarking_module</a>())</div>
-<div class="line">    exit(1);</div>
+<div class="line">  <a class="code" href="classmanak_1_1ManakSuite.html">manak::ManakSuite</a>* suite1 = <a class="code" href="classmanak_1_1ManakSuite.html#a5d22e3a5e90d84787e6fd74651473f40">manak::ManakSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1ManakSuite.html#a4b88a314d5ec1940aef64a39d35c019d">AddSuite</a>(MANAK_BENCHMARK_SUITE(Suite1));</div>
 <div class="line">  </div>
-<div class="line">  <a class="code" href="classmanak_1_1BenchmarkSuite.html">manak::BenchmarkSuite</a>* suite1 = <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#a62ca596fa52af0e6684371d74c85668d">AddSuite</a>(<a class="code" href="benchmark__suite_8hpp.html#a8189866f141e05991cccd875935e7d05">MANAK_BENCHMARK_SUITE</a>(Suite1));</div>
-<div class="line">  </div>
-<div class="line">  suite1-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, lib1, fun));</div>
+<div class="line">  suite1-&gt;<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, Lib1, fun));</div>
 <div class="line">  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm6"></a>
-Parametrized Benchmark cases</h2>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_nmmpbcr"></a>
+Normal Module Manual Parametrized Benchmark Case Registration Macros</h2>
 <p>You can also use parametrized benchmarks with manual registartion.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="fragment"><div class="line"><span class="keywordtype">bool</span> bench_init();</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">bool</span> bench_init();</div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_ALTERNATE_INIT_FUNCTION bench_init</span></div>
+<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_MANUAL_INIT_FUNCTION bench_init</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">bool</span> bench_init()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">if</span>(!<a class="code" href="namespacemanak.html#a93543497ad183da42bf3aad4995621d3">manak::init_benchmarking_module</a>())</div>
-<div class="line">    exit(1);</div>
-<div class="line">  </div>
-<div class="line">  <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, lib1, fun)-&gt;AddArgs(0,0));</div>
+<div class="line">  <a class="code" href="classmanak_1_1ManakSuite.html#a5d22e3a5e90d84787e6fd74651473f40">manak::ManakSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, Lib1, fun)-&gt;AddArgs(0,0));</div>
 <div class="line">  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>For more advance parametrized benchmark options check <a class="el" href="p_bench.html">Complete guide on Templatized Benchmarking</a>.</p>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm8"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</h2>
+<p>Creates a parametrized benchmark with name, library, function, tolerance, iterations and success percentage. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#aa9c9e057e1eca8fa29fcf66b159abcca">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</a>(B1, Lib1, fun, 10, 50, 90)-&gt;AddArgs(100));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm9"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</h2>
+<p>Creates a parametrized benchmark with name, library, function, tolerance and iterations. The value of success percentage is taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#ae4eb7982c13cc282c19835d911dd0e55">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</a>(B1, Lib1, fun, 10, 50)-&gt;AddArgs(100));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm10"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS</h2>
+<p>Creates a parametrized benchmark with name, library, function, iterations and success percentage. The value of tolerance is taken s default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#ad08682f5ccdd1f35ac3d61cd5b03e32b">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS</a>(B1, Lib1, fun, 10, 50)-&gt;AddArgs(100));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm11"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</h2>
+<p>Creates a parametrized benchmark with name, library, function and tolerance. The values of iterations and succes percentage are taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#a2eda1eac14133048c0a81e82a1f57f3c">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</a>(B1, Lib1, fun, 10)-&gt;AddArgs(100));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm12"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</h2>
+<p>Creates a parametrized benchmark with name, library, function and iterations. The values of tolerance and succes percentage are taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#a9b9ee06845d61aad173310764cf5a64c">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a>(B1, Lib1, fun, 10)-&gt;AddArgs(100));</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm13"></a>
+MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</h2>
+<p>Creates a parametrized benchmark with name, libary, function. The values of tolerance, iterations and succes percentage are taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be passed to <a class="el" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">manak::ManakSuite::AddCase</a>.</p>
+<div class="fragment"><div class="line">suite-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, Lib1, fun)-&gt;AddArgs(100));</div>
+</div><!-- fragment --><p>For more advance parametrized benchmark options check <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmarking</a>.</p>
+<h2><a class="anchor" id="man_reg_nmmgrm"></a>
+Normal Module Manual Group Registration Macros</h2>
+<h2><a class="anchor" id="man_reg_mbm14"></a>
+MANAK_GROUP and MANAK_GROUP_END</h2>
+<p>Marks the start and end of the group with name. Manak manual group can also be templatized. Use 'MANAK_ADD_GROUP' to register a group. For more advance manual group registration see <a class="el" href="com_gr.html">Tutorial on Using Groups</a></p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a41b5a5c7c25baeac43fdb2fd534906ed">MANAK_GROUP</a>(TestGroup);</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">bool</span> bench_init()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="classmanak_1_1ManakSuite.html#a5d22e3a5e90d84787e6fd74651473f40">manak::ManakSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1ManakSuite.html#abce0088aebffb405be3d18b0c6ceb0aa">AddGroup</a>&lt;MG_TestGroup&gt;(100);</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_nmmgbcrm"></a>
+Normal Module Manual Group Benchmark Case Registration Macros</h2>
+<p>Note: Manual registration group benchmark cases needs to be done in 'GINIT' function. Remember while initialization only one 'GINIT' function is called depending on the parameters given. This may sometimes be usefull but can also create confusion.</p>
+<h2><a class="anchor" id="man_reg_mbm15"></a>
+MANAK_GROUP_BENCHMARK_CASE_TIS</h2>
+<p>Creates a benchmark case with name, library, benchmark function, tolerance, iterations and success percentage. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#afee24eb6f1adab1f0cf4fbdb2039de48">MANAK_GROUP_BENCHMARK_CASE_TIS</a>(<span class="stringliteral">&quot;B1&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun, 10, 50, 90));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm16"></a>
+MANAK_GROUP_BENCHMARK_CASE_TI</h2>
+<p>Creates a benchmark case with name, library, benchmark function, tolerance and iterations. The value of success percentage is taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#aae073349da7cd35265ab5978a5f7a883">MANAK_GROUP_BENCHMARK_CASE_TI</a>(<span class="stringliteral">&quot;B1&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun, 10, 50));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm17"></a>
+MANAK_GROUP_BENCHMARK_CASE_IS</h2>
+<p>Creates a benchmark case with name, library, benchmark function, iterations and success percentage. The value of tolerance is taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a5ed8091dd77f9c1e2c1d6232b5f142d8">MANAK_GROUP_BENCHMARK_CASE_IS</a>(<span class="stringliteral">&quot;B1&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun, 10, 50));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm18"></a>
+MANAK_GROUP_BENCHMARK_CASE_T</h2>
+<p>Creates a benchmark case with name, library, benchmark function and tolerance. The values of iterations and success percentage are taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'. </p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#ae34dad2ee2b016ef03ec16d6fbaea171">MANAK_GROUP_BENCHMARK_CASE_T</a>(<span class="stringliteral">&quot;B1&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun, 10));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm19"></a>
+MANAK_GROUP_BENCHMARK_CASE_I</h2>
+<p>Creates a benchmark case with name, benchmark function and iterations. The values of tolerance and success percentage are taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a2aadc70254c3a8aa3df6f7519e3de118">MANAK_GROUP_BENCHMARK_CASE_I</a>(<span class="stringliteral">&quot;B1&quot;</span>, fun, 10));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm20"></a>
+MANAK_GROUP_BENCHMARK_CASE</h2>
+<p>Creates a benchmark case with name, library and benchmark function. The values of tolerance, iterations and success percentage are taken to be default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#adc8a60c4368fea71c54332ff0f9be4b4">MANAK_GROUP_BENCHMARK_CASE</a>(<span class="stringliteral">&quot;B1&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_nmmgpbcr"></a>
+Normal Module Manual Group Parametrized Benchmark Case Registration Macros</h2>
+<p>Note: Manual registration group benchmark cases needs to be done in 'GINIT' function. Remember while initialization only one 'GINIT' function is called depending on the parameters given. This may sometimes be usefull but can also create confusion.</p>
+<p>You can also use group parametrized benchmarks with manual registartion.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">bool</span> bench_init();</div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#define MANAK_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_MANUAL_INIT_FUNCTION bench_init</span></div>
+<div class="line"><span class="preprocessor"></span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a41b5a5c7c25baeac43fdb2fd534906ed">MANAK_GROUP</a>(TestGroup);</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a04b828f51e0252234dc645e9a33710fa">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</a>(<span class="stringliteral">&quot;B1&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun)-&gt;AddArgs(100));</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  </div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">bool</span> bench_init()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="classmanak_1_1ManakSuite.html#a5d22e3a5e90d84787e6fd74651473f40">manak::ManakSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1ManakSuite.html#abce0088aebffb405be3d18b0c6ceb0aa">AddGroup</a>&lt;MG_TestGroup&gt;();</div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm21"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</h2>
+<p>Creates a parametrized benchmark with name, library, function, tolerance, iterations and success percentage. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#acee437281c9d4eb384831bf8a383c3ae">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</a>(<span class="stringliteral">&quot;B1&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun, 10, 50, 90)-&gt;AddArgs(100));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm22"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</h2>
+<p>Creates a parametrized benchmark with name, library, function, tolerance and iterations. The value of success percentage is taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a84646b1a367e1d32bcbded0c67c5eedc">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</a>(<span class="stringliteral">&quot;B1&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun, 10, 50)-&gt;AddArgs(100));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm23"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS</h2>
+<p>Creates a parametrized benchmark with name, library, function, iterations and success percentage. The value of tolerance is taken s default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a284ed8c40844ffe9f1067d74f4865bfb">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS</a>(<span class="stringliteral">&quot;B1&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun, 10, 50)-&gt;AddArgs(100));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm24"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T</h2>
+<p>Creates a parametrized benchmark with name, library, function and tolerance. The values of iterations and succes percentage are taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a07a92dcbe49a15c6b24038a2ded2684a">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T</a>(<span class="stringliteral">&quot;B1&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun, 10)-&gt;AddArgs(100));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm25"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I</h2>
+<p>Creates a parametrized benchmark with name, library, function and iterations. The values of tolerance and succes percentage are taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#ac2c41fb6d064130d5a95df293b0a7d1b">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I</a>(<span class="stringliteral">&quot;B1&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun, 10)-&gt;AddArgs(100));</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="man_reg_mbm26"></a>
+MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</h2>
+<p>Creates a parametrized benchmark with name, library, function. The values of tolerance, iterations and succes percentage are taken as default. Returns pointer to created <a class="el" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a> object. This can be added to member std::list named 'cases'.</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a04b828f51e0252234dc645e9a33710fa">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</a>(<span class="stringliteral">&quot;B1&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun)-&gt;AddArgs(100));</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>For more advance parametrized benchmark options check <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmarking</a>.</p>
 <p>For example on normal module manual registration check <a class="el" href="n_mod.html#n_mod_mr_ex">Example</a>. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

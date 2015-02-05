@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Manak: Benchmark Module</title>
+<title>Manak: Normal Module</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -60,171 +60,319 @@ $(document).ready(function(){initNavTree('n_mod.html','');});
 <div id="doc-content">
 <div class="header">
   <div class="headertitle">
-<div class="title">Benchmark Module </div>  </div>
+<div class="title">Normal Module </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="n_mod_intro"></a>
 Introduction</h1>
-<p>This module is useful when 2 or more libraries ar compared against each other with time. This module can be used by setting 'MANAK_BENCHMARK_MODULE' to a desired name. For more information on setting module type see <a class="el" href="set_env.html#set_env_smt">Setting module type</a>.</p>
+<p>This module is useful when cases are need to be registered with different library names.</p>
 <h1><a class="anchor" id="n_mod_ar"></a>
 Auto Registration</h1>
 <p>For detalied information on auto registration of benchmark cases and benchmark suites in this module see <a class="el" href="auto_reg.html#auto_reg_bm">Auto Registration With Normal Module</a>.</p>
 <p>The macros provided for auto registartion of benchmark case:</p>
 <ul>
-<li><a class="el" href="auto_reg.html#auto_reg_bm1">MANAK_AUTO_BENCHMARK_CASE</a></li>
-<li><a class="el" href="auto_reg.html#auto_reg_bm2">MANAK_AUTO_BENCHMARK_CASE_I</a></li>
-<li><a class="el" href="auto_reg.html#auto_reg_bm3">MANAK_AUTO_BENCHMARK_CASE_T</a></li>
-<li><a class="el" href="auto_reg.html#auto_reg_bm4">MANAK_AUTO_BENCHMARK_CASE_IT</a></li>
-<li><a class="el" href="auto_reg.html#auto_reg_bm8">MANAK_ADD_BENCHMARK</a></li>
-<li><a class="el" href="auto_reg.html#auto_reg_bm7">Parametrized Benchmark cases</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm1">MANAK_AUTO_BENCHMARK_CASE_TIS</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm2">MANAK_AUTO_BENCHMARK_CASE_TI</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm3">MANAK_AUTO_BENCHMARK_CASE_IS</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm4">MANAK_AUTO_BENCHMARK_CASE_I</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm5">MANAK_AUTO_BENCHMARK_CASE_T</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm6">MANAK_AUTO_BENCHMARK_CASE</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm7">MANAK_ADD_CASE</a></li>
 </ul>
 <p>The macros provided for auto registration of benchmark suite:</p>
 <ul>
-<li><a class="el" href="auto_reg.html#auto_reg_bm5">MANAK_AUTO_BENCHMARK_SUITE</a></li>
-<li><a class="el" href="auto_reg.html#auto_reg_bm6">MANAK_AUTO_BENCHMARK_END</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm8">MANAK_AUTO_SUITE</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm9">MANAK_AUTO_SUITE_END</a></li>
+</ul>
+<p>The macros provided for auto registration of parametrized benchmark cases:</p>
+<ul>
+<li><a class="el" href="auto_reg.html#auto_reg_bm10">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm11">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm12">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm13">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm14">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm15">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a></li>
+</ul>
+<p>The macros provided for auto registration of groups:</p>
+<ul>
+<li><a class="el" href="auto_reg.html#auto_reg_bm16">MANAK_AUTO_GROUP AND MANAK_AUTO_GROUP_END</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm30">MANAK_ADD_GROUP</a></li>
+</ul>
+<p>The macros provided for auto registration of group benchmark cases:</p>
+<ul>
+<li><a class="el" href="auto_reg.html#auto_reg_bm17">MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm18">MANAK_AUTO_GROUP_BENCHMARK_CASE_TI</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm19">MANAK_AUTO_GROUP_BENCHMARK_CASE_IS</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm20">MANAK_AUTO_GROUP_BENCHMARK_CASE_I</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm21">MANAK_AUTO_GROUP_BENCHMARK_CASE_T</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm22">MANAK_AUTO_GROUP_BENCHMARK_CASE</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm23">MANAK_ADD_TO_GROUP</a></li>
+</ul>
+<p>The macros provided for auto registration of group parametrized benchmark cases:</p>
+<ul>
+<li><a class="el" href="auto_reg.html#auto_reg_bm24">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm25">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm26">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm27">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm28">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T</a></li>
+<li><a class="el" href="auto_reg.html#auto_reg_bm29">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</a></li>
 </ul>
 <h1><a class="anchor" id="n_mod_ar_ex"></a>
 Example</h1>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#define MANAK_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> fun3(<span class="keywordtype">size_t</span> a)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ac57cc187439c0bff8b688ca09b689d9c">MANAK_AUTO_BENCHMARK_CASE_I</a>(B1, lib1, 10)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#aab497fb679c4c1b52176ce8f6dd89eb9">MANAK_AUTO_BENCHMARK_CASE_IT</a>(B1, lib2, 10, 50)</div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#af1126e30e86e54b86742e1102ae74c36">MANAK_AUTO_BENCHMARK_CASE_TI</a>(B1, lib2, 10, 50)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__suite_8hpp.html#ae2cb39c3eedb85936f963b6e9a48b546">MANAK_AUTO_BENCHMARK_SUITE</a>(Suite1);</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#ac70ac27f45a67029b99088a024b7ec09">MANAK_AUTO_SUITE</a>(Suite1);</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ab449c770b6d3bc90c0e1dcb8a38cd23e">MANAK_AUTO_BENCHMARK_CASE_T</a>(B2, lib1, 50)</div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ae2f2660c6a6b9ac778648c5aad36b8d5">MANAK_AUTO_BENCHMARK_CASE_T</a>(B2, lib1, 50)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ac57cc187439c0bff8b688ca09b689d9c">MANAK_AUTO_BENCHMARK_CASE_I</a>(B2, lib2, 10)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__suite_8hpp.html#ae2cb39c3eedb85936f963b6e9a48b546">MANAK_AUTO_BENCHMARK_SUITE</a>(Suite2);</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#ac70ac27f45a67029b99088a024b7ec09">MANAK_AUTO_SUITE</a>(Suite2);</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a15c94140b4b5e90b10cd583b1e837366">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a>(B3, lib1, fun3, 10)-&gt;AddArgs((<span class="keywordtype">size_t</span>)2000)-&gt;AddArgs((<span class="keywordtype">size_t</span>)3000));</div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a594ad3aeecf7f689b73ba3565fe84e99">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</a>(B3, lib2, fun3, 50)-&gt;AddArgs((<span class="keywordtype">size_t</span>)4000)-&gt;AddArgs((<span class="keywordtype">size_t</span>)6000));</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#a9b9ee06845d61aad173310764cf5a64c">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a>(B3, lib1, fun3, 10)-&gt;AddArgs((<span class="keywordtype">size_t</span>)2000)-&gt;AddArgs((<span class="keywordtype">size_t</span>)3000));</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#a2eda1eac14133048c0a81e82a1f57f3c">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</a>(B3, lib2, fun3, 50)-&gt;AddArgs((<span class="keywordtype">size_t</span>)4000)-&gt;AddArgs((<span class="keywordtype">size_t</span>)6000));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>();</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">size_t</span> iter;</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  iter = 100;</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#afecf2683d7fd06c9b4c8975191df59c0">MANAK_AUTO_GROUP_BENCHMARK_CASE</a>(<span class="stringliteral">&quot;InGroup1&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; iter;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a48c4ef71e3cd26bb77c8274282ab9388">MANAK_AUTO_GROUP_BENCHMARK_CASE_I</a>(<span class="stringliteral">&quot;InGroup1&quot;</span>, <span class="stringliteral">&quot;Lib2&quot;</span>, 10)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10 * iter;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun1(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a * iter;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#a84646b1a367e1d32bcbded0c67c5eedc">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</a>(<span class="stringliteral">&quot;InGroup2&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun1, 10, 50)-&gt;AddArgs(100)-&gt;AddArgs(1000));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
 </div><!-- fragment --><p>Output -</p>
-<div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version 1.0.0                                                     #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Created at Nov 14 16:34:18 2014                                   #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">######################################################################</span></div>
-<div class="line"><span class="preprocessor"></span></div>
-<div class="line">       Case Name              lib1                lib2                </div>
-<div class="line"></div>
-<div class="line">B1                            3.2                 3.3                 </div>
-<div class="line">B2                            31.5                32.2                </div>
-<div class="line">B3</div>
-<div class="line">  Parameter Set 0             7.7                 14.5                </div>
-<div class="line">  Parameter Set 1             11.1                21.6    </div>
-</div><!-- fragment --><p>The equivalent manual registration code can be found at <a class="el" href="n_mod.html#n_mod_mr_ex">Example</a>.</p>
+<p>HTML output can be seen <a href="samples/n_mod_1.html">HERE</a></p>
+<p>The equivalent manual registration code can be found at <a class="el" href="n_mod.html#n_mod_mr_ex">Example</a>.</p>
 <h1><a class="anchor" id="n_mod_mr"></a>
-Manual Registration</h1>
+Manual Registration with Normal Mode</h1>
 <p>For detailed information on manual registration of benchmark cases and benchmark suites in benchmark module see <a class="el" href="man_reg.html#man_reg_mbm">Manual Registartion with Normal Module</a>.</p>
 <p>The macros provided for manual registartion of benchmark case:</p>
 <ul>
-<li><a class="el" href="man_reg.html#man_reg_mbm1">MANAK_BENCHMARK_CASE</a></li>
-<li><a class="el" href="man_reg.html#man_reg_mbm2">MANAK_BENCHMARK_CASE_I</a></li>
-<li><a class="el" href="man_reg.html#man_reg_mbm3">MANAK_BENCHMARK_CASE_T</a></li>
-<li><a class="el" href="man_reg.html#man_reg_mbm4">MANAK_BENCHMARK_CASE_IT</a></li>
-<li><a class="el" href="man_reg.html#man_reg_mbm6">Parametrized Benchmark cases</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm1">MANAK_BENCHMARK_CASE_TIS</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm2">MANAK_BENCHMARK_CASE_TI</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm3">MANAK_BENCHMARK_CASE_IS</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm4">MANAK_BENCHMARK_CASE_T</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm5">MANAK_BENCHMARK_CASE_I</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm6">MANAK_BENCHMARK_CASE</a></li>
 </ul>
 <p>The macros provided for manual registration of benchmark suite:</p>
 <ul>
-<li><a class="el" href="man_reg.html#man_reg_mbm5">MANAK_BENCHMARK_SUITE</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm7">MANAK_BENCHMARK_SUITE</a></li>
+</ul>
+<p>The macros provided for manual registration of parametrized benchmark cases:</p>
+<ul>
+<li><a class="el" href="man_reg.html#man_reg_mbm8">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm9">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm10">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm11">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm12">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm13">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a></li>
+</ul>
+<p>The macros provided for manual registration of groups:</p>
+<ul>
+<li><a class="el" href="man_reg.html#man_reg_mbm14">MANAK_GROUP and MANAK_GROUP_END</a></li>
+</ul>
+<p>The macros provided for manual registration of group benchmark cases:</p>
+<ul>
+<li><a class="el" href="man_reg.html#man_reg_mbm15">MANAK_GROUP_BENCHMARK_CASE_TIS</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm16">MANAK_GROUP_BENCHMARK_CASE_TI</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm17">MANAK_GROUP_BENCHMARK_CASE_IS</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm18">MANAK_GROUP_BENCHMARK_CASE_T</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm19">MANAK_GROUP_BENCHMARK_CASE_I</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm20">MANAK_GROUP_BENCHMARK_CASE</a></li>
+</ul>
+<p>The macros provided for manual registration of group parametrized benchmark cases:</p>
+<ul>
+<li><a class="el" href="man_reg.html#man_reg_mbm21">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm22">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm23">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm24">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm25">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I</a></li>
+<li><a class="el" href="man_reg.html#man_reg_mbm26">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</a></li>
 </ul>
 <h1><a class="anchor" id="n_mod_mr_ex"></a>
 Example</h1>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="fragment"><div class="line"><span class="keywordtype">bool</span> bench_init();</div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">bool</span> bench_init();</div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_ALTERNATE_INIT_FUNCTION bench_init</span></div>
+<div class="line"><span class="preprocessor">#define MANAK_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_MANUAL_INIT_FUNCTION bench_init</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> lib1_fun()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
-<div class="line">}</div>
-<div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> lib2_fun()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
-<div class="line">}</div>
-<div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> lib1_fun2()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
-<div class="line">}</div>
-<div class="line"></div>
-<div class="line"><span class="keywordtype">void</span> lib2_fun2()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
-<div class="line">}</div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"><span class="keyword">using namespace </span>manak;</div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> fun3(<span class="keywordtype">size_t</span> a)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun1()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun2()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun4()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun5()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a41b5a5c7c25baeac43fdb2fd534906ed">MANAK_GROUP</a>(TestGroup);</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">size_t</span> iter;</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
+<div class="line">{</div>
+<div class="line">  iter = 100;</div>
+<div class="line"></div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#adc8a60c4368fea71c54332ff0f9be4b4">MANAK_GROUP_BENCHMARK_CASE</a>(<span class="stringliteral">&quot;InGroup1&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun2));</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a2aadc70254c3a8aa3df6f7519e3de118">MANAK_GROUP_BENCHMARK_CASE_I</a>(<span class="stringliteral">&quot;InGroup1&quot;</span>, <span class="stringliteral">&quot;Lib2&quot;</span>, fun3, 10));</div>
+<div class="line">  cases.push_back(<a class="code" href="module__benchmark__case_8hpp.html#a84646b1a367e1d32bcbded0c67c5eedc">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</a>(<span class="stringliteral">&quot;InGroup2&quot;</span>, <span class="stringliteral">&quot;Lib1&quot;</span>, fun1, 10, 50)-&gt;AddArgs(100)-&gt;AddArgs(1000));</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun2()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; iter;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun3()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10 * iter;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> fun1(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a * iter;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#afe8d8c18b2ff78ca468caf3ee3254187">MANAK_GROUP_END</a>();</div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">bool</span> bench_init()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">if</span>(!<a class="code" href="namespacemanak.html#a93543497ad183da42bf3aad4995621d3">manak::init_benchmarking_module</a>())</div>
-<div class="line">    exit(1);</div>
+<div class="line">  <a class="code" href="classmanak_1_1ManakSuite.html">ManakSuite</a>&amp; master_suite = ManakSuite::GetMasterSuite();</div>
+<div class="line">  master_suite.<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#ae91698abb025e5a9d51e0a062d2e1084">MANAK_BENCHMARK_CASE_I</a>(B1, lib1, fun1, 10));</div>
+<div class="line">  master_suite.<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a65b08c81f8378d4a91a070e3d60ef8bd">MANAK_BENCHMARK_CASE_TI</a>(B1, lib2, fun2, 10, 50));</div>
 <div class="line"></div>
-<div class="line">  <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#ae91698abb025e5a9d51e0a062d2e1084">MANAK_BENCHMARK_CASE_I</a>(B1, lib1, lib1_fun, 10));</div>
+<div class="line">  <a class="code" href="classmanak_1_1ManakSuite.html">ManakSuite</a>* Suite1 = master_suite.<a class="code" href="classmanak_1_1ManakSuite.html#a4b88a314d5ec1940aef64a39d35c019d">AddSuite</a>(<a class="code" href="manak__macros_8hpp.html#acb0a3b3bbd9f81e5bcd6c383eebce41f">MANAK_SUITE</a>(Suite1));</div>
 <div class="line"></div>
-<div class="line">  <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8391855cd709dfc0e257a7bf35beff56">MANAK_BENCHMARK_CASE_IT</a>(B1, lib2, lib2_fun, 10, 50));</div>
+<div class="line">  Suite1-&gt;<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a964bd52c244dcb3b100dbb91972c6889">MANAK_BENCHMARK_CASE_T</a>(B2, lib1, fun4, 50));</div>
+<div class="line">  Suite1-&gt;<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#ae91698abb025e5a9d51e0a062d2e1084">MANAK_BENCHMARK_CASE_I</a>(B2, lib2, fun5, 10));</div>
 <div class="line"></div>
-<div class="line">  <a class="code" href="classmanak_1_1BenchmarkSuite.html">manak::BenchmarkSuite</a>* suite1 = <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#a62ca596fa52af0e6684371d74c85668d">AddSuite</a>(<a class="code" href="benchmark__suite_8hpp.html#a8189866f141e05991cccd875935e7d05">MANAK_BENCHMARK_SUITE</a>(Suite1));</div>
+<div class="line">  <a class="code" href="classmanak_1_1ManakSuite.html">ManakSuite</a>* Suite2 = Suite1-&gt;<a class="code" href="classmanak_1_1ManakSuite.html#a4b88a314d5ec1940aef64a39d35c019d">AddSuite</a>(<a class="code" href="manak__macros_8hpp.html#acb0a3b3bbd9f81e5bcd6c383eebce41f">MANAK_SUITE</a>(Suite2));</div>
 <div class="line"></div>
-<div class="line">  suite1-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#ac3ae1ccbe4d914d66690f650bb647b76">MANAK_BENCHMARK_CASE_T</a>(B2, lib1, lib1_fun2, 50));</div>
-<div class="line">  suite1-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#ae91698abb025e5a9d51e0a062d2e1084">MANAK_BENCHMARK_CASE_I</a>(B2, lib2, lib2_fun2, 10));</div>
+<div class="line">  Suite2-&gt;<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a9b9ee06845d61aad173310764cf5a64c">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a>(B3, lib1, fun3, 10)-&gt;AddArgs((<span class="keywordtype">size_t</span>)2000)-&gt;AddArgs((<span class="keywordtype">size_t</span>)3000));</div>
+<div class="line">  Suite2-&gt;<a class="code" href="classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a2eda1eac14133048c0a81e82a1f57f3c">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</a>(B3, lib2, fun3, 50)-&gt;AddArgs((<span class="keywordtype">size_t</span>)4000)-&gt;AddArgs((<span class="keywordtype">size_t</span>)6000));</div>
 <div class="line"></div>
-<div class="line">  <a class="code" href="classmanak_1_1BenchmarkSuite.html">manak::BenchmarkSuite</a>* suite2 = suite1-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#a62ca596fa52af0e6684371d74c85668d">AddSuite</a>(<a class="code" href="benchmark__suite_8hpp.html#a8189866f141e05991cccd875935e7d05">MANAK_BENCHMARK_SUITE</a>(Suite2));</div>
+<div class="line">  master_suite.<a class="code" href="classmanak_1_1ManakSuite.html#abce0088aebffb405be3d18b0c6ceb0aa">AddGroup</a>&lt;MG_TestGroup&gt;();</div>
 <div class="line"></div>
-<div class="line">  suite2-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a15c94140b4b5e90b10cd583b1e837366">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a>(B3, lib1, fun3, 10)-&gt;AddArgs((<span class="keywordtype">size_t</span>)2000)-&gt;AddArgs((<span class="keywordtype">size_t</span>)3000));</div>
-<div class="line">  suite2-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a594ad3aeecf7f689b73ba3565fe84e99">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</a>(B3, lib2, fun3, 50)-&gt;AddArgs((<span class="keywordtype">size_t</span>)4000)-&gt;AddArgs((<span class="keywordtype">size_t</span>)6000));</div>
 <div class="line">  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Output - </p>
-<div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version 1.0.0                                                     #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Created at Nov 14 14:14:50 2014                                   #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">######################################################################</span></div>
-<div class="line"><span class="preprocessor"></span></div>
-<div class="line">       Case Name              lib1                lib2                </div>
-<div class="line"></div>
-<div class="line">B1                            3.5                 3.5                 </div>
-<div class="line">B2                            33.3                34                  </div>
-<div class="line">B3</div>
-<div class="line">  Parameter Set 0             7.9                 15.2                </div>
-<div class="line">  Parameter Set 1             11.4                22.8                </div>
-</div><!-- fragment --><p>The equivalent auto registration code can be found at <a class="el" href="n_mod.html#n_mod_ar_ex">Example</a>.</p>
+</div><!-- fragment --><p>HTML output can be seen <a href="samples/n_mod_2.html">HERE</a></p>
+<p>The equivalent auto registration code can be found at <a class="el" href="n_mod.html#n_mod_ar_ex">Example</a>.</p>
 <h1><a class="anchor" id="nm_cf"></a>
 Comparison Framework</h1>
 <p>Check out <a class="el" href="comp.html#comp_sm">Comparison Framework for Simple Module</a> for information on comparion framework of normal module. </p>
@@ -233,7 +381,7 @@ Comparison Framework</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

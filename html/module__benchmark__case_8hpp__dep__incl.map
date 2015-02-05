@@ -1,6 +1,5 @@
-<map id="src/manak/benchmark_suit/module_benchmark_case.hpp" name="src/manak/benchmark_suit/module_benchmark_case.hpp">
-<area shape="rect" id="node2" href="$benchmark__case_8hpp.html" title="src/manak/benchmark\l_suit/benchmark_case.hpp" alt="" coords="61,110,240,151"/>
-<area shape="rect" id="node3" href="$benchmark__suite_8hpp.html" title="src/manak/benchmark\l_suit/benchmark_suite.hpp" alt="" coords="5,291,184,333"/>
-<area shape="rect" id="node5" href="$run__tree_8hpp.html" title="src/manak/benchmark\l_suit/run_tree.hpp" alt="" coords="133,201,283,242"/>
-<area shape="rect" id="node4" href="$manak_8hpp.html" title="src/manak/manak.hpp" alt="" coords="82,381,232,408"/>
+<map id="src/manak/benchmark_suite/module_benchmark_case.hpp" name="src/manak/benchmark_suite/module_benchmark_case.hpp">
+<area shape="rect" id="node2" href="$manak__benchmark__macros_8hpp.html" title="src/manak/benchmark\l_suite/manak_benchmark\l_macros.hpp" alt="" coords="12,109,183,165"/>
+<area shape="rect" id="node3" href="$benchmark__suite_8hpp.html" title="src/manak/benchmark\l_suite/benchmark_suite.hpp" alt="" coords="5,214,189,255"/>
+<area shape="rect" id="node4" href="$manak_8hpp.html" title="src/manak/manak.hpp" alt="" coords="22,304,172,331"/>
 </map>

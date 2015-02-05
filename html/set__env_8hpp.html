@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Manak: src/manak/benchmark_suit/set_env.hpp File Reference</title>
+<title>Manak: src/manak/util/set_env.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -72,10 +72,17 @@ $(document).ready(function(){initNavTree('set__env_8hpp.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><div class="dynheader">
+Include dependency graph for set_env.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="set__env_8hpp__incl.png" border="0" usemap="#src_2manak_2util_2set__env_8hpp" alt=""/></div>
+<map name="src_2manak_2util_2set__env_8hpp" id="src_2manak_2util_2set__env_8hpp">
+<area shape="rect" id="node3" href="macro__utils_8hpp.html" title="macro_utils.hpp" alt="" coords="96,96,211,123"/></map>
+</div>
+</div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="set__env_8hpp__dep__incl.png" border="0" usemap="#src_2manak_2benchmark__suit_2set__env_8hppdep" alt=""/></div>
-<map name="src_2manak_2benchmark__suit_2set__env_8hppdep" id="src_2manak_2benchmark__suit_2set__env_8hppdep">
+<div class="center"><img src="set__env_8hpp__dep__incl.png" border="0" usemap="#src_2manak_2util_2set__env_8hppdep" alt=""/></div>
+<map name="src_2manak_2util_2set__env_8hppdep" id="src_2manak_2util_2set__env_8hppdep">
 <area shape="rect" id="node2" href="manak_8hpp.html" title="src/manak/manak.hpp" alt="" coords="5,96,155,123"/></map>
 </div>
 </div>
@@ -83,8 +90,6 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a836a1345951e2740f56228db0cb7e2c6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="set__env_8hpp.html#a836a1345951e2740f56228db0cb7e2c6">MANAK_BENCHMARK_REDIRECTION_STREAM</a>&#160;&#160;&#160;f.rdbuf()</td></tr>
-<tr class="separator:a836a1345951e2740f56228db0cb7e2c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe72ee9cd4a99a4139634bb7025a28c4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="set__env_8hpp.html#abe72ee9cd4a99a4139634bb7025a28c4">MANAK_CLOSE_LOG</a>&#160;&#160;&#160;f.close();</td></tr>
 <tr class="separator:abe72ee9cd4a99a4139634bb7025a28c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1cd76cc677481c340deb63bbdca0ddb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>&#160;&#160;&#160;10</td></tr>
@@ -93,37 +98,25 @@ Macros</h2></td></tr>
 <tr class="memitem:aae73d91f689202dab06e8a4027b947c6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="set__env_8hpp.html#aae73d91f689202dab06e8a4027b947c6">MANAK_DEFAULT_OUT_FILENAME</a>&#160;&#160;&#160;benchmark_stat</td></tr>
 <tr class="memdesc:aae73d91f689202dab06e8a4027b947c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">If no output file is given benchmarking statistics will be saved to this file.  <a href="#aae73d91f689202dab06e8a4027b947c6">More...</a><br/></td></tr>
 <tr class="separator:aae73d91f689202dab06e8a4027b947c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee0cf3804862eacd7abb05192fe57d3a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="set__env_8hpp.html#aee0cf3804862eacd7abb05192fe57d3a">MANAK_DEFAULT_SP</a>&#160;&#160;&#160;100</td></tr>
+<tr class="memdesc:aee0cf3804862eacd7abb05192fe57d3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set default success percentage for benchmark-test cases.  <a href="#aee0cf3804862eacd7abb05192fe57d3a">More...</a><br/></td></tr>
+<tr class="separator:aee0cf3804862eacd7abb05192fe57d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a407c624fb108f4a4a399ffc647b7db93"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>&#160;&#160;&#160;10</td></tr>
 <tr class="memdesc:a407c624fb108f4a4a399ffc647b7db93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set default tolerance if not defined.  <a href="#a407c624fb108f4a4a399ffc647b7db93">More...</a><br/></td></tr>
 <tr class="separator:a407c624fb108f4a4a399ffc647b7db93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac85d291ccac61ae5a1419b0c3f4556bc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="set__env_8hpp.html#ac85d291ccac61ae5a1419b0c3f4556bc">MANAK_INIT_FUNCTION</a>&#160;&#160;&#160;<a class="el" href="namespacemanak.html#a93543497ad183da42bf3aad4995621d3">manak::init_benchmarking_module</a></td></tr>
-<tr class="memdesc:ac85d291ccac61ae5a1419b0c3f4556bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">If MANAK_ALTERNATE_INIT_FUNCTION is defined then that function will be called from generated main function for initializing unit benchmarking module.  <a href="#ac85d291ccac61ae5a1419b0c3f4556bc">More...</a><br/></td></tr>
-<tr class="separator:ac85d291ccac61ae5a1419b0c3f4556bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ffbb68bb6699b04b8760c2cdc572c82"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="set__env_8hpp.html#a7ffbb68bb6699b04b8760c2cdc572c82">MANAK_MODULE_NAME</a>&#160;&#160;&#160;<a class="el" href="macro__utils_8hpp.html#a6673dd5f64792781ee76c46a8b6e6bf0">MANAK_STRINGIZE</a>(MANAK_BENCHMARK_MODULE)</td></tr>
+<tr class="memitem:a7ffbb68bb6699b04b8760c2cdc572c82"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="set__env_8hpp.html#a7ffbb68bb6699b04b8760c2cdc572c82">MANAK_MODULE_NAME</a>&#160;&#160;&#160;<a class="el" href="macro__utils_8hpp.html#a6673dd5f64792781ee76c46a8b6e6bf0">MANAK_STRINGIZE</a>(MANAK_MODULE)</td></tr>
 <tr class="memdesc:a7ffbb68bb6699b04b8760c2cdc572c82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the module name for further use.  <a href="#a7ffbb68bb6699b04b8760c2cdc572c82">More...</a><br/></td></tr>
 <tr class="separator:a7ffbb68bb6699b04b8760c2cdc572c82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0649f58c42271d45849f87bc84884611"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="set__env_8hpp.html#a0649f58c42271d45849f87bc84884611">MANAK_OPEN_LOG</a>&#160;&#160;&#160;std::ofstream f(<a class="el" href="macro__utils_8hpp.html#a6673dd5f64792781ee76c46a8b6e6bf0">MANAK_STRINGIZE</a>(<a class="el" href="set__env_8hpp.html#af46b05b8d7d27ef3bb17b920049e4916">MANAK_REDIRECTION_FILENAME</a>), std::fstream::app);</td></tr>
-<tr class="memdesc:a0649f58c42271d45849f87bc84884611"><td class="mdescLeft">&#160;</td><td class="mdescRight">While the benchmark is running all the output on std::cout and std::cerr is redirected to another stream If that stream is not defined then define it ourselves.  <a href="#a0649f58c42271d45849f87bc84884611">More...</a><br/></td></tr>
+<tr class="memdesc:a0649f58c42271d45849f87bc84884611"><td class="mdescLeft">&#160;</td><td class="mdescRight">MANAK_REDIRECTION_BUFFER is the buffer to which std::cout and std::cerr is redirected while benchmark is running.  <a href="#a0649f58c42271d45849f87bc84884611">More...</a><br/></td></tr>
 <tr class="separator:a0649f58c42271d45849f87bc84884611"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fbb7cd9365afbb33a1dca29241aa6a5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="set__env_8hpp.html#a1fbb7cd9365afbb33a1dca29241aa6a5">MANAK_REDIRECTION_BUFFER</a>&#160;&#160;&#160;f.rdbuf()</td></tr>
+<tr class="separator:a1fbb7cd9365afbb33a1dca29241aa6a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af46b05b8d7d27ef3bb17b920049e4916"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="set__env_8hpp.html#af46b05b8d7d27ef3bb17b920049e4916">MANAK_REDIRECTION_FILENAME</a>&#160;&#160;&#160;benchmark_log.txt</td></tr>
-<tr class="memdesc:af46b05b8d7d27ef3bb17b920049e4916"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filename where the output of benchmark cases will be stored.  <a href="#af46b05b8d7d27ef3bb17b920049e4916">More...</a><br/></td></tr>
+<tr class="memdesc:af46b05b8d7d27ef3bb17b920049e4916"><td class="mdescLeft">&#160;</td><td class="mdescRight">While the benchmark is running all the output on std::cout and std::cerr is redirected to another stream if MANAK_REDIRECTION_FILENAME is set the output is redirected to that file.  <a href="#af46b05b8d7d27ef3bb17b920049e4916">More...</a><br/></td></tr>
 <tr class="separator:af46b05b8d7d27ef3bb17b920049e4916"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a class="anchor" id="a836a1345951e2740f56228db0cb7e2c6"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MANAK_BENCHMARK_REDIRECTION_STREAM&#160;&#160;&#160;f.rdbuf()</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00052">52</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="abe72ee9cd4a99a4139634bb7025a28c4"></a>
 <div class="memitem">
 <div class="memproto">
@@ -134,7 +127,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00051">51</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
+<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00053">53</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
 
 </div>
 </div>
@@ -150,7 +143,7 @@ Macros</h2></td></tr>
 
 <p>Set default iterations if not defined. </p>
 
-<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00034">34</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
+<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00029">29</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
 
 </div>
 </div>
@@ -166,9 +159,23 @@ Macros</h2></td></tr>
 
 <p>If no output file is given benchmarking statistics will be saved to this file. </p>
 
-<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00024">24</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
+<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00019">19</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="manak_8hpp_source.html#l00027">manak::manak_benchmarking_main()</a>.</p>
+</div>
+</div>
+<a class="anchor" id="aee0cf3804862eacd7abb05192fe57d3a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_DEFAULT_SP&#160;&#160;&#160;100</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set default success percentage for benchmark-test cases. </p>
+
+<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00034">34</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
 
 </div>
 </div>
@@ -184,24 +191,7 @@ Macros</h2></td></tr>
 
 <p>Set default tolerance if not defined. </p>
 
-<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00029">29</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac85d291ccac61ae5a1419b0c3f4556bc"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MANAK_INIT_FUNCTION&#160;&#160;&#160;<a class="el" href="namespacemanak.html#a93543497ad183da42bf3aad4995621d3">manak::init_benchmarking_module</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>If MANAK_ALTERNATE_INIT_FUNCTION is defined then that function will be called from generated main function for initializing unit benchmarking module. </p>
-<p>This function can be used manually registering cases. </p>
-
-<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00019">19</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
+<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00024">24</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
 
 </div>
 </div>
@@ -210,16 +200,14 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MANAK_MODULE_NAME&#160;&#160;&#160;<a class="el" href="macro__utils_8hpp.html#a6673dd5f64792781ee76c46a8b6e6bf0">MANAK_STRINGIZE</a>(MANAK_BENCHMARK_MODULE)</td>
+          <td class="memname">#define MANAK_MODULE_NAME&#160;&#160;&#160;<a class="el" href="macro__utils_8hpp.html#a6673dd5f64792781ee76c46a8b6e6bf0">MANAK_STRINGIZE</a>(MANAK_MODULE)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Set the module name for further use. </p>
 
-<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00009">9</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
-
-<p>Referenced by <a class="el" href="benchmark__suite_8hpp_source.html#l00141">manak::init_benchmarking_module()</a>.</p>
+<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00013">13</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
 
 </div>
 </div>
@@ -233,10 +221,24 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>While the benchmark is running all the output on std::cout and std::cerr is redirected to another stream If that stream is not defined then define it ourselves. </p>
-<p>Open the logging file stream </p>
+<p>MANAK_REDIRECTION_BUFFER is the buffer to which std::cout and std::cerr is redirected while benchmark is running. </p>
+<p>If its not defined it is redirected to file given by MANAK_REDIRECTION_FILENAME Open the logging file stream </p>
 
-<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00050">50</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
+<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00052">52</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1fbb7cd9365afbb33a1dca29241aa6a5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_REDIRECTION_BUFFER&#160;&#160;&#160;f.rdbuf()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00054">54</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
 
 </div>
 </div>
@@ -250,9 +252,9 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Filename where the output of benchmark cases will be stored. </p>
+<p>While the benchmark is running all the output on std::cout and std::cerr is redirected to another stream if MANAK_REDIRECTION_FILENAME is set the output is redirected to that file. </p>
 
-<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00040">40</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
+<p>Definition at line <a class="el" href="set__env_8hpp_source.html#l00042">42</a> of file <a class="el" href="set__env_8hpp_source.html">set_env.hpp</a>.</p>
 
 </div>
 </div>
@@ -261,8 +263,8 @@ Macros</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4c6f0f56bb7b054cbb2a0de860d7d462.html">manak</a></li><li class="navelem"><a class="el" href="dir_586b1078daf0a92751fc3409d59529af.html">benchmark_suit</a></li><li class="navelem"><a class="el" href="set__env_8hpp.html">set_env.hpp</a></li>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4c6f0f56bb7b054cbb2a0de860d7d462.html">manak</a></li><li class="navelem"><a class="el" href="dir_1fe2efaad9cdc7226aed6d70f6eeea1f.html">util</a></li><li class="navelem"><a class="el" href="set__env_8hpp.html">set_env.hpp</a></li>
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Manak: MANAK Hierarchical Structure</title>
+<title>Manak: Manak Hierarchical Structure</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -60,14 +60,14 @@ $(document).ready(function(){initNavTree('mhierarchy.html','');});
 <div id="doc-content">
 <div class="header">
   <div class="headertitle">
-<div class="title">MANAK Hierarchical Structure </div>  </div>
+<div class="title">Manak Hierarchical Structure </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>MANAK hierarchical structure - </p>
 <pre class="fragment">  Master Suite
         |
         |
- Benchmark Suite
+   Manak Suite
         |
         |
   Benchmark Case
@@ -76,10 +76,10 @@ $(document).ready(function(){initNavTree('mhierarchy.html','');});
 Sub-Benchmark Case
 </pre><h1><a class="anchor" id="hierarchy_master"></a>
 Master Suite</h1>
-<p>When you include <a class="el" href="manak_8hpp.html">manak.hpp</a>, it also adds a master suite to the program. Master suite is ancestor of all benchmark suites and cases. Main function of MANAK always runs this master suite which eventually runs the cases. Check out <a class="el" href="set_env.html#set_env_smft">Set main function type</a> for more information on main functions.</p>
+<p>When you include <a class="el" href="manak_8hpp.html">manak.hpp</a>, it also adds a master suite to the program. Master suite is ancestor of all benchmark suites and cases. The 'main' function of Manak always runs this master suite which eventually runs the cases. Check out <a class="el" href="set_env.html#set_env_smft">Set main function type</a> for more information on main functions.</p>
 <h1><a class="anchor" id="hierarchy_suite"></a>
-Benchmark Suite</h1>
-<p>Benchmark Suite is a collection of benchmark suites and cases which can be accessed by a unique name. For example, </p>
+Manak Suite</h1>
+<p>Manak Suite is a collection of Manak suites and cases which can be accessed by a unique name. For example, </p>
 <pre class="fragment">  Master Suite
         |
         |
@@ -89,19 +89,95 @@ Benchmark Suite</h1>
    Suite2 |
           |
         Case1
-</pre><p>Here, Suite1 is a direct child of master suite having name /Suite1. Suite2 will have name /Suite1/Suite2. Specific benchmarking suites can be run with regular expression support provided by MANAK. Check out <a class="el" href="quick_guide.html#qg_rsc">Running Specific Cases</a> for regular expression support.</p>
+</pre><p>Here, Suite1 is a direct child of master suite having name /Suite1. Suite2 will have name /Suite1/Suite2. Specific benchmarking suites can be run with regular expression support provided by Manak. Check out <a class="el" href="quick_guide.html#qg_rsc">Running Specific Cases</a> for regular expression support.</p>
 <h1><a class="anchor" id="hierarchy_case"></a>
 Benchmark Case</h1>
-<p>Like benchmark suites, benchmarking cases in MANAK are also accessed by unique hierarchical names. MANAK also supports running specific case with regular expressions(see <a class="el" href="quick_guide.html#qg_rsc">Running Specific Cases</a>). Benchmark is not associated to any function to run, it simply contains sub-benchmark cases which holds the actual code to be benchmarked.</p>
+<p>Like benchmark suites, benchmarking cases in Manak are also accessed by unique hierarchical names. Benchmarking cases in Manak can also perform testing with 'TEST' blocks. Check out <a class="el" href="test_fr.html">Test Framework</a> for more information on 'TEST' blocks. Manak also supports running specific case with regular expressions(see <a class="el" href="quick_guide.html#qg_rsc">Running Specific Cases</a>). For comparison, cases can have muliple entries under different library names. For example -</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#define MANAK_MODULE Bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
+<div class="line"><span class="preprocessor"></span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(Test, Lib1)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(Test, Lib2)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>NOTE: 'MANAK_AUTO_MAIN' or 'MANAK_INIT' has to be defined only once in case of multi file project. Check out <a class="el" href="multi_file.html">Using Manak Effectively in Multi File Project</a> for more information.</p>
+<p>In the above example there are 2 entries under Benchmark Case 'Test' with libraries 'Lib1' and 'Lib2'. Check <a href="samples/hierarchy_2.html">Sample HTML ouput</a> for output of above code. In the output you will notice that library entries are compared against each other. Check out <a class="el" href="comp.html">Comparison Framework</a> for more information on comparison framework.</p>
 <h1><a class="anchor" id="hierarchy_sub"></a>
 Sub-Benchmark Case</h1>
-<p>Sub-Benchmark case may be the smallest unit in this hierarchy but it is the most important and complex. There can be any number of sub-benchmark cases in a benchmark case and they are identified with index rather than a name(although a name can be assigned). Index is provided based on the chronological order(starting with 0). So when benchmark cases are compared against each other(see <a class="el" href="comp.html">Comparison Framework</a> if you don't know when they are compared), sub-benchmark cases are compared against each other. The benchmark cases in comparison can have different number of sub-benchmark cases. For example - look at this <a href="samples/hierarchy_1.html">Sample HTML ouput</a>. Check out <a class="el" href="out_format.html#out_format_html">HTML</a> for information on HTML output. You can see here that case B1 for lib1 contains 3 sub-cases while B1 for lib2 contains 2 sub-cases. Take a look at the detailed report, in B1-lib1 all the sub-cases are named but the second one does not reflect into the main table. This is because the name of second sub-case name of lib1 and second sub-case of lib2 does not match(there is an extra space). As sub-cases are indexed by numbers, Names of sub-cases only reflect in the main table if they match for every library. This also applied to TXT output. Check out <a class="el" href="p_bench.html">Complete guide on Templatized Benchmarking</a> for guide on templatized benchmarking. </p>
+<p>Sub-Benchmark cases are only used in case of parametrized benchmarks. Check out <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmarking</a> for guide on parametrized benchmarking.</p>
+<p>Sub-Benchmark case may be the smallest unit in this hierarchy but it is the most important and complex. There can be any number of sub-benchmark cases in a benchmark case and they are identified with index rather than a name(although a name can be assigned). Index is provided based on the chronological order(starting with 0). So when multiple library entries of benchmark case are compared against each other(see <a class="el" href="comp.html">Comparison Framework</a> if you don't know when they are compared), the corresponding sub-benchmark cases are compared against each other with index. The benchmark cases in comparison can have different number of sub-benchmark cases. For example -</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#define MANAK_MODULE Test</span></div>
+<div class="line"><span class="preprocessor"></span></div>
+<div class="line"><span class="preprocessor">#define MANAK_INIT</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> ForLoops(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, Lib1, ForLoops)-&gt;AddArgs_N(<span class="stringliteral">&quot;With100&quot;</span>, 100)-&gt;AddArgs_N(<span class="stringliteral">&quot;With1000&quot;</span>, 1000)-&gt;AddArgs_N(<span class="stringliteral">&quot;With10000&quot;</span>, 10000));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, Lib2, ForLoops)-&gt;AddArgs_N(<span class="stringliteral">&quot;With100&quot;</span>, 100)-&gt;AddArgs_N(<span class="stringliteral">&quot;With 1000&quot;</span>, 1000));</div>
+</div><!-- fragment --><p>NOTE: 'MANAK_AUTO_MAIN' or 'MANAK_INIT' has to be defined only once in case of multi file project. Check out <a class="el" href="multi_file.html">Using Manak Effectively in Multi File Project</a> for more information.</p>
+<p>The output of above code - <a href="samples/hierarchy_1.html">Sample HTML ouput</a>. Check out <a class="el" href="out_format.html#out_format_html">HTML</a> for information on HTML output. You can see here that case 'B1' with Lib1 contains 3 sub-cases while with Lib2 contains 2 sub-cases. Take a look at the detailed report, in B1-lib1 all the sub-cases are named but the second one does not reflect into the main table of 'B1'. This is because, second sub-case name of lib1 and second sub-case name of lib2 do not match(there is an extra space). As sub-cases are characterized only by their index, names of sub-cases only reflect in the main table if they match for every library.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#define MANAK_MODULE Test</span></div>
+<div class="line"><span class="preprocessor"></span></div>
+<div class="line"><span class="preprocessor">#define MANAK_INIT</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> ForLoops(<span class="keywordtype">size_t</span> a)</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, Lib1, ForLoops)-&gt;AddArgs_N(<span class="stringliteral">&quot;With100&quot;</span>, 100)-&gt;AddArgs_N(<span class="stringliteral">&quot;With1000&quot;</span>, 1000)-&gt;AddArgs_N(<span class="stringliteral">&quot;With10000&quot;</span>, 10000));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, Lib2, ForLoops)-&gt;AddArgs_N(<span class="stringliteral">&quot;With100&quot;</span>, 100)-&gt;AddArgs_N(<span class="stringliteral">&quot;With 1000&quot;</span>, 1000));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B2, Lib1, ForLoops)-&gt;AddArgs_N(<span class="stringliteral">&quot;With100&quot;</span>, 100)-&gt;AddArgs_N(<span class="stringliteral">&quot;With1000&quot;</span>, 1000)-&gt;AddArgs_N(<span class="stringliteral">&quot;With10000&quot;</span>, 10000));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B2, Lib2, ForLoops)-&gt;AddArgs_N(<span class="stringliteral">&quot;With100&quot;</span>, 100)-&gt;AddArgs_N(<span class="stringliteral">&quot;With1000&quot;</span>, 1000));</div>
+</div><!-- fragment --><p>Check out the output of the above code <a href="samples/hierarchy_3.html">HERE</a></p>
+<p>This also applies to TXT output. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

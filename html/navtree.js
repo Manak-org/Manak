@@ -12,118 +12,212 @@ var NAVTREE =
     ] ],
     [ "Automatic Registration", "auto_reg.html", [
       [ "Auto Registration With Simple Module", "auto_reg.html#auto_reg_sbm", [
-        [ "MANAK_AUTO_BENCHMARK_CASE", "auto_reg.html#auto_reg_sbm1", null ],
-        [ "MANAK_AUTO_BENCHMARK_CASE_I", "auto_reg.html#auto_reg_sbm2", null ],
-        [ "MANAK_AUTO_BENCHMARK_CASE_T", "auto_reg.html#auto_reg_sbm3", null ],
-        [ "MANAK_AUTO_BENCHMARK_CASE_IT", "auto_reg.html#auto_reg_sbm4", null ],
-        [ "MANAK_ADD_BENCHMARK", "auto_reg.html#auto_reg_sbm8", null ],
-        [ "MANAK_AUTO_BENCHMARK_SUITE", "auto_reg.html#auto_reg_sbm5", null ],
-        [ "MANAK_AUTO_BENCHMARK_END", "auto_reg.html#auto_reg_sbm6", null ],
-        [ "Parametrized Benchmark cases", "auto_reg.html#auto_reg_sbm7", null ]
+        [ "Simple Module Auto Case Registration Macros", "auto_reg.html#auto_reg_smacr", null ],
+        [ "MANAK_AUTO_BENCHMARK_CASE_TIS", "auto_reg.html#auto_reg_sbm1", null ],
+        [ "MANAK_AUTO_BENCHMARK_CASE_TI", "auto_reg.html#auto_reg_sbm2", null ],
+        [ "MANAK_AUTO_BENCHMARK_CASE_IS", "auto_reg.html#auto_reg_sbm3", null ],
+        [ "MANAK_AUTO_BENCHMARK_CASE_I", "auto_reg.html#auto_reg_sbm4", null ],
+        [ "MANAK_AUTO_BENCHMARK_CASE_T", "auto_reg.html#auto_reg_sbm5", null ],
+        [ "MANAK_AUTO_BENCHMARK_CASE", "auto_reg.html#auto_reg_sbm6", null ],
+        [ "MANAK_ADD_CASE", "auto_reg.html#auto_reg_sbm7", null ],
+        [ "Simple Module Auto Suite Registration Macros", "auto_reg.html#auto_reg_smasr", null ],
+        [ "MANAK_AUTO_SUITE", "auto_reg.html#auto_reg_sbm8", null ],
+        [ "MANAK_AUTO_SUITE_END", "auto_reg.html#auto_reg_sbm9", null ],
+        [ "Simple Module Auto Parametrized Benchmark Case Registration Macros", "auto_reg.html#auto_reg_smapbcr", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS", "auto_reg.html#auto_reg_sbm10", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI", "auto_reg.html#auto_reg_sbm11", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS", "auto_reg.html#auto_reg_sbm12", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I", "auto_reg.html#auto_reg_sbm13", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T", "auto_reg.html#auto_reg_sbm14", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE", "auto_reg.html#auto_reg_sbm15", null ],
+        [ "Simple Module Auto Group Registration Macros", "auto_reg.html#auto_reg_smagr", null ],
+        [ "MANAK_AUTO_GROUP AND MANAK_AUTO_GROUP_END", "auto_reg.html#auto_reg_sbm16", null ],
+        [ "MANAK_ADD_GROUP", "auto_reg.html#auto_reg_sbm30", null ],
+        [ "Simple Module Auto Group Benchmark Case Registration Macros", "auto_reg.html#auto_reg_smagbcr", null ],
+        [ "MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS", "auto_reg.html#auto_reg_sbm17", null ],
+        [ "MANAK_AUTO_GROUP_BENCHMARK_CASE_TI", "auto_reg.html#auto_reg_sbm18", null ],
+        [ "MANAK_AUTO_GROUP_BENCHMARK_CASE_IS", "auto_reg.html#auto_reg_sbm19", null ],
+        [ "MANAK_AUTO_GROUP_BENCHMARK_CASE_I", "auto_reg.html#auto_reg_sbm20", null ],
+        [ "MANAK_AUTO_GROUP_BENCHMARK_CASE_T", "auto_reg.html#auto_reg_sbm21", null ],
+        [ "MANAK_AUTO_GROUP_BENCHMARK_CASE", "auto_reg.html#auto_reg_sbm22", null ],
+        [ "MANAK_ADD_TO_GROUP", "auto_reg.html#auto_reg_sbm23", null ],
+        [ "Simple Module Auto Group Parametrized Benchmark Case Registration Macros", "auto_reg.html#auto_reg_smagpbcr", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS", "auto_reg.html#auto_reg_sbm24", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI", "auto_reg.html#auto_reg_sbm25", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS", "auto_reg.html#auto_reg_sbm26", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I", "auto_reg.html#auto_reg_sbm27", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T", "auto_reg.html#auto_reg_sbm28", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE", "auto_reg.html#auto_reg_sbm29", null ]
       ] ],
       [ "Auto Registration With Normal Module", "auto_reg.html#auto_reg_bm", [
-        [ "MANAK_AUTO_BENCHMARK_CASE", "auto_reg.html#auto_reg_bm1", null ],
-        [ "MANAK_AUTO_BENCHMARK_CASE_I", "auto_reg.html#auto_reg_bm2", null ],
-        [ "MANAK_AUTO_BENCHMARK_CASE_T", "auto_reg.html#auto_reg_bm3", null ],
-        [ "MANAK_AUTO_BENCHMARK_CASE_IT", "auto_reg.html#auto_reg_bm4", null ],
-        [ "MANAK_ADD_BENCHMARK", "auto_reg.html#auto_reg_bm8", null ],
-        [ "MANAK_AUTO_BENCHMARK_SUITE", "auto_reg.html#auto_reg_bm5", null ],
-        [ "MANAK_AUTO_BENCHMARK_END", "auto_reg.html#auto_reg_bm6", null ],
-        [ "Parametrized Benchmark cases", "auto_reg.html#auto_reg_bm7", null ]
+        [ "Normal Module Auto Case Registration Macros", "auto_reg.html#auto_reg_nmacr", null ],
+        [ "MANAK_AUTO_BENCHMARK_CASE_TIS", "auto_reg.html#auto_reg_bm1", null ],
+        [ "MANAK_AUTO_BENCHMARK_CASE_TI", "auto_reg.html#auto_reg_bm2", null ],
+        [ "MANAK_AUTO_BENCHMARK_CASE_IS", "auto_reg.html#auto_reg_bm3", null ],
+        [ "MANAK_AUTO_BENCHMARK_CASE_I", "auto_reg.html#auto_reg_bm4", null ],
+        [ "MANAK_AUTO_BENCHMARK_CASE_T", "auto_reg.html#auto_reg_bm5", null ],
+        [ "MANAK_AUTO_BENCHMARK_CASE", "auto_reg.html#auto_reg_bm6", null ],
+        [ "MANAK_ADD_CASE", "auto_reg.html#auto_reg_bm7", null ],
+        [ "Normal Module Auto Suite Registration Macros", "auto_reg.html#auto_reg_nmasr", null ],
+        [ "MANAK_AUTO_SUITE", "auto_reg.html#auto_reg_bm8", null ],
+        [ "MANAK_AUTO_SUITE_END", "auto_reg.html#auto_reg_bm9", null ],
+        [ "Normal Module Auto Parametrized Benchmark Case Registration Macros", "auto_reg.html#auto_reg_nmapbcr", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS", "auto_reg.html#auto_reg_bm10", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI", "auto_reg.html#auto_reg_bm11", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS", "auto_reg.html#auto_reg_bm12", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I", "auto_reg.html#auto_reg_bm13", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T", "auto_reg.html#auto_reg_bm14", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE", "auto_reg.html#auto_reg_bm15", null ],
+        [ "Normal Module Auto Group Registration Macros", "auto_reg.html#auto_reg_nmagr", null ],
+        [ "MANAK_AUTO_GROUP AND MANAK_AUTO_GROUP_END", "auto_reg.html#auto_reg_bm16", null ],
+        [ "MANAK_ADD_GROUP", "auto_reg.html#auto_reg_bm30", null ],
+        [ "Normal Module Auto Group Benchmark Case Registration Macros", "auto_reg.html#auto_reg_nmagbcr", null ],
+        [ "MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS", "auto_reg.html#auto_reg_bm17", null ],
+        [ "MANAK_AUTO_GROUP_BENCHMARK_CASE_TI", "auto_reg.html#auto_reg_bm18", null ],
+        [ "MANAK_AUTO_GROUP_BENCHMARK_CASE_IS", "auto_reg.html#auto_reg_bm19", null ],
+        [ "MANAK_AUTO_GROUP_BENCHMARK_CASE_I", "auto_reg.html#auto_reg_bm20", null ],
+        [ "MANAK_AUTO_GROUP_BENCHMARK_CASE_T", "auto_reg.html#auto_reg_bm21", null ],
+        [ "MANAK_AUTO_GROUP_BENCHMARK_CASE", "auto_reg.html#auto_reg_bm22", null ],
+        [ "MANAK_ADD_TO_GROUP", "auto_reg.html#auto_reg_bm23", null ],
+        [ "Normal Module Auto Group Parametrized Benchmark Case Registration Macros", "auto_reg.html#auto_reg_nmagpbcr", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS", "auto_reg.html#auto_reg_bm24", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI", "auto_reg.html#auto_reg_bm25", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS", "auto_reg.html#auto_reg_bm26", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I", "auto_reg.html#auto_reg_bm27", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T", "auto_reg.html#auto_reg_bm28", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE", "auto_reg.html#auto_reg_bm29", null ]
       ] ]
     ] ],
     [ "Installing and Using Manak", "build.html", [
       [ "Supported Compilers", "build.html#build_sc", null ],
       [ "Installing On Linux(or like environments)", "build.html#build_lb", [
-        [ "with CMake", "build.html#Installing", null ],
+        [ "and Installing with CMake", "build.html#Building", null ],
         [ "Installation", "build.html#Manual", null ]
       ] ],
-      [ "Installing on Windows", "build.html#build_wb", null ],
+      [ "Installing on Windows", "build.html#build_wb", [
+        [ "with CMake", "build.html#Installing", null ]
+      ] ],
       [ "Using Manak", "build.html#build_um", [
         [ "Command Line Arguments", "build.html#build_cli", null ]
       ] ]
     ] ],
     [ "Comparison Framework", "comp.html", [
       [ "Comparison Framework for Simple Module", "comp.html#comp_sm", [
-        [ "Comparison framework examples", "comp.html#comp_sm_ex", null ]
+        [ "Comparison framework Examples", "comp.html#comp_sm_ex", null ]
       ] ],
       [ "Comparison Framework of Normal Module", "comp.html#comp_nm", null ]
     ] ],
-    [ "MANAK Hierarchical Structure", "mhierarchy.html", [
+    [ "Tutorial on Using Groups", "com_gr.html", null ],
+    [ "Manak Hierarchical Structure", "mhierarchy.html", [
       [ "Master Suite", "mhierarchy.html#hierarchy_master", null ],
-      [ "Benchmark Suite", "mhierarchy.html#hierarchy_suite", null ],
+      [ "Manak Suite", "mhierarchy.html#hierarchy_suite", null ],
       [ "Benchmark Case", "mhierarchy.html#hierarchy_case", null ],
       [ "Sub-Benchmark Case", "mhierarchy.html#hierarchy_sub", null ]
     ] ],
     [ "Manual Registration", "man_reg.html", [
       [ "Manual Registartion with Simple Module", "man_reg.html#man_reg_msbm", [
-        [ "MANAK_BENCHMARK_CASE", "man_reg.html#man_reg_msbm1", null ],
-        [ "MANAK_BENCHMARK_CASE_I", "man_reg.html#man_reg_msbm2", null ],
-        [ "MANAK_BENCHMARK_CASE_T", "man_reg.html#man_reg_msbm3", null ],
-        [ "MANAK_BENCHMARK_CASE_IT", "man_reg.html#man_reg_msbm4", null ],
-        [ "MANAK_BENCHMARK_SUITE", "man_reg.html#man_reg_msbm5", null ],
-        [ "Parametrized Benchmark cases", "man_reg.html#man_reg_msbm6", null ]
+        [ "Simple Module Manual Benchmark Case Registration Macros", "man_reg.html#man_reg_smmbcr", null ],
+        [ "MANAK_BENCHMARK_CASE_TIS", "man_reg.html#man_reg_msbm1", null ],
+        [ "MANAK_BENCHMARK_CASE_TI", "man_reg.html#man_reg_msbm2", null ],
+        [ "MANAK_BENCHMARK_CASE_IS", "man_reg.html#man_reg_msbm3", null ],
+        [ "MANAK_BENCHMARK_CASE_T", "man_reg.html#man_reg_msbm4", null ],
+        [ "MANAK_BENCHMARK_CASE_I", "man_reg.html#man_reg_msbm5", null ],
+        [ "MANAK_BENCHMARK_CASE", "man_reg.html#man_reg_msbm6", null ],
+        [ "Simple Module Manual Suite Registration Macros", "man_reg.html#man_reg_smmsr", null ],
+        [ "MANAK_BENCHMARK_SUITE", "man_reg.html#man_reg_msbm7", null ],
+        [ "Simple Module Manual Parametrized Benchmark Case Registration Macros", "man_reg.html#man_reg_smmpbcr", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS", "man_reg.html#man_reg_msbm8", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI", "man_reg.html#man_reg_msbm9", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS", "man_reg.html#man_reg_msbm10", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T", "man_reg.html#man_reg_msbm11", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I", "man_reg.html#man_reg_msbm12", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE", "man_reg.html#man_reg_msbm13", null ],
+        [ "Simple Module Manual Group Registration Macros", "man_reg.html#man_reg_smmgrm", null ],
+        [ "MANAK_GROUP and MANAK_GROUP_END", "man_reg.html#man_reg_msbm14", null ],
+        [ "Simple Module Manual Group Benchmark Case Registration Macros", "man_reg.html#man_reg_smmgbcrm", null ],
+        [ "MANAK_GROUP_BENCHMARK_CASE_TIS", "man_reg.html#man_reg_msbm15", null ],
+        [ "MANAK_GROUP_BENCHMARK_CASE_TI", "man_reg.html#man_reg_msbm16", null ],
+        [ "MANAK_GROUP_BENCHMARK_CASE_IS", "man_reg.html#man_reg_msbm17", null ],
+        [ "MANAK_GROUP_BENCHMARK_CASE_T", "man_reg.html#man_reg_msbm18", null ],
+        [ "MANAK_GROUP_BENCHMARK_CASE_I", "man_reg.html#man_reg_msbm19", null ],
+        [ "MANAK_GROUP_BENCHMARK_CASE", "man_reg.html#man_reg_msbm20", null ],
+        [ "Module Manual Group Parametrized Benchmark Case Registration Macros", "man_reg.html#Simple", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS", "man_reg.html#man_reg_msbm21", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI", "man_reg.html#man_reg_msbm22", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS", "man_reg.html#man_reg_msbm23", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T", "man_reg.html#man_reg_msbm24", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I", "man_reg.html#man_reg_msbm25", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE", "man_reg.html#man_reg_msbm26", null ]
       ] ],
       [ "Manual Registartion with Normal Module", "man_reg.html#man_reg_mbm", [
-        [ "MANAK_BENCHMARK_CASE", "man_reg.html#man_reg_mbm1", null ],
-        [ "MANAK_BENCHMARK_CASE_I", "man_reg.html#man_reg_mbm2", null ],
-        [ "MANAK_BENCHMARK_CASE_T", "man_reg.html#man_reg_mbm3", null ],
-        [ "MANAK_BENCHMARK_CASE_IT", "man_reg.html#man_reg_mbm4", null ],
-        [ "MANAK_BENCHMARK_SUITE", "man_reg.html#man_reg_mbm5", null ],
-        [ "Parametrized Benchmark cases", "man_reg.html#man_reg_mbm6", null ]
+        [ "Normal Module Manual Benchmark Case Registration Macros", "man_reg.html#man_reg_nmmbcr", null ],
+        [ "MANAK_BENCHMARK_CASE_TIS", "man_reg.html#man_reg_mbm1", null ],
+        [ "MANAK_BENCHMARK_CASE_TI", "man_reg.html#man_reg_mbm2", null ],
+        [ "MANAK_BENCHMARK_CASE_IS", "man_reg.html#man_reg_mbm3", null ],
+        [ "MANAK_BENCHMARK_CASE_T", "man_reg.html#man_reg_mbm4", null ],
+        [ "MANAK_BENCHMARK_CASE_I", "man_reg.html#man_reg_mbm5", null ],
+        [ "MANAK_BENCHMARK_CASE", "man_reg.html#man_reg_mbm6", null ],
+        [ "Normal Module Manual Suite Registration Macros", "man_reg.html#man_reg_nmmsr", null ],
+        [ "MANAK_BENCHMARK_SUITE", "man_reg.html#man_reg_mbm7", null ],
+        [ "Normal Module Manual Parametrized Benchmark Case Registration Macros", "man_reg.html#man_reg_nmmpbcr", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS", "man_reg.html#man_reg_mbm8", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI", "man_reg.html#man_reg_mbm9", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS", "man_reg.html#man_reg_mbm10", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T", "man_reg.html#man_reg_mbm11", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I", "man_reg.html#man_reg_mbm12", null ],
+        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE", "man_reg.html#man_reg_mbm13", null ],
+        [ "Normal Module Manual Group Registration Macros", "man_reg.html#man_reg_nmmgrm", null ],
+        [ "MANAK_GROUP and MANAK_GROUP_END", "man_reg.html#man_reg_mbm14", null ],
+        [ "Normal Module Manual Group Benchmark Case Registration Macros", "man_reg.html#man_reg_nmmgbcrm", null ],
+        [ "MANAK_GROUP_BENCHMARK_CASE_TIS", "man_reg.html#man_reg_mbm15", null ],
+        [ "MANAK_GROUP_BENCHMARK_CASE_TI", "man_reg.html#man_reg_mbm16", null ],
+        [ "MANAK_GROUP_BENCHMARK_CASE_IS", "man_reg.html#man_reg_mbm17", null ],
+        [ "MANAK_GROUP_BENCHMARK_CASE_T", "man_reg.html#man_reg_mbm18", null ],
+        [ "MANAK_GROUP_BENCHMARK_CASE_I", "man_reg.html#man_reg_mbm19", null ],
+        [ "MANAK_GROUP_BENCHMARK_CASE", "man_reg.html#man_reg_mbm20", null ],
+        [ "Normal Module Manual Group Parametrized Benchmark Case Registration Macros", "man_reg.html#man_reg_nmmgpbcr", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS", "man_reg.html#man_reg_mbm21", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI", "man_reg.html#man_reg_mbm22", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS", "man_reg.html#man_reg_mbm23", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T", "man_reg.html#man_reg_mbm24", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I", "man_reg.html#man_reg_mbm25", null ],
+        [ "MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE", "man_reg.html#man_reg_mbm26", null ]
       ] ]
     ] ],
-    [ "Benchmark Module", "n_mod.html", [
+    [ "Using Manak Effectively in Multi File Project", "multi_file.html", null ],
+    [ "Normal Module", "n_mod.html", [
       [ "Introduction", "n_mod.html#n_mod_intro", null ],
       [ "Auto Registration", "n_mod.html#n_mod_ar", null ],
       [ "Example", "n_mod.html#n_mod_ar_ex", null ],
-      [ "Manual Registration", "n_mod.html#n_mod_mr", null ],
+      [ "Manual Registration with Normal Mode", "n_mod.html#n_mod_mr", null ],
       [ "Example", "n_mod.html#n_mod_mr_ex", null ],
       [ "Comparison Framework", "n_mod.html#nm_cf", null ]
     ] ],
-    [ "Output Formats", "out_format.html", [
+    [ "All About Outputs", "out_format.html", [
       [ "Introduction", "out_format.html#out_format_intro", null ],
-      [ "HTML", "out_format.html#out_format_html", null ]
+      [ "HTML", "out_format.html#out_format_html", null ],
+      [ "Generating More Than One Output", "out_format.html#out_format_gmto", null ]
     ] ],
-    [ "Complete guide on Templatized Benchmarking", "p_bench.html", [
-      [ "Templatized Benchmarking with Parametrized Benchmarks", "p_bench.html#p_bench_para", [
-        [ "AddArgs_N", "p_bench.html#p_bench_aan", null ],
-        [ "AddCustomArgs", "p_bench.html#p_bench_aca", null ]
-      ] ],
-      [ "AddCuctomArgs_N", "p_bench.html#p_bench_acan", null ],
-      [ "Parametrized Benchmark Macros for Simple Module", "p_bench.html#p_bench_sm_m", [
-        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE", "p_bench.html#p_bench_m1", null ],
-        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I", "p_bench.html#p_bench_m2", null ],
-        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T", "p_bench.html#p_bench_m3", null ],
-        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT", "p_bench.html#p_bench_m4", null ]
-      ] ],
-      [ "Parametrized Benchmark Macros for Normal Module", "p_bench.html#p_bench_m_m", [
-        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE", "p_bench.html#p_bench_m5", null ],
-        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I", "p_bench.html#p_bench_m6", null ],
-        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T", "p_bench.html#p_bench_m7", null ],
-        [ "MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT", "p_bench.html#p_bench_m8", null ]
-      ] ],
-      [ "Templatized Benchmarking with Multiple 'Repeat' blocks.", "p_bench.html#p_bench_mr", null ]
+    [ "Complete guide on Parametrized Benchmarking", "p_bench.html", [
+      [ "AddArgs_N", "p_bench.html#p_bench_aan", null ],
+      [ "AddCustomArgs", "p_bench.html#p_bench_aca", null ]
     ] ],
     [ "Quick Guide", "quick_guide.html", [
-      [ "Introduction", "quick_guide.html#qg_intro_sec", null ],
-      [ "Simple Benchmarking Module", "quick_guide.html#qg_sbm", [
+      [ "Introduction", "quick_guide.html#qg_intro_sec", [
         [ "Parametrized Benchmark Cases", "quick_guide.html#qg_pbc", null ]
       ] ],
-      [ "Benchmaking Module", "quick_guide.html#qg_bm", null ],
+      [ "Manak Groups", "quick_guide.html#qg_groups", null ],
       [ "Manak Comparison Framework", "quick_guide.html#qg_comp", null ],
+      [ "Manak parametrized Benchmarks", "quick_guide.html#qg_para", null ],
       [ "Running Specific Cases", "quick_guide.html#qg_rsc", null ]
     ] ],
     [ "Setting Environment", "set_env.html", [
-      [ "Setting module type", "set_env.html#set_env_smt", [
-        [ "MANAK_SIMPLE_BENCHMARK_MODULE", "set_env.html#set_env_msbm", null ],
-        [ "MANAK_BENCHMARK_MODULE", "set_env.html#set_env_mbm", null ]
-      ] ],
+      [ "Linkage Type", "set_env.html#Setting", null ],
       [ "Set main function type", "set_env.html#set_env_smft", [
-        [ "MANAK_AUTO_BENCHMARK_MAIN", "set_env.html#set_env_mabm", null ],
+        [ "MANAK_AUTO_MAIN", "set_env.html#set_env_mabm", null ],
         [ "Manually creating main function", "set_env.html#set_env_mcmf", null ]
       ] ],
-      [ "Set benchmark initialization function", "set_env.html#set_env_sbif", null ],
+      [ "Set Manual initialization function", "set_env.html#set_env_sbif", null ],
       [ "Set Output Options", "set_env.html#set_env_soo", [
         [ "Setting Redirection Options", "set_env.html#set_env_sro", null ],
         [ "Setting Options For Output File", "set_env.html#set_env_soof", null ]
@@ -131,7 +225,8 @@ var NAVTREE =
       [ "Other Environment Variables", "set_env.html#set_env_oev", [
         [ "MANAK_BASE_LIBRARY_NAME", "set_env.html#set_env_mbln", null ],
         [ "MANAK_DEFAULT_ITERATIONS", "set_env.html#set_env_mdi", null ],
-        [ "MANAK_DEFAULT_TOLERANCE", "set_env.html#set_env_mdt", null ]
+        [ "MANAK_DEFAULT_TOLERANCE", "set_env.html#set_env_mdt", null ],
+        [ "MANAK_DEFAULT_SP", "set_env.html#set_env_mdsp", null ]
       ] ]
     ] ],
     [ "Simple Benchmark Module", "s_mod.html", [
@@ -142,12 +237,27 @@ var NAVTREE =
       [ "Example", "s_mod.html#s_mod_mr_ex", null ],
       [ "Comparison Framework", "s_mod.html#sm_cf", null ]
     ] ],
+    [ "Test Framework", "test_fr.html", [
+      [ "Macros", "test_fr.html#test_fr_ma", [
+        [ "ASSERT Macros", "test_fr.html#test_fr_m_a", null ],
+        [ "MANAK_ASSERT_TRUE", "test_fr.html#test_fr_m_at", null ],
+        [ "MANAK_ASSERT_TRUE_MSG", "test_fr.html#test_fr_m_atm", null ],
+        [ "MANAK_ASSERT_FALSE", "test_fr.html#test_fr_m_af", null ],
+        [ "MANAK_ASSERT_FALSE_MSG", "test_fr.html#test_fr_m_afm", null ],
+        [ "CHECK Macros", "test_fr.html#test_fr_m_c", null ],
+        [ "MANAK_CHECK_TRUE", "test_fr.html#test_fr_m_ct", null ],
+        [ "MANAK_CHECK_TRUE_MSG", "test_fr.html#test_fr_m_ctm", null ],
+        [ "MANAK_CHECK_FALSE", "test_fr.html#test_fr_m_cf", null ],
+        [ "MANAK_CHECK_FALSE_MSG", "test_fr.html#test_fr_m_cfm", null ]
+      ] ]
+    ] ],
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
       [ "Namespace Members", "namespacemembers.html", [
         [ "All", "namespacemembers.html", null ],
         [ "Functions", "namespacemembers_func.html", null ],
-        [ "Variables", "namespacemembers_vars.html", null ]
+        [ "Variables", "namespacemembers_vars.html", null ],
+        [ "Typedefs", "namespacemembers_type.html", null ]
       ] ]
     ] ],
     [ "Classes", null, [
@@ -155,10 +265,12 @@ var NAVTREE =
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
+        [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ],
-        [ "Typedefs", "functions_type.html", null ]
+        [ "Typedefs", "functions_type.html", null ],
+        [ "Enumerations", "functions_enum.html", null ],
+        [ "Enumerator", "functions_eval.html", null ]
       ] ]
     ] ],
     [ "Files", null, [
@@ -174,7 +286,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "all_time.html",
-"p_bench.html#p_bench_m1"
+"classmanak_1_1Timer.html#ae55a4aec57b4b20ce27810ac1d87ea2a",
+"out_format.html",
+"use_afr.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -65,34 +65,43 @@ $(document).ready(function(){initNavTree('comp.html','');});
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="comp_sm"></a>
 Comparison Framework for Simple Module</h1>
-<p>In simple module there is only one library which is compared against itself along time. The current result can be saved for comparison by passing '-s &lt;filename&gt;' command line option to the executable. This saved file can be later loaded with '-c &lt;filename&gt;' for comparison. Remember while saving, only the benchmarks which run will be saved. For example, if given '-r' options for running specific, only the benchmark cases satisfying the regular expression will be saved. See <a class="el" href="quick_guide.html#qg_rsc">Running Specific Cases</a> for more information on running specific benchmarks.</p>
+<p>In simple module, benchmark cases are added with a default library name. Understand the library concept by checking out <a class="el" href="mhierarchy.html#hierarchy_case">Benchmark Case</a>. The current results can be saved for comparison by passing '-s &lt;filename&gt;' command line option to the executable. This saved file can be later loaded with '-c &lt;filename&gt;' for comparison. Remember while saving, only the cases which actually ran will be saved. For example, if given '-r' options for running specific cases, only the benchmark cases satisfying the regular expression will be saved. See <a class="el" href="quick_guide.html#qg_rsc">Running Specific Cases</a> for more information on running specific benchmarks.</p>
 <h2><a class="anchor" id="comp_sm_ex"></a>
-Comparison framework examples</h2>
+Comparison framework Examples</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN </span></div>
+<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Save the results of this benchmark in 'bench1.txt' for comparison.</p>
+</div><!-- fragment --><p>NOTE: 'MANAK_AUTO_MAIN' or 'MANAK_INIT' has to be defined only once in case of multi file project. Check out <a class="el" href="multi_file.html">Using Manak Effectively in Multi File Project</a> for more information.</p>
+<p>Save the results of this benchmark in 'bench1.txt' for comparison.</p>
 <div class="fragment"><div class="line">g++ -std=c++11 &lt;name&gt;.cpp</div>
 <div class="line">./a.out -s bench1.txt</div>
 </div><!-- fragment --><p>Change &lt;name&gt;.cpp to -</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN </span></div>
+<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Compare the new code with the older -</p>
 <div class="fragment"><div class="line">g++ -std=c++11 &lt;name&gt;.cpp</div>
@@ -101,32 +110,39 @@ Comparison framework examples</h2>
 <p>The sample TXT output is -</p>
 <div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version 1.0.0                                                     #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Created at Nov 15 03:40:08 2014                                   #</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version 1.1.0                                                     #</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Created at Jan 31 23:27:53 2015                                   #</span></div>
 <div class="line"><span class="preprocessor"></span><span class="preprocessor">######################################################################</span></div>
-<div class="line"><span class="preprocessor"></span> </div>
-<div class="line">       Case Name              base_library        </div>
+<div class="line"><span class="preprocessor"></span></div>
 <div class="line"></div>
-<div class="line">B1                            +34(3.7) </div>
-</div><!-- fragment --><p>MANAK by default generates HTML output. Check out <a class="el" href="out_format.html">Output Formats</a> for more information on output formats.</p>
-<p>The value in the bracket is the old benchmarked value which was saved in 'bench1.txt'. The '+' sign in front of the entry suggests that the current benchmark is higher in magnitude. On the other hand if the current entry is lower in magnitude, output will show a negative sign. This comparison is done based on tolerance. Hence no sign implies the benchmarks are equivalent with respect to given tolerance. Here no tolerance is given for 'B1' so default tolerance is assumed(10 microseconds). See <a class="el" href="set_env.html#set_env_mdt">MANAK_DEFAULT_TOLERANCE</a> for setting default tolerance value. In comparison with tolerance 'value +- tolerance' is considered equivalent. Tolerance can be given for a perticular benchmark case with 'MANAK_AUTO_BENCHMARK_CASE_T' or 'MANAK_BENCHMARK_CASE_T'. See <a class="el" href="s_mod.html">Simple Benchmark Module</a> for more information on these macros.</p>
-<p>For loading the appropriate old value into the benchmark case each benchmark case is assigned a unique name. This unique name depends on its location in the hierarchy and its library. Hence its not necessary to maintain the exact state of the benchmarking module to load the old saved results.</p>
+<div class="line">       Case Name              bench               </div>
+<div class="line">B1                            +30.7(3.4) </div>
+</div><!-- fragment --><p>Manak by default generates HTML output. Check out <a class="el" href="out_format.html">All About Outputs</a> for more information on output formats.</p>
+<p>The value in the bracket is the old benchmarked value which was saved in 'bench1.txt'. The '+' sign in front of the entry suggests that the current benchmark is higher in magnitude. On the other hand if the current entry is lower in magnitude, output will show a negative sign. This comparison is done based on tolerance. Lack of sign implies the benchmarks are equivalent with respect to given tolerance. Here no tolerance value is given for 'B1' so default tolerance is assumed(10 microseconds). See <a class="el" href="set_env.html#set_env_mdt">MANAK_DEFAULT_TOLERANCE</a> for setting default tolerance value. In comparison with tolerance 'value +- tolerance' is considered equivalent. Tolerance value can be given for a perticular benchmark case with 'MANAK_AUTO_BENCHMARK_CASE_T' or 'MANAK_BENCHMARK_CASE_T'. See <a class="el" href="s_mod.html">Simple Benchmark Module</a> for more information on these macros.</p>
+<p>For loading the appropriate old value into the benchmark case each benchmark case is assigned a unique name. This unique name depends on its location in the hierarchy. Hence its not necessary to maintain the exact state of the benchmarking module to load the old saved results.</p>
 <p>For example let us change the code of &lt;name&gt;.cpp to - </p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN </span></div>
+<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT </span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B2)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 100000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 100000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>In this case the output(TXT... HTML output will be similar) will look like -</p>
 <div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
@@ -139,26 +155,33 @@ Comparison framework examples</h2>
 <div class="line"></div>
 <div class="line">B1                            +33.6(3.7)          </div>
 <div class="line">B2                            337.2</div>
-</div><!-- fragment --><p>Here only 'B1' is compared as only its old data was available. Here if we shift 'B1' inside any suite, its unique signature will change and it won't be compared with the old entry.</p>
+</div><!-- fragment --><p>Here only 'B1' is compared as only its old data was available. Here if we shift 'B1' inside any suite, its unique signature will change and it won't be compared with the old entry. Also remember the values are loaded against the associated library in a benchmark case, changing the library name will also affect the loading process.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
+<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__suite_8hpp.html#ae2cb39c3eedb85936f963b6e9a48b546">MANAK_AUTO_BENCHMARK_SUITE</a>(Suite1);</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#ac70ac27f45a67029b99088a024b7ec09">MANAK_AUTO_SUITE</a>(Suite1);</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__suite_8hpp.html#a2b688eb84da0738790f8cf8448d47341">MANAK_AUTO_BENCHMARK_SUITE_END</a>();</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#adffecc8a604080c811777e4e513b9beb">MANAK_AUTO_SUITE_END</a>();</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B2)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 100000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 100000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>The output(TXT) will be -</p>
 <div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
@@ -173,82 +196,82 @@ Comparison framework examples</h2>
 <div class="line">B1                            33.6                </div>
 </div><!-- fragment --><h1><a class="anchor" id="comp_nm"></a>
 Comparison Framework of Normal Module</h1>
-<p>In normal benchmarking module multiple libraries are compared against each other. The libraries can also be compared with themselves along time. The comparison framework of normal module is built around the comparison structure of simple module. Time based comparison structure of both modules is identical hence see <a class="el" href="comp.html#comp_sm">Comparison Framework for Simple Module</a> for time based comparison of libraries. libraries with themselves along time </p>
-<dl class="section see"><dt>See Also</dt><dd>comp_sm. In normal module comparison framework benchmark cases having identical name but different library name are also compared against each other.</dd></dl>
+<p>In normal benchmarking module multiple libraries are compared against each other. The libraries can also be compared along time. The comparison framework of normal module is built around the comparison structure of simple module. Time based comparison structure of both modules is identical hence see <a class="el" href="comp.html#comp_sm">Comparison Framework for Simple Module</a> for time based comparison. In normal module comparison framework, libraries associed with benchmark case are compared against each other.</p>
 <p>For example - </p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN </span></div>
+<div class="line"><span class="preprocessor">#define MANAK_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT </span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1, lib1)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
+<div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1, lib2)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
+<div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B2, lib2)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>The output(TXT) of this code will be -</p>
-<div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version master.0.0                                                #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Created at Nov 15 04:36:52 2014                                   #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">######################################################################</span></div>
-<div class="line"><span class="preprocessor"></span></div>
-<div class="line">       Case Name              lib1                lib2                </div>
-<div class="line"></div>
-<div class="line">B1                            3.6                 33.7                </div>
-<div class="line">B2                                                3.8</div>
-</div><!-- fragment --><p>The examples shown in <a class="el" href="comp.html#comp_sm_ex">Comparison framework examples</a> would work equivalently on this code in time based comparison. Remember, all benchmark suites carry their own namespace hence benchmark suite having same name and different suite and library won't be compared against each other.</p>
+</div><!-- fragment --><p>The output of this code can be seen <a href="samples/comp_2.html">HERE</a>.</p>
+<p>The examples shown in <a class="el" href="comp.html#comp_sm_ex">Comparison framework Examples</a> would work equivalently on this code in time based comparison. Remember, all suites carry their own namespace.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
+<div class="line"><span class="preprocessor">#define MANAK_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__suite_8hpp.html#ae2cb39c3eedb85936f963b6e9a48b546">MANAK_AUTO_BENCHMARK_SUITE</a>(Suite1);</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#ac70ac27f45a67029b99088a024b7ec09">MANAK_AUTO_SUITE</a>(Suite1);</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1, lib1)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__suite_8hpp.html#a2b688eb84da0738790f8cf8448d47341">MANAK_AUTO_BENCHMARK_SUITE_END</a>();</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#adffecc8a604080c811777e4e513b9beb">MANAK_AUTO_SUITE_END</a>();</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1, lib2)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 10000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B2, lib2)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>And the output(TXT) -</p>
-<div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version master.0.0                                                #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Created at Nov 15 04:41:25 2014                                   #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">######################################################################</span></div>
-<div class="line"><span class="preprocessor"></span></div>
-<div class="line">       Case Name              lib2                lib1                </div>
-<div class="line"></div>
-<div class="line">B1                            33.5                </div>
-<div class="line">B2                            3.5                 </div>
-<div class="line">B1                                                4.6</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p>And the output <a href="samples/comp_3.html">HERE</a>. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

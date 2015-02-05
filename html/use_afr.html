@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -65,14 +65,14 @@ $(document).ready(function(){initNavTree('use_afr.html','');});
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="use_afr_rtf"></a>
 Registration of Templatized Functions</h1>
-<p>With overloadedtemplatized functions the template substitution becomes ambiguous. To remove this ambiguity in case of templatized functions specific template signature must be given as auto template substitution won't work.</p>
+<p>With overloaded templatized functions the template substitution becomes ambiguous. To remove this ambiguity in case of templatized functions specific template signature must be given.</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><span class="keywordtype">int</span> fun(T a)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun&lt;size_t&gt;)-&gt;AddArgs(1000));</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun&lt;size_t&gt;)-&gt;AddArgs(1000));</div>
 </div><!-- fragment --><h1><a class="anchor" id="use_afr_ofr"></a>
 Overloaded Function Registration</h1>
 <p>In case of overloaded functions, a static cast has to be used to determine the correct signature.</p>
@@ -80,12 +80,12 @@ Overloaded Function Registration</h1>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
-<div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">int</span> b)</div>
+<div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">double</span> b)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span>(&amp;)(<span class="keywordtype">int</span>)<span class="keyword">&gt;</span>(fun)));</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span>(&amp;)(<span class="keywordtype">int</span>)<span class="keyword">&gt;</span>(fun)));</div>
 </div><!-- fragment --><h1><a class="anchor" id="use_afr_rcmf"></a>
 Registration of Class Member Functions</h1>
 <p>Static class functions can be directly passed.</p>
@@ -98,7 +98,7 @@ Registration of Class Member Functions</h1>
 <div class="line">  }</div>
 <div class="line">};</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, A::fun));</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(B1, A::fun));</div>
 </div><!-- fragment --><p>The use of non static members is little complex. Manak provides a useful function <a class="el" href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">manak::utils::BindToObject</a> for that. This function accepts class member function pointer as first argument and pointer to class object as second and returns a non class member function which can be directly passed to any macro.</p>
 <p>With manual registration - </p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>A</div>
@@ -113,9 +113,10 @@ Registration of Class Member Functions</h1>
 <div class="line"><span class="keywordtype">bool</span> manual_init()</div>
 <div class="line">{</div>
 <div class="line">  A* a = <span class="keyword">new</span> A();</div>
-<div class="line">  <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>()-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, <a class="code" href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">manak::utils::BindToObject</a>(&amp;A::fun, a))-&gt;AddArgs(1000));</div>
+<div class="line">  manak::BenchmarkSuite::GetMasterSuite()-&gt;AddCase(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, <a class="code" href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">manak::utils::BindToObject</a>(&amp;A::fun, a))-&gt;AddArgs(1000));</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>With auto registration - </p>
+</div><!-- fragment --><p>In this case it is important to assign memory in heap as the actual call to this registered function happens after the execution of initialization.</p>
+<p>With auto registration - </p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>A</div>
 <div class="line">{</div>
 <div class="line"> <span class="keyword">public</span>:</div>
@@ -130,13 +131,13 @@ Registration of Class Member Functions</h1>
 <div class="line">  <span class="keywordflow">return</span> <span class="keyword">new</span> A();</div>
 <div class="line">} </div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, <a class="code" href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">manak::utils::BindToObject</a>(&amp;A::fun, Test()))-&gt;AddArgs(1000));</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, <a class="code" href="namespacemanak_1_1utils.html#afcb1904a214bd5346f199db39663ae3c">manak::utils::BindToObject</a>(&amp;A::fun, Test()))-&gt;AddArgs(1000));</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

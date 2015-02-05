@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -81,14 +81,21 @@ $(document).ready(function(){initNavTree('macro__utils_8hpp_source.html','');});
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="macro__utils_8hpp.html#a6ec7bd2e052f08c1b0163acf7ccdc9fe">   18</a></span>&#160;<span class="preprocessor">#define STRING_JOIN(X, Y) STRING_JOIN2(X, Y)</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif // MANAK_UTIL_MACRO_ARG_COUNT_HPP_INCLUDED</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#ifdef MANAK_USE_DYN_LINK</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_INLINE</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="macro__utils_8hpp.html#ab916b6f36b84bf800d708fe551b4dcc0">   25</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_INLINE inline</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif // MANAK_UE_DYNAMIC_LINK</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif // MANAK_UTIL_MACRO_ARG_COUNT_HPP_INCLUDED</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4c6f0f56bb7b054cbb2a0de860d7d462.html">manak</a></li><li class="navelem"><a class="el" href="dir_1fe2efaad9cdc7226aed6d70f6eeea1f.html">util</a></li><li class="navelem"><a class="el" href="macro__utils_8hpp.html">macro_utils.hpp</a></li>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

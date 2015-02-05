@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structmanak_1_1RNode.html" title="manak::RNode" alt="" coords="6,5,117,32"/>
+<area shape="rect" id="node1" href="$classmanak_1_1OutputHandler.html" title="manak::OutputHandler" alt="" coords="6,31,159,57"/>
+<area shape="rect" id="node2" href="$classmanak_1_1HTMLOutputHandler.html" title="manak::HTMLOutputHandler" alt="" coords="208,5,397,32"/>
+<area shape="rect" id="node3" href="$classmanak_1_1TXTOutputHandler.html" title="manak::TXTOutputHandler" alt="" coords="213,56,392,83"/>
 </map>

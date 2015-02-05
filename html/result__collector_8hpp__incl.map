@@ -1,0 +1,14 @@
+<map id="src/manak/manak_suite/result_collector.hpp" name="src/manak/manak_suite/result_collector.hpp">
+<area shape="rect" id="node6" href="$output__manager_8hpp.html" title="manak/output_manager\l/output_manager.hpp" alt="" coords="718,97,876,138"/>
+<area shape="rect" id="node9" href="$macro__utils_8hpp.html" title="macro_utils.hpp" alt="" coords="2529,427,2644,453"/>
+<area shape="rect" id="node19" href="$version_8hpp.html" title="manak/util/version.hpp" alt="" coords="1759,269,1912,296"/>
+<area shape="rect" id="node8" href="$object__store_8hpp.html" title="manak/util/object_store.hpp" alt="" coords="681,352,863,379"/>
+<area shape="rect" id="node11" href="$output__handler_8hpp.html" title="output_handler.hpp" alt="" coords="577,269,708,296"/>
+<area shape="rect" id="node13" href="$txt__output__handler_8hpp.html" title="txt_output_handler.hpp" alt="" coords="663,187,816,213"/>
+<area shape="rect" id="node22" href="$html__output__handler_8hpp.html" title="html_output_handler.hpp" alt="" coords="1386,187,1549,213"/>
+<area shape="rect" id="node14" href="$test__monitor_8hpp.html" title="manak/test_suite/test\l_monitor.hpp" alt="" coords="1238,262,1385,303"/>
+<area shape="rect" id="node20" href="$pmeasure_8hpp.html" title="manak/util/pmeasure.hpp" alt="" coords="1917,352,2085,379"/>
+<area shape="rect" id="node17" href="$monitor__entry_8hpp.html" title="monitor_entry.hpp" alt="" coords="1091,352,1217,379"/>
+<area shape="rect" id="node23" href="$timer_8hpp.html" title="manak/util/timer.hpp" alt="" coords="2330,269,2469,296"/>
+<area shape="rect" id="node27" href="$manak__env_8hpp.html" title="manak/util/manak_env.hpp" alt="" coords="1505,269,1684,296"/>
+</map>

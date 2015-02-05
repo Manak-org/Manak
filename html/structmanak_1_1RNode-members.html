@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -74,26 +74,24 @@ $(document).ready(function(){initNavTree('structmanak_1_1RNode.html','');});
 
 <p>This is the complete list of members for <a class="el" href="structmanak_1_1RNode.html">manak::RNode</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="structmanak_1_1RNode.html#a9cd22af32e4430297c5b4b915c81f118">AddCase</a>(BenchmarkCase *bc, size_t l_id)</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="structmanak_1_1RNode.html#a2fcc502e34d3f403c2bb78748a4997f8">AddNext</a>(const std::string &amp;name, RNode *&amp;n)</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="structmanak_1_1RNode.html#ac22eef47360f0fb40f44d50ad7d87167">children</a></td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="structmanak_1_1RNode.html#a1e0cfa9c58736f39a005b4b0f7e0928f">GetPMRep</a>(const utils::ObjectStore &amp;entry)</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="structmanak_1_1RNode.html#ae350ffb130da8b32a2658082e2844c09">LoadForComparison</a>(const std::string &amp;uname, size_t l_id, const std::list&lt; double &gt; &amp;readings)</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="structmanak_1_1RNode.html#a39f9a20faf0aa24d8c7881e643afec0b">nexts</a></td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structmanak_1_1RNode.html#a1e2a578b782cfa6c0a310f4995c5517e">AddCase</a>(ManakCase *bc)=0</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="structmanak_1_1RNode.html#aed52cf2c054b1f12efca6cde04947510">AddSuite</a>(ManakSuite *suite)=0</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structmanak_1_1RNode.html#a38680b8c4be4ba38f966c2bdea649d14">count</a></td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structmanak_1_1RNode.html#af9ea27b700baad039905528871353b81">EraseSuite</a>(ManakSuite *suite)=0</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structmanak_1_1RNode.html#af259353be1ec6268e1591d243fdba4c4">GetSuite</a>()</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="structmanak_1_1RNode.html#a4c117b9083ad5b234dd15cd5accc57e8">LoadForComparison</a>(const std::string &amp;uname, std::string library, const std::list&lt; double &gt; &amp;readings)=0</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="structmanak_1_1RNode.html#a61b9db4000c2d2e7f3ea90cb033dace6">parent</a></td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="structmanak_1_1RNode.html#ae9e1002104a53e2f6dafdcf8c6a1f83e">PrintHTML</a>(std::ostream &amp;stream, std::ostream &amp;stream2, size_t l_ids, const std::map&lt; std::string, size_t &gt; &amp;l_map)</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="structmanak_1_1RNode.html#a463a9bb7c7938cf9fa1f17ddd1cdc628">PrintTXT</a>(std::ostream &amp;stream, size_t l_ids)</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="structmanak_1_1RNode.html#a30a11b337912285c9012bc2fb399dc04">results</a></td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structmanak_1_1RNode.html#aa1a3c54969eefe93a33c5ecdf86f16e3">Print</a>()=0</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="structmanak_1_1RNode.html#a5d6a06c5939c5c0ed0493bc8c4156dc6">RNode</a>(RNode *parent)</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="structmanak_1_1RNode.html#adfee0e5bb97ce99d666caa47e7d39a8e">Run</a>()</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="structmanak_1_1RNode.html#a175d5b1b64e8b84f5488a30e9f568290">SaveForComparison</a>(std::ostream &amp;stream, const std::string &amp;uname)</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="structmanak_1_1RNode.html#a3416fc3819201972d4111723b74c6d3e">~RNode</a>()</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="structmanak_1_1RNode.html#a7ff10b435558e655cd746db25565663b">Run</a>()=0</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structmanak_1_1RNode.html#ad6ffdf41f745b942ed1e64336534bd38">SaveForComparison</a>(std::ostream &amp;stream)=0</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="structmanak_1_1RNode.html#ab73a93384f07675fe3868ec123da0600">~RNode</a>()</td><td class="entry"><a class="el" href="structmanak_1_1RNode.html">manak::RNode</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

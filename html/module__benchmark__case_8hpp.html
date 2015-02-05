@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Manak: src/manak/benchmark_suit/module_benchmark_case.hpp File Reference</title>
+<title>Manak: src/manak/benchmark_suite/module_benchmark_case.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -74,48 +74,93 @@ $(document).ready(function(){initNavTree('module__benchmark__case_8hpp.html','')
 <div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="module__benchmark__case_8hpp__dep__incl.png" border="0" usemap="#src_2manak_2benchmark__suit_2module__benchmark__case_8hppdep" alt=""/></div>
-<map name="src_2manak_2benchmark__suit_2module__benchmark__case_8hppdep" id="src_2manak_2benchmark__suit_2module__benchmark__case_8hppdep">
-<area shape="rect" id="node2" href="benchmark__case_8hpp.html" title="src/manak/benchmark\l_suit/benchmark_case.hpp" alt="" coords="61,110,240,151"/><area shape="rect" id="node3" href="benchmark__suite_8hpp.html" title="src/manak/benchmark\l_suit/benchmark_suite.hpp" alt="" coords="5,291,184,333"/><area shape="rect" id="node5" href="run__tree_8hpp.html" title="src/manak/benchmark\l_suit/run_tree.hpp" alt="" coords="133,201,283,242"/><area shape="rect" id="node4" href="manak_8hpp.html" title="src/manak/manak.hpp" alt="" coords="82,381,232,408"/></map>
+<div class="center"><img src="module__benchmark__case_8hpp__dep__incl.png" border="0" usemap="#src_2manak_2benchmark__suite_2module__benchmark__case_8hppdep" alt=""/></div>
+<map name="src_2manak_2benchmark__suite_2module__benchmark__case_8hppdep" id="src_2manak_2benchmark__suite_2module__benchmark__case_8hppdep">
+<area shape="rect" id="node2" href="manak__benchmark__macros_8hpp.html" title="src/manak/benchmark\l_suite/manak_benchmark\l_macros.hpp" alt="" coords="12,109,183,165"/><area shape="rect" id="node3" href="benchmark__suite_8hpp.html" title="src/manak/benchmark\l_suite/benchmark_suite.hpp" alt="" coords="5,214,189,255"/><area shape="rect" id="node4" href="manak_8hpp.html" title="src/manak/manak.hpp" alt="" coords="22,304,172,331"/></map>
 </div>
 </div>
 <p><a href="module__benchmark__case_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a57b66a0d95282c208124d1bdac0f8d2e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(Name, Library)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a36734a579f75d970b779509262ed8cbd">MANAK_AUTO_BENCHMARK_CASE_ITD</a>(Name, Library, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, &quot;&quot;)</td></tr>
+<tr class="memitem:a57b66a0d95282c208124d1bdac0f8d2e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(Name, Library)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a2d2b93ce7fe0008018f821e7d58c5507">MANAK_AUTO_BENCHMARK_CASE_T</a>(Name, Library, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>)</td></tr>
 <tr class="separator:a57b66a0d95282c208124d1bdac0f8d2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac57cc187439c0bff8b688ca09b689d9c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#ac57cc187439c0bff8b688ca09b689d9c">MANAK_AUTO_BENCHMARK_CASE_I</a>(Name, Library, Iter)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a36734a579f75d970b779509262ed8cbd">MANAK_AUTO_BENCHMARK_CASE_ITD</a>(Name, Library, Iter, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, &quot;&quot;)</td></tr>
+<tr class="memitem:ac57cc187439c0bff8b688ca09b689d9c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#ac57cc187439c0bff8b688ca09b689d9c">MANAK_AUTO_BENCHMARK_CASE_I</a>(Name, Library, Iter)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#af1b3583395a788c4a65b57b3de98b8e6">MANAK_AUTO_BENCHMARK_CASE_TI</a>(Name, Library, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter)</td></tr>
 <tr class="separator:ac57cc187439c0bff8b688ca09b689d9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab497fb679c4c1b52176ce8f6dd89eb9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#aab497fb679c4c1b52176ce8f6dd89eb9">MANAK_AUTO_BENCHMARK_CASE_IT</a>(Name, Library, Iter, Tol)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a36734a579f75d970b779509262ed8cbd">MANAK_AUTO_BENCHMARK_CASE_ITD</a>(Name, Library, Iter, Tol, &quot;&quot;)</td></tr>
-<tr class="separator:aab497fb679c4c1b52176ce8f6dd89eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4a37dc4776318cfa2193e3427c73d16"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#ad4a37dc4776318cfa2193e3427c73d16">MANAK_AUTO_BENCHMARK_CASE_ITD</a>(Name, Library, Iter, Tolerance, Desc)</td></tr>
-<tr class="memdesc:ad4a37dc4776318cfa2193e3427c73d16"><td class="mdescLeft">&#160;</td><td class="mdescRight">MANAK_AUTO_BENCHMARK_CASE macros.  <a href="#ad4a37dc4776318cfa2193e3427c73d16">More...</a><br/></td></tr>
-<tr class="separator:ad4a37dc4776318cfa2193e3427c73d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab449c770b6d3bc90c0e1dcb8a38cd23e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#ab449c770b6d3bc90c0e1dcb8a38cd23e">MANAK_AUTO_BENCHMARK_CASE_T</a>(Name, Library, tol)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a36734a579f75d970b779509262ed8cbd">MANAK_AUTO_BENCHMARK_CASE_ITD</a>(Name, Library, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>, tol, &quot;&quot;)</td></tr>
-<tr class="separator:ab449c770b6d3bc90c0e1dcb8a38cd23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f21edae675d03a868227adac1647ce0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(Name, Library, Function)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a4d1b44d72e2b962fca1a5fc5cae3a82f">MANAK_BENCHMARK_CASE_ITD</a>(Name, Library, Function, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, &quot;&quot;)</td></tr>
+<tr class="memitem:a2f0af965aa3a7d770333fe6a210267c8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a2f0af965aa3a7d770333fe6a210267c8">MANAK_AUTO_BENCHMARK_CASE_IS</a>(Name, Library, Iter, SP)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a0acbb570b6bcad3f6e1e391f413aa286">MANAK_AUTO_BENCHMARK_CASE_TIS</a>(Name, Library, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter, SP)</td></tr>
+<tr class="separator:a2f0af965aa3a7d770333fe6a210267c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2f2660c6a6b9ac778648c5aad36b8d5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#ae2f2660c6a6b9ac778648c5aad36b8d5">MANAK_AUTO_BENCHMARK_CASE_T</a>(Name, Library, Tol)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#af1b3583395a788c4a65b57b3de98b8e6">MANAK_AUTO_BENCHMARK_CASE_TI</a>(Name, Library, Tol, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>)</td></tr>
+<tr class="separator:ae2f2660c6a6b9ac778648c5aad36b8d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1126e30e86e54b86742e1102ae74c36"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#af1126e30e86e54b86742e1102ae74c36">MANAK_AUTO_BENCHMARK_CASE_TI</a>(Name, Library, Tol, Iter)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a0acbb570b6bcad3f6e1e391f413aa286">MANAK_AUTO_BENCHMARK_CASE_TIS</a>(Name, Library, Tol, Iter, <a class="el" href="set__env_8hpp.html#aee0cf3804862eacd7abb05192fe57d3a">MANAK_DEFAULT_SP</a>)</td></tr>
+<tr class="separator:af1126e30e86e54b86742e1102ae74c36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a724f74b9ed6df7f5ccd8e23dc1a0860d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a724f74b9ed6df7f5ccd8e23dc1a0860d">MANAK_AUTO_BENCHMARK_CASE_TIS</a>(Name, Library, Tol, Iter, SP)&#160;&#160;&#160;<a class="el" href="manak__benchmark__macros_8hpp.html#aeeca6d01d623dab9be0d2922040eaa66">_MANAK_AUTO_BENCHMARK_CASE_TIS</a>(Name, Library, Tol, Iter, SP)</td></tr>
+<tr class="memdesc:a724f74b9ed6df7f5ccd8e23dc1a0860d"><td class="mdescLeft">&#160;</td><td class="mdescRight">MANAK_AUTO_BENCHMARK_CASE macros.  <a href="#a724f74b9ed6df7f5ccd8e23dc1a0860d">More...</a><br/></td></tr>
+<tr class="separator:a724f74b9ed6df7f5ccd8e23dc1a0860d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afecf2683d7fd06c9b4c8975191df59c0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#afecf2683d7fd06c9b4c8975191df59c0">MANAK_AUTO_GROUP_BENCHMARK_CASE</a>(Name, Lib)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ac1d875c9c9463029a2b6db0718d0ec73">MANAK_AUTO_GROUP_BENCHMARK_CASE_T</a>(Name, Lib, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>)</td></tr>
+<tr class="separator:afecf2683d7fd06c9b4c8975191df59c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48c4ef71e3cd26bb77c8274282ab9388"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a48c4ef71e3cd26bb77c8274282ab9388">MANAK_AUTO_GROUP_BENCHMARK_CASE_I</a>(Name, Lib, Iter)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a8d70d782021caa7c1175ee5e2059a53f">MANAK_AUTO_GROUP_BENCHMARK_CASE_TI</a>(Name, Lib, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter)</td></tr>
+<tr class="separator:a48c4ef71e3cd26bb77c8274282ab9388"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b39b1f6d33b67aec60f07604d364550"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a2b39b1f6d33b67aec60f07604d364550">MANAK_AUTO_GROUP_BENCHMARK_CASE_IS</a>(Name, Lib, Iter, SP)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a4c26125c7c11791f3eed9f83b8836bd5">MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS</a>(Name, Lib, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter, SP)</td></tr>
+<tr class="separator:a2b39b1f6d33b67aec60f07604d364550"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bccf7178b2908bf90f5712ccad93cff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a9bccf7178b2908bf90f5712ccad93cff">MANAK_AUTO_GROUP_BENCHMARK_CASE_T</a>(Name, Lib, Tol)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a8d70d782021caa7c1175ee5e2059a53f">MANAK_AUTO_GROUP_BENCHMARK_CASE_TI</a>(Name, Lib, Tol, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>)</td></tr>
+<tr class="separator:a9bccf7178b2908bf90f5712ccad93cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af258aeee615e28e4417b9eab9c98cfbd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#af258aeee615e28e4417b9eab9c98cfbd">MANAK_AUTO_GROUP_BENCHMARK_CASE_TI</a>(Name, Lib, Tol, Iter)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a4c26125c7c11791f3eed9f83b8836bd5">MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS</a>(Name, Lib, Tol, Iter, <a class="el" href="set__env_8hpp.html#aee0cf3804862eacd7abb05192fe57d3a">MANAK_DEFAULT_SP</a>)</td></tr>
+<tr class="separator:af258aeee615e28e4417b9eab9c98cfbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9604810531e17e8e2bd54ca37fe25c1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#ac9604810531e17e8e2bd54ca37fe25c1">MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS</a>(Name, Lib, Tol, Iter, SP)&#160;&#160;&#160;<a class="el" href="manak__benchmark__macros_8hpp.html#ae59bde53f9ee4ba22b2477ebd9ad23a9">_MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS</a>(Name, Lib, Tol, Iter, SP)</td></tr>
+<tr class="memdesc:ac9604810531e17e8e2bd54ca37fe25c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">MANAK AUTO GROUP BENCHMAK CASE macros.  <a href="#ac9604810531e17e8e2bd54ca37fe25c1">More...</a><br/></td></tr>
+<tr class="separator:ac9604810531e17e8e2bd54ca37fe25c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f21edae675d03a868227adac1647ce0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a8f21edae675d03a868227adac1647ce0">MANAK_BENCHMARK_CASE</a>(Name, Library, Function)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ad3afbc28bd9e8d4a95ff1c57c7f59de3">MANAK_BENCHMARK_CASE_T</a>(Name, Library, Function, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>)</td></tr>
 <tr class="separator:a8f21edae675d03a868227adac1647ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae91698abb025e5a9d51e0a062d2e1084"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#ae91698abb025e5a9d51e0a062d2e1084">MANAK_BENCHMARK_CASE_I</a>(Name, Library, Function, Iter)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a4d1b44d72e2b962fca1a5fc5cae3a82f">MANAK_BENCHMARK_CASE_ITD</a>(Name, Library, Function, Iter, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, &quot;&quot;)</td></tr>
+<tr class="memitem:ae91698abb025e5a9d51e0a062d2e1084"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#ae91698abb025e5a9d51e0a062d2e1084">MANAK_BENCHMARK_CASE_I</a>(Name, Library, Function, Iter)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#af5cdcb39766dee5fe029f494bad21df2">MANAK_BENCHMARK_CASE_TI</a>(Name, Library, Function, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter)</td></tr>
 <tr class="separator:ae91698abb025e5a9d51e0a062d2e1084"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8391855cd709dfc0e257a7bf35beff56"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a8391855cd709dfc0e257a7bf35beff56">MANAK_BENCHMARK_CASE_IT</a>(Name, Library, Function, Iter, Tol)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a4d1b44d72e2b962fca1a5fc5cae3a82f">MANAK_BENCHMARK_CASE_ITD</a>(Name, Library, Function, Iter, Tol, &quot;&quot;)</td></tr>
-<tr class="separator:a8391855cd709dfc0e257a7bf35beff56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afac3a3687df154be49ef9e59ee1502dc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#afac3a3687df154be49ef9e59ee1502dc">MANAK_BENCHMARK_CASE_ITD</a>(Name, Library, Function, Iter, Tolerance, Desc)</td></tr>
-<tr class="memdesc:afac3a3687df154be49ef9e59ee1502dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">MANAK_BENCHMARK_CASE macros.  <a href="#afac3a3687df154be49ef9e59ee1502dc">More...</a><br/></td></tr>
-<tr class="separator:afac3a3687df154be49ef9e59ee1502dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3ae1ccbe4d914d66690f650bb647b76"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#ac3ae1ccbe4d914d66690f650bb647b76">MANAK_BENCHMARK_CASE_T</a>(Name, Library, Function, Tolerance)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a4d1b44d72e2b962fca1a5fc5cae3a82f">MANAK_BENCHMARK_CASE_ITD</a>(Name, Library, Function, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>, Tolerance, &quot;&quot;)</td></tr>
-<tr class="separator:ac3ae1ccbe4d914d66690f650bb647b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42fd12f274385b4c08b6ba316105ab2d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(Name, Library, f_name)&#160;&#160;&#160;( <a class="el" href="namespacemanak.html#ada1890933429fd0563aca289c7f6c3c3">manak::CTBenchmarkObject</a>(#Name, #Library, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, &quot;&quot;, f_name) )</td></tr>
-<tr class="separator:a42fd12f274385b4c08b6ba316105ab2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15c94140b4b5e90b10cd583b1e837366"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a15c94140b4b5e90b10cd583b1e837366">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a>(Name, Library, f_name, Iter)&#160;&#160;&#160;( <a class="el" href="namespacemanak.html#ada1890933429fd0563aca289c7f6c3c3">manak::CTBenchmarkObject</a>(#Name, #Library, Iter, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, &quot;&quot;, f_name) )</td></tr>
-<tr class="separator:a15c94140b4b5e90b10cd583b1e837366"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14cd14813d655b5447e8232cc70fcbcc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a14cd14813d655b5447e8232cc70fcbcc">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT</a>(Name, Library, f_name, Iter, Tol)&#160;&#160;&#160;( <a class="el" href="namespacemanak.html#ada1890933429fd0563aca289c7f6c3c3">manak::CTBenchmarkObject</a>(#Name, #Library, Iter, Tol, &quot;&quot;, f_name) )</td></tr>
-<tr class="separator:a14cd14813d655b5447e8232cc70fcbcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30086d4078bdb8869c470f5acfd5f854"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a30086d4078bdb8869c470f5acfd5f854">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_ITD</a>(Name, Library, f_name, Iter, tol, Desc)&#160;&#160;&#160;( <a class="el" href="namespacemanak.html#ada1890933429fd0563aca289c7f6c3c3">manak::CTBenchmarkObject</a>(#Name, #Library, Iter, tol, Desc, f_name) )</td></tr>
-<tr class="memdesc:a30086d4078bdb8869c470f5acfd5f854"><td class="mdescLeft">&#160;</td><td class="mdescRight">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE macros.  <a href="#a30086d4078bdb8869c470f5acfd5f854">More...</a><br/></td></tr>
-<tr class="separator:a30086d4078bdb8869c470f5acfd5f854"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a594ad3aeecf7f689b73ba3565fe84e99"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a594ad3aeecf7f689b73ba3565fe84e99">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</a>(Name, Library, f_name, Tol)&#160;&#160;&#160;( <a class="el" href="namespacemanak.html#ada1890933429fd0563aca289c7f6c3c3">manak::CTBenchmarkObject</a>(#Name, #Library, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>, Tol, &quot;&quot;, f_name) )</td></tr>
-<tr class="separator:a594ad3aeecf7f689b73ba3565fe84e99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa99fcb571cfd87f87eba98fe04ba744"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#aaa99fcb571cfd87f87eba98fe04ba744">MANAK_BENCHMARK_CASE_IS</a>(Name, Library, Function, Iter, SP)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ae1a2ecbdae07a24ed7bdf717e6ac0499">MANAK_BENCHMARK_CASE_TIS</a>(Name, Library, Function, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter, SP)</td></tr>
+<tr class="separator:aaa99fcb571cfd87f87eba98fe04ba744"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a964bd52c244dcb3b100dbb91972c6889"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a964bd52c244dcb3b100dbb91972c6889">MANAK_BENCHMARK_CASE_T</a>(Name, Library, Function, Tol)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#af5cdcb39766dee5fe029f494bad21df2">MANAK_BENCHMARK_CASE_TI</a>(Name, Library, Function, Tol,<a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>)</td></tr>
+<tr class="separator:a964bd52c244dcb3b100dbb91972c6889"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65b08c81f8378d4a91a070e3d60ef8bd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a65b08c81f8378d4a91a070e3d60ef8bd">MANAK_BENCHMARK_CASE_TI</a>(Name, Library, Function, Tol, Iter)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ae1a2ecbdae07a24ed7bdf717e6ac0499">MANAK_BENCHMARK_CASE_TIS</a>(Name, Library, Function, Tol, Iter, <a class="el" href="set__env_8hpp.html#aee0cf3804862eacd7abb05192fe57d3a">MANAK_DEFAULT_SP</a>)</td></tr>
+<tr class="separator:a65b08c81f8378d4a91a070e3d60ef8bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4eafe1d53d07b9ba7a8f179d0498e0d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#ac4eafe1d53d07b9ba7a8f179d0498e0d">MANAK_BENCHMARK_CASE_TIS</a>(Name, Library, Function, Tol, Iter, SP)&#160;&#160;&#160;<a class="el" href="manak__benchmark__macros_8hpp.html#a64d056b2bc50068c3cbbea60c6938008">_MANAK_BENCHMARK_CASE_TIS</a>(Name, Library, Function, Tol, Iter, SP)</td></tr>
+<tr class="memdesc:ac4eafe1d53d07b9ba7a8f179d0498e0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">MANAK_BENCHMARK_CASE macros.  <a href="#ac4eafe1d53d07b9ba7a8f179d0498e0d">More...</a><br/></td></tr>
+<tr class="separator:ac4eafe1d53d07b9ba7a8f179d0498e0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adeade358344f5ac95e5b9c7a0cf166d2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(Name, Lib, Fun)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#adfa4dbd1651629ae87ee16a9435818db">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>)</td></tr>
+<tr class="separator:adeade358344f5ac95e5b9c7a0cf166d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b9ee06845d61aad173310764cf5a64c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a9b9ee06845d61aad173310764cf5a64c">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a>(Name, Lib, Fun, Iter)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a350c151f820aa80f12876721289b2045">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter)</td></tr>
+<tr class="separator:a9b9ee06845d61aad173310764cf5a64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad08682f5ccdd1f35ac3d61cd5b03e32b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#ad08682f5ccdd1f35ac3d61cd5b03e32b">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS</a>(Name, Lib, Fun, Iter, SP)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ae829c0a6a45486143828ec20af7ba3c5">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter, SP)</td></tr>
+<tr class="separator:ad08682f5ccdd1f35ac3d61cd5b03e32b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eda1eac14133048c0a81e82a1f57f3c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a2eda1eac14133048c0a81e82a1f57f3c">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</a>(Name, Lib, Fun, Tol)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a350c151f820aa80f12876721289b2045">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</a>(Name, Lib, Fun, Tol, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>)</td></tr>
+<tr class="separator:a2eda1eac14133048c0a81e82a1f57f3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4eb7982c13cc282c19835d911dd0e55"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#ae4eb7982c13cc282c19835d911dd0e55">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</a>(Name, Lib, Fun, Tol, Iter)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ae829c0a6a45486143828ec20af7ba3c5">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</a>(Name, Lib, Fun, Tol, Iter, <a class="el" href="set__env_8hpp.html#aee0cf3804862eacd7abb05192fe57d3a">MANAK_DEFAULT_SP</a>)</td></tr>
+<tr class="separator:ae4eb7982c13cc282c19835d911dd0e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9c9e057e1eca8fa29fcf66b159abcca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#aa9c9e057e1eca8fa29fcf66b159abcca">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</a>(Name, Lib, Fun, Tol, Iter, SP)&#160;&#160;&#160;<a class="el" href="manak__benchmark__macros_8hpp.html#a23b7cba7848167a5c7ab6e0254ec8f7a">_MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</a>(Name, Lib, Fun, Tol, Iter, SP)</td></tr>
+<tr class="memdesc:aa9c9e057e1eca8fa29fcf66b159abcca"><td class="mdescLeft">&#160;</td><td class="mdescRight">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE macros.  <a href="#aa9c9e057e1eca8fa29fcf66b159abcca">More...</a><br/></td></tr>
+<tr class="separator:aa9c9e057e1eca8fa29fcf66b159abcca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04b828f51e0252234dc645e9a33710fa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a04b828f51e0252234dc645e9a33710fa">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</a>(Name, Lib, Fun)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a45f0d21dbb2036bad324b648821e13b0">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>)</td></tr>
+<tr class="separator:a04b828f51e0252234dc645e9a33710fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2c41fb6d064130d5a95df293b0a7d1b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#ac2c41fb6d064130d5a95df293b0a7d1b">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I</a>(Name, Lib, Fun, Iter)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a749a9e3708691697beee15f5bba50bda">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter)</td></tr>
+<tr class="separator:ac2c41fb6d064130d5a95df293b0a7d1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a284ed8c40844ffe9f1067d74f4865bfb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a284ed8c40844ffe9f1067d74f4865bfb">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS</a>(Name, Lib, Fun, Iter, SP)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a3593a16d905c326652f1485194f2b423">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter, SP)</td></tr>
+<tr class="separator:a284ed8c40844ffe9f1067d74f4865bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07a92dcbe49a15c6b24038a2ded2684a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a07a92dcbe49a15c6b24038a2ded2684a">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T</a>(Name, Lib, Fun, Tol)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a749a9e3708691697beee15f5bba50bda">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</a>(Name, Lib, Fun, Tol, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>)</td></tr>
+<tr class="separator:a07a92dcbe49a15c6b24038a2ded2684a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84646b1a367e1d32bcbded0c67c5eedc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a84646b1a367e1d32bcbded0c67c5eedc">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</a>(Name, Lib, Fun, Tol, Iter)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a3593a16d905c326652f1485194f2b423">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</a>(Name, Lib, Fun, Tol, Iter, <a class="el" href="set__env_8hpp.html#aee0cf3804862eacd7abb05192fe57d3a">MANAK_DEFAULT_SP</a>)</td></tr>
+<tr class="separator:a84646b1a367e1d32bcbded0c67c5eedc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acee437281c9d4eb384831bf8a383c3ae"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#acee437281c9d4eb384831bf8a383c3ae">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</a>(Name, Lib, Fun, Tol, Iter, SP)&#160;&#160;&#160;<a class="el" href="manak__benchmark__macros_8hpp.html#aa423ad961b934cd3bc8e04f91c5d4741">_MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</a>(Name, Lib, Fun, Tol, Iter, SP)</td></tr>
+<tr class="memdesc:acee437281c9d4eb384831bf8a383c3ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">MANAK CREATE GROUP BENCHMARK WITH TEMPLATE.  <a href="#acee437281c9d4eb384831bf8a383c3ae">More...</a><br/></td></tr>
+<tr class="separator:acee437281c9d4eb384831bf8a383c3ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc8a60c4368fea71c54332ff0f9be4b4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#adc8a60c4368fea71c54332ff0f9be4b4">MANAK_GROUP_BENCHMARK_CASE</a>(Name, Lib, Fun)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#abca1b675c19703c2b766b3472dd528e1">MANAK_GROUP_BENCHMARK_CASE_T</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>)</td></tr>
+<tr class="separator:adc8a60c4368fea71c54332ff0f9be4b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aadc70254c3a8aa3df6f7519e3de118"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a2aadc70254c3a8aa3df6f7519e3de118">MANAK_GROUP_BENCHMARK_CASE_I</a>(Name, Lib, Fun, Iter)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ac077478b69ae217bf0e40d31e0ace648">MANAK_GROUP_BENCHMARK_CASE_TI</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter)</td></tr>
+<tr class="separator:a2aadc70254c3a8aa3df6f7519e3de118"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ed8091dd77f9c1e2c1d6232b5f142d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#a5ed8091dd77f9c1e2c1d6232b5f142d8">MANAK_GROUP_BENCHMARK_CASE_IS</a>(Name, Lib, Fun, Iter, SP)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a2a5b92b745655db58ffaa3bd6fdfbac1">MANAK_GROUP_BENCHMARK_CASE_TIS</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter, SP)</td></tr>
+<tr class="separator:a5ed8091dd77f9c1e2c1d6232b5f142d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae34dad2ee2b016ef03ec16d6fbaea171"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#ae34dad2ee2b016ef03ec16d6fbaea171">MANAK_GROUP_BENCHMARK_CASE_T</a>(Name, Lib, Fun, Tol)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ac077478b69ae217bf0e40d31e0ace648">MANAK_GROUP_BENCHMARK_CASE_TI</a>(Name, Lib, Fun, Tol, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>)</td></tr>
+<tr class="separator:ae34dad2ee2b016ef03ec16d6fbaea171"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae073349da7cd35265ab5978a5f7a883"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#aae073349da7cd35265ab5978a5f7a883">MANAK_GROUP_BENCHMARK_CASE_TI</a>(Name, Lib, Fun, Tol, Iter)&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a2a5b92b745655db58ffaa3bd6fdfbac1">MANAK_GROUP_BENCHMARK_CASE_TIS</a>(Name, Lib, Fun, Tol, Iter, <a class="el" href="set__env_8hpp.html#aee0cf3804862eacd7abb05192fe57d3a">MANAK_DEFAULT_SP</a>)</td></tr>
+<tr class="separator:aae073349da7cd35265ab5978a5f7a883"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afee24eb6f1adab1f0cf4fbdb2039de48"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="module__benchmark__case_8hpp.html#afee24eb6f1adab1f0cf4fbdb2039de48">MANAK_GROUP_BENCHMARK_CASE_TIS</a>(Name, Lib, Fun, Tol, Iter, SP)&#160;&#160;&#160;<a class="el" href="manak__benchmark__macros_8hpp.html#a9231d0ae97efa5f99528db93ffaac8bf">_MANAK_GROUP_BENCHMARK_CASE_TIS</a>(Name, Lib, Fun, Tol, Iter, SP)</td></tr>
+<tr class="memdesc:afee24eb6f1adab1f0cf4fbdb2039de48"><td class="mdescLeft">&#160;</td><td class="mdescRight">MANAK GROUP BENCHMARK CASE macros.  <a href="#afee24eb6f1adab1f0cf4fbdb2039de48">More...</a><br/></td></tr>
+<tr class="separator:afee24eb6f1adab1f0cf4fbdb2039de48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Sumedh Ghaisas</dd></dl>
@@ -142,12 +187,12 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a36734a579f75d970b779509262ed8cbd">MANAK_AUTO_BENCHMARK_CASE_ITD</a>(Name, Library, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, &quot;&quot;)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a2d2b93ce7fe0008018f821e7d58c5507">MANAK_AUTO_BENCHMARK_CASE_T</a>(Name, Library, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00052">52</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00051">51</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
@@ -176,21 +221,21 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a36734a579f75d970b779509262ed8cbd">MANAK_AUTO_BENCHMARK_CASE_ITD</a>(Name, Library, Iter, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, &quot;&quot;)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#af1b3583395a788c4a65b57b3de98b8e6">MANAK_AUTO_BENCHMARK_CASE_TI</a>(Name, Library, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00058">58</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00048">48</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aab497fb679c4c1b52176ce8f6dd89eb9"></a>
+<a class="anchor" id="a2f0af965aa3a7d770333fe6a210267c8"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MANAK_AUTO_BENCHMARK_CASE_IT</td>
+          <td class="memname">#define MANAK_AUTO_BENCHMARK_CASE_IS</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">Name, </td>
@@ -211,87 +256,21 @@ Macros</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">Tol&#160;</td>
+          <td class="paramname">SP&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a36734a579f75d970b779509262ed8cbd">MANAK_AUTO_BENCHMARK_CASE_ITD</a>(Name, Library, Iter, Tol, &quot;&quot;)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a0acbb570b6bcad3f6e1e391f413aa286">MANAK_AUTO_BENCHMARK_CASE_TIS</a>(Name, Library, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter, SP)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00061">61</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00042">42</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ad4a37dc4776318cfa2193e3427c73d16"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MANAK_AUTO_BENCHMARK_CASE_ITD</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Name, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Library, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Iter, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Tolerance, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Desc&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">struct </span>Name ## _ ## Library ##_## Benchmark                                   \</div>
-<div class="line">{                                                                             \</div>
-<div class="line">  static <span class="keywordtype">void</span> Run();                                                          \</div>
-<div class="line">  static <a class="code" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a>* static_temp;                                   \</div>
-<div class="line">};                                                                            \</div>
-<div class="line">manak::BenchmarkCase* Name ## _ ## Library ##_## Benchmark::static_temp =     <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">\</a></div>
-<div class="line"><a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1BenchmarkSuite.html#a320e653fae69d8f720a6cacbe82aa27f">GetCurrentSuite</a>()-&gt;                  \</div>
-<div class="line">AddCase(<a class="code" href="module__benchmark__case_8hpp.html#afac3a3687df154be49ef9e59ee1502dc">MANAK_BENCHMARK_CASE_ITD</a>(Name,                                        \</div>
-<div class="line">                                 Library,                                     \</div>
-<div class="line">                                 Name ## _ ## Library ##_## Benchmark::Run,   \</div>
-<div class="line">                                 Iter,                                        \</div>
-<div class="line">                                 Tolerance,                                   \</div>
-<div class="line">                                 Desc));                                      \</div>
-<div class="line">void Name ## _ ## Library ##_## Benchmark::Run()</div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a306217163f19652e9dd1eba93b81ce58"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a></div><div class="ttdeci">static BenchmarkSuite &amp; GetMasterSuite()</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00045">benchmark_suite.hpp:45</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a320e653fae69d8f720a6cacbe82aa27f"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a320e653fae69d8f720a6cacbe82aa27f">manak::BenchmarkSuite::GetCurrentSuite</a></div><div class="ttdeci">BenchmarkSuite * GetCurrentSuite() const </div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00058">benchmark_suite.hpp:58</a></div></div>
-<div class="ttc" id="module__benchmark__case_8hpp_html_afac3a3687df154be49ef9e59ee1502dc"><div class="ttname"><a href="module__benchmark__case_8hpp.html#afac3a3687df154be49ef9e59ee1502dc">MANAK_BENCHMARK_CASE_ITD</a></div><div class="ttdeci">#define MANAK_BENCHMARK_CASE_ITD(Name, Library, Function, Iter, Tolerance, Desc)</div><div class="ttdoc">MANAK_BENCHMARK_CASE macros. </div><div class="ttdef"><b>Definition:</b> <a href="module__benchmark__case_8hpp_source.html#l00012">module_benchmark_case.hpp:12</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkCase_html"><div class="ttname"><a href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a></div><div class="ttdef"><b>Definition:</b> <a href="benchmark__case_8hpp_source.html#l00032">benchmark_case.hpp:32</a></div></div>
-</div><!-- fragment -->
-<p>MANAK_AUTO_BENCHMARK_CASE macros. </p>
-
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00036">36</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab449c770b6d3bc90c0e1dcb8a38cd23e"></a>
+<a class="anchor" id="ae2f2660c6a6b9ac778648c5aad36b8d5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -311,17 +290,329 @@ Macros</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">tol&#160;</td>
+          <td class="paramname">Tol&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a36734a579f75d970b779509262ed8cbd">MANAK_AUTO_BENCHMARK_CASE_ITD</a>(Name, Library, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>, tol, &quot;&quot;)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#af1b3583395a788c4a65b57b3de98b8e6">MANAK_AUTO_BENCHMARK_CASE_TI</a>(Name, Library, Tol, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00055">55</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00045">45</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af1126e30e86e54b86742e1102ae74c36"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_AUTO_BENCHMARK_CASE_TI</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Library, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a0acbb570b6bcad3f6e1e391f413aa286">MANAK_AUTO_BENCHMARK_CASE_TIS</a>(Name, Library, Tol, Iter, <a class="el" href="set__env_8hpp.html#aee0cf3804862eacd7abb05192fe57d3a">MANAK_DEFAULT_SP</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00039">39</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a724f74b9ed6df7f5ccd8e23dc1a0860d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_AUTO_BENCHMARK_CASE_TIS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Library, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SP&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="manak__benchmark__macros_8hpp.html#aeeca6d01d623dab9be0d2922040eaa66">_MANAK_AUTO_BENCHMARK_CASE_TIS</a>(Name, Library, Tol, Iter, SP)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MANAK_AUTO_BENCHMARK_CASE macros. </p>
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00036">36</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afecf2683d7fd06c9b4c8975191df59c0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_AUTO_GROUP_BENCHMARK_CASE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ac1d875c9c9463029a2b6db0718d0ec73">MANAK_AUTO_GROUP_BENCHMARK_CASE_T</a>(Name, Lib, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00117">117</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a48c4ef71e3cd26bb77c8274282ab9388"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_AUTO_GROUP_BENCHMARK_CASE_I</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a8d70d782021caa7c1175ee5e2059a53f">MANAK_AUTO_GROUP_BENCHMARK_CASE_TI</a>(Name, Lib, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00114">114</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2b39b1f6d33b67aec60f07604d364550"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_AUTO_GROUP_BENCHMARK_CASE_IS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SP&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a4c26125c7c11791f3eed9f83b8836bd5">MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS</a>(Name, Lib, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter, SP)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00108">108</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9bccf7178b2908bf90f5712ccad93cff"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_AUTO_GROUP_BENCHMARK_CASE_T</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a8d70d782021caa7c1175ee5e2059a53f">MANAK_AUTO_GROUP_BENCHMARK_CASE_TI</a>(Name, Lib, Tol, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00111">111</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af258aeee615e28e4417b9eab9c98cfbd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_AUTO_GROUP_BENCHMARK_CASE_TI</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a4c26125c7c11791f3eed9f83b8836bd5">MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS</a>(Name, Lib, Tol, Iter, <a class="el" href="set__env_8hpp.html#aee0cf3804862eacd7abb05192fe57d3a">MANAK_DEFAULT_SP</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00105">105</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac9604810531e17e8e2bd54ca37fe25c1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SP&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="manak__benchmark__macros_8hpp.html#ae59bde53f9ee4ba22b2477ebd9ad23a9">_MANAK_AUTO_GROUP_BENCHMARK_CASE_TIS</a>(Name, Lib, Tol, Iter, SP)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MANAK AUTO GROUP BENCHMAK CASE macros. </p>
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00102">102</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
@@ -350,12 +641,12 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a4d1b44d72e2b962fca1a5fc5cae3a82f">MANAK_BENCHMARK_CASE_ITD</a>(Name, Library, Function, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, &quot;&quot;)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ad3afbc28bd9e8d4a95ff1c57c7f59de3">MANAK_BENCHMARK_CASE_T</a>(Name, Library, Function, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00020">20</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00027">27</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
@@ -390,21 +681,21 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a4d1b44d72e2b962fca1a5fc5cae3a82f">MANAK_BENCHMARK_CASE_ITD</a>(Name, Library, Function, Iter, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, &quot;&quot;)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#af5cdcb39766dee5fe029f494bad21df2">MANAK_BENCHMARK_CASE_TI</a>(Name, Library, Function, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00026">26</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00024">24</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a8391855cd709dfc0e257a7bf35beff56"></a>
+<a class="anchor" id="aaa99fcb571cfd87f87eba98fe04ba744"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MANAK_BENCHMARK_CASE_IT</td>
+          <td class="memname">#define MANAK_BENCHMARK_CASE_IS</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">Name, </td>
@@ -431,82 +722,21 @@ Macros</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">Tol&#160;</td>
+          <td class="paramname">SP&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a4d1b44d72e2b962fca1a5fc5cae3a82f">MANAK_BENCHMARK_CASE_ITD</a>(Name, Library, Function, Iter, Tol, &quot;&quot;)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ae1a2ecbdae07a24ed7bdf717e6ac0499">MANAK_BENCHMARK_CASE_TIS</a>(Name, Library, Function, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter, SP)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00029">29</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00018">18</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="afac3a3687df154be49ef9e59ee1502dc"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MANAK_BENCHMARK_CASE_ITD</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Name, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Library, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Function, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Iter, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Tolerance, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Desc&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">( <span class="keyword">new</span> <a class="code" href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a>(#Name,                                             \</div>
-<div class="line">                           #Library,                                          \</div>
-<div class="line">                           Function,                                          \</div>
-<div class="line">                           Iter,                                              \</div>
-<div class="line">                           Tolerance,                                         \</div>
-<div class="line">                           Desc) )</div>
-<div class="ttc" id="classmanak_1_1BenchmarkCase_html"><div class="ttname"><a href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a></div><div class="ttdef"><b>Definition:</b> <a href="benchmark__case_8hpp_source.html#l00032">benchmark_case.hpp:32</a></div></div>
-</div><!-- fragment -->
-<p>MANAK_BENCHMARK_CASE macros. </p>
-
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00012">12</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac3ae1ccbe4d914d66690f650bb647b76"></a>
+<a class="anchor" id="a964bd52c244dcb3b100dbb91972c6889"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -532,21 +762,121 @@ Macros</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">Tolerance&#160;</td>
+          <td class="paramname">Tol&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a4d1b44d72e2b962fca1a5fc5cae3a82f">MANAK_BENCHMARK_CASE_ITD</a>(Name, Library, Function, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>, Tolerance, &quot;&quot;)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#af5cdcb39766dee5fe029f494bad21df2">MANAK_BENCHMARK_CASE_TI</a>(Name, Library, Function, Tol,<a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00023">23</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00021">21</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a42fd12f274385b4c08b6ba316105ab2d"></a>
+<a class="anchor" id="a65b08c81f8378d4a91a070e3d60ef8bd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_BENCHMARK_CASE_TI</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Library, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Function, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ae1a2ecbdae07a24ed7bdf717e6ac0499">MANAK_BENCHMARK_CASE_TIS</a>(Name, Library, Function, Tol, Iter, <a class="el" href="set__env_8hpp.html#aee0cf3804862eacd7abb05192fe57d3a">MANAK_DEFAULT_SP</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00015">15</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac4eafe1d53d07b9ba7a8f179d0498e0d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_BENCHMARK_CASE_TIS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Library, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Function, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SP&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="manak__benchmark__macros_8hpp.html#a64d056b2bc50068c3cbbea60c6938008">_MANAK_BENCHMARK_CASE_TIS</a>(Name, Library, Function, Tol, Iter, SP)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MANAK_BENCHMARK_CASE macros. </p>
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00012">12</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adeade358344f5ac95e5b9c7a0cf166d2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -560,27 +890,27 @@ Macros</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">Library, </td>
+          <td class="paramname">Lib, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">f_name&#160;</td>
+          <td class="paramname">Fun&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;( <a class="el" href="namespacemanak.html#ada1890933429fd0563aca289c7f6c3c3">manak::CTBenchmarkObject</a>(#Name, #Library, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, &quot;&quot;, f_name) )</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#adfa4dbd1651629ae87ee16a9435818db">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00071">71</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00073">73</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a15c94140b4b5e90b10cd583b1e837366"></a>
+<a class="anchor" id="a9b9ee06845d61aad173310764cf5a64c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -594,13 +924,13 @@ Macros</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">Library, </td>
+          <td class="paramname">Lib, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">f_name, </td>
+          <td class="paramname">Fun, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -611,21 +941,21 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;( <a class="el" href="namespacemanak.html#ada1890933429fd0563aca289c7f6c3c3">manak::CTBenchmarkObject</a>(#Name, #Library, Iter, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, &quot;&quot;, f_name) )</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a350c151f820aa80f12876721289b2045">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00074">74</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00070">70</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a14cd14813d655b5447e8232cc70fcbcc"></a>
+<a class="anchor" id="ad08682f5ccdd1f35ac3d61cd5b03e32b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT</td>
+          <td class="memname">#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IS</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">Name, </td>
@@ -634,13 +964,13 @@ Macros</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">Library, </td>
+          <td class="paramname">Lib, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">f_name, </td>
+          <td class="paramname">Fun, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -652,75 +982,21 @@ Macros</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">Tol&#160;</td>
+          <td class="paramname">SP&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;( <a class="el" href="namespacemanak.html#ada1890933429fd0563aca289c7f6c3c3">manak::CTBenchmarkObject</a>(#Name, #Library, Iter, Tol, &quot;&quot;, f_name) )</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ae829c0a6a45486143828ec20af7ba3c5">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter, SP)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00080">80</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00064">64</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a30086d4078bdb8869c470f5acfd5f854"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_ITD</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Name, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Library, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">f_name, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Iter, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">tol, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Desc&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;( <a class="el" href="namespacemanak.html#ada1890933429fd0563aca289c7f6c3c3">manak::CTBenchmarkObject</a>(#Name, #Library, Iter, tol, Desc, f_name) )</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>MANAK_CREATE_BENCHMARK_WITH_TEMPLATE macros. </p>
-
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00068">68</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a594ad3aeecf7f689b73ba3565fe84e99"></a>
+<a class="anchor" id="a2eda1eac14133048c0a81e82a1f57f3c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -734,13 +1010,13 @@ Macros</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">Library, </td>
+          <td class="paramname">Lib, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">f_name, </td>
+          <td class="paramname">Fun, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -751,12 +1027,632 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;( <a class="el" href="namespacemanak.html#ada1890933429fd0563aca289c7f6c3c3">manak::CTBenchmarkObject</a>(#Name, #Library, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>, Tol, &quot;&quot;, f_name) )</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a350c151f820aa80f12876721289b2045">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</a>(Name, Lib, Fun, Tol, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00077">77</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00067">67</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae4eb7982c13cc282c19835d911dd0e55"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TI</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Fun, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ae829c0a6a45486143828ec20af7ba3c5">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</a>(Name, Lib, Fun, Tol, Iter, <a class="el" href="set__env_8hpp.html#aee0cf3804862eacd7abb05192fe57d3a">MANAK_DEFAULT_SP</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00061">61</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa9c9e057e1eca8fa29fcf66b159abcca"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Fun, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SP&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="manak__benchmark__macros_8hpp.html#a23b7cba7848167a5c7ab6e0254ec8f7a">_MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_TIS</a>(Name, Lib, Fun, Tol, Iter, SP)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MANAK_CREATE_BENCHMARK_WITH_TEMPLATE macros. </p>
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00058">58</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a04b828f51e0252234dc645e9a33710fa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Fun&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a45f0d21dbb2036bad324b648821e13b0">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00139">139</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac2c41fb6d064130d5a95df293b0a7d1b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_I</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Fun, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a749a9e3708691697beee15f5bba50bda">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00136">136</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a284ed8c40844ffe9f1067d74f4865bfb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_IS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Fun, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SP&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a3593a16d905c326652f1485194f2b423">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter, SP)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00130">130</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a07a92dcbe49a15c6b24038a2ded2684a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_T</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Fun, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a749a9e3708691697beee15f5bba50bda">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</a>(Name, Lib, Fun, Tol, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00133">133</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a84646b1a367e1d32bcbded0c67c5eedc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TI</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Fun, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a3593a16d905c326652f1485194f2b423">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</a>(Name, Lib, Fun, Tol, Iter, <a class="el" href="set__env_8hpp.html#aee0cf3804862eacd7abb05192fe57d3a">MANAK_DEFAULT_SP</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00127">127</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acee437281c9d4eb384831bf8a383c3ae"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Fun, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SP&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="manak__benchmark__macros_8hpp.html#aa423ad961b934cd3bc8e04f91c5d4741">_MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE_TIS</a>(Name, Lib, Fun, Tol, Iter, SP)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MANAK CREATE GROUP BENCHMARK WITH TEMPLATE. </p>
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00124">124</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adc8a60c4368fea71c54332ff0f9be4b4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_GROUP_BENCHMARK_CASE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Fun&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#abca1b675c19703c2b766b3472dd528e1">MANAK_GROUP_BENCHMARK_CASE_T</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00095">95</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2aadc70254c3a8aa3df6f7519e3de118"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_GROUP_BENCHMARK_CASE_I</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Fun, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ac077478b69ae217bf0e40d31e0ace648">MANAK_GROUP_BENCHMARK_CASE_TI</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00092">92</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5ed8091dd77f9c1e2c1d6232b5f142d8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_GROUP_BENCHMARK_CASE_IS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Fun, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SP&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a2a5b92b745655db58ffaa3bd6fdfbac1">MANAK_GROUP_BENCHMARK_CASE_TIS</a>(Name, Lib, Fun, <a class="el" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">MANAK_DEFAULT_TOLERANCE</a>, Iter, SP)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00086">86</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae34dad2ee2b016ef03ec16d6fbaea171"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_GROUP_BENCHMARK_CASE_T</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Fun, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#ac077478b69ae217bf0e40d31e0ace648">MANAK_GROUP_BENCHMARK_CASE_TI</a>(Name, Lib, Fun, Tol, <a class="el" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">MANAK_DEFAULT_ITERATIONS</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00089">89</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aae073349da7cd35265ab5978a5f7a883"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_GROUP_BENCHMARK_CASE_TI</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Fun, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="simple__module__benchmark__case_8hpp.html#a2a5b92b745655db58ffaa3bd6fdfbac1">MANAK_GROUP_BENCHMARK_CASE_TIS</a>(Name, Lib, Fun, Tol, Iter, <a class="el" href="set__env_8hpp.html#aee0cf3804862eacd7abb05192fe57d3a">MANAK_DEFAULT_SP</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00083">83</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afee24eb6f1adab1f0cf4fbdb2039de48"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MANAK_GROUP_BENCHMARK_CASE_TIS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Lib, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Fun, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Tol, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Iter, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SP&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="manak__benchmark__macros_8hpp.html#a9231d0ae97efa5f99528db93ffaac8bf">_MANAK_GROUP_BENCHMARK_CASE_TIS</a>(Name, Lib, Fun, Tol, Iter, SP)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>MANAK GROUP BENCHMARK CASE macros. </p>
+
+<p>Definition at line <a class="el" href="module__benchmark__case_8hpp_source.html#l00080">80</a> of file <a class="el" href="module__benchmark__case_8hpp_source.html">module_benchmark_case.hpp</a>.</p>
 
 </div>
 </div>
@@ -765,8 +1661,8 @@ Macros</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4c6f0f56bb7b054cbb2a0de860d7d462.html">manak</a></li><li class="navelem"><a class="el" href="dir_586b1078daf0a92751fc3409d59529af.html">benchmark_suit</a></li><li class="navelem"><a class="el" href="module__benchmark__case_8hpp.html">module_benchmark_case.hpp</a></li>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4c6f0f56bb7b054cbb2a0de860d7d462.html">manak</a></li><li class="navelem"><a class="el" href="dir_6d46d7b2f39e8922706ee95b4e3718a4.html">benchmark_suite</a></li><li class="navelem"><a class="el" href="module__benchmark__case_8hpp.html">module_benchmark_case.hpp</a></li>
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

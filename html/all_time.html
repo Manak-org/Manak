@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -66,72 +66,56 @@ $(document).ready(function(){initNavTree('all_time.html','');});
 <div class="textblock"><p>Let us start by timing the simplest function.</p>
 <div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1)</div>
 <div class="line">{</div>
-<div class="line">  Code;</div>
+<div class="line">  SetUp;</div>
+<div class="line">  </div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    Code;</div>
+<div class="line">  )</div>
+<div class="line">  </div>
+<div class="line">  TearDown;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>In this case the entire function call will be timed. Sometimes the Code to measure is more time sensetive. The code to measue may require some other code for setup or tear down. For this Manak provides 'Measure' macro.</p>
+</div><!-- fragment --><p>Here the code inside the 'MEASURE' block will be timed. Important thing to remember is that 'MEASURE' block does not change the scope.</p>
+<p>There can be any number of 'MEASURE' blocks inside a benchmark case. The time of all the 'Measure' blocks will be sumed.</p>
 <div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1)</div>
 <div class="line">{</div>
 <div class="line">  SetUp Code;</div>
 <div class="line">  </div>
-<div class="line">  <a class="code" href="benchmark__case_8hpp.html#ae14657e1f2d907faa918ff681c81d895">Measure</a></div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
 <div class="line">  (</div>
 <div class="line">    Code</div>
 <div class="line">  )</div>
 <div class="line">  </div>
 <div class="line">  TearDown Code;</div>
 <div class="line">  </div>
-<div class="line">  <a class="code" href="benchmark__case_8hpp.html#ae14657e1f2d907faa918ff681c81d895">Measure</a></div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
 <div class="line">  (</div>
 <div class="line">    Code;</div>
 <div class="line">  )</div>
 <div class="line">  </div>
 <div class="line">  TearDown Code;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>In this case only the code inside Measure blocks will be timed. There can be any number of 'Measure' blocks inside a benchmark case. The time of all the 'Measure' blocks will be sumed.</p>
-<p>All the benchmarks cases run for certain number of iterations and the final time is taken as the average of all the iterations. If number of iterations are not specified for any benchmark case default is used(which is 10). Check out <a class="el" href="set_env.html#set_env_mdi">MANAK_DEFAULT_ITERATIONS</a> for setting default number of iterations. Sometimes the setup code or the tear down is very expensive in terms of time and is required to be executed only once. Even with 'Measure' blocks, setup and teardown code is executed every iteration. This problem can be solved with 'Repeat' macro.</p>
-<div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1)</div>
+</div><!-- fragment --><p>'MEASURE' blocks can also appear user created function.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">size_t</span> a)</div>
 <div class="line">{</div>
-<div class="line">  SetUp Code;</div>
+<div class="line">  SetUp;</div>
 <div class="line">  </div>
-<div class="line">  <a class="code" href="benchmark__case_8hpp.html#aa0fdc74d5cc0b16ad5c9c2a6f78bf18d">Repeat</a></div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
 <div class="line">  (</div>
-<div class="line">    <a class="code" href="benchmark__case_8hpp.html#ae14657e1f2d907faa918ff681c81d895">Measure</a></div>
-<div class="line">    (</div>
-<div class="line">      Code</div>
-<div class="line">    )</div>
-<div class="line">  </div>
 <div class="line">    Code;</div>
+<div class="line">  )</div>
 <div class="line">  </div>
-<div class="line">    <a class="code" href="benchmark__case_8hpp.html#ae14657e1f2d907faa918ff681c81d895">Measure</a></div>
-<div class="line">    (</div>
-<div class="line">      Code;</div>
-<div class="line">    )</div>
-<div class="line">  )</div>
-<div class="line">  TearDown Code;</div>
-<div class="line">}</div>
-</div><!-- fragment --><p>With 'Repeat' block, only the code inside the 'Repeat' block is executed for number of iterations. Any code outside of 'Repeat' block will not be timed, even 'Measure' blocks.</p>
-<p>There can be multiple 'Repeat' blocks inside a case, in such a case each 'Repeat' block will be timed separately and added as a sub-benchmark case. For more information on multiple 'Repeat' blocks see <a class="el" href="p_bench.html#p_bench_mr">Templatized Benchmarking with Multiple 'Repeat' blocks.</a></p>
-<p>'Measure' and 'Repeat' blocks can also be used in manually added benchmark cases. For example -</p>
-<div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b)</div>
-<div class="line">{</div>
-<div class="line">  Code;</div>
-<div class="line"></div>
-<div class="line">  <a class="code" href="benchmark__case_8hpp.html#aa0fdc74d5cc0b16ad5c9c2a6f78bf18d">Repeat</a></div>
-<div class="line">  (</div>
-<div class="line">    <a class="code" href="benchmark__case_8hpp.html#ae14657e1f2d907faa918ff681c81d895">Measure</a></div>
-<div class="line">    (</div>
-<div class="line">      Code to measure;</div>
-<div class="line">    )</div>
-<div class="line">  )</div>
+<div class="line">  TearDown;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun)-&gt;AddArgs(0,0)...);</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(Test, fun)-&gt;AddArgs(0));</div>
+</div><!-- fragment --><p>'MANAK_ADD_BENCHMARK_WITH_TEMPLATE' creates a parametrized benchmark case. For more information on parametrized benchmarks check <a class="el" href="p_bench.html">Complete guide on Parametrized Benchmarking</a>. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

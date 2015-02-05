@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Manak: Complete guide on Templatized Benchmarking</title>
+<title>Manak: Complete guide on Parametrized Benchmarking</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -60,50 +60,62 @@ $(document).ready(function(){initNavTree('p_bench.html','');});
 <div id="doc-content">
 <div class="header">
   <div class="headertitle">
-<div class="title">Complete guide on Templatized Benchmarking </div>  </div>
+<div class="title">Complete guide on Parametrized Benchmarking </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>With the use advance C++11 features, Manak implements simple to use template benchmarking. Template benchmarking is useful when a same function is benchmarked with many different parameters.</p>
-<h1><a class="anchor" id="p_bench_para"></a>
-Templatized Benchmarking with Parametrized Benchmarks</h1>
+<div class="textblock"><p>With the use of advance C++11 features, Manak implements simple to use parametrized benchmarking. Parametrized benchmarking is useful when a same function is benchmarkek with many different parameters.</p>
 <div class="fragment"><div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(ForLoops_1000)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 1000;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(ForLoops_2000)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 200;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 200;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Parametrized benchmark cases in Manak helps reduce code duplication and the above code can be written like -</p>
+</div><!-- fragment --><p>Parametrized benchmark cases in Manak helps reduce code duplication. The above code can be written like -</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> ForLoops(<span class="keywordtype">size_t</span> a)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, ForLoops)-&gt;AddArgs(1000)-&gt;AddArgs(2000));</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, ForLoops)-&gt;AddArgs(1000)-&gt;AddArgs(2000));</div>
 </div><!-- fragment --><p>The output(HTML) can be seen <a href="samples/p_bench_1.html">HERE</a>. As you can see there are 2 sub-cases in B1. Notice that all the sub-cases share the same tolerance and iteration values.</p>
-<p>Reducing code redundancy helps minimize erros. In the above code 'B1' is a parametrized benchmark holding 2 sets of parameter set. With 'AddArgs' you can add more parameter sets to the parametrized benchmark. There can be any number of 'AddArgs' calls linked to a parametrized benchmark case. Parametrized benchmark case will run the function given on all the parameter sets. There is no restriction on type of function accepted by parametrized benchmark but number and type of parameters given to 'AddArgs' must match the given benchmark function. The only thing is that the auto template substitution wont work with benchmark functions. For templatized function the entire template signature must be provided.</p>
+<p>Reducing code redundancy helps minimize errors. In the above code 'B1' is a parametrized benchmark holding 2 sets of parameter. With 'AddArgs' you can add more parameter sets to the parametrized benchmark. There can be any number of 'AddArgs' calls linked to a parametrized benchmark case. Parametrized benchmark case will run the given function on all the parameter sets. There is no restriction on type of function accepted by parametrized benchmark but number and type of parameters given to 'AddArgs' must match the given benchmark function. The only thing is that the auto template substitution won't work with functions. For templatized function the entire template signature must be provided.</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><span class="keywordtype">int</span> fun(<span class="keyword">const</span> T&amp; t)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun&lt;std::string&gt;)-&gt;AddArgs(<span class="stringliteral">&quot;Test&quot;</span>));</div>
-</div><!-- fragment --><h2><a class="anchor" id="p_bench_aan"></a>
-AddArgs_N</h2>
-<p>'AddArgs' adds an unamed sub-case to the benchmark case. Sub-benchmark cases are characterized by the chronological index rather than a name. Check out <a class="el" href="mhierarchy.html#hierarchy_sub">Sub-Benchmark Case</a> for more information on the structure. But still it sometimes helps to associate a name. For example <a href="samples/p_bench_2.html">THIS</a> output is better than <a href="samples/p_bench_1.html">THIS</a> output. AddArgs_N can be used to add name to the sub-case.</p>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun&lt;std::string&gt;)-&gt;AddArgs(<span class="stringliteral">&quot;Test&quot;</span>));</div>
+</div><!-- fragment --><p>Check out <a class="el" href="s_mod.html#s_mod_ar">Auto Registration</a> and <a class="el" href="n_mod.html#n_mod_ar">Auto Registration</a> for more supported parametrized benchmark macros with auto registration.</p>
+<p>Check out <a class="el" href="s_mod.html#s_mod_mr">Manual Registration</a> and <a class="el" href="n_mod.html#n_mod_mr">Manual Registration with Normal Mode</a> for more supported parametrized benchmark macros with manual registration.</p>
+<h1><a class="anchor" id="p_bench_aan"></a>
+AddArgs_N</h1>
+<p>'AddArgs' adds an unamed sub-case to the benchmark case. Sub-benchmark cases are characterized by the chronological index rather than a name. Check out <a class="el" href="mhierarchy.html#hierarchy_sub">Sub-Benchmark Case</a> for more information on the structure. But still it sometimes helps to associate it with a name. For example <a href="samples/p_bench_2.html">THIS</a> output is better than <a href="samples/p_bench_1.html">THIS</a> output. AddArgs_N can be used to add name to the sub-case.</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> ForLoops(<span class="keywordtype">size_t</span> a)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; a;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, ForLoops)-&gt;AddArgs_N(<span class="stringliteral">&quot;With 1000&quot;</span>, 1000)-&gt;AddArgs_N(<span class="stringliteral">&quot;With 2000&quot;</span>, 2000));</div>
-</div><!-- fragment --><p>AddArgs_N works as same as AddArgs but always accepts one parameter as name. Remember even though name is added to the sub-case they are accessed only by their chronological index. To understand this better see <a class="el" href="mhierarchy.html#hierarchy_sub">Sub-Benchmark Case</a>.</p>
-<h2><a class="anchor" id="p_bench_aca"></a>
-AddCustomArgs</h2>
-<p>If number of parameter sets gets large its inconvenient to write each one down in AddArgs. On top of that they may be part of the sequence which can be generated at runtime. For that 'AddCustomArgs' is useful.</p>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, ForLoops)-&gt;AddArgs_N(<span class="stringliteral">&quot;With 1000&quot;</span>, 1000)-&gt;AddArgs_N(<span class="stringliteral">&quot;With 2000&quot;</span>, 2000));</div>
+</div><!-- fragment --><p>'AddArgs_N' works as same as AddArgs but always accepts first parameter as name. Remember even though name is added to the sub-case they are accessed only by their chronological index. To understand this better see <a class="el" href="mhierarchy.html#hierarchy_sub">Sub-Benchmark Case</a>.</p>
+<h1><a class="anchor" id="p_bench_aca"></a>
+AddCustomArgs</h1>
+<p>If number of parameter sets gets large its inconvenient to write each one down in 'AddArgs'. On top of that they may be part of the sequence which can be generated at runtime. In this case 'AddCustomArgs' is useful.</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
@@ -117,8 +129,8 @@ AddCustomArgs</h2>
 <div class="line">  <span class="keywordflow">return</span> out;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun)-&gt;AddCustomArgs(GetArgs));</div>
-</div><!-- fragment --><p>'AddCustomArgs' accepts a function which should return list of appropriate tuples. This custom function may have parameters which can be passed to 'AddCustomArgs' after the function name.</p>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun)-&gt;AddCustomArgs(GetArgs));</div>
+</div><!-- fragment --><p>'AddCustomArgs' accepts a function which should return list of appropriate tuples. This custom function can have parameters which can be passed to 'AddCustomArgs' after the function name.</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
@@ -132,10 +144,8 @@ AddCustomArgs</h2>
 <div class="line">  <span class="keywordflow">return</span> out;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun)-&gt;AddCustomArgs(GetArgs, 50));</div>
-</div><!-- fragment --><h1><a class="anchor" id="p_bench_acan"></a>
-AddCuctomArgs_N</h1>
-<p>To name sub-cases use AddCustomArgs_N</p>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun)-&gt;AddCustomArgs(GetArgs, 50));</div>
+</div><!-- fragment --><p>To name sub-cases use AddCustomArgs_N.</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> fun(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b)</div>
 <div class="line">{</div>
 <div class="line">  Code;</div>
@@ -149,122 +159,33 @@ AddCuctomArgs_N</h1>
 <div class="line">  <span class="keywordflow">return</span> out;</div>
 <div class="line">}</div>
 <div class="line"></div>
-<div class="line"><a class="code" href="benchmark__case_8hpp.html#ac0c89bd653d645660e205facaec0eeb4">MANAK_ADD_BENCHMARK</a>(<a class="code" href="module__benchmark__case_8hpp.html#a42fd12f274385b4c08b6ba316105ab2d">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun)-&gt;AddCustomArgs_N(GetArgs, 50));</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a5a8f20b4fca604e483261aaf4f63e82c">MANAK_ADD_CASE</a>(<a class="code" href="module__benchmark__case_8hpp.html#adeade358344f5ac95e5b9c7a0cf166d2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a>(B1, fun)-&gt;AddCustomArgs_N(GetArgs, 50));</div>
 </div><!-- fragment --><p>For more advance function passing see <a class="el" href="use_afr.html">Advance Function Registration</a>.</p>
-<h1><a class="anchor" id="p_bench_sm_m"></a>
-Parametrized Benchmark Macros for Simple Module</h1>
-<p>Manak offers following macros for creating parametrized benchmarks</p>
-<ul>
-<li><a class="el" href="p_bench.html#p_bench_m1">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a></li>
-<li><a class="el" href="p_bench.html#p_bench_m2">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a></li>
-<li><a class="el" href="p_bench.html#p_bench_m3">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</a></li>
-<li><a class="el" href="p_bench.html#p_bench_m4">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT</a></li>
-</ul>
-<h2><a class="anchor" id="p_bench_m1"></a>
-MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</h2>
-<p>Creates a parametrized benchmark case with given name and function and return pointer to the created case. The returned pointer can be registered manually or auto with 'MANAK_ADD_BENCHMARK'.</p>
-<h2><a class="anchor" id="p_bench_m2"></a>
-MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</h2>
-<p>Creates a parametrized benchmark case with given name, function and number of iterations.</p>
-<h2><a class="anchor" id="p_bench_m3"></a>
-MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</h2>
-<p>Creates a parmetrized benchmark case with given name, function and tolerance.</p>
-<h2><a class="anchor" id="p_bench_m4"></a>
-MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT</h2>
-<p>Creates a parametrized benchmark case with given name, function, number of iterations and tolerance.</p>
-<h1><a class="anchor" id="p_bench_m_m"></a>
-Parametrized Benchmark Macros for Normal Module</h1>
-<p>Manak offers following macros for creating parametrized benchmarks</p>
-<ul>
-<li><a class="el" href="p_bench.html#p_bench_m5">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</a></li>
-<li><a class="el" href="p_bench.html#p_bench_m6">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</a></li>
-<li><a class="el" href="p_bench.html#p_bench_m7">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</a></li>
-<li><a class="el" href="p_bench.html#p_bench_m8">MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT</a></li>
-</ul>
-<h2><a class="anchor" id="p_bench_m5"></a>
-MANAK_CREATE_BENCHMARK_WITH_TEMPLATE</h2>
-<p>Creates a parametrized benchmark case with name, library and function and return pointer to the created case. The returned pointer can be registered manually or auto with 'MANAK_ADD_BENCHMARK'.</p>
-<h2><a class="anchor" id="p_bench_m6"></a>
-MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_I</h2>
-<p>Creates a parametrized benchmark case with name, library, function and number of iterations.</p>
-<h2><a class="anchor" id="p_bench_m7"></a>
-MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_T</h2>
-<p>Creates a parmetrized benchmark case with name, library, function and tolerance.</p>
-<h2><a class="anchor" id="p_bench_m8"></a>
-MANAK_CREATE_BENCHMARK_WITH_TEMPLATE_IT</h2>
-<p>Creates a parametrized benchmark case with name, library, function, number of iterations and tolerance.</p>
-<h1><a class="anchor" id="p_bench_mr"></a>
-Templatized Benchmarking with Multiple 'Repeat' blocks.</h1>
-<p>Check out <a class="el" href="all_time.html">All About Timing</a> to understand what 'Repeat' blocks are. Each 'Repeat' blocks registers a sub-benchmark case under the benchmark case. This property can be used to simulate the effect of templatized benchmarking. For example - </p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<p>Parametrized benchmark cases can also be used inside a group. for example -</p>
+<div class="fragment"><div class="line"><a class="code" href="manak__macros_8hpp.html#a9b30113368385a684e82d86be646a2d7">MANAK_AUTO_GROUP</a>()</div>
 <div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
-<div class="line"><span class="preprocessor"></span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="keyword">using namespace </span>std;</div>
-<div class="line"></div>
-<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#a57b66a0d95282c208124d1bdac0f8d2e">MANAK_AUTO_BENCHMARK_CASE</a>(B1)</div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a3e0d091ad756bb53fdc8e4a7ffe5acce">GINIT</a>()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 1000;i &lt; 2000;i = i + 100)</div>
-<div class="line">  {</div>
-<div class="line">    <a class="code" href="benchmark__case_8hpp.html#aa0fdc74d5cc0b16ad5c9c2a6f78bf18d">Repeat</a></div>
-<div class="line">    (</div>
-<div class="line">      <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> j = 0;j &lt; i;j++);</div>
-<div class="line">    )</div>
-<div class="line">  }</div>
+<div class="line"></div>
 <div class="line">}</div>
-</div><!-- fragment --><p>The output of this code is <a href="samples/p_bench_3.html">HTML</a></p>
-<p>TXT output is given below -</p>
-<div class="fragment"><div class="line"><span class="preprocessor">######################################################################</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Manak C++ Benchmarking Library                                    #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Version master                                                    #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#  Created at Nov 26 15:38:38 2014                                   #</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">######################################################################</span></div>
-<div class="line"><span class="preprocessor"></span></div>
-<div class="line">       Case Name              base_library        </div>
 <div class="line"></div>
-<div class="line">B1</div>
-<div class="line">  Parameter Set 0             3                   </div>
-<div class="line">  Parameter Set 1             3.4                 </div>
-<div class="line">  Parameter Set 2             3.7                 </div>
-<div class="line">  Parameter Set 3             4                   </div>
-<div class="line">  Parameter Set 4             4.4                 </div>
-<div class="line">  Parameter Set 5             4.6                 </div>
-<div class="line">  Parameter Set 6             5                   </div>
-<div class="line">  Parameter Set 7             5                   </div>
-<div class="line">  Parameter Set 8             5.4                 </div>
-<div class="line">  Parameter Set 9             5.8</div>
-</div><!-- fragment --><p>If you want to assign different tolerance and iteration values to sub-cases, multiple repeat is the way to go. This is not possible with parametrized benchmark cases.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="preprocessor">#define MANAK_SIMPLE_BENCHMARK_MODULE bench</span></div>
-<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_MAIN</span></div>
-<div class="line"><span class="preprocessor"></span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
-<div class="line"></div>
-<div class="line"><span class="keyword">using namespace </span>std;</div>
-<div class="line"></div>
-<div class="line"><a class="code" href="module__benchmark__case_8hpp.html#ab449c770b6d3bc90c0e1dcb8a38cd23e">MANAK_AUTO_BENCHMARK_CASE_T</a>(B1, &lt;value&gt;)</div>
+<div class="line"><span class="keywordtype">void</span> fun(<span class="keywordtype">size_t</span> a)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 1000;i &lt; 2000;i = i + 100)</div>
-<div class="line">  {</div>
-<div class="line">    <a class="code" href="benchmark__case_8hpp.html#acff036c6b940a558569f933840e95e8c">SetTol</a>(&lt;value&gt;);</div>
-<div class="line">    <a class="code" href="benchmark__case_8hpp.html#a0fbdc81576f9c20e181d0586a57aa71f">SetIter</a>(&lt;value&gt;);</div>
-<div class="line">    <a class="code" href="benchmark__case_8hpp.html#aa0fdc74d5cc0b16ad5c9c2a6f78bf18d">Repeat</a></div>
-<div class="line">    (</div>
-<div class="line">      <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> j = 0;j &lt; i;j++);</div>
-<div class="line">    )</div>
-<div class="line">  }</div>
+<div class="line">  <a class="code" href="manak__benchmark__macros_8hpp.html#a37c0e143435c7c23afdda41fbbc0a689">MEASURE</a></div>
+<div class="line">  (</div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">size_t</span> i = 0;i &lt; 100;i++);</div>
+<div class="line">  )</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>SetIter and SetTol only takes effect for the next sub-case. It is trivial to mention that if no SetTol is given for a sub-case the default is taken which is the tolerance set for the parent benchmark case. </p>
-</div></div><!-- contents -->
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#aa7c700b921bb823e3a4ff55cff19de63">MANAK_ADD_TO_GROUP</a>(<a class="code" href="module__benchmark__case_8hpp.html#a04b828f51e0252234dc645e9a33710fa">MANAK_CREATE_GROUP_BENCHMARK_WITH_TEMPLATE</a>(<span class="stringliteral">&quot;InGroup&quot;</span>, fun)-&gt;AddArgs(100));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="manak__macros_8hpp.html#a7ec36c764e3ead2c9043199bdb7c71c5">MANAK_AUTO_GROUP_END</a>();</div>
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

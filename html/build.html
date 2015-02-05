@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -73,9 +73,9 @@ Supported Compilers</h1>
 </ul>
 <h1><a class="anchor" id="build_lb"></a>
 Installing On Linux(or like environments)</h1>
-<p>As Manak is header only library and has no external dependency, no build is required for installation.</p>
-<h2><a class="anchor" id="Installing"></a>
-with CMake</h2>
+<p>Manak has no dependencies and can work as header only.</p>
+<h2><a class="anchor" id="Building"></a>
+and Installing with CMake</h2>
 <ul>
 <li>Download and extract the source into folder.</li>
 <li>cd into that directory</li>
@@ -87,7 +87,7 @@ with CMake</h2>
 <p>This will install Manak header files into /usr/local/includes. To generate this documentation run command 'make doc' in build.</p>
 <h2><a class="anchor" id="Manual"></a>
 Installation</h2>
-<p>You can just copy the 'manak' folder(./src/manak) into the directory of your choice. While compiling don't forget to add that directory to the compilers search path.</p>
+<p>You can just copy the 'manak' folder(./src/manak) into the directory of your choice. While compiling, don't forget to add that directory to the compilers search path. Use CMake build for use with dynamic linkage.</p>
 <h1><a class="anchor" id="build_wb"></a>
 Installing on Windows</h1>
 <h2><a class="anchor" id="Installing"></a>
@@ -95,16 +95,25 @@ with CMake</h2>
 <p>You can download CMake GUI for Windows and install Manak with it.</p>
 <h2><a class="anchor" id="Manual"></a>
 Installation</h2>
-<p>Sometimes working with CMake on Windows is really confusing. So if you are using Visual Studio environment of MinGW environment you can just copy the 'manak' folder (./src/manak) into the default search path of your environment.</p>
+<p>Sometimes working with CMake on Windows is really confusing. So if you are using Visual Studio environment of MinGW environment you can just copy the 'manak' folder (./src/manak) into the default search path of your environment. To build Manak for dynamic linkage you have to use CMake for windows.</p>
 <h1><a class="anchor" id="build_um"></a>
 Using Manak</h1>
-<p>To use manak you only have to add <a class="el" href="manak_8hpp.html">manak.hpp</a> to your project, which will let you use all the macros and functions available. But before including <a class="el" href="manak_8hpp.html">manak.hpp</a> you should set the environment for Manak. See <a class="el" href="set_env.html">Setting Environment</a>.</p>
+<p>To use manak you only have to add <a class="el" href="manak_8hpp.html">manak.hpp</a> to your project, which will let you use all the macros and functions available. But before including <a class="el" href="manak_8hpp.html">manak.hpp</a> you should set the environment for Manak. See <a class="el" href="set_env.html">Setting Environment</a>. Check out <a class="el" href="multi_file.html">Using Manak Effectively in Multi File Project</a> to use Manak in multi file projects.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"></div>
 <div class="line">Set Manak environment; </div>
 <div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="build_cli"></a>
+</div><!-- fragment --><p>Manak can be used both with static linkage and dynamic linkage. The default is static linkage. To use Manak with dynamic linkage -</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"></div>
+<div class="line">Set Manak environment; </div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#define MANAK_USE_DYN_LINK</span></div>
+<div class="line"><span class="preprocessor"></span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="manak_8hpp.html">manak/manak.hpp</a>&gt;</span></div>
+</div><!-- fragment --><p>With this you need to provide the shared object generated in build to the linker. If you have installed Manak to one of the default directories, passing option '-lmanak' should work.</p>
+<h2><a class="anchor" id="build_cli"></a>
 Command Line Arguments</h2>
 <p>The following are the command line arguments available for any Manak generated executable.</p>
 <ul>
@@ -112,6 +121,7 @@ Command Line Arguments</h2>
 <li>'-s &lt;filename&gt;': Save the generated for later comparisons. See <a class="el" href="comp.html">Comparison Framework</a> for more information.</li>
 <li>'-c &lt;filename&gt;': Load previously saved benchmarks for comparison. See <a class="el" href="comp.html">Comparison Framework</a> for more information.</li>
 <li>'-r &lt;regex&gt;': Run benchmark cases matching given regex. See <a class="el" href="quick_guide.html#qg_rsc">Running Specific Cases</a> for more information.</li>
+<li>'-f &lt;format&gt;: Change format of default output. Available formats are "HTML" and "TXT". Default is set to "HTML". See <a class="el" href="out_format.html">All About Outputs</a> for more information.</li>
 <li>'-o &lt;filename&gt;: Redirect the output to given file. See <a class="el" href="set_env.html#set_env_soof">Setting Options For Output File</a> for more information.</li>
 <li>'-v': Get version information </li>
 </ul>
@@ -120,7 +130,7 @@ Command Line Arguments</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

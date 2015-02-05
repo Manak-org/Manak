@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -75,161 +75,212 @@ $(document).ready(function(){initNavTree('manak_8hpp_source.html','');});
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="set__env_8hpp.html">manak/benchmark_suit/set_env.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="benchmark__suite_8hpp.html">manak/benchmark_suit/benchmark_suite.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="run__tree_8hpp.html">manak/benchmark_suit/run_tree.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="cli_8hpp.html">manak/util/cli.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span>manak </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="manak__env_8hpp.html">manak/util/manak_env.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="set__env_8hpp.html">manak/util/set_env.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="manak__suite_8hpp.html">manak/manak_suite/manak_suite.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="result__collector_8hpp.html">manak/manak_suite/result_collector.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="manak__macros_8hpp.html">manak/manak_suite/manak_macros.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="benchmark__suite_8hpp.html">manak/benchmark_suite/benchmark_suite.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="namespacemanak.html#adcb407502ab54acd1f73edb30564d5ce">   27</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="namespacemanak.html#adcb407502ab54acd1f73edb30564d5ce">manak_benchmarking_main</a>(std::function&lt;<span class="keywordtype">bool</span>()&gt; init_func, <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[] )</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="test__suite_8hpp.html">manak/test_suite/test_suite.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="output__manager_8hpp.html">manak/output_manager/output_manager.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="cli_8hpp.html">manak/util/cli.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">namespace </span>manak </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordtype">bool</span> output_format_html = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordtype">bool</span> compare = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a>(argv, argv + argc, <span class="stringliteral">&quot;-h&quot;</span>))</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;-h          : For help&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;-r regex    : Only the cases satisfying the given regex will run.&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;              Check out guide for supported regex expressions.&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;-o filename : Save output to given file.&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;-s filename : Save the result for comparison.&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;-c filename : Load the given file for comparison.&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;-f HTML     : Save the output as HTML(Default)&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;   TXT      : Save the output as text document&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    exit(0);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a>(argv, argv + argc, <span class="stringliteral">&quot;-v&quot;</span>))</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    std::cout &lt;&lt; <a class="code" href="namespacemanak.html#a951d1134a5aa1a031e8f6922d77bf8d8">manak::GetVersionInfo</a>() &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    exit(0);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  init_func();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  std::string pattern = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a>(argv, argv + argc, <span class="stringliteral">&quot;-r&quot;</span>))</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">char</span>* c_pattern = <a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a578f1007dd0bbe17a2e84993189519f7">manak::utils::cli::CLI::getCmdOption</a>(argv,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                                                           argv + argc,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                                                           <span class="stringliteral">&quot;-r&quot;</span>);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">if</span>(c_pattern)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      pattern = std::string(c_pattern);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      std::cout &lt;&lt; <span class="stringliteral">&quot;No pattern given!&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      exit(1);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  std::ofstream* stream = NULL;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a>(argv, argv + argc, <span class="stringliteral">&quot;-f&quot;</span>))</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    std::string format = <a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a578f1007dd0bbe17a2e84993189519f7">manak::utils::cli::CLI::getCmdOption</a>(argv, argv + argc, <span class="stringliteral">&quot;-f&quot;</span>);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">if</span>(format == <span class="stringliteral">&quot;TXT&quot;</span> || format == <span class="stringliteral">&quot;txt&quot;</span>)</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      output_format_html = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(format == <span class="stringliteral">&quot;HTML&quot;</span> || format == <span class="stringliteral">&quot;html&quot;</span>);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      std::cerr &lt;&lt; <span class="stringliteral">&quot;Unrecognized format \&quot;&quot;</span> &lt;&lt; format &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      std::cerr &lt;&lt; <span class="stringliteral">&quot;For supported formats pass \&quot;-h\&quot;&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      exit(1);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#ifdef MANAK_INIT</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespacemanak.html#ac999c55405a23e9c842411033ecd2120">manak_init_module</a>()</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">  #ifdef MANAK_CONFIG_FILE</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #include MANAK_CONFIG_FILE</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #endif // MANAK_CONFIG_FILE</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">  #ifdef MANAK_MANUAL_INIT_FUNCTION</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor"></span>  MANAK_MANUAL_INIT_FUNCTION();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">  #endif // MANAK_MANUAL_INIT_FUNCTION</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <a class="code" href="classmanak_1_1ManakEnv.html#a678fda83693cd6a601cc203dfa5c2274">manak::ManakEnv::GlobalEnv</a>().<a class="code" href="classmanak_1_1ManakEnv.html#aa4b584259904a88e3f129c661f262009">GetModuleName</a>() = <a class="code" href="set__env_8hpp.html#a7ffbb68bb6699b04b8760c2cdc572c82">MANAK_MODULE_NAME</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <a class="code" href="classmanak_1_1ManakSuite.html#a5d22e3a5e90d84787e6fd74651473f40">manak::ManakSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1ManakSuite.html#ab085af7ba02dc18721a161fd89380335">Name</a>() = <a class="code" href="set__env_8hpp.html#a7ffbb68bb6699b04b8760c2cdc572c82">MANAK_MODULE_NAME</a>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> manak_main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[] )</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">bool</span> output_format_html = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">bool</span> compare = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a>(argv, argv + argc, <span class="stringliteral">&quot;-h&quot;</span>))</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;-h          : For help&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;-r regex    : Only the cases satisfying the given regex will run.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;              Check out guide for supported regex expressions.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;-o filename : Save output to given file.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;-s filename : Save the result for comparison.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;-c filename : Load the given file for comparison.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;-f HTML     : Save the output as HTML(Default)&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;   TXT      : Save the output as text document&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    exit(0);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a>(argv, argv + argc, <span class="stringliteral">&quot;-v&quot;</span>))</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    std::cout &lt;&lt; <a class="code" href="namespacemanak.html#a951d1134a5aa1a031e8f6922d77bf8d8">manak::GetVersionInfo</a>() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    exit(0);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  }</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a>(argv, argv + argc, <span class="stringliteral">&quot;-o&quot;</span>))</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    std::string filename(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a578f1007dd0bbe17a2e84993189519f7">manak::utils::cli::CLI::getCmdOption</a>(argv, argv + argc, <span class="stringliteral">&quot;-o&quot;</span>));</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    stream = <span class="keyword">new</span> std::ofstream(filename);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    std::string fname = <a class="code" href="macro__utils_8hpp.html#a6673dd5f64792781ee76c46a8b6e6bf0">MANAK_STRINGIZE</a>(<a class="code" href="set__env_8hpp.html#aae73d91f689202dab06e8a4027b947c6">MANAK_DEFAULT_OUT_FILENAME</a>);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">if</span>(output_format_html)</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      fname += <span class="stringliteral">&quot;.html&quot;</span>;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">else</span> fname += <span class="stringliteral">&quot;.txt&quot;</span>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    stream = <span class="keyword">new</span> std::ofstream(fname);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">BenchmarkSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1BenchmarkSuite.html#aa94f6d653cc68b2cf2ce437b78a3f4ff">Run</a>(<span class="stringliteral">&quot;&quot;</span>, pattern, compare);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <a class="code" href="classmanak_1_1RunTree.html#a1ac041f90b576275833a7f45848b5e1c">RunTree::GlobalRunTree</a>().<a class="code" href="classmanak_1_1RunTree.html#a54dff5bfe24f37725602138f46d6046a">Run</a>();</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a>(argv, argv + argc, <span class="stringliteral">&quot;-c&quot;</span>))</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    std::string filename(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a578f1007dd0bbe17a2e84993189519f7">manak::utils::cli::CLI::getCmdOption</a>(argv, argv + argc, <span class="stringliteral">&quot;-c&quot;</span>));</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    std::ifstream com_file(filename);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <a class="code" href="classmanak_1_1RunTree.html#a1ac041f90b576275833a7f45848b5e1c">RunTree::GlobalRunTree</a>().<a class="code" href="classmanak_1_1RunTree.html#aae96bf764810f2d9df0d5d50a87fe060">LoadForComparison</a>(com_file);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keywordflow">if</span>(output_format_html)</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <a class="code" href="classmanak_1_1RunTree.html#a1ac041f90b576275833a7f45848b5e1c">RunTree::GlobalRunTree</a>().<a class="code" href="classmanak_1_1RunTree.html#a1c6e05f9a565f3d952e55cdd78de1083">PrintHTML</a>(*stream);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <a class="code" href="classmanak_1_1RunTree.html#a1ac041f90b576275833a7f45848b5e1c">RunTree::GlobalRunTree</a>().<a class="code" href="classmanak_1_1RunTree.html#ae2aea8645a116220d0b14b15b08b048d">PrintTXT</a>(*stream);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">//  std::ofstream s_html(&quot;test.html&quot;);</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">//  RunTree::GlobalRunTree().PrintHTML(s_html);</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a>(argv, argv + argc, <span class="stringliteral">&quot;-s&quot;</span>))</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  {</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    std::string filename(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a578f1007dd0bbe17a2e84993189519f7">manak::utils::cli::CLI::getCmdOption</a>(argv, argv + argc, <span class="stringliteral">&quot;-s&quot;</span>));</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    std::ofstream ss(filename);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <a class="code" href="classmanak_1_1RunTree.html#a1ac041f90b576275833a7f45848b5e1c">RunTree::GlobalRunTree</a>().<a class="code" href="classmanak_1_1RunTree.html#a2641440cb675ed31dda8808ae56d6882">SaveForComparison</a>(ss);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    ss.close();</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  }</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  stream-&gt;close();</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <span class="keyword">delete</span> stream;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;}; <span class="comment">// namespace manak</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  std::string pattern = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a>(argv, argv + argc, <span class="stringliteral">&quot;-r&quot;</span>))</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">char</span>* c_pattern = <a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a578f1007dd0bbe17a2e84993189519f7">manak::utils::cli::CLI::getCmdOption</a>(argv,</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                                                           argv + argc,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                                                           <span class="stringliteral">&quot;-r&quot;</span>);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">if</span>(c_pattern)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      pattern = std::string(c_pattern);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      std::cout &lt;&lt; <span class="stringliteral">&quot;No pattern given!&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      exit(1);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a>(argv, argv + argc, <span class="stringliteral">&quot;-f&quot;</span>))</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    std::string format = <a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a578f1007dd0bbe17a2e84993189519f7">manak::utils::cli::CLI::getCmdOption</a>(argv, argv + argc, <span class="stringliteral">&quot;-f&quot;</span>);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">if</span>(format == <span class="stringliteral">&quot;TXT&quot;</span> || format == <span class="stringliteral">&quot;txt&quot;</span>)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      output_format_html = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(format == <span class="stringliteral">&quot;HTML&quot;</span> || format == <span class="stringliteral">&quot;html&quot;</span>);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      std::cerr &lt;&lt; <span class="stringliteral">&quot;Unrecognized format \&quot;&quot;</span> &lt;&lt; format &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      std::cerr &lt;&lt; <span class="stringliteral">&quot;For supported formats pass \&quot;-h\&quot;&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      exit(1);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  }</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  std::string filename;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a>(argv, argv + argc, <span class="stringliteral">&quot;-o&quot;</span>))</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  {</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    filename = std::string(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a578f1007dd0bbe17a2e84993189519f7">manak::utils::cli::CLI::getCmdOption</a>(argv, argv + argc, <span class="stringliteral">&quot;-o&quot;</span>));</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  {</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    filename = <a class="code" href="macro__utils_8hpp.html#a6673dd5f64792781ee76c46a8b6e6bf0">MANAK_STRINGIZE</a>(<a class="code" href="set__env_8hpp.html#aae73d91f689202dab06e8a4027b947c6">MANAK_DEFAULT_OUT_FILENAME</a>);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">if</span>(output_format_html)</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;      filename += <span class="stringliteral">&quot;.html&quot;</span>;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    }</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;      filename += <span class="stringliteral">&quot;.txt&quot;</span>;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  }</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="preprocessor">#ifdef MANAK_AUTO_BENCHMARK_MAIN</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;{</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="namespacemanak.html#adcb407502ab54acd1f73edb30564d5ce">manak::manak_benchmarking_main</a>(&amp;<a class="code" href="set__env_8hpp.html#ac85d291ccac61ae5a1419b0c3f4556bc">MANAK_INIT_FUNCTION</a>, argc, argv);</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;}</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">#endif // MANAK_AUTO_BENCHMARK_MAIN</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">#endif // MANAK_HPP_INCLUDED</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  <span class="keywordflow">if</span>(output_format_html)</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <a class="code" href="classmanak_1_1OutputManager.html#a86f0f6ba24c4bfa927453f13faac1f66">manak::OutputManager::GlobalOutputManager</a>().<a class="code" href="classmanak_1_1OutputManager.html#ae298f66cda2cb96c596b741784f69844">AddHandler</a>(<span class="keyword">new</span> <a class="code" href="classmanak_1_1HTMLOutputHandler.html">manak::HTMLOutputHandler</a>(filename));</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <a class="code" href="classmanak_1_1OutputManager.html#a86f0f6ba24c4bfa927453f13faac1f66">manak::OutputManager::GlobalOutputManager</a>().<a class="code" href="classmanak_1_1OutputManager.html#ae298f66cda2cb96c596b741784f69844">AddHandler</a>(<span class="keyword">new</span> <a class="code" href="classmanak_1_1TXTOutputHandler.html">manak::TXTOutputHandler</a>(<span class="stringliteral">&quot;test.txt&quot;</span>));</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  }</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;  {</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <a class="code" href="classmanak_1_1OutputManager.html#a86f0f6ba24c4bfa927453f13faac1f66">manak::OutputManager::GlobalOutputManager</a>().<a class="code" href="classmanak_1_1OutputManager.html#ae298f66cda2cb96c596b741784f69844">AddHandler</a>(<span class="keyword">new</span> <a class="code" href="classmanak_1_1TXTOutputHandler.html">manak::TXTOutputHandler</a>(filename));</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  }</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  <span class="comment">// call the default init function</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  <a class="code" href="namespacemanak.html#ac999c55405a23e9c842411033ecd2120">manak::manak_init_module</a>();</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <span class="comment">// Construct the running tree</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  <a class="code" href="classmanak_1_1ManakSuite.html#a5d22e3a5e90d84787e6fd74651473f40">ManakSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1ManakSuite.html#a59b051cc8ecb48122643cc19c2e06ada">Run</a>(<span class="stringliteral">&quot;&quot;</span>, pattern, compare);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="comment">// Run the generated run tree and collect results</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  <a class="code" href="classmanak_1_1ResultCollector.html#a0b53e7c11d996c0373863b5c358edfd3">ResultCollector::GlobalResultCollector</a>().<a class="code" href="classmanak_1_1ResultCollector.html#a5a3c5c774b4986ff4233e0c3c2db7edb">Run</a>();</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a>(argv, argv + argc, <span class="stringliteral">&quot;-c&quot;</span>))</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    std::string filename(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a578f1007dd0bbe17a2e84993189519f7">manak::utils::cli::CLI::getCmdOption</a>(argv, argv + argc, <span class="stringliteral">&quot;-c&quot;</span>));</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    std::ifstream com_file(filename);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <a class="code" href="classmanak_1_1ResultCollector.html#a0b53e7c11d996c0373863b5c358edfd3">ResultCollector::GlobalResultCollector</a>().<a class="code" href="classmanak_1_1ResultCollector.html#a04fb68a211e91a5e226737f9044faa9f">LoadForComparison</a>(com_file);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  }</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="comment">// Pass the results to registered output handlers</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <a class="code" href="classmanak_1_1ResultCollector.html#a0b53e7c11d996c0373863b5c358edfd3">ResultCollector::GlobalResultCollector</a>().<a class="code" href="classmanak_1_1ResultCollector.html#a3023863f8901fc9e5ca6fceeaaa9b917">Print</a>();</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a>(argv, argv + argc, <span class="stringliteral">&quot;-s&quot;</span>))</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  {</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    std::string filename(<a class="code" href="classmanak_1_1utils_1_1cli_1_1CLI.html#a578f1007dd0bbe17a2e84993189519f7">manak::utils::cli::CLI::getCmdOption</a>(argv, argv + argc, <span class="stringliteral">&quot;-s&quot;</span>));</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    std::ofstream ss(filename);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <a class="code" href="classmanak_1_1ResultCollector.html#a0b53e7c11d996c0373863b5c358edfd3">ResultCollector::GlobalResultCollector</a>().<a class="code" href="classmanak_1_1ResultCollector.html#a14e36d716310f06edac1a8b07149ee7f">SaveForComparison</a>(ss);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    ss.close();</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  }</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;}</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor"></span><span class="keywordtype">bool</span> <a class="code" href="namespacemanak.html#ac999c55405a23e9c842411033ecd2120">manak_init_module</a>();</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="preprocessor">#endif // defind</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;}; <span class="comment">// namespace manak</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="preprocessor">#ifdef MANAK_AUTO_MAIN</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;{</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <span class="keywordflow">return</span> manak::manak_main(argc, argv);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;}</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="preprocessor">#endif // MANAK_AUTO_MAIN</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="preprocessor">#endif // MANAK_HPP_INCLUDED</span></div>
+<div class="ttc" id="manak__macros_8hpp_html"><div class="ttname"><a href="manak__macros_8hpp.html">manak_macros.hpp</a></div></div>
 <div class="ttc" id="classmanak_1_1utils_1_1cli_1_1CLI_html_a578f1007dd0bbe17a2e84993189519f7"><div class="ttname"><a href="classmanak_1_1utils_1_1cli_1_1CLI.html#a578f1007dd0bbe17a2e84993189519f7">manak::utils::cli::CLI::getCmdOption</a></div><div class="ttdeci">static char * getCmdOption(char **begin, char **end, const std::string &amp;option)</div><div class="ttdoc">Check if certain option is passed. </div><div class="ttdef"><b>Definition:</b> <a href="cli_8hpp_source.html#l00027">cli.hpp:27</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_aa94f6d653cc68b2cf2ce437b78a3f4ff"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#aa94f6d653cc68b2cf2ce437b78a3f4ff">manak::BenchmarkSuite::Run</a></div><div class="ttdeci">bool Run(const std::string &amp;uname=&quot;&quot;, const std::string &amp;pattern=&quot;&quot;, const bool compare=false)</div></div>
-<div class="ttc" id="classmanak_1_1RunTree_html_a54dff5bfe24f37725602138f46d6046a"><div class="ttname"><a href="classmanak_1_1RunTree.html#a54dff5bfe24f37725602138f46d6046a">manak::RunTree::Run</a></div><div class="ttdeci">void Run()</div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a306217163f19652e9dd1eba93b81ce58"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a></div><div class="ttdeci">static BenchmarkSuite &amp; GetMasterSuite()</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00045">benchmark_suite.hpp:45</a></div></div>
-<div class="ttc" id="classmanak_1_1RunTree_html_ae2aea8645a116220d0b14b15b08b048d"><div class="ttname"><a href="classmanak_1_1RunTree.html#ae2aea8645a116220d0b14b15b08b048d">manak::RunTree::PrintTXT</a></div><div class="ttdeci">void PrintTXT(std::ostream &amp;stream)</div></div>
-<div class="ttc" id="set__env_8hpp_html_aae73d91f689202dab06e8a4027b947c6"><div class="ttname"><a href="set__env_8hpp.html#aae73d91f689202dab06e8a4027b947c6">MANAK_DEFAULT_OUT_FILENAME</a></div><div class="ttdeci">#define MANAK_DEFAULT_OUT_FILENAME</div><div class="ttdoc">If no output file is given benchmarking statistics will be saved to this file. </div><div class="ttdef"><b>Definition:</b> <a href="set__env_8hpp_source.html#l00024">set_env.hpp:24</a></div></div>
-<div class="ttc" id="classmanak_1_1RunTree_html_aae96bf764810f2d9df0d5d50a87fe060"><div class="ttname"><a href="classmanak_1_1RunTree.html#aae96bf764810f2d9df0d5d50a87fe060">manak::RunTree::LoadForComparison</a></div><div class="ttdeci">void LoadForComparison(std::istream &amp;stream)</div></div>
+<div class="ttc" id="manak__env_8hpp_html"><div class="ttname"><a href="manak__env_8hpp.html">manak_env.hpp</a></div></div>
+<div class="ttc" id="classmanak_1_1ResultCollector_html_a3023863f8901fc9e5ca6fceeaaa9b917"><div class="ttname"><a href="classmanak_1_1ResultCollector.html#a3023863f8901fc9e5ca6fceeaaa9b917">manak::ResultCollector::Print</a></div><div class="ttdeci">MANAK_INLINE void Print()</div></div>
+<div class="ttc" id="classmanak_1_1ManakSuite_html_a5d22e3a5e90d84787e6fd74651473f40"><div class="ttname"><a href="classmanak_1_1ManakSuite.html#a5d22e3a5e90d84787e6fd74651473f40">manak::ManakSuite::GetMasterSuite</a></div><div class="ttdeci">static ManakSuite &amp; GetMasterSuite()</div><div class="ttdef"><b>Definition:</b> <a href="manak__suite_8hpp_source.html#l00041">manak_suite.hpp:41</a></div></div>
+<div class="ttc" id="classmanak_1_1ManakEnv_html_aa4b584259904a88e3f129c661f262009"><div class="ttname"><a href="classmanak_1_1ManakEnv.html#aa4b584259904a88e3f129c661f262009">manak::ManakEnv::GetModuleName</a></div><div class="ttdeci">const std::string &amp; GetModuleName() const </div><div class="ttdef"><b>Definition:</b> <a href="manak__env_8hpp_source.html#l00018">manak_env.hpp:18</a></div></div>
+<div class="ttc" id="classmanak_1_1TXTOutputHandler_html"><div class="ttname"><a href="classmanak_1_1TXTOutputHandler.html">manak::TXTOutputHandler</a></div><div class="ttdef"><b>Definition:</b> <a href="txt__output__handler_8hpp_source.html#l00019">txt_output_handler.hpp:19</a></div></div>
+<div class="ttc" id="classmanak_1_1ManakEnv_html_a678fda83693cd6a601cc203dfa5c2274"><div class="ttname"><a href="classmanak_1_1ManakEnv.html#a678fda83693cd6a601cc203dfa5c2274">manak::ManakEnv::GlobalEnv</a></div><div class="ttdeci">static ManakEnv &amp; GlobalEnv()</div><div class="ttdef"><b>Definition:</b> <a href="manak__env_8hpp_source.html#l00012">manak_env.hpp:12</a></div></div>
+<div class="ttc" id="set__env_8hpp_html_a7ffbb68bb6699b04b8760c2cdc572c82"><div class="ttname"><a href="set__env_8hpp.html#a7ffbb68bb6699b04b8760c2cdc572c82">MANAK_MODULE_NAME</a></div><div class="ttdeci">#define MANAK_MODULE_NAME</div><div class="ttdoc">Set the module name for further use. </div><div class="ttdef"><b>Definition:</b> <a href="set__env_8hpp_source.html#l00013">set_env.hpp:13</a></div></div>
+<div class="ttc" id="classmanak_1_1HTMLOutputHandler_html"><div class="ttname"><a href="classmanak_1_1HTMLOutputHandler.html">manak::HTMLOutputHandler</a></div><div class="ttdef"><b>Definition:</b> <a href="html__output__handler_8hpp_source.html#l00022">html_output_handler.hpp:22</a></div></div>
+<div class="ttc" id="set__env_8hpp_html_aae73d91f689202dab06e8a4027b947c6"><div class="ttname"><a href="set__env_8hpp.html#aae73d91f689202dab06e8a4027b947c6">MANAK_DEFAULT_OUT_FILENAME</a></div><div class="ttdeci">#define MANAK_DEFAULT_OUT_FILENAME</div><div class="ttdoc">If no output file is given benchmarking statistics will be saved to this file. </div><div class="ttdef"><b>Definition:</b> <a href="set__env_8hpp_source.html#l00019">set_env.hpp:19</a></div></div>
+<div class="ttc" id="output__manager_8hpp_html"><div class="ttname"><a href="output__manager_8hpp.html">output_manager.hpp</a></div></div>
 <div class="ttc" id="cli_8hpp_html"><div class="ttname"><a href="cli_8hpp.html">cli.hpp</a></div></div>
 <div class="ttc" id="set__env_8hpp_html"><div class="ttname"><a href="set__env_8hpp.html">set_env.hpp</a></div></div>
-<div class="ttc" id="classmanak_1_1RunTree_html_a1ac041f90b576275833a7f45848b5e1c"><div class="ttname"><a href="classmanak_1_1RunTree.html#a1ac041f90b576275833a7f45848b5e1c">manak::RunTree::GlobalRunTree</a></div><div class="ttdeci">static RunTree &amp; GlobalRunTree()</div><div class="ttdef"><b>Definition:</b> <a href="run__tree_8hpp_source.html#l00080">run_tree.hpp:80</a></div></div>
-<div class="ttc" id="run__tree_8hpp_html"><div class="ttname"><a href="run__tree_8hpp.html">run_tree.hpp</a></div></div>
-<div class="ttc" id="classmanak_1_1RunTree_html_a2641440cb675ed31dda8808ae56d6882"><div class="ttname"><a href="classmanak_1_1RunTree.html#a2641440cb675ed31dda8808ae56d6882">manak::RunTree::SaveForComparison</a></div><div class="ttdeci">void SaveForComparison(std::ostream &amp;stream)</div></div>
+<div class="ttc" id="classmanak_1_1ResultCollector_html_a04fb68a211e91a5e226737f9044faa9f"><div class="ttname"><a href="classmanak_1_1ResultCollector.html#a04fb68a211e91a5e226737f9044faa9f">manak::ResultCollector::LoadForComparison</a></div><div class="ttdeci">MANAK_INLINE void LoadForComparison(std::istream &amp;stream)</div></div>
+<div class="ttc" id="classmanak_1_1ManakSuite_html_a59b051cc8ecb48122643cc19c2e06ada"><div class="ttname"><a href="classmanak_1_1ManakSuite.html#a59b051cc8ecb48122643cc19c2e06ada">manak::ManakSuite::Run</a></div><div class="ttdeci">MANAK_INLINE bool Run(const std::string &amp;uname=&quot;&quot;, const std::string &amp;pattern=&quot;&quot;, const bool compare=false)</div></div>
+<div class="ttc" id="classmanak_1_1ManakSuite_html_ab085af7ba02dc18721a161fd89380335"><div class="ttname"><a href="classmanak_1_1ManakSuite.html#ab085af7ba02dc18721a161fd89380335">manak::ManakSuite::Name</a></div><div class="ttdeci">const std::string &amp; Name() const </div><div class="ttdef"><b>Definition:</b> <a href="manak__suite_8hpp_source.html#l00087">manak_suite.hpp:87</a></div></div>
+<div class="ttc" id="classmanak_1_1ResultCollector_html_a0b53e7c11d996c0373863b5c358edfd3"><div class="ttname"><a href="classmanak_1_1ResultCollector.html#a0b53e7c11d996c0373863b5c358edfd3">manak::ResultCollector::GlobalResultCollector</a></div><div class="ttdeci">static ResultCollector &amp; GlobalResultCollector()</div><div class="ttdef"><b>Definition:</b> <a href="result__collector_8hpp_source.html#l00130">result_collector.hpp:130</a></div></div>
 <div class="ttc" id="benchmark__suite_8hpp_html"><div class="ttname"><a href="benchmark__suite_8hpp.html">benchmark_suite.hpp</a></div></div>
 <div class="ttc" id="namespacemanak_html_a951d1134a5aa1a031e8f6922d77bf8d8"><div class="ttname"><a href="namespacemanak.html#a951d1134a5aa1a031e8f6922d77bf8d8">manak::GetVersionInfo</a></div><div class="ttdeci">std::string GetVersionInfo()</div><div class="ttdoc">Returns the version information in string. </div><div class="ttdef"><b>Definition:</b> <a href="version_8hpp_source.html#l00024">version.hpp:24</a></div></div>
-<div class="ttc" id="set__env_8hpp_html_ac85d291ccac61ae5a1419b0c3f4556bc"><div class="ttname"><a href="set__env_8hpp.html#ac85d291ccac61ae5a1419b0c3f4556bc">MANAK_INIT_FUNCTION</a></div><div class="ttdeci">#define MANAK_INIT_FUNCTION</div><div class="ttdoc">If MANAK_ALTERNATE_INIT_FUNCTION is defined then that function will be called from generated main fun...</div><div class="ttdef"><b>Definition:</b> <a href="set__env_8hpp_source.html#l00019">set_env.hpp:19</a></div></div>
 <div class="ttc" id="macro__utils_8hpp_html_a6673dd5f64792781ee76c46a8b6e6bf0"><div class="ttname"><a href="macro__utils_8hpp.html#a6673dd5f64792781ee76c46a8b6e6bf0">MANAK_STRINGIZE</a></div><div class="ttdeci">#define MANAK_STRINGIZE(X)</div><div class="ttdoc">Converts the parameter into string. </div><div class="ttdef"><b>Definition:</b> <a href="macro__utils_8hpp_source.html#l00013">macro_utils.hpp:13</a></div></div>
-<div class="ttc" id="namespacemanak_html_adcb407502ab54acd1f73edb30564d5ce"><div class="ttname"><a href="namespacemanak.html#adcb407502ab54acd1f73edb30564d5ce">manak::manak_benchmarking_main</a></div><div class="ttdeci">int manak_benchmarking_main(std::function&lt; bool()&gt; init_func, int argc, char *argv[])</div><div class="ttdoc">This function runs benchmarking module with given function. </div><div class="ttdef"><b>Definition:</b> <a href="manak_8hpp_source.html#l00027">manak.hpp:27</a></div></div>
+<div class="ttc" id="classmanak_1_1ResultCollector_html_a5a3c5c774b4986ff4233e0c3c2db7edb"><div class="ttname"><a href="classmanak_1_1ResultCollector.html#a5a3c5c774b4986ff4233e0c3c2db7edb">manak::ResultCollector::Run</a></div><div class="ttdeci">MANAK_INLINE void Run()</div></div>
+<div class="ttc" id="classmanak_1_1OutputManager_html_a86f0f6ba24c4bfa927453f13faac1f66"><div class="ttname"><a href="classmanak_1_1OutputManager.html#a86f0f6ba24c4bfa927453f13faac1f66">manak::OutputManager::GlobalOutputManager</a></div><div class="ttdeci">static OutputManager &amp; GlobalOutputManager()</div><div class="ttdef"><b>Definition:</b> <a href="output__manager_8hpp_source.html#l00021">output_manager.hpp:21</a></div></div>
+<div class="ttc" id="test__suite_8hpp_html"><div class="ttname"><a href="test__suite_8hpp.html">test_suite.hpp</a></div></div>
 <div class="ttc" id="classmanak_1_1utils_1_1cli_1_1CLI_html_a9b42a605ae1a4017c0467c5095249c91"><div class="ttname"><a href="classmanak_1_1utils_1_1cli_1_1CLI.html#a9b42a605ae1a4017c0467c5095249c91">manak::utils::cli::CLI::cmdOptionExists</a></div><div class="ttdeci">static bool cmdOptionExists(char **begin, char **end, const std::string &amp;option)</div><div class="ttdoc">Get passed option. </div><div class="ttdef"><b>Definition:</b> <a href="cli_8hpp_source.html#l00040">cli.hpp:40</a></div></div>
-<div class="ttc" id="classmanak_1_1RunTree_html_a1c6e05f9a565f3d952e55cdd78de1083"><div class="ttname"><a href="classmanak_1_1RunTree.html#a1c6e05f9a565f3d952e55cdd78de1083">manak::RunTree::PrintHTML</a></div><div class="ttdeci">void PrintHTML(std::ostream &amp;stream)</div></div>
+<div class="ttc" id="classmanak_1_1ResultCollector_html_a14e36d716310f06edac1a8b07149ee7f"><div class="ttname"><a href="classmanak_1_1ResultCollector.html#a14e36d716310f06edac1a8b07149ee7f">manak::ResultCollector::SaveForComparison</a></div><div class="ttdeci">MANAK_INLINE void SaveForComparison(std::ostream &amp;stream)</div></div>
+<div class="ttc" id="namespacemanak_html_ac999c55405a23e9c842411033ecd2120"><div class="ttname"><a href="namespacemanak.html#ac999c55405a23e9c842411033ecd2120">manak::manak_init_module</a></div><div class="ttdeci">bool manak_init_module()</div></div>
+<div class="ttc" id="classmanak_1_1OutputManager_html_ae298f66cda2cb96c596b741784f69844"><div class="ttname"><a href="classmanak_1_1OutputManager.html#ae298f66cda2cb96c596b741784f69844">manak::OutputManager::AddHandler</a></div><div class="ttdeci">MANAK_INLINE void AddHandler(OutputHandler *handler)</div></div>
+<div class="ttc" id="manak__suite_8hpp_html"><div class="ttname"><a href="manak__suite_8hpp.html">manak_suite.hpp</a></div></div>
+<div class="ttc" id="result__collector_8hpp_html"><div class="ttname"><a href="result__collector_8hpp.html">result_collector.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4c6f0f56bb7b054cbb2a0de860d7d462.html">manak</a></li><li class="navelem"><a class="el" href="manak_8hpp.html">manak.hpp</a></li>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

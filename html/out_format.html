@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Manak: Output Formats</title>
+<title>Manak: All About Outputs</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -60,22 +60,42 @@ $(document).ready(function(){initNavTree('out_format.html','');});
 <div id="doc-content">
 <div class="header">
   <div class="headertitle">
-<div class="title">Output Formats </div>  </div>
+<div class="title">All About Outputs </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="out_format_intro"></a>
 Introduction</h1>
-<p>MANAK(since 1.1.0) also supports HTML output generation. HTML output is more intuitive as well as infomative. HTML is easy to use for users and is widely acceptible. MANAK can still generate TXT output but the default output is now HTML. To force MANAK to generate TXT output pass '-f TXT' as command line arguments while running the executable.</p>
+<p>Manak(since 1.1.0) also supports HTML output generation. HTML output is more intuitive as well as infomative. HTML is easy to use for users and is widely acceptible. Manak can still generate TXT output but the default output is now HTML. To force Manak to generate TXT output pass '-f TXT' as command line arguments while running the executable.</p>
 <h1><a class="anchor" id="out_format_html"></a>
 HTML</h1>
-<p>MANAK, by default generates output in HTML. A sample page can be seen <a href="samples/qg_intro_sec_1.html">Here</a>. As you can see the output shows information about the module and instance loaded for comparison. Check out <a class="el" href="comp.html">Comparison Framework</a> for more information on comparison framework. The first table shows all the benchmark cases, which gives the overall comparative look at the run. The libraries are compared against each other horizontally while the time dependent comparison is done with values in brackets.</p>
-<p>After that detailed report can be viewed. Each case is considered separately. All the information about the case and its sub-cases can be viewed here. </p>
+<p>Manak, by default generates output in HTML. A sample page can be seen <a href="samples/out_format_1.html">Here</a>. As you can see, the output shows information about the module and instance loaded for comparison. Check out <a class="el" href="comp.html">Comparison Framework</a> for more information on comparison framework. The first shows all the main tables, which gives the overall comparative look at the run. The libraries are compared against each other horizontally while the time dependent comparison is done with values in brackets. The colors indicate the test status. Green indicates that the tests in that benchmark case passed while red indicates failure. No color indicates that there were no tests inside that benchmark case. To see the failure msg the headers of the tables provides in page links to detailed report.</p>
+<p>In the 'Detailed Report' section, all the information about all the cases is displayed. Even in this section color indicates test status and failure msg can be seen directly below the case or the correspoding sub-case. Look out for easy to use in page links, they provide the ease.</p>
+<h1><a class="anchor" id="out_format_gmto"></a>
+Generating More Than One Output</h1>
+<p>Manak supports generating generating of more than one outputs. This can be done in manual init function. Check out <a class="el" href="set_env.html#set_env_sbif">Set Manual initialization function</a> for more information on manual init function. For example</p>
+<div class="fragment"><div class="line"><span class="keywordtype">bool</span> bench_init();</div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#define MANAK_INIT</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_MAIN</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_SIMPLE_MODULE bench</span></div>
+<div class="line"><span class="preprocessor"></span><span class="preprocessor">#define MANAK_MANUAL_INIT_FUNCTION bench_init</span></div>
+<div class="line"><span class="preprocessor"></span></div>
+<div class="line"><span class="keyword">using namespace </span>manak;</div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">bool</span> bench_init()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code" href="classmanak_1_1OutputManager.html#a86f0f6ba24c4bfa927453f13faac1f66">OutputManager::GlobalOutputManager</a>().<a class="code" href="classmanak_1_1OutputManager.html#ae298f66cda2cb96c596b741784f69844">AddHandler</a>(<span class="keyword">new</span> <a class="code" href="classmanak_1_1TXTOutputHandler.html">TXTOutputHandler</a>(&lt;filename&gt;));</div>
+<div class="line">  </div>
+<div class="line">  <a class="code" href="classmanak_1_1OutputManager.html#a86f0f6ba24c4bfa927453f13faac1f66">OutputManager::GlobalOutputManager</a>().<a class="code" href="classmanak_1_1OutputManager.html#ae298f66cda2cb96c596b741784f69844">AddHandler</a>(<span class="keyword">new</span> <a class="code" href="classmanak_1_1HTMLOutputHandler.html">HTMLOutputHandler</a>(&lt;filename&gt;));</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>The user can create their own output handlers by extending class <a class="el" href="classmanak_1_1OutputHandler.html">manak::OutputHandler</a>. Use <a class="el" href="classmanak_1_1TXTOutputHandler.html">manak::TXTOutputHandler</a> and <a class="el" href="classmanak_1_1HTMLOutputHandler.html">manak::HTMLOutputHandler</a> as examples. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

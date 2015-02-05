@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Manak: src/manak/benchmark_suit/set_env.hpp Source File</title>
+<title>Manak: src/manak/util/set_env.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -72,62 +72,65 @@ $(document).ready(function(){initNavTree('set__env_8hpp_source.html','');});
 <a href="set__env_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MANAK_SET_ENV_HPP_INCLUDED</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_SET_ENV_HPP_INCLUDED</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifdef MANAK_SIMPLE_BENCHMARK_MODULE</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_MODULE_NAME MANAK_STRINGIZE(MANAK_SIMPLE_BENCHMARK_MODULE)</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#else // MANAK_SIMPLE_BENCHMARK_MODULE</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#a7ffbb68bb6699b04b8760c2cdc572c82">    9</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_MODULE_NAME MANAK_STRINGIZE(MANAK_BENCHMARK_MODULE)</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#endif // MANAK_SIMPLE_BENCHMARK_MODULE</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#ifdef MANAK_ALTERNATE_INIT_FUNCTION</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT_FUNCTION MANAK_ALTERNATE_INIT_FUNCTION</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#ac85d291ccac61ae5a1419b0c3f4556bc">   19</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_INIT_FUNCTION manak::init_benchmarking_module</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif // MANAK_ALTERNATE_INIT_FUNCTION</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="macro__utils_8hpp.html">macro_utils.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifdef MANAK_SIMPLE_MODULE</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_MODULE_NAME MANAK_STRINGIZE(MANAK_SIMPLE_MODULE)</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#else // MANAK_SIMPLE_MODULE</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#a7ffbb68bb6699b04b8760c2cdc572c82">   13</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_MODULE_NAME MANAK_STRINGIZE(MANAK_MODULE)</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#endif // MANAK_SIMPLE_BENCHMARK_MODULE</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef MANAK_DEFAULT_OUT_FILENAME</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#aae73d91f689202dab06e8a4027b947c6">   19</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_DEFAULT_OUT_FILENAME benchmark_stat</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifndef MANAK_DEFAULT_OUT_FILENAME</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#aae73d91f689202dab06e8a4027b947c6">   24</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_DEFAULT_OUT_FILENAME benchmark_stat</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifndef MANAK_DEFAULT_TOLERANCE</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">   24</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #define MANAK_DEFAULT_TOLERANCE 10</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#ifndef MANAK_DEFAULT_TOLERANCE</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#a407c624fb108f4a4a399ffc647b7db93">   29</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #define MANAK_DEFAULT_TOLERANCE 10</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#ifndef MANAK_DEFAULT_ITERATIONS</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">   29</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #define MANAK_DEFAULT_ITERATIONS 10</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#ifndef MANAK_DEFAULT_ITERATIONS</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#ae1cd76cc677481c340deb63bbdca0ddb">   34</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #define MANAK_DEFAULT_ITERATIONS 10</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#ifndef MANAK_DEFAULT_SP</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#aee0cf3804862eacd7abb05192fe57d3a">   34</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #define MANAK_DEFAULT_SP 100</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif // MANAK_DEFAULT_SP</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#ifndef MANAK_REDIRECTION_FILENAME</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#af46b05b8d7d27ef3bb17b920049e4916">   40</a></span>&#160;<span class="preprocessor">#define MANAK_REDIRECTION_FILENAME benchmark_log.txt</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#ifndef MANAK_REDIRECTION_FILENAME</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif // MANAK_REDIRECTION_FILENAME</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#af46b05b8d7d27ef3bb17b920049e4916">   42</a></span>&#160;<span class="preprocessor">#define MANAK_REDIRECTION_FILENAME benchmark_log.txt</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#ifndef MANAK_BENCHMARK_REDIRECTION_STREAM</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#a0649f58c42271d45849f87bc84884611">   50</a></span>&#160;<span class="preprocessor">#define MANAK_OPEN_LOG std::ofstream f(MANAK_STRINGIZE(MANAK_REDIRECTION_FILENAME), std::fstream::app);</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#abe72ee9cd4a99a4139634bb7025a28c4">   51</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_CLOSE_LOG f.close();</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#a836a1345951e2740f56228db0cb7e2c6">   52</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_BENCHMARK_REDIRECTION_STREAM f.rdbuf()</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif // MANAK_REDIRECTION_FILENAME</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#ifndef MANAK_REDIRECTION_BUFFER</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#a0649f58c42271d45849f87bc84884611">   52</a></span>&#160;<span class="preprocessor">#define MANAK_OPEN_LOG std::ofstream f(MANAK_STRINGIZE(MANAK_REDIRECTION_FILENAME), std::fstream::app);</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#abe72ee9cd4a99a4139634bb7025a28c4">   53</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_CLOSE_LOG f.close();</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="set__env_8hpp.html#a1fbb7cd9365afbb33a1dca29241aa6a5">   54</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_REDIRECTION_BUFFER f.rdbuf()</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#ifndef MANAK_OPEN_LOG</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_OPEN_LOG</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#ifndef MANAK_CLOSE_LOG</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_CLOSE_LOG</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif // MANAK_SET_ENV_HPP_INCLUDED</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif //MANAK_REDIRECTION_BUFFER</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#ifndef MANAK_OPEN_LOG</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_OPEN_LOG</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#ifndef MANAK_CLOSE_LOG</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_CLOSE_LOG</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#endif // MANAK_SET_ENV_HPP_INCLUDED</span></div>
+<div class="ttc" id="macro__utils_8hpp_html"><div class="ttname"><a href="macro__utils_8hpp.html">macro_utils.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4c6f0f56bb7b054cbb2a0de860d7d462.html">manak</a></li><li class="navelem"><a class="el" href="dir_586b1078daf0a92751fc3409d59529af.html">benchmark_suit</a></li><li class="navelem"><a class="el" href="set__env_8hpp.html">set_env.hpp</a></li>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4c6f0f56bb7b054cbb2a0de860d7d462.html">manak</a></li><li class="navelem"><a class="el" href="dir_1fe2efaad9cdc7226aed6d70f6eeea1f.html">util</a></li><li class="navelem"><a class="el" href="set__env_8hpp.html">set_env.hpp</a></li>
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

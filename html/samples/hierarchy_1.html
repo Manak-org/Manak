@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Benchmarking log for module 'Test'</title>
+<style>
+li bold {font-weight: bold; font-size: 25px; }
+li info {font-size: 25px; }
+table, th, td { border: 1px solid black;                              border-collapse: collapse;                            }               th, td {                         padding: 5px;                         text-align: left;                       }
+bold {font-weight: bold; }
+</style>
+</head>
+<body>
+<h1 style="text-align:center"> Benchmarking Log for Module 'Test'</h1>
+<br>
+<ul>
+<li><bold>Module: </bold><info>Test</info></li>
+<li><bold>Timestamp: </bold><info>Jan 31 18:16:50 2015</info></li>
+<li><bold>Total Cases: </bold><info>1</info></li>
+<li><bold>Timestamp of module added for comparison: Jan 31 18:01:48 2015</bold></li>
+</ul>
+<br>
+<h2>Comparison Report</h2>
+<a href="#detail_/B1"><h2>B1</h2></a><br>
+                                                                  <table style="width:100%">                                                  <tr>                                                                            <th></th>
+<th>Lib1</th>
+<th>Lib2</th>
+</tr>
+<tr>
+<td>With100</td>
+<td>0.1</td>
+<td>0.2</td>
+
+</tr>
+<tr>
+<td>Parameter Set 1</td>
+<td>2</td>
+<td>2.1</td>
+
+</tr>
+<tr>
+<td>With10000</td>
+<td>21</td>
+<td>---</td>
+
+</tr>
+</table>
+<hr width=100% align=left>
+
+<br>
+<h2>Detailed Report</h2>
+<hr width=100% align=left>
+<a name="detail_/B1">
+<h2>/B1</h2>
+<bold>Number of Libraries: </bold>2<br>
+<bold>Libraries: </bold><a href="#/B1_lib_Lib1">Lib1</a>
+, <a href="#/B1_lib_Lib2">Lib2</a>
+<br>
+<a name="/B1_lib_Lib1"><h3>Lib1</h3>
+<table style="width:100%">
+<tr>                                                                            <th>Subcase</th>                                                              <th>Result</th>                                                               <th>Min</th>                                                                  <th>Max</th>                                                                  <th>Tolerance</th>                                                            <th>Iterations</th>                                                         </tr>
+<tr>
+<td><a href = "#/B1_lib_Lib1_SC_With100">With100</td></a>
+<td>0.1</td>
+<td>0</td>
+<td>1</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td><a href = "#/B1_lib_Lib1_SC_With1000">With1000</td></a>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td><a href = "#/B1_lib_Lib1_SC_With10000">With10000</td></a>
+<td>21</td>
+<td>20</td>
+<td>22</td>
+<td>10</td>
+<td>10</td>
+</tr>
+</table>
+
+</a>
+<a name="/B1_lib_Lib2"><h3>Lib2</h3>
+<table style="width:100%">
+<tr>                                                                            <th>Subcase</th>                                                              <th>Result</th>                                                               <th>Min</th>                                                                  <th>Max</th>                                                                  <th>Tolerance</th>                                                            <th>Iterations</th>                                                         </tr>
+<tr>
+<td><a href = "#/B1_lib_Lib2_SC_With100">With100</td></a>
+<td>0.2</td>
+<td>0</td>
+<td>1</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr>
+<td><a href = "#/B1_lib_Lib2_SC_With 1000">With 1000</td></a>
+<td>2.1</td>
+<td>2</td>
+<td>3</td>
+<td>10</td>
+<td>10</td>
+</tr>
+</table>
+
+</a>
+</a>
+<hr width=100% align=left>
+
+<footer>
+<p>Created by Manak:C++ Unit Benchmarking Library</p>
+</footer>
+</body>
+</html>

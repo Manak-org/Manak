@@ -1,0 +1,27 @@
+var classmanak_1_1ManakSuite =
+[
+    [ "ManakSuite", "classmanak_1_1ManakSuite.html#a8055121588c10deae8009206c6a7be96", null ],
+    [ "ManakSuite", "classmanak_1_1ManakSuite.html#ab29c7c120d4e9fe71f240b7b54ac3631", null ],
+    [ "~ManakSuite", "classmanak_1_1ManakSuite.html#a03e3c88c48b56b3b6ca98cf42ea78649", null ],
+    [ "AddCase", "classmanak_1_1ManakSuite.html#a6bc4f3bda10190a994b7fe66af8578b4", null ],
+    [ "AddGroup", "classmanak_1_1ManakSuite.html#abce0088aebffb405be3d18b0c6ceb0aa", null ],
+    [ "AddSuite", "classmanak_1_1ManakSuite.html#a4b88a314d5ec1940aef64a39d35c019d", null ],
+    [ "Find", "classmanak_1_1ManakSuite.html#a36e505bb8bed57cfe5a4cb01596ef93c", null ],
+    [ "GetCurrentSuite", "classmanak_1_1ManakSuite.html#a25964a22222abe5d43c23ff9ab3f2d1e", null ],
+    [ "GetMasterSuite", "classmanak_1_1ManakSuite.html#a5d22e3a5e90d84787e6fd74651473f40", null ],
+    [ "LoadData", "classmanak_1_1ManakSuite.html#aeaf9ddc94a9aa682ec5889fed43fa011", null ],
+    [ "Name", "classmanak_1_1ManakSuite.html#ab085af7ba02dc18721a161fd89380335", null ],
+    [ "Name", "classmanak_1_1ManakSuite.html#a44c8a06a07e82d62b84992e21b236f22", null ],
+    [ "Run", "classmanak_1_1ManakSuite.html#a59b051cc8ecb48122643cc19c2e06ada", null ],
+    [ "SetCurrentSuite", "classmanak_1_1ManakSuite.html#abb62e7385be9fa477d80ec7ba3ad6fce", null ],
+    [ "SetCurrentSuite", "classmanak_1_1ManakSuite.html#a9ad0b54cc05d8435875ba593c91dbed4", null ],
+    [ "SetCurrentSuiteToParent", "classmanak_1_1ManakSuite.html#a66bb4c14cae95862070592a22e0e4c50", null ],
+    [ "UName", "classmanak_1_1ManakSuite.html#aa9f87021441268c62cc8b02a506ebf0c", null ],
+    [ "UName", "classmanak_1_1ManakSuite.html#a64f22483a9265c29e88b84d0a0e81021", null ],
+    [ "child_suits", "classmanak_1_1ManakSuite.html#ae943a8c72c4b9a559471c9e325231f80", null ],
+    [ "children", "classmanak_1_1ManakSuite.html#af4940aa9748f4facff0e2ac53ae9f13e", null ],
+    [ "current_manak_suite", "classmanak_1_1ManakSuite.html#a34f26a082f411e5e1493053ac7f466c6", null ],
+    [ "name", "classmanak_1_1ManakSuite.html#a283db31f3aefc48aee1890255de69003", null ],
+    [ "parent", "classmanak_1_1ManakSuite.html#a25208b77abb57d740a097d50686bbbf2", null ],
+    [ "uname", "classmanak_1_1ManakSuite.html#a7727bf55cf268c82f039b66ccd0a2ea1", null ]
+];

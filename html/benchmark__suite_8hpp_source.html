@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Manak: src/manak/benchmark_suit/benchmark_suite.hpp Source File</title>
+<title>Manak: src/manak/benchmark_suite/benchmark_suite.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Manak
-   &#160;<span id="projectnumber">0.0.0</span>
+   &#160;<span id="projectnumber">2.0.0</span>
    </div>
   </td>
  </tr>
@@ -69,238 +69,29 @@ $(document).ready(function(){initNavTree('benchmark__suite_8hpp_source.html','')
 <div class="title">benchmark_suite.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="benchmark__suite_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef MANAK_BENCHMARK_SUITE_HPP_INCLUDED</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_BENCHMARK_SUITE_HPP_INCLUDED</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;list&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;regex&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="benchmark__case_8hpp.html">benchmark_case.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="macro__utils_8hpp.html">manak/util/macro_utils.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>manak</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classmanak_1_1BenchmarkSuite.html">BenchmarkSuite</a></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#a2b0450f3f5b4fa1a9ef8dc549aca5227">   26</a></span>&#160;  <a class="code" href="classmanak_1_1BenchmarkSuite.html#a2b0450f3f5b4fa1a9ef8dc549aca5227">BenchmarkSuite</a>()</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    : <a class="code" href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">current_benchmark_suite</a>(this),</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="classmanak_1_1BenchmarkSuite.html#ac7107f616d3927630cdaefb6026423cc">parent</a>(NULL){}</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#a8512189b4d435758b93d3919e81d6727">   30</a></span>&#160;  <a class="code" href="classmanak_1_1BenchmarkSuite.html#a8512189b4d435758b93d3919e81d6727">BenchmarkSuite</a>(<span class="keyword">const</span> std::string&amp; <a class="code" href="classmanak_1_1BenchmarkSuite.html#abbf5cba113b204b3cc36c69aac5f204b">name</a>)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    : name(name),</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">current_benchmark_suite</a>(this),</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classmanak_1_1BenchmarkSuite.html#ac7107f616d3927630cdaefb6026423cc">parent</a>(NULL) {}</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classmanak_1_1BenchmarkSuite.html#aa94f6d653cc68b2cf2ce437b78a3f4ff">Run</a>(<span class="keyword">const</span> std::string&amp; <a class="code" href="classmanak_1_1BenchmarkSuite.html#aacb9ff372f69064146d7a4f2de9a7b9d">uname</a> = <span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;           <span class="keyword">const</span> std::string&amp; pattern = <span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;           <span class="keyword">const</span> <span class="keywordtype">bool</span> compare = <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classmanak_1_1BenchmarkSuite.html#a722c17dcdf827bebee56464d5d47f209">Find</a>(<span class="keyword">const</span> std::string&amp; <a class="code" href="classmanak_1_1BenchmarkSuite.html#abbf5cba113b204b3cc36c69aac5f204b">name</a>, std::list&lt;BenchmarkCase*&gt;&amp; lbc);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classmanak_1_1BenchmarkSuite.html#a425babbc6006b56e858abd9629016e40">LoadData</a>(<span class="keyword">const</span> std::string&amp; <a class="code" href="classmanak_1_1BenchmarkSuite.html#abbf5cba113b204b3cc36c69aac5f204b">name</a>);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="classmanak_1_1BenchmarkSuite.html#a9162ab334d3fedecd0769163373e7c0e">~BenchmarkSuite</a>();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">   45</a></span>&#160;  <span class="keyword">static</span> <a class="code" href="classmanak_1_1BenchmarkSuite.html">BenchmarkSuite</a>&amp; <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">GetMasterSuite</a>()</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">static</span> <a class="code" href="classmanak_1_1BenchmarkSuite.html">BenchmarkSuite</a> singleton;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">return</span> singleton;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#a62ca596fa52af0e6684371d74c85668d">   51</a></span>&#160;  <a class="code" href="classmanak_1_1BenchmarkSuite.html">BenchmarkSuite</a>* <a class="code" href="classmanak_1_1BenchmarkSuite.html#a62ca596fa52af0e6684371d74c85668d">AddSuite</a>(<a class="code" href="classmanak_1_1BenchmarkSuite.html">BenchmarkSuite</a>* suite)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="classmanak_1_1BenchmarkSuite.html#adeefdce0517fa460fa9d77d88bfe0ae7">child_suits</a>[suite-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae22ac4ea4d3a66be76a11be7dc82cf53">Name</a>()] = suite;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    suite-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ac7107f616d3927630cdaefb6026423cc">parent</a> = <span class="keyword">this</span>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">return</span> suite;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#a320e653fae69d8f720a6cacbe82aa27f">   58</a></span>&#160;  <a class="code" href="classmanak_1_1BenchmarkSuite.html">BenchmarkSuite</a>* <a class="code" href="classmanak_1_1BenchmarkSuite.html#a320e653fae69d8f720a6cacbe82aa27f">GetCurrentSuite</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">current_benchmark_suite</a>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#add3cb9e1a0babcaf07bbb33703502714">   63</a></span>&#160;  <a class="code" href="classmanak_1_1BenchmarkSuite.html">BenchmarkSuite</a>* <a class="code" href="classmanak_1_1BenchmarkSuite.html#add3cb9e1a0babcaf07bbb33703502714">SetCurrentSuite</a>(<a class="code" href="classmanak_1_1BenchmarkSuite.html">BenchmarkSuite</a>* suite)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">current_benchmark_suite</a> = suite);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#a3a9db5f700f8bb7b6e7ea52dd5867f8e">   68</a></span>&#160;  <a class="code" href="classmanak_1_1BenchmarkSuite.html">BenchmarkSuite</a>* <a class="code" href="classmanak_1_1BenchmarkSuite.html#a3a9db5f700f8bb7b6e7ea52dd5867f8e">SetCurrentSuite</a>(<span class="keyword">const</span> std::string&amp; <a class="code" href="classmanak_1_1BenchmarkSuite.html#abbf5cba113b204b3cc36c69aac5f204b">name</a>)</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">auto</span> suite = <a class="code" href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">current_benchmark_suite</a>-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#adeefdce0517fa460fa9d77d88bfe0ae7">child_suits</a>.find(name);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span>(suite != <a class="code" href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">current_benchmark_suite</a>-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#adeefdce0517fa460fa9d77d88bfe0ae7">child_suits</a>.end())</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      <a class="code" href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">current_benchmark_suite</a> = suite-&gt;second;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <a class="code" href="classmanak_1_1BenchmarkSuite.html">BenchmarkSuite</a>* n_s = <span class="keyword">new</span> <a class="code" href="classmanak_1_1BenchmarkSuite.html#a2b0450f3f5b4fa1a9ef8dc549aca5227">BenchmarkSuite</a>(name);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      <a class="code" href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">current_benchmark_suite</a>-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#a62ca596fa52af0e6684371d74c85668d">AddSuite</a>(n_s);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <a class="code" href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">current_benchmark_suite</a> = n_s;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">current_benchmark_suite</a>;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#a200ca583fd6baba6ee34bf37a3f73285">   84</a></span>&#160;  <a class="code" href="classmanak_1_1BenchmarkSuite.html">BenchmarkSuite</a>* <a class="code" href="classmanak_1_1BenchmarkSuite.html#a200ca583fd6baba6ee34bf37a3f73285">SetCurrentSuiteToParent</a>()</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">current_benchmark_suite</a> = <a class="code" href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">current_benchmark_suite</a>-&gt;<a class="code" href="classmanak_1_1BenchmarkSuite.html#ac7107f616d3927630cdaefb6026423cc">parent</a>);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">   89</a></span>&#160;  <a class="code" href="classmanak_1_1BenchmarkCase.html">BenchmarkCase</a>* <a class="code" href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">AddCase</a>(<a class="code" href="classmanak_1_1BenchmarkCase.html">BenchmarkCase</a>* obj)</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">auto</span> it = <a class="code" href="classmanak_1_1BenchmarkSuite.html#a960af9d8a0fa2878e014e61b1690b489">children</a>.find(obj-&gt;<a class="code" href="classmanak_1_1BenchmarkCase.html#ada60ac171d3907e81997b9c09b186e6c">Name</a>());</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">if</span>(it != <a class="code" href="classmanak_1_1BenchmarkSuite.html#a960af9d8a0fa2878e014e61b1690b489">children</a>.end())</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <span class="keywordflow">for</span>(<span class="keyword">auto</span> bc : it-&gt;second)</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      {</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">if</span>(bc-&gt;LibraryName() == obj-&gt;<a class="code" href="classmanak_1_1BenchmarkCase.html#a8243e5f0f55db69cb0ae30260ef4234c">LibraryName</a>())</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;          std::cerr &lt;&lt; <span class="stringliteral">&quot;Contains multiple entries for library &quot;</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                    &lt;&lt; obj-&gt;<a class="code" href="classmanak_1_1BenchmarkCase.html#a8243e5f0f55db69cb0ae30260ef4234c">LibraryName</a>() &lt;&lt; <span class="stringliteral">&quot; with benchmark case &quot;</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                    &lt;&lt; obj-&gt;<a class="code" href="classmanak_1_1BenchmarkCase.html#ada60ac171d3907e81997b9c09b186e6c">Name</a>() &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;          exit(1);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        }</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      }</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      it-&gt;second.push_back(obj);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      <a class="code" href="classmanak_1_1BenchmarkSuite.html#a960af9d8a0fa2878e014e61b1690b489">children</a>[obj-&gt;<a class="code" href="classmanak_1_1BenchmarkCase.html#ada60ac171d3907e81997b9c09b186e6c">Name</a>()].push_back(obj);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">return</span> obj;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#ae22ac4ea4d3a66be76a11be7dc82cf53">  113</a></span>&#160;  <span class="keyword">const</span> std::string&amp; <a class="code" href="classmanak_1_1BenchmarkSuite.html#ae22ac4ea4d3a66be76a11be7dc82cf53">Name</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classmanak_1_1BenchmarkSuite.html#abbf5cba113b204b3cc36c69aac5f204b">name</a>;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  }</div>
-<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#a639e9ae0285d0e3d44e0dd63e2311384">  117</a></span>&#160;  std::string&amp; <a class="code" href="classmanak_1_1BenchmarkSuite.html#a639e9ae0285d0e3d44e0dd63e2311384">Name</a>()</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  {</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classmanak_1_1BenchmarkSuite.html#abbf5cba113b204b3cc36c69aac5f204b">name</a>;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  }</div>
-<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#a1f8e13b1ef3e224c79f376c81c858ae6">  121</a></span>&#160;  <span class="keyword">const</span> std::string&amp; <a class="code" href="classmanak_1_1BenchmarkSuite.html#a1f8e13b1ef3e224c79f376c81c858ae6">UName</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classmanak_1_1BenchmarkSuite.html#aacb9ff372f69064146d7a4f2de9a7b9d">uname</a>;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  }</div>
-<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#aeb2bce02de22cd84b63f93f1dc7b1e6f">  125</a></span>&#160;  std::string&amp; <a class="code" href="classmanak_1_1BenchmarkSuite.html#aeb2bce02de22cd84b63f93f1dc7b1e6f">UName</a>()</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  {</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classmanak_1_1BenchmarkSuite.html#aacb9ff372f69064146d7a4f2de9a7b9d">uname</a>;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  }</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#abbf5cba113b204b3cc36c69aac5f204b">  131</a></span>&#160;  std::string <a class="code" href="classmanak_1_1BenchmarkSuite.html#abbf5cba113b204b3cc36c69aac5f204b">name</a>;</div>
-<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#aacb9ff372f69064146d7a4f2de9a7b9d">  132</a></span>&#160;  std::string <a class="code" href="classmanak_1_1BenchmarkSuite.html#aacb9ff372f69064146d7a4f2de9a7b9d">uname</a>;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
-<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#a960af9d8a0fa2878e014e61b1690b489">  134</a></span>&#160;  std::map&lt;std::string, std::list&lt;BenchmarkCase*&gt;&gt; <a class="code" href="classmanak_1_1BenchmarkSuite.html#a960af9d8a0fa2878e014e61b1690b489">children</a>;</div>
-<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#adeefdce0517fa460fa9d77d88bfe0ae7">  135</a></span>&#160;  std::map&lt;std::string, BenchmarkSuite*&gt; <a class="code" href="classmanak_1_1BenchmarkSuite.html#adeefdce0517fa460fa9d77d88bfe0ae7">child_suits</a>;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
-<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">  137</a></span>&#160;  <a class="code" href="classmanak_1_1BenchmarkSuite.html">BenchmarkSuite</a>* <a class="code" href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">current_benchmark_suite</a>;</div>
-<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="classmanak_1_1BenchmarkSuite.html#ac7107f616d3927630cdaefb6026423cc">  138</a></span>&#160;  <a class="code" href="classmanak_1_1BenchmarkSuite.html">BenchmarkSuite</a>* <a class="code" href="classmanak_1_1BenchmarkSuite.html#ac7107f616d3927630cdaefb6026423cc">parent</a>;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;};</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;</div>
-<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="namespacemanak.html#a93543497ad183da42bf3aad4995621d3">  141</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacemanak.html#a93543497ad183da42bf3aad4995621d3">init_benchmarking_module</a>()</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;{</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="preprocessor">  #ifndef MANAK_SIMPLE_BENCHMARK_MODULE</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #ifndef MANAK_BENCHMARK_MODULE</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor"></span>  static_assert(<span class="keyword">false</span>, <span class="stringliteral">&quot;Manak benchmarking module not defined. Use either MANAK_BENCHMARK_MODULE or MANAK_SIMPLE_BENCHMARK_MODULE&quot;</span>);</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">  #endif // MANAK_BENCHMARK_MODULE</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor"></span><span class="preprocessor">  #endif // MANAK_SIMPLE_BENCHMARK_MODULE</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1BenchmarkSuite.html#ae22ac4ea4d3a66be76a11be7dc82cf53">Name</a>() = <a class="code" href="set__env_8hpp.html#a7ffbb68bb6699b04b8760c2cdc572c82">MANAK_MODULE_NAME</a>;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;}</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;}</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pmeasure_8hpp.html">pmeasure.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="run__tree_8hpp.html">run_tree.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">#include &quot;benchmark_suite_impl.hpp&quot;</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="keyword">namespace </span>manak</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;{</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;</div>
-<div class="line"><a name="l00164"></a><span class="lineno"><a class="line" href="classmanak_1_1RegisterBenchmarkSuite.html">  164</a></span>&#160;<span class="keyword">class </span><a class="code" href="classmanak_1_1RegisterBenchmarkSuite.html">RegisterBenchmarkSuite</a></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;{</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00167"></a><span class="lineno"><a class="line" href="classmanak_1_1RegisterBenchmarkSuite.html#a29b02fa270df5b414b593a089316a083">  167</a></span>&#160;  <a class="code" href="classmanak_1_1RegisterBenchmarkSuite.html#a29b02fa270df5b414b593a089316a083">RegisterBenchmarkSuite</a>(<span class="keyword">const</span> std::string&amp; name)</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  {</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">BenchmarkSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1BenchmarkSuite.html#add3cb9e1a0babcaf07bbb33703502714">SetCurrentSuite</a>(name);</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  }</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;};</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;</div>
-<div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="classmanak_1_1DeRegisterBenchmarkSuite.html">  173</a></span>&#160;<span class="keyword">class </span><a class="code" href="classmanak_1_1DeRegisterBenchmarkSuite.html">DeRegisterBenchmarkSuite</a></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;{</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="classmanak_1_1DeRegisterBenchmarkSuite.html#aa91d748637a324ae6e6774caa4046348">  176</a></span>&#160;  <a class="code" href="classmanak_1_1DeRegisterBenchmarkSuite.html#aa91d748637a324ae6e6774caa4046348">DeRegisterBenchmarkSuite</a>()</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  {</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <a class="code" href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">BenchmarkSuite::GetMasterSuite</a>().<a class="code" href="classmanak_1_1BenchmarkSuite.html#a200ca583fd6baba6ee34bf37a3f73285">SetCurrentSuiteToParent</a>();</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  }</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;};</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;}</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;</div>
-<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="benchmark__suite_8hpp.html#a8189866f141e05991cccd875935e7d05">  184</a></span>&#160;<span class="preprocessor">#define MANAK_BENCHMARK_SUITE(X)  \</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="preprocessor">( new manak::BenchmarkSuite(#X) )</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00187"></a><span class="lineno"><a class="line" href="benchmark__suite_8hpp.html#ae2cb39c3eedb85936f963b6e9a48b546">  187</a></span>&#160;<span class="preprocessor">#define MANAK_AUTO_BENCHMARK_SUITE(X)  \</span></div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="preprocessor">static manak::RegisterBenchmarkSuite STRING_JOIN(X, STRING_JOIN(invoker, __LINE__))(#X);\</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="benchmark__suite_8hpp.html#a2b688eb84da0738790f8cf8448d47341">  190</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_AUTO_BENCHMARK_SUITE_END()  \</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="preprocessor">static manak::DeRegisterBenchmarkSuite STRING_JOIN(destroy, __LINE__); \</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif // MANAK_BENCHMARK_SUITE_HPP_INCLUDED</span></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_add3cb9e1a0babcaf07bbb33703502714"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#add3cb9e1a0babcaf07bbb33703502714">manak::BenchmarkSuite::SetCurrentSuite</a></div><div class="ttdeci">BenchmarkSuite * SetCurrentSuite(BenchmarkSuite *suite)</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00063">benchmark_suite.hpp:63</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a425babbc6006b56e858abd9629016e40"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a425babbc6006b56e858abd9629016e40">manak::BenchmarkSuite::LoadData</a></div><div class="ttdeci">bool LoadData(const std::string &amp;name)</div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a960af9d8a0fa2878e014e61b1690b489"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a960af9d8a0fa2878e014e61b1690b489">manak::BenchmarkSuite::children</a></div><div class="ttdeci">std::map&lt; std::string, std::list&lt; BenchmarkCase * &gt; &gt; children</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00134">benchmark_suite.hpp:134</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_aeb2bce02de22cd84b63f93f1dc7b1e6f"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#aeb2bce02de22cd84b63f93f1dc7b1e6f">manak::BenchmarkSuite::UName</a></div><div class="ttdeci">std::string &amp; UName()</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00125">benchmark_suite.hpp:125</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_aa94f6d653cc68b2cf2ce437b78a3f4ff"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#aa94f6d653cc68b2cf2ce437b78a3f4ff">manak::BenchmarkSuite::Run</a></div><div class="ttdeci">bool Run(const std::string &amp;uname=&quot;&quot;, const std::string &amp;pattern=&quot;&quot;, const bool compare=false)</div></div>
-<div class="ttc" id="macro__utils_8hpp_html"><div class="ttname"><a href="macro__utils_8hpp.html">macro_utils.hpp</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a639e9ae0285d0e3d44e0dd63e2311384"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a639e9ae0285d0e3d44e0dd63e2311384">manak::BenchmarkSuite::Name</a></div><div class="ttdeci">std::string &amp; Name()</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00117">benchmark_suite.hpp:117</a></div></div>
+<a href="benchmark__suite_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MANAK_BENCHMARK_SUITE_HPP_INCLUDED</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define MANAK_BENCHMARK_SUITE_HPP_INCLUDED</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="pmeasure_8hpp.html">manak/util/pmeasure.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="benchmark__case_8hpp.html">benchmark_case.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="t__benchmark__case_8hpp.html">t_benchmark_case.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="manak__benchmark__macros_8hpp.html">manak_benchmark_macros.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#endif // MANAK_BENCHMARK_SUITE_HPP_INCLUDED</span></div>
 <div class="ttc" id="pmeasure_8hpp_html"><div class="ttname"><a href="pmeasure_8hpp.html">pmeasure.hpp</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a306217163f19652e9dd1eba93b81ce58"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a306217163f19652e9dd1eba93b81ce58">manak::BenchmarkSuite::GetMasterSuite</a></div><div class="ttdeci">static BenchmarkSuite &amp; GetMasterSuite()</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00045">benchmark_suite.hpp:45</a></div></div>
-<div class="ttc" id="set__env_8hpp_html_a7ffbb68bb6699b04b8760c2cdc572c82"><div class="ttname"><a href="set__env_8hpp.html#a7ffbb68bb6699b04b8760c2cdc572c82">MANAK_MODULE_NAME</a></div><div class="ttdeci">#define MANAK_MODULE_NAME</div><div class="ttdoc">Set the module name for further use. </div><div class="ttdef"><b>Definition:</b> <a href="set__env_8hpp_source.html#l00009">set_env.hpp:9</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a320e653fae69d8f720a6cacbe82aa27f"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a320e653fae69d8f720a6cacbe82aa27f">manak::BenchmarkSuite::GetCurrentSuite</a></div><div class="ttdeci">BenchmarkSuite * GetCurrentSuite() const </div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00058">benchmark_suite.hpp:58</a></div></div>
-<div class="ttc" id="classmanak_1_1RegisterBenchmarkSuite_html"><div class="ttname"><a href="classmanak_1_1RegisterBenchmarkSuite.html">manak::RegisterBenchmarkSuite</a></div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00164">benchmark_suite.hpp:164</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkCase_html_a8243e5f0f55db69cb0ae30260ef4234c"><div class="ttname"><a href="classmanak_1_1BenchmarkCase.html#a8243e5f0f55db69cb0ae30260ef4234c">manak::BenchmarkCase::LibraryName</a></div><div class="ttdeci">const std::string &amp; LibraryName() const </div><div class="ttdef"><b>Definition:</b> <a href="benchmark__case_8hpp_source.html#l00092">benchmark_case.hpp:92</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_ae22ac4ea4d3a66be76a11be7dc82cf53"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#ae22ac4ea4d3a66be76a11be7dc82cf53">manak::BenchmarkSuite::Name</a></div><div class="ttdeci">const std::string &amp; Name() const </div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00113">benchmark_suite.hpp:113</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a9162ab334d3fedecd0769163373e7c0e"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a9162ab334d3fedecd0769163373e7c0e">manak::BenchmarkSuite::~BenchmarkSuite</a></div><div class="ttdeci">~BenchmarkSuite()</div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a722c17dcdf827bebee56464d5d47f209"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a722c17dcdf827bebee56464d5d47f209">manak::BenchmarkSuite::Find</a></div><div class="ttdeci">bool Find(const std::string &amp;name, std::list&lt; BenchmarkCase * &gt; &amp;lbc)</div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a3a9db5f700f8bb7b6e7ea52dd5867f8e"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a3a9db5f700f8bb7b6e7ea52dd5867f8e">manak::BenchmarkSuite::SetCurrentSuite</a></div><div class="ttdeci">BenchmarkSuite * SetCurrentSuite(const std::string &amp;name)</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00068">benchmark_suite.hpp:68</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_abbf5cba113b204b3cc36c69aac5f204b"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#abbf5cba113b204b3cc36c69aac5f204b">manak::BenchmarkSuite::name</a></div><div class="ttdeci">std::string name</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00131">benchmark_suite.hpp:131</a></div></div>
-<div class="ttc" id="run__tree_8hpp_html"><div class="ttname"><a href="run__tree_8hpp.html">run_tree.hpp</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a200ca583fd6baba6ee34bf37a3f73285"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a200ca583fd6baba6ee34bf37a3f73285">manak::BenchmarkSuite::SetCurrentSuiteToParent</a></div><div class="ttdeci">BenchmarkSuite * SetCurrentSuiteToParent()</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00084">benchmark_suite.hpp:84</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_ae3bd404a66a8be4cb72000d3c0152474"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#ae3bd404a66a8be4cb72000d3c0152474">manak::BenchmarkSuite::AddCase</a></div><div class="ttdeci">BenchmarkCase * AddCase(BenchmarkCase *obj)</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00089">benchmark_suite.hpp:89</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a1f8e13b1ef3e224c79f376c81c858ae6"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a1f8e13b1ef3e224c79f376c81c858ae6">manak::BenchmarkSuite::UName</a></div><div class="ttdeci">const std::string &amp; UName() const </div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00121">benchmark_suite.hpp:121</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_ac7107f616d3927630cdaefb6026423cc"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#ac7107f616d3927630cdaefb6026423cc">manak::BenchmarkSuite::parent</a></div><div class="ttdeci">BenchmarkSuite * parent</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00138">benchmark_suite.hpp:138</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html">manak::BenchmarkSuite</a></div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00023">benchmark_suite.hpp:23</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_adeefdce0517fa460fa9d77d88bfe0ae7"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#adeefdce0517fa460fa9d77d88bfe0ae7">manak::BenchmarkSuite::child_suits</a></div><div class="ttdeci">std::map&lt; std::string, BenchmarkSuite * &gt; child_suits</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00135">benchmark_suite.hpp:135</a></div></div>
+<div class="ttc" id="manak__benchmark__macros_8hpp_html"><div class="ttname"><a href="manak__benchmark__macros_8hpp.html">manak_benchmark_macros.hpp</a></div></div>
 <div class="ttc" id="benchmark__case_8hpp_html"><div class="ttname"><a href="benchmark__case_8hpp.html">benchmark_case.hpp</a></div></div>
-<div class="ttc" id="classmanak_1_1DeRegisterBenchmarkSuite_html_aa91d748637a324ae6e6774caa4046348"><div class="ttname"><a href="classmanak_1_1DeRegisterBenchmarkSuite.html#aa91d748637a324ae6e6774caa4046348">manak::DeRegisterBenchmarkSuite::DeRegisterBenchmarkSuite</a></div><div class="ttdeci">DeRegisterBenchmarkSuite()</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00176">benchmark_suite.hpp:176</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a62ca596fa52af0e6684371d74c85668d"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a62ca596fa52af0e6684371d74c85668d">manak::BenchmarkSuite::AddSuite</a></div><div class="ttdeci">BenchmarkSuite * AddSuite(BenchmarkSuite *suite)</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00051">benchmark_suite.hpp:51</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_aacb9ff372f69064146d7a4f2de9a7b9d"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#aacb9ff372f69064146d7a4f2de9a7b9d">manak::BenchmarkSuite::uname</a></div><div class="ttdeci">std::string uname</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00132">benchmark_suite.hpp:132</a></div></div>
-<div class="ttc" id="classmanak_1_1RegisterBenchmarkSuite_html_a29b02fa270df5b414b593a089316a083"><div class="ttname"><a href="classmanak_1_1RegisterBenchmarkSuite.html#a29b02fa270df5b414b593a089316a083">manak::RegisterBenchmarkSuite::RegisterBenchmarkSuite</a></div><div class="ttdeci">RegisterBenchmarkSuite(const std::string &amp;name)</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00167">benchmark_suite.hpp:167</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a4d240726d05d3e348efc5ad4a534eb9b"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a4d240726d05d3e348efc5ad4a534eb9b">manak::BenchmarkSuite::current_benchmark_suite</a></div><div class="ttdeci">BenchmarkSuite * current_benchmark_suite</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00137">benchmark_suite.hpp:137</a></div></div>
-<div class="ttc" id="classmanak_1_1DeRegisterBenchmarkSuite_html"><div class="ttname"><a href="classmanak_1_1DeRegisterBenchmarkSuite.html">manak::DeRegisterBenchmarkSuite</a></div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00173">benchmark_suite.hpp:173</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a8512189b4d435758b93d3919e81d6727"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a8512189b4d435758b93d3919e81d6727">manak::BenchmarkSuite::BenchmarkSuite</a></div><div class="ttdeci">BenchmarkSuite(const std::string &amp;name)</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00030">benchmark_suite.hpp:30</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkSuite_html_a2b0450f3f5b4fa1a9ef8dc549aca5227"><div class="ttname"><a href="classmanak_1_1BenchmarkSuite.html#a2b0450f3f5b4fa1a9ef8dc549aca5227">manak::BenchmarkSuite::BenchmarkSuite</a></div><div class="ttdeci">BenchmarkSuite()</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00026">benchmark_suite.hpp:26</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkCase_html"><div class="ttname"><a href="classmanak_1_1BenchmarkCase.html">manak::BenchmarkCase</a></div><div class="ttdef"><b>Definition:</b> <a href="benchmark__case_8hpp_source.html#l00032">benchmark_case.hpp:32</a></div></div>
-<div class="ttc" id="classmanak_1_1BenchmarkCase_html_ada60ac171d3907e81997b9c09b186e6c"><div class="ttname"><a href="classmanak_1_1BenchmarkCase.html#ada60ac171d3907e81997b9c09b186e6c">manak::BenchmarkCase::Name</a></div><div class="ttdeci">const std::string &amp; Name() const </div><div class="ttdef"><b>Definition:</b> <a href="benchmark__case_8hpp_source.html#l00087">benchmark_case.hpp:87</a></div></div>
-<div class="ttc" id="namespacemanak_html_a93543497ad183da42bf3aad4995621d3"><div class="ttname"><a href="namespacemanak.html#a93543497ad183da42bf3aad4995621d3">manak::init_benchmarking_module</a></div><div class="ttdeci">bool init_benchmarking_module()</div><div class="ttdef"><b>Definition:</b> <a href="benchmark__suite_8hpp_source.html#l00141">benchmark_suite.hpp:141</a></div></div>
+<div class="ttc" id="t__benchmark__case_8hpp_html"><div class="ttname"><a href="t__benchmark__case_8hpp.html">t_benchmark_case.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4c6f0f56bb7b054cbb2a0de860d7d462.html">manak</a></li><li class="navelem"><a class="el" href="dir_586b1078daf0a92751fc3409d59529af.html">benchmark_suit</a></li><li class="navelem"><a class="el" href="benchmark__suite_8hpp.html">benchmark_suite.hpp</a></li>
-    <li class="footer">Generated on Thu Jan 8 2015 23:45:48 for Manak by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4c6f0f56bb7b054cbb2a0de860d7d462.html">manak</a></li><li class="navelem"><a class="el" href="dir_6d46d7b2f39e8922706ee95b4e3718a4.html">benchmark_suite</a></li><li class="navelem"><a class="el" href="benchmark__suite_8hpp.html">benchmark_suite.hpp</a></li>
+    <li class="footer">Generated on Thu Feb 5 2015 21:20:27 for Manak by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

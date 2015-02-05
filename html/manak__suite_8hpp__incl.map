@@ -1,0 +1,18 @@
+<map id="src/manak/manak_suite/manak_suite.hpp" name="src/manak/manak_suite/manak_suite.hpp">
+<area shape="rect" id="node8" href="$manak__case_8hpp.html" title="manak_case.hpp" alt="" coords="483,261,604,288"/>
+<area shape="rect" id="node15" href="$macro__utils_8hpp.html" title="macro_utils.hpp" alt="" coords="921,501,1036,528"/>
+<area shape="rect" id="node20" href="$t__manak__case_8hpp.html" title="t_manak_case.hpp" alt="" coords="3147,96,3279,123"/>
+<area shape="rect" id="node21" href="$result__collector_8hpp.html" title="result_collector.hpp" alt="" coords="2411,96,2545,123"/>
+<area shape="rect" id="node11" href="$timer_8hpp.html" title="manak/util/timer.hpp" alt="" coords="837,344,976,371"/>
+<area shape="rect" id="node17" href="$template__utils_8hpp.html" title="manak/util/template\l_utils.hpp" alt="" coords="245,337,380,378"/>
+<area shape="rect" id="node18" href="$object__store_8hpp.html" title="manak/util/object_store.hpp" alt="" coords="1321,427,1503,453"/>
+<area shape="rect" id="node13" href="$pmeasure_8hpp.html" title="pmeasure.hpp" alt="" coords="1848,427,1952,453"/>
+<area shape="rect" id="node22" href="$output__manager_8hpp.html" title="manak/output_manager\l/output_manager.hpp" alt="" coords="2071,171,2229,213"/>
+<area shape="rect" id="node30" href="$version_8hpp.html" title="manak/util/version.hpp" alt="" coords="2014,344,2167,371"/>
+<area shape="rect" id="node23" href="$output__handler_8hpp.html" title="output_handler.hpp" alt="" coords="2294,344,2425,371"/>
+<area shape="rect" id="node25" href="$txt__output__handler_8hpp.html" title="txt_output_handler.hpp" alt="" coords="1747,261,1900,288"/>
+<area shape="rect" id="node32" href="$html__output__handler_8hpp.html" title="html_output_handler.hpp" alt="" coords="2009,261,2172,288"/>
+<area shape="rect" id="node26" href="$test__monitor_8hpp.html" title="manak/test_suite/test\l_monitor.hpp" alt="" coords="1638,337,1785,378"/>
+<area shape="rect" id="node28" href="$monitor__entry_8hpp.html" title="monitor_entry.hpp" alt="" coords="2129,427,2255,453"/>
+<area shape="rect" id="node33" href="$manak__env_8hpp.html" title="manak/util/manak_env.hpp" alt="" coords="2451,344,2629,371"/>
+</map>
