@@ -1,198 +1,180 @@
 #Manak: C++ Unit Benchmarking Library
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Manak-org/Manak?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Manak-org/Manak?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)        ![build status](https://travis-ci.org/Manak-org/Manak.svg?branch=master)
 
-![build status](https://travis-ci.org/Manak-org/Manak.svg?branch=master)
+###Latest Stable Release: [Manak 2.0.0](https://github.com/Manak-org/Manak/archive/v2.0.0.zip)
 
 ##Introduction
 
-Manak unit benchmarking library provides both easy to use and flexible solution
-to the problem of benchmarking. Unit benchmarking comes handy for projects 
-with continuous integration. With Manak you can save the benchmarks of your
-current implementation and compare them against the later ones. You can also 
-benchmark your library against any other library. Manak offers a hierarchical 
-structure similar to BOOST Unit Testing and generates a easy to read output file.
-Manak supports HTML log generation along with txt logs. Manak is header only 
-library and highly uses c++11 features. 
+Manak unit benchmarking and testing library provides both easy to use and flexible 
+API. As both benchmarking and testing framework are combined into one, Manak comes
+handy for projects with continuous integration. Manak implements xUnit achitecture
+and improves upon it.
 
-###Check out [Documentation](http://Manak-org.github.io/Manak/) for tutorials on Manak C++ Benchmarking.
+Manak offers following unique features - 
+ - Timing and testing both in a single unit
+ - Comparison of implementation along time(for checking improvent)
+ - Manak groups for removing code redundancy
+ - Implements framework for randomized tests
+ - Complete regular expression support for running specific cases
+ - Supports HTML output generating, supports mulyipe output generating
+ - Supports both Static and Dynamic Linkage
+ - Implemented in C++11 and scalable to C++14
+ - No external dependency(Specially for Windows Users :D)
+ 
+###Check out [Wiki](https://github.com/Manak-org/Manak/wiki) for User Guide.
+
+###Check out [Developer's Guide](http://Manak-org.github.io/Manak/).
 
 ##How To Install
 
-###For Linux
 1. Create directory build.
 2. cd into build and run command _**cmake ../**_
 3. For building from source run command _**make**_, this will create executable kif
    and flatten inside bin.
 4. To install run command _**sudo make install**_
 
-###For Windows
-Manak does not have any external dependency. Hence you can use the CMake GUI to
-install the header files to your environment. Or you can simple copy the folder 
-named **manak**(_./src/manak_) to the include folder of your IDE.
+Of course, all this is unneccessary if you want to use only static linkage. 
+Just copy the src/manak folder to the default search path and you are done.
 
-##Quick Guide
+##An Overview
 
-A simple benchmarking case is given below -   
+A simple case is given below -   
 
 ```cpp
-#include <iostream>
-
-#define MANAK_SIMPLE_BENCHMARK_MODULE lib
-#define MANAK_AUTO_BENCHMARK_MAIN
-
-#include <manak/manak.hpp>
-
-MANAK_AUTO_BENCHMARK_CASE(ForLoops)
-{
-  for(size_t i = 0;i < 10000;i++);
-}
-```
-This will create a benchmark case with name 'ForLoops' which will time the 
-for loop given inside. The default iterations are 10. Run the genrated executable 
-by passing '-h' for more options.   
-
-The ouput will be written to file 'benchmark_stat.html'.Here the function code 
-inside the auto case will be timed. For More time sensetive code you can use 
-'Measure' macro. For example -  
-
-```cpp
-#include <iostream>
-
-#define MANAK_SIMPLE_BENCHMARK_MODULE lib
-#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_SIMPLE_MODULE mod1
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
 
 #include <manak/manak.hpp>
-
-MANAK_AUTO_BENCHMARK_CASE(ForLoops)
-{
-  Setup code;
-  
-  Measure
-  (
-    Code to measure;
-  )
-  
-  More code...
-}
-```
-
-This usage will only measure the code inside the measure block. There can be 
-more that one measure blocks. For more time related options check out the 
-complete guide.
-
-To add already existing function to benchmarking -
-
-```cpp
-#include <iostream>
-
-#define MANAK_SIMPLE_BENCHMARK_MODULE lib
-#define MANAK_AUTO_BENCHMARK_MAIN
-
-#include <manak/manak.hpp>
-
-int fun()
-{
-  Code;
-}
-
-MANAK_ADD_BENCHMARK(MANAK_BENCHMARK_CASE(B1, fun));
-```
-Remember Measure blocks can also be used in functions such as 'fun' here.
-
-To create benchmark suite -
-
-```cpp
-#include <iostream>
-
-#define MANAK_SIMPLE_BENCHMARK_MODULE lib
-#define MANAK_AUTO_BENCHMARK_MAIN
-
-#include <manak/manak.hpp>
-
-MANAK_AUTO_BENCHMARK_SUITE(Suite1);
 
 MANAK_AUTO_BENCHMARK_CASE(B1)
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
+  
+  TEST
+  (
+    MANAK_ASSERT_TRUE(1 == 1);
+  )
 }
 ```
+This will create a benchmark case with name 'B1' which will time the 
+for loop given inside 'MEASURE' and run the tests given inside 'TEST' block. 
+The case is run for certain number of iterations, the default is 10. The iterations
+help to gt average score and also for randomized tests, where sometimes x out of
+n times the test has to be passed.  
 
-To compare 2 or more libraries against each other -
+The ouput will be written to file 'benchmark_stat.html'. TThe output is easy to
+read and verbose. 
 
 ```cpp
-#include <iostream>
-
-#define MANAK_BENCHMARK_MODULE lib
-#define MANAK_AUTO_BENCHMARK_MAIN
+#define MANAK_MODULE mod1
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
 
 #include <manak/manak.hpp>
 
-MANAK_AUTO_BENCHMARK_CASE(B1, lib1)
+MANAK_AUTO_BENCHMARK_CASE(B1, With10000)
 {
-  for(size_t i = 0;i < 1000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 10000;i++);
+  )
+  
+  TEST
+  (
+    MANAK_ASSERT_TRUE(1 == 1);
+  )
 }
 
-MANAK_AUTO_BENCHMARK_CASE(B2, lib2)
+MANAK_AUTO_BENCHMARK_CASE(B1, With100000)
 {
-  for(size_t i = 0;i < 10000;i++);
+  MEASURE
+  (
+    for(size_t i = 0;i < 100000;i++);
+  )
+  
+  TEST
+  (
+    MANAK_ASSERT_TRUE(1 == 1);
+  )
 }
 ```
 
-Functions with arguments can be used as templates. Templates are useful when 
-the same function is used for benchmarking with different parameters.
-Consider the next example -
+The above code will measure the time taken by the loops and compare them against 
+each other in the output. Observe that the case name is same and the second 
+argument(the library name in Manak hierarchy) is different. 
+
+See that its a code redundancy. The solution is through Groups - 
 
 ```cpp
-#include <iostream>
+template<size_t index>
+MANAK_GROUP(TestGroup);
 
-#define MANAK_SIMPLE_BENCHMARK_MODULE lib
-#define MANAK_AUTO_BENCHMARK_MAIN
+size_t iter;
+std::string l_name;
 
-#include <manak/manak.hpp>
-
-int fun(int a, int b)
+GINIT(size_t n, const std::string& str)
 {
-  Code
+  iter = n;
+  name = str;
 }
 
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddArgs(0,0)->AddArgs(1,1)...);
+MANAK_AUTO_GROUP_BENHMARK_CASE("ForLoops", l_name)
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < iter;i++);
+  )
+}
+
+MANAK_AUTO_GROUP_BENCHMARK_CASE("Test", "Lib1")
+{
+  //Can use iter and name here
+} 
+
+MANAK_GROUP_END();
+
+MANAK_ADD_GROUP(TestGroup<1>, 1000, "With1000");
+MANAK_ADD_GROUP(TestGroup<2>, 10000, "With10000");
 ```
 
-Here the banechmark case will contain many unnamed cases. When number of argument
-sets is large you can add all the argument sets by a function. The function must
-return list of tuples.
-For example -
+Another important usgae of groups is that the cases inside can share variables.
+Imagine that you are testing a variable which takes lot of time to create. 
+So rather than wasting time while creating it in each case create it in 'GINIT'
+and usage is freely inside the group. Groups act like c++ Classes. Example of
+this is also shown in the above code.
+
+Sometimes you don't want to compare the code against each other but time and test
+a function with many different parameters. Maybe while regression testing.
+For this parametrized benchmarks can be used.
 
 ```cpp
-#include <iostream>
-#include <tuple>
-#include <list>
-
-#define MANAK_SIMPLE_BENCHMARK_MODULE lib
-#define MANAK_AUTO_BENCHMARK_MAIN
-
-#include <manak/manak.hpp>
-
-using namespace std;
-
-int fun(int a, int b)
+void fun(ize_t a, size_t b)
 {
-  Code;
+
 }
 
-list<tuple<int, int>> get_args()
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddArgs(0, 0)->AddArgs(1, 1));
+```
+
+What if you want to test it against 100 set of parameters -
+
+```cpp
+std::list<std::tuple<size_t, size_t>> GetArgs()
 {
-  list<tuple<int, int>> out;
+  std::list<std::tuple<size_t, size_t>> out;
+
   for(size_t i = 0;i < 100;i++)
     out.emplace_back(i, i);
+    
   return out;
 }
 
-MANAK_ADD_BENCHMARK(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs(get_args));
+MANAK_ADD_CASE(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)->AddCustomArgs(GetArgs));
 ```
 
-Check out the complete guide for more template related options.
-
-The genrated timings can be saved and added for comparison for later runs. For
-more options check out the Complete Guide.
+Check out the the wiki for many more such features.

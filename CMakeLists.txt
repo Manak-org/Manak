@@ -3,10 +3,10 @@ cmake_minimum_required(VERSION 2.8.5)
 project(manak C CXX)
 
 # set version information
-set(MANAK_MAJOR_VERSION "1")
+set(MANAK_MAJOR_VERSION "2")
 set(MANAK_MINOR_VERSION "0")
 set(MANAK_PATCH_VERSION "0")
-set(MANAK_VERSION_NAME "master")
+set(MANAK_VERSION_NAME "Unit Testing nd Benchmarking")
 
 # First, define all the compilation options.
 # We default to debugging mode for developers.

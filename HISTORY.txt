@@ -1,3 +1,11 @@
+   5 FEB 2015   MANAK 2.0.0
+   
+   * Major API Change
+   * Added group support
+   * Supports Unit Testing
+   * Supports multiple output generation
+   * Supports both static and dynamic linkage
+   
    9 JAN 2015   MANAK 1.1.0
    
   * Multiple repeat block support added(#1)
