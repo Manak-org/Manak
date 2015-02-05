@@ -50,6 +50,23 @@ Set Manak environment;
 #include <manak/manak.hpp>
 @endcode
 
+Manak can be used both with static linkage and dynamic linkage. The default 
+is static linkage. To use Manak with dynamic linkage - 
+
+@code
+#include <iostream>
+
+Set Manak environment; 
+
+#define MANAK_USE_DYN_LINK
+
+#include <manak/manak.hpp>
+@endcode
+
+With this you need to provide the shared object generated in build to the linker.
+If you have installed Manak to one of the default directories, passing
+option '-lmanak' should work.
+
 @subsection build_cli Command Line Arguments
 The following are the command line arguments available for any Manak generated 
 executable.

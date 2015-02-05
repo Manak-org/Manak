@@ -36,7 +36,7 @@ comparison framework check @ref comp. Manak by default generates HTML output
 but user can force Manak to generate TXT output with '-f' 
 option(also stands for format :P). Passing argument '-f TXT' will force Manak
 to generate TXT output. Check out @ref out_format for more information on 
-output formats.
+output formats. 
 
 The usual one file usage will look like this - 
 @code
@@ -54,7 +54,9 @@ with given command line arguments. To create such a main we need to define
 'MANAK_AUTO_MAIN'. Manak needs to initialize some variable such as module name,
 master suit etc. This initialization needs to be done only once. For this we need 
 to define 'MANAK_INIT'. This looks foolish in case of one file setup but it plays
-major role in muli file setup. Next we need to provide a module name to manak.
+major role in muli file setup. Check out @ref multi_file for more information.
+
+Next we need to provide a module name to manak.
 For example a simple Manak program -
 @code
 #include <iostream>
@@ -141,7 +143,7 @@ and the effect will be the sum of all. 'TEST' block can be used for testing.
 code inside. Thats why its not preferred to have 'MEASURE' block inside the 'TEST'
 block. Like 'MEASURE', there can be any number of 'TEST' blocks. Remember,
 'MANAK_ASSERT_TRUE' or any other test has to used inside 'TEST' block to register
-it.
+it. Check out @ref test_fr for more information on testing framework.
 
 To change the default output file, set 'MANAK_DEFAULT_OUT_FILENAME' to desired 
 value. Check out @ref set_env_soof for more options. While running the benchmark 
@@ -332,32 +334,17 @@ under Suite1. And in the same way Suite2 will be registered under Suite1 and
 Suite1 under master. This hierarchical structure helps in running specific 
 benchmarks at a time. For more information on auto registration see @ref auto_reg.
 
+@section qg_groups Manak Groups
+
+As a part of the quick guide check out @ref com_gr.
+
 @section qg_comp Manak Comparison Framework
 
-Manak also offers saving these results for comparison. This comparison type is 
-available for both simple and normal modules. Pass argument '-s <filename>'
-to the executable for saving the results. This specially saved file 
-can be loaded for comparison with command line arguments '-c <filename>'. Let us 
-assume 'bench' is the executable name, then -
+As a part of the quick guide check out @ref comp.
 
-@code
-bench -s saved.txt
-bench -c saved.txt
-@endcode
+@section qg_para Manak parametrized Benchmarks
 
-The output of the second run will be saved to 'benchmark_stat.html'.
-The output will look like - <a href="samples/comp_1.html">Sample HTML ouput</a>
-
-The values in bracket are the values loaded for comparison. Loaded values are 
-compared with the current values with tolerance. The result of the comparison
-is shown with a sign in front of the current value. No sign will imply equivalent 
-runs. The default tolerance is 10 which can be changed by setting 
-'MANAK_DEFAULT_TOLERANCE' to desired value. Also tolerance for each test can be 
-set by using 'MANAK_AUTO_BENCHMARK_CASE_T' macro. For more available macros 
-check @ref auto_reg.
-
-The default measure of tolerance is in microseconds. Pass command line argument 
-'-h' for more help.
+As a part of the quick guide check out @ref p_bench.
 
 @section qg_rsc Running Specific Cases
 

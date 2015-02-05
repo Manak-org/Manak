@@ -1,3 +1,319 @@
 /*! @page com_gr Tutorial on Using Groups
 
+In Manak each case has its on scope and variables cannot be shared between them.
+Imagine a scenario in which you need to use a same variable in multiple cases
+and constructing that variable is very costly. What would you do? If you construct
+it in each case you would be wasting lot of resources. Manak provides a solution
+for this through groups.
+
+Take a look at this example code - 
+
+@code
+#define MANAK_AUTO_MAIN
+#define MANAK_INIT
+#define MANAK_SIMPLE_MODULE
+
+MANAK_AUTO_GROUP();
+
+size_t num;
+
+GINIT()
+{
+  num = 100;
+}
+
+MANAK_AUTO_GROUP_BENCHMARK_CASE("B1")
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < num;i++);
+  )
+}
+
+MANAK_AUTO_GROUP_END();
+@endcode
+
+In the above code, all the cases inside the group share a variables defined 
+inside the group. The function GINIT is the initialization function and is 
+compulsory, but can be overloaded which we will see later. Group can be considered 
+a class so variables can be defined anywhere in the group. The important thing to
+remember here is that the function 'GINIT' is not the constructor so the variables
+defined inside needs to be default constructible. But you can use pointers where
+you need to use non-default constructible objects. So for memory cleaning
+Manak provides 'GDOWN' function which can act as the destructor of the group.
+
+Another importatnt thing is, group macros accepts string as the case name where
+other Manak macros accepts normal text. This has a very good reason behind it,
+which we will cover later. 
+
+@code
+MANAK_AUTO_GROUP();
+
+GINIT()
+{
+
+}
+
+GDOWN()
+{
+
+}
+
+MANAK_AUTO_GROUP_END();
+@endcode
+
+The groups are invisible in the output. 'MANAK_AUTO_GROUP' registers all the 
+registered cases to the group to the current suite. 'MANAK_AUTO_GROUP_BENCHMARK_CASE'
+registers the following case to the current group. Check out @ref s_mod and
+@ref n_mod for more useful macros. 
+
+This is not all the groups are good for. 
+
+As we already know the 'GINIT' function can be used to initialize the variables
+defined in the group. These 'GINIT' functions can be overloaded and can have
+parameters. The 'MANAK_AUTO_GROUP' call the default 'GINIT()' function. To 
+use overloaded 'GINIT' function we need to use define a group and then register
+it. This gives much more flexibility and power.
+
+@code
+MANAK_GROUP(TestGroup);
+
+size_t n;
+
+GINIT(size_t x)
+{
+  n = x;
+}
+
+GINIT(const std::string& str)
+{
+
+}
+
+MANAK_AUTO_GROUP_BENCHMARK_CASE("B1")
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < n;i++);
+  )
+}
+
+MANAK_GROUP_END();
+
+MANAK_ADD_GROUP(TestGroup, 1000);
+@endcode
+
+'MANAK_ADD_GROUP' macro is pretty simple. The first argument is the group name
+and then you can pass the initialization arguments and it will call the appropriate
+'GINIT' overload. 'MANAK_ADD_GROUP' will register all the cases inside the group
+to current benchmark suite. 
+
+Now you will ask can I add a group multiple times with different initializations??
+
+Yes you can, but before showing how I would like you to see another important
+property of groups - they can be templatized.
+
+So the above can also be written as - 
+
+@code
+template<typename T>
+MANAK_GROUP(TestGroup);
+
+size_t n;
+
+GINIT(T x)
+{
+  n = x;
+}
+
+MANAK_AUTO_GROUP_BENCHMARK_CASE("B1")
+{
+  MEASURE
+  (
+    for(size_t i = 0;i < n;i++);
+  )
+}
+
+MANAK_GROUP_END();
+
+MANAK_ADD_GROUP(TestGroup<size_t>, 1000);
+@endcode
+
+They can also be template specialized, partially and completely. 
+
+Okay, now lets try to add the same group multiple times with different 
+initializations.
+
+@code
+MANAK_GROUP(TestGroup);
+
+size_t n;
+
+GINIT(size_t x)
+{
+  n = x;
+}
+
+GINIT(const std::string& str)
+{
+
+}
+
+MANAK_AUTO_GROUP_BENCHMARK_CASE("B1")
+{
+  std::cout << n << std::endl;
+  MEASURE
+  (
+    for(size_t i = 0;i < n;i++);
+  )
+}
+
+MANAK_GROUP_END();
+
+MANAK_ADD_GROUP(TestGroup, 1000);
+MANAK_ADD_GROUP(TestGroup, 10000);
+@endcode
+
+Compile and run this code and you will see this error while running - 
+@code
+Contains multiple entries for library with case B1.
+@endode
+
+This is because when you are adding the same group multiple times benchmark case
+"B1" is also added multiple times under same suite. This is why the group benchmark
+macros accept a string rather than text so you can provide the variable.
+For example - 
+
+@code
+MANAK_GROUP(TestGroup);
+
+size_t n;
+std::string name;
+
+GINIT(size_t x, const std::string& str)
+{
+  n = x;
+  name = str;
+}
+
+GINIT(const std::string& str)
+{
+  n = 1000;
+  name = str;
+}
+
+MANAK_AUTO_GROUP_BENCHMARK_CASE(name)
+{
+  std::cout << n << std::endl;
+  MEASURE
+  (
+    for(size_t i = 0;i < n;i++);
+  )
+}
+
+MANAK_GROUP_END();
+
+MANAK_ADD_GROUP(TestGroup, 1000, "With1000");
+MANAK_ADD_GROUP(TestGroup, 10000, "With10000");
+@endcode
+
+Here we added another parameter to 'GINIT' which determines the name of the 
+case inside it. This way 2 different benchmark cases will be registered. Or is 
+it so? Let's see. As we have put the value of 'n' to std::cout we can check the
+logs to make sure. It you are using the default configuration the logs can be 
+seen in file 'benchmark_log.txt'. This file is appended so check the last couple
+of lines, and you will see that only 10000 is printed 20 times. The expected 
+output is 1000, 10 times and 10000, 10 times isn't it? So what went wrong this
+time?
+
+Each group instance is unique, hence each group can be assigned only one
+initilization. When we add the same group twice with different initialization, 
+all initialization are called on the same instance.
+
+So how do we add a same group multiple times with different
+initializations? The solution is through templates. As we know that each template 
+substitution is a different instance, we can templatize the group we want to add
+multiple times, and add it with different template substitutions.
+
+@code
+template<size_t index>
+MANAK_GROUP(TestGroup);
+
+size_t n;
+std::string name;
+
+GINIT(size_t x, const std::string& str)
+{
+  n = x;
+  name = str;
+}
+
+GINIT(const std::string& str)
+{
+  n = 1000;
+  name = str;
+}
+
+MANAK_AUTO_GROUP_BENCHMARK_CASE(name)
+{
+  std::cout << n << std::endl;
+  MEASURE
+  (
+    for(size_t i = 0;i < n;i++);
+  )
+}
+
+MANAK_GROUP_END();
+
+MANAK_ADD_GROUP(TestGroup<1>, 1000, "With1000");
+MANAK_ADD_GROUP(TestGroup<2>, 10000, "With10000");
+@endcode
+
+Check the log again, 10 times 1000 and 10 times 10000. Voila!!! You have added 
+the same group with different initializations. Imagine the amount of code 
+redundancy which can be removed. 
+
+Lets take a scenario of machine learning benchmarking.
+Lets assume algorithm1 and algorithm2 for same goal that you want to compare 
+against and check. They are implemented in class Algo1 and Algo2, assuming they 
+have the same API, the following code can be used.
+
+@code
+#define MANAK_MODULE bench
+#define MANAK_AUTO_MAIN 
+#define MANAK_INIT
+
+#include <manak/manak.hpp>
+
+template<typename T>
+MANAK_GROUP(TheGoal);
+
+GINIT()
+{
+  
+}
+
+MANAK_AUTO_GROUP_BENCHMARK_CASE("The Goal", T::GetTypeName())
+{
+  MEASURE
+  (
+    // Code to benchmark
+  )
+  
+  TEST
+  (
+    // Tests to run on output
+  )
+}
+
+MANAK_GROUP_END();
+
+MANAK_ADD_GROUP(TheGoal<Algo1>);
+MANAK_ADD_GROUP(TheGoal<Algo2>);
+@endcode
+
+In the above code we have used the algorithm name as a library name so that in the
+output they can be compared horizontally. Check out @ref comp to know more 
+about this comparison framework. Check out @ref s_mod and @ref n_mod for macros
+provided for group benchmark registration. 
 */
