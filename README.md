@@ -27,9 +27,20 @@ Manak offers following unique features -
  - Implemented in C++11 and scalable to C++14
  - No external dependency(Specially for Windows Users :D)
  
+##The Idea Behind Manak
+'Manak' in Sanskrit means standard. Manak aims at a framework for standardization
+of code. Currently Manak combines the 2 most important requirements for any C++
+project, testing and benchmarking. Manak understands that benchmarking is not just 
+timing, it must also be supported with a rich comparison framework. And this is 
+not the end. The next milestone is to integrate the memory mesurement tools. With 
+proper steps, we will build a one stop solution for all continuous integration 
+issues. 
+ 
 ###Check out [Wiki](https://github.com/Manak-org/Manak/wiki) for User Guide.
 
 ###Check out [Developer's Guide](http://Manak-org.github.io/Manak/html/index.html).
+
+###Check out [GSOC 2015 Ideas Page](Google Summer of Code 2015 Ideas Page)
 
 ##How To Install
 
