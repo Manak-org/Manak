@@ -40,7 +40,7 @@ issues.
 
 ###Check out [Developer's Guide](http://Manak-org.github.io/Manak/html/index.html).
 
-###Check out [GSOC 2015 Ideas Page](Google Summer of Code 2015 Ideas Page)
+###Check out [GSOC 2015 Ideas Page](https://github.com/Manak-org/Manak/wiki/Google-Summer-of-Code-2015---Ideas-Page)
 
 ##How To Install
 
