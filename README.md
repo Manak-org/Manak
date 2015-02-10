@@ -18,11 +18,11 @@ and improves upon it.
 
 Manak offers following unique features - 
  - Timing and testing both in a single unit
- - Comparison of implementation along time(for checking improvent)
- - Manak groups for removing code redundancy
+ - Comparison between different implementations and changing implementation(for judging improvements)
+ - Support for 'Groups' to remove code redundancy and improve runtime
  - Implements framework for randomized tests
  - Complete regular expression support for running specific cases
- - Supports HTML output generating, supports mulyipe output generating
+ - Supports HTML output generation, also supports multiple output generation
  - Supports both Static and Dynamic Linkage
  - Implemented in C++11 and scalable to C++14
  - No external dependency(Specially for Windows Users :D)
