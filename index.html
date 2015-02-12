@@ -4,7 +4,7 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Manak : C++ Unit Benchmarking Library">
+    <meta name="description" content="Manak : C++ Unit Benchmarking and Testing Library">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -16,14 +16,14 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/sumedhghaisas/Manak">View on GitHub</a>
+          <a id="forkme_banner" href="https://github.com/Manak-org/Manak">View on GitHub</a>
 
           <h1 id="project_title">Manak</h1>
-          <h2 id="project_tagline">C++ Unit Benchmarking Library</h2>
+          <h2 id="project_tagline">C++ Unit Benchmarking and Testing Library</h2>
 
             <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/sumedhghaisas/Manak/archive/v1.1.0.zip">Download the latest release as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/sumedhghaisas/Manak/archive/v1.1.0.tar.gz">Download the latest release as a tar.gz file</a>
+              <a class="zip_download_link" href="https://github.com/Manak-org/Manak/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Manak-org/Manak/tarball/master">Download this project as a tar.gz file</a>
             </section>
         </header>
     </div>
@@ -32,26 +32,67 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h1>
-<a id="manak-c-unit-benchmarking-library" class="anchor" href="#manak-c-unit-benchmarking-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>Manak: C++ Unit Benchmarking Library</h1>
+<a id="manak-c-unit-benchmarking-and-testing-library" class="anchor" href="#manak-c-unit-benchmarking-and-testing-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>Manak: C++ Unit Benchmarking and Testing Library</h1>
 
-<h3>Also check out <a href="html/index.html">Complete Guide</a></h3>
+<h3>
+<a id="latest-stable-release-manak-200" class="anchor" href="#latest-stable-release-manak-200" aria-hidden="true"><span class="octicon octicon-link"></span></a>Latest Stable Release: <a href="https://github.com/Manak-org/Manak/archive/v2.0.0.zip">Manak 2.0.0</a>
+</h3>
+
+<h3>
+<a id="contact-us" class="anchor" href="#contact-us" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact Us:</h3>
+
+<ul>
+<li>Join IRC channel #manak on Freenode</li>
+<li>Get in touch with Gitter</li>
+<li>Or you can just drop a mail on <a href="mailto:sumedhghaisas@gmail.com">sumedhghaisas@gmail.com</a>
+</li>
+</ul>
 
 <h2>
 <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
 
-<p>Manak unit benchmarking library provides both easy to use and flexible solution
-to the problem of benchmarking. Unit benchmarking comes handy for projects 
-with continuous integration. With manak you can save the benchmarks of your
-current implementation and compare them against the later ones. You can also 
-benchmark your library against any other library. Manak offers a hierarchical 
-structure similar to BOOST Unit Testing and generates a easy to read output file.
-Manak is header only library and highly uses c++11 features. </p>
+<p>Manak unit benchmarking and testing library provides both easy to use and flexible 
+API. As both benchmarking and testing framework are combined into one, Manak comes
+handy for projects with continuous integration. Manak implements xUnit achitecture
+and improves upon it.</p>
+
+<p>Manak offers following unique features - </p>
+
+<ul>
+<li>Timing and testing both in a single unit</li>
+<li>Comparison between different implementations and changing implementation(for judging improvements)</li>
+<li>Support for 'Groups' to remove code redundancy and improve runtime</li>
+<li>Implements framework for randomized tests</li>
+<li>Complete regular expression support for running specific cases</li>
+<li>Supports HTML output generation, also supports multiple output generation</li>
+<li>Supports both Static and Dynamic Linkage</li>
+<li>Implemented in C++11 and scalable to C++14</li>
+<li>No external dependency(Specially for Windows Users :D)</li>
+</ul>
+
+<h2>
+<a id="the-idea-behind-manak" class="anchor" href="#the-idea-behind-manak" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Idea Behind Manak</h2>
+
+<p>'Manak' in Sanskrit means standard. Manak aims at a framework for standardization
+of code. Currently Manak combines the 2 most important requirements for any C++
+project, testing and benchmarking. Manak understands that benchmarking is not just 
+timing, it must also be supported with a rich comparison framework. And this is 
+not the end. The next milestone is to integrate the memory mesurement tools. With 
+proper steps, we will build a one stop solution for all continuous integration 
+issues. </p>
+
+<h3>
+<a id="check-out-wiki-for-user-guide" class="anchor" href="#check-out-wiki-for-user-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check out <a href="https://github.com/Manak-org/Manak/wiki">Wiki</a> for User Guide.</h3>
+
+<h3>
+<a id="check-out-developers-guide" class="anchor" href="#check-out-developers-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check out <a href="http://Manak-org.github.io/Manak/html/index.html">Developer's Guide</a>.</h3>
+
+<h3>
+<a id="check-out-gsoc-2015-ideas-page" class="anchor" href="#check-out-gsoc-2015-ideas-page" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check out <a href="https://github.com/Manak-org/Manak/wiki/Google-Summer-of-Code-2015---Ideas-Page">GSOC 2015 Ideas Page</a>
+</h3>
 
 <h2>
 <a id="how-to-install" class="anchor" href="#how-to-install" aria-hidden="true"><span class="octicon octicon-link"></span></a>How To Install</h2>
-
-<h3>
-<a id="for-linux" class="anchor" href="#for-linux" aria-hidden="true"><span class="octicon octicon-link"></span></a>For Linux</h3>
 
 <ol>
 <li>Create directory build.</li>
@@ -63,171 +104,149 @@ and flatten inside bin.</li>
 </li>
 </ol>
 
-<h3>
-<a id="for-windows" class="anchor" href="#for-windows" aria-hidden="true"><span class="octicon octicon-link"></span></a>For Windows</h3>
-
-<p>Manak does not have any external dependency. Hence you can use the CMake GUI to
-install the header files to your environment. Or you can simple copy the folder 
-named <strong>manak</strong>(<em>./src/manak</em>) to the include folder of your IDE.</p>
+<p>Of course, all this is unneccessary if you want to use only static linkage. 
+Just copy the src/manak folder to the default search path and you are done.</p>
 
 <h2>
-<a id="quick-guide" class="anchor" href="#quick-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick Guide</h2>
+<a id="an-overview" class="anchor" href="#an-overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>An Overview</h2>
 
-<p>A simple benchmarking case is given below -   </p>
+<p>A simple case is given below -   </p>
 
-<div class="highlight highlight-cpp"><pre>#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
-
-#<span class="pl-k">define</span> <span class="pl-enf">MANAK_SIMPLE_BENCHMARK_MODULE</span> lib
-#<span class="pl-k">define</span> <span class="pl-enf">MANAK_AUTO_BENCHMARK_MAIN</span>
-
-#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>manak/manak.hpp<span class="pl-pds">&gt;</span></span>
-
-<span class="pl-enf">MANAK_AUTO_BENCHMARK_CASE</span>(ForLoops)
-{
-  <span class="pl-k">for</span>(<span class="pl-st">size_t</span> i = <span class="pl-cn">0</span>;i &lt; <span class="pl-cn">10000</span>;i++);
-}</pre></div>
-
-<p>This will create a benchmark case with name 'ForLoops' which will time the 
-fo loop given inside. The default iterations are 10. Run the genrated executable 
-by passing '-h' for more options.   </p>
-
-<p>The ouput will be written to file 'benchmark_stat.txt'.Here the function code 
-inside the auo case will be timed. For More time sensetive code you can use 
-'Measure' macro. For example -  </p>
-
-<div class="highlight highlight-cpp"><pre>#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
-
-#<span class="pl-k">define</span> <span class="pl-enf">MANAK_SIMPLE_BENCHMARK_MODULE</span> lib
-#<span class="pl-k">define</span> <span class="pl-enf">MANAK_AUTO_BENCHMARK_MAIN</span>
+<div class="highlight highlight-cpp"><pre>#<span class="pl-k">define</span> <span class="pl-en">MANAK_SIMPLE_MODULE</span> mod1
+#<span class="pl-k">define</span> <span class="pl-en">MANAK_AUTO_MAIN</span>
+#<span class="pl-k">define</span> <span class="pl-en">MANAK_INIT</span>
 
 #<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>manak/manak.hpp<span class="pl-pds">&gt;</span></span>
 
-<span class="pl-enf">MANAK_AUTO_BENCHMARK_CASE</span>(ForLoops)
+<span class="pl-en">MANAK_AUTO_BENCHMARK_CASE</span>(B1)
 {
-  Setup code;
-
-  Measure
+  MEASURE
   (
-    Code to measure;
+    <span class="pl-k">for</span>(<span class="pl-s3">size_t</span> i = <span class="pl-c1">0</span>;i &lt; <span class="pl-c1">10000</span>;i++);
   )
 
-  More code...
+  TEST
+  (
+    <span class="pl-s3">MANAK_ASSERT_TRUE</span>(<span class="pl-c1">1</span> == <span class="pl-c1">1</span>);
+  )
 }</pre></div>
 
-<p>This usage will only measure the code inside the measure block. There can be 
-more that one measure blocks.</p>
+<p>This will create a benchmark case with name 'B1' which will time the 
+for loop given inside 'MEASURE' and run the tests given inside 'TEST' block. 
+The case is run for certain number of iterations, the default is 10. The iterations
+help to gt average score and also for randomized tests, where sometimes x out of
+n times the test has to be passed.  </p>
 
-<p>To add already existing function to benchmarking -</p>
+<p>The ouput will be written to file 'benchmark_stat.html'. TThe output is easy to
+read and verbose. </p>
 
-<div class="highlight highlight-cpp"><pre>#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
-
-#<span class="pl-k">define</span> <span class="pl-enf">MANAK_SIMPLE_BENCHMARK_MODULE</span> lib
-#<span class="pl-k">define</span> <span class="pl-enf">MANAK_AUTO_BENCHMARK_MAIN</span>
+<div class="highlight highlight-cpp"><pre>#<span class="pl-k">define</span> <span class="pl-en">MANAK_MODULE</span> mod1
+#<span class="pl-k">define</span> <span class="pl-en">MANAK_AUTO_MAIN</span>
+#<span class="pl-k">define</span> <span class="pl-en">MANAK_INIT</span>
 
 #<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>manak/manak.hpp<span class="pl-pds">&gt;</span></span>
 
-<span class="pl-s">int</span> <span class="pl-enf">fun</span>()
+<span class="pl-en">MANAK_AUTO_BENCHMARK_CASE</span>(B1, With10000)
 {
-  Code;
+  MEASURE
+  (
+    <span class="pl-k">for</span>(<span class="pl-s3">size_t</span> i = <span class="pl-c1">0</span>;i &lt; <span class="pl-c1">10000</span>;i++);
+  )
+
+  TEST
+  (
+    <span class="pl-s3">MANAK_ASSERT_TRUE</span>(<span class="pl-c1">1</span> == <span class="pl-c1">1</span>);
+  )
 }
 
-<span class="pl-enf">MANAK_ADD_BENCHMARK</span>(MANAK_BENCHMARK_CASE(B1, fun));</pre></div>
-
-<p>Remember Measure blocks can also be used in functions such as 'fun' here.</p>
-
-<p>To create benchmark suite -</p>
-
-<div class="highlight highlight-cpp"><pre>#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
-
-#<span class="pl-k">define</span> <span class="pl-enf">MANAK_SIMPLE_BENCHMARK_MODULE</span> lib
-#<span class="pl-k">define</span> <span class="pl-enf">MANAK_AUTO_BENCHMARK_MAIN</span>
-
-#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>manak/manak.hpp<span class="pl-pds">&gt;</span></span>
-
-<span class="pl-enf">MANAK_AUTO_BENCHMARK_SUITE</span>(Suite1);
-
-<span class="pl-enf">MANAK_AUTO_BENCHMARK_CASE</span>(B1)
+<span class="pl-en">MANAK_AUTO_BENCHMARK_CASE</span>(B1, With100000)
 {
-  <span class="pl-k">for</span>(<span class="pl-st">size_t</span> i = <span class="pl-cn">0</span>;i &lt; <span class="pl-cn">1000</span>;i++);
+  MEASURE
+  (
+    <span class="pl-k">for</span>(<span class="pl-s3">size_t</span> i = <span class="pl-c1">0</span>;i &lt; <span class="pl-c1">100000</span>;i++);
+  )
+
+  TEST
+  (
+    <span class="pl-s3">MANAK_ASSERT_TRUE</span>(<span class="pl-c1">1</span> == <span class="pl-c1">1</span>);
+  )
 }</pre></div>
 
-<p>To compare 2 or more libraries against each other -</p>
+<p>The above code will measure the time taken by the loops and compare them against 
+each other in the output. Observe that the case name is same and the second 
+argument(the library name in Manak hierarchy) is different. </p>
 
-<div class="highlight highlight-cpp"><pre>#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
+<p>See that its a code redundancy. The solution is through Groups - </p>
 
-#<span class="pl-k">define</span> <span class="pl-enf">MANAK_BENCHMARK_MODULE</span> lib
-#<span class="pl-k">define</span> <span class="pl-enf">MANAK_AUTO_BENCHMARK_MAIN</span>
+<div class="highlight highlight-cpp"><pre><span class="pl-st">template</span>&lt;<span class="pl-s3">size_t</span> index&gt;
+<span class="pl-en">MANAK_GROUP</span>(TestGroup);
 
-#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>manak/manak.hpp<span class="pl-pds">&gt;</span></span>
+<span class="pl-s3">size_t</span> iter;
+std::string l_name;
 
-<span class="pl-enf">MANAK_AUTO_BENCHMARK_CASE</span>(B1, lib1)
+<span class="pl-en">GINIT</span>(<span class="pl-s3">size_t</span> n, <span class="pl-s">const</span> std::string&amp; str)
 {
-  <span class="pl-k">for</span>(<span class="pl-st">size_t</span> i = <span class="pl-cn">0</span>;i &lt; <span class="pl-cn">1000</span>;i++);
+  iter = n;
+  name = str;
 }
 
-<span class="pl-enf">MANAK_AUTO_BENCHMARK_CASE</span>(B2, lib2)
+<span class="pl-en">MANAK_AUTO_GROUP_BENHMARK_CASE</span>(<span class="pl-s1"><span class="pl-pds">"</span>ForLoops<span class="pl-pds">"</span></span>, l_name)
 {
-  <span class="pl-k">for</span>(<span class="pl-st">size_t</span> i = <span class="pl-cn">0</span>;i &lt; <span class="pl-cn">10000</span>;i++);
-}</pre></div>
-
-<p>Functions with arguments can be used as templates. Templates are useful when 
-the same function is used for benchmarking with different parameters.
-Consider the next example -</p>
-
-<div class="highlight highlight-cpp"><pre>#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
-
-#<span class="pl-k">define</span> <span class="pl-enf">MANAK_SIMPLE_BENCHMARK_MODULE</span> lib
-#<span class="pl-k">define</span> <span class="pl-enf">MANAK_AUTO_BENCHMARK_MAIN</span>
-
-#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>manak/manak.hpp<span class="pl-pds">&gt;</span></span>
-
-<span class="pl-s">int</span> <span class="pl-enf">fun</span>(<span class="pl-s">int</span> a, <span class="pl-s">int</span> b)
-{
-  Code
+  MEASURE
+  (
+    <span class="pl-k">for</span>(<span class="pl-s3">size_t</span> i = <span class="pl-c1">0</span>;i &lt; iter;i++);
+  )
 }
 
-<span class="pl-enf">MANAK_ADD_BENCHMARK</span>(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)-&gt;AddArgs(<span class="pl-cn">0</span>,<span class="pl-cn">0</span>)-&gt;AddArgs(<span class="pl-cn">1</span>,<span class="pl-cn">1</span>)...);</pre></div>
-
-<p>Here the banechmark case will contain many unnamed cases. When number of argument
-sets is large you can add all the argument sets by a function. The function must
-return list of tuples.
-For example -</p>
-
-<div class="highlight highlight-cpp"><pre>#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
-#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>tuple<span class="pl-pds">&gt;</span></span>
-#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>list<span class="pl-pds">&gt;</span></span>
-
-#<span class="pl-k">define</span> <span class="pl-enf">MANAK_SIMPLE_BENCHMARK_MODULE</span> lib
-#<span class="pl-k">define</span> <span class="pl-enf">MANAK_AUTO_BENCHMARK_MAIN</span>
-
-#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>manak/manak.hpp<span class="pl-pds">&gt;</span></span>
-
-<span class="pl-k">using</span> <span class="pl-s">namespace</span> std<span class="pl-k">;</span>
-
-<span class="pl-s">int</span> <span class="pl-enf">fun</span>(<span class="pl-s">int</span> a, <span class="pl-s">int</span> b)
+<span class="pl-en">MANAK_AUTO_GROUP_BENCHMARK_CASE</span>(<span class="pl-s1"><span class="pl-pds">"</span>Test<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>Lib1<span class="pl-pds">"</span></span>)
 {
-  Code;
+  <span class="pl-c">//Can use iter and name here</span>
+} 
+
+<span class="pl-en">MANAK_GROUP_END</span>();
+
+<span class="pl-en">MANAK_ADD_GROUP</span>(TestGroup&lt;<span class="pl-c1">1</span>&gt;, <span class="pl-c1">1000</span>, <span class="pl-s1"><span class="pl-pds">"</span>With1000<span class="pl-pds">"</span></span>);
+<span class="pl-en">MANAK_ADD_GROUP</span>(TestGroup&lt;<span class="pl-c1">2</span>&gt;, <span class="pl-c1">10000</span>, <span class="pl-s1"><span class="pl-pds">"</span>With10000<span class="pl-pds">"</span></span>);</pre></div>
+
+<p>Another important usgae of groups is that the cases inside can share variables.
+Imagine that you are testing a variable which takes lot of time to create. 
+So rather than wasting time while creating it in each case create it in 'GINIT'
+and usage is freely inside the group. Groups act like c++ Classes. Example of
+this is also shown in the above code.</p>
+
+<p>Sometimes you don't want to compare the code against each other but time and test
+a function with many different parameters. Maybe while regression testing.
+For this parametrized benchmarks can be used.</p>
+
+<div class="highlight highlight-cpp"><pre><span class="pl-st">void</span> <span class="pl-en">fun</span>(<span class="pl-s3">ize_t</span> a, <span class="pl-s3">size_t</span> b)
+{
+
 }
 
-list&lt;tuple&lt;<span class="pl-s">int</span>, <span class="pl-s">int</span>&gt;&gt; <span class="pl-enf">get_args</span>()
+<span class="pl-en">MANAK_ADD_CASE</span>(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)-&gt;AddArgs(<span class="pl-c1">0</span>, <span class="pl-c1">0</span>)-&gt;AddArgs(<span class="pl-c1">1</span>, <span class="pl-c1">1</span>));</pre></div>
+
+<p>What if you want to test it against 100 set of parameters -</p>
+
+<div class="highlight highlight-cpp"><pre>std::list&lt;std::tuple&lt;<span class="pl-s3">size_t</span>, <span class="pl-s3">size_t</span>&gt;&gt; <span class="pl-en">GetArgs</span>()
 {
-  list&lt;tuple&lt;<span class="pl-s">int</span>, <span class="pl-s">int</span>&gt;&gt; out;
-  <span class="pl-k">for</span>(<span class="pl-st">size_t</span> i = <span class="pl-cn">0</span>;i &lt; <span class="pl-cn">100</span>;i++)
-    out.<span class="pl-sf">emplace_back</span>(i, i);
+  std::list&lt;std::tuple&lt;<span class="pl-s3">size_t</span>, <span class="pl-s3">size_t</span>&gt;&gt; out;
+
+  <span class="pl-k">for</span>(<span class="pl-s3">size_t</span> i = <span class="pl-c1">0</span>;i &lt; <span class="pl-c1">100</span>;i++)
+    out.<span class="pl-s3">emplace_back</span>(i, i);
+
   <span class="pl-k">return</span> out;
 }
 
-<span class="pl-enf">MANAK_ADD_BENCHMARK</span>(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)-&gt;AddCustomArgs(get_args));</pre></div>
+<span class="pl-en">MANAK_ADD_CASE</span>(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, fun)-&gt;AddCustomArgs(GetArgs));</pre></div>
 
-<p>The genrated timing can be saved and added for comparison for later runs. For
-more options check out the <a href = "html/index.html">Complete Guide</a>.</p>
+<p>Check out the the wiki for many more such features.</p>
       </section>
     </div>
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p class="copyright">Manak maintained by <a href="https://github.com/sumedhghaisas">sumedhghaisas</a></p>
+        <p class="copyright">Manak maintained by <a href="https://github.com/Manak-org">Manak-org</a></p>
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
