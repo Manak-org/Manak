@@ -1,4 +1,4 @@
-#Manak: C++ Unit Benchmarking Library
+#Manak: C++ Unit Benchmarking and Testing Library
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Manak-org/Manak?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)        ![build status](https://travis-ci.org/Manak-org/Manak.svg?branch=master)
 
