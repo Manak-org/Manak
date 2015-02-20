@@ -47,6 +47,8 @@ class HTMLOutputHandler : public OutputHandler
  private:
   MANAK_INLINE std::string GetPMRep(const utils::ObjectStore& entry);
 
+   MANAK_INLINE void OpenTable(std::ostream& stream);
+  
   std::stringstream stream1;
   std::stringstream stream2;
 

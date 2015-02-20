@@ -5,6 +5,12 @@
 namespace manak
 {
 
+
+MANAK_INLINE void HTMLOutputHandler::OpenTable(std::ostream& stream)
+{
+  stream << "<table style=\"width:100%\">" << std::endl;
+}
+
 MANAK_INLINE void HTMLOutputHandler::Initialize(bool compare,
                                                 const std::string& c_time)
 {
