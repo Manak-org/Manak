@@ -32,6 +32,7 @@ int fun(double b)
 MANAK_ADD_CASE(MANAK_BENCHMARK_CASE(B1, static_cast<int(&)(int)>(fun)));
 @endcode
 
+The example code can be found at examples/Advance_Function_Registration/example1.cpp
 
 @section use_afr_rcmf Registration of Class Member Functions
 Static class functions can be directly passed.
@@ -68,7 +69,7 @@ class A
 bool manual_init()
 {
   A* a = new A();
-  manak::BenchmarkSuite::GetMasterSuite()->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, manak::utils::BindToObject(&A::fun, a))->AddArgs(1000));
+  manak::ManakSuite::GetMasterSuite()->AddCase(MANAK_CREATE_BENCHMARK_WITH_TEMPLATE(B1, manak::utils::BindToObject(&A::fun, a))->AddArgs(1000));
 }
 @endcode
 
