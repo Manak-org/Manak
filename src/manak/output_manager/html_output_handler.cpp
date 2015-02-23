@@ -11,6 +11,8 @@ MANAK_INLINE void HTMLOutputHandler::OpenTable(std::ostream& stream)
   stream << "<table style=\"width:100%\">" << std::endl;
 }
 
+
+
 MANAK_INLINE void HTMLOutputHandler::Initialize(bool compare,
                                                 const std::string& c_time)
 {
@@ -41,14 +43,17 @@ MANAK_INLINE void HTMLOutputHandler::Finalize()
   stream << "li info {font-size: 25px; }" << std::endl;
 
   //! Table styles
-  stream << "table, th, td { border: 1px solid black; \
+  
+  
+    OpenTable(stream);
+    stream << "th, td { border: 1px solid black; \
                              border-collapse: collapse; \
                            } \
               th, td { \
                         padding: 5px; \
                         text-align: left; \
                       }" << std::endl;
-
+  
   stream << "bold {font-weight: bold; }" << std::endl;
 
   stream << "</style>" << std::endl;
@@ -135,9 +140,8 @@ MANAK_INLINE void HTMLOutputHandler::AddCase(const std::string& uname,
           << std::endl;
 
   //! construct case table
-  stream1 << "                                                                \
-  <table style=\"width:100%\">                                                \
-  <tr>                                                                        \
+  OpenTable(stream1)
+  stream1 << "<tr>                                                                        \
     <th></th>" << std::endl;
   for(auto res : results)
   {
@@ -299,7 +303,7 @@ MANAK_INLINE void HTMLOutputHandler::AddCase(const std::string& uname,
             << "<h3>" << l_name << "</h3>" << std::endl;
 
     //! add table
-    stream2 << "<table style=\"width:100%\">" << std::endl;
+    OpenTable(stream2);
 
     stream2 << "<tr>                                                          \
                   <th>Subcase</th>                                            \
