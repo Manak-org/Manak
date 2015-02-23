@@ -11,6 +11,12 @@ MANAK_INLINE void HTMLOutputHandler::OpenTable(std::ostream& stream)
   stream << "<table style=\"width:100%\">" << std::endl;
 }
 
+//Function to close table
+MANAK_INLINE void HTMLOutputHandler::CloseTable(std::ostream& stream)
+{
+  stream << "</table>" << std::endl;
+}
+
 
 
 MANAK_INLINE void HTMLOutputHandler::Initialize(bool compare,
@@ -53,6 +59,8 @@ MANAK_INLINE void HTMLOutputHandler::Finalize()
                         padding: 5px; \
                         text-align: left; \
                       }" << std::endl;
+
+    CloseTable(stream);
   
   stream << "bold {font-weight: bold; }" << std::endl;
 
@@ -268,7 +276,7 @@ MANAK_INLINE void HTMLOutputHandler::AddCase(const std::string& uname,
     stream1 << "</tr>" << std::endl;
   }
 
-  stream1 << "</table>" << std::endl;
+  CloseTable(stream1);
   stream1 << "<hr width=100% align=left>" << std::endl;
 
 
@@ -418,7 +426,8 @@ MANAK_INLINE void HTMLOutputHandler::AddCase(const std::string& uname,
     }
 
     stream2 << stream21.str();
-    stream2 << "</table>" << std::endl;
+    
+    CloseTable(stream2);
 
     stream2 << stream22.str() << std::endl;
 
