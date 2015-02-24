@@ -148,7 +148,7 @@ MANAK_INLINE void HTMLOutputHandler::AddCase(const std::string& uname,
           << std::endl;
 
   //! construct case table
-  OpenTable(stream1)
+  OpenTable(stream1);
   stream1 << "<tr>                                                                        \
     <th></th>" << std::endl;
   for(auto res : results)
